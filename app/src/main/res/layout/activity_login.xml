@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity"
+    android:theme="@style/LoginTheme"
+    android:background="@color/white">
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:srcCompat="@drawable/tail"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:id="@+id/btnHome" />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        app:srcCompat="@drawable/back"
+        android:id="@+id/btnBack"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnBack"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="70dp"
+        android:id="@+id/textCim"
+        android:text="Jelentkezz be"
+        android:textSize="40sp"
+        android:fontFamily="@font/bold"
+        android:textColor="@color/gray" />
+
+    <EditText
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/inputUsername"
+        android:layout_below="@id/textCim"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"
+        android:hint="Felhasználónév vagy E-mail"
+        android:fontFamily="@font/regular" />
+
+    <EditText
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/inputPassword"
+        android:layout_below="@id/inputUsername"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:inputType="textPassword"
+        android:hint="Password"
+        android:fontFamily="@font/regular" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:id="@+id/btnLogin"
+        android:layout_below="@id/inputPassword"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="70dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/button"
+        android:text="Bejelentkezés"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:fontFamily="@font/regular"
+        android:textAllCaps="false" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="25dp"
+        android:layout_marginLeft="25dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nincs még profilod?"
+            android:fontFamily="@font/regular"
+            android:textColor="@color/gray"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnReg"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="4dp"
+            android:text="Regisztrálj."
+            android:fontFamily="@font/bold"
+            android:textColor="@color/rebelBlue"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>
