@@ -30,21 +30,98 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnBack"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="20dp"
         android:id="@+id/textCim"
         android:text="Regisztrálj"
         android:textSize="40sp"
         android:fontFamily="@font/bold"
         android:textColor="@color/gray" />
-
+    <!-- Username -->
     <EditText
-        android:layout_width="270dp"
+        android:layout_width="340dp"
         android:layout_height="wrap_content"
+        android:paddingVertical="15dp"
+        android:background="@drawable/input"
         android:id="@+id/inputUsername"
         android:layout_below="@id/textCim"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
-        android:hint="Felhasználónév vagy E-mail"
+        android:hint="Felhasználónév"
+        android:fontFamily="@font/regular" />
+    <!-- Email -->
+    <EditText
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="15dp"
+        android:background="@drawable/input"
+        android:id="@+id/inputEmail"
+        android:inputType="textEmailAddress"
+        android:layout_below="@id/inputUsername"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:hint="E-mail"
+        android:fontFamily="@font/regular"
+        android:textColor="@color/gray" />
+    <!-- Firstname -->
+    <EditText
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="15dp"
+        android:background="@drawable/input"
+        android:id="@+id/inputFirstname"
+        android:layout_below="@id/inputEmail"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:hint="Keresztnév"
+        android:fontFamily="@font/regular" />
+    <!-- Lastname -->
+    <EditText
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="15dp"
+        android:background="@drawable/input"
+        android:id="@+id/inputLastname"
+        android:layout_below="@id/inputFirstname"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:hint="Vezetéknév"
+        android:fontFamily="@font/regular" />
+    <!-- BirthDate -->
+    <EditText
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="15dp"
+        android:background="@drawable/input"
+        android:id="@+id/inputBirthdate"
+        android:layout_below="@id/inputLastname"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:hint="Születési dátum"
+        android:fontFamily="@font/regular" />
+    <!-- Password and again -->
+    <EditText
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="15dp"
+        android:background="@drawable/input"
+        android:id="@+id/inputPassword"
+        android:layout_below="@id/inputBirthdate"
+        android:inputType="textPassword"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:hint="Jelszó"
+        android:fontFamily="@font/regular" />
+
+    <EditText
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="15dp"
+        android:background="@drawable/input"
+        android:id="@+id/inputPasswordAgain"
+        android:layout_below="@id/inputPassword"
+        android:inputType="textPassword"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:hint="Jelszó megerősítés"
         android:fontFamily="@font/regular" />
 
     <!-- ... -->
@@ -54,10 +131,10 @@
         android:layout_height="wrap_content"
         android:paddingHorizontal="20dp"
         android:id="@+id/btnReg"
-        android:layout_below="@id/inputUsername"
+        android:layout_below="@id/inputPasswordAgain"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="70dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/button"
         android:text="Regisztráció"
         android:textColor="@color/white"
