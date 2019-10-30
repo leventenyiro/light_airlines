@@ -47,6 +47,7 @@
         android:layout_below="@id/textCim"
         android:layout_marginTop="50dp"
         android:layout_centerHorizontal="true"
+        android:inputType="textEmailAddress"
         android:hint="Felhasználónév vagy E-mail"
         android:textColor="@color/gray"
         android:fontFamily="@font/regular" />
