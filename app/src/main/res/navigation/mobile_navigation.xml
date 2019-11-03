@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_jaratok">
+
+    <fragment
+        android:id="@+id/nav_jaratok"
+        android:name="com.example.szakdolgozat.ui.jaratok.JaratokFragment"
+        android:label="@string/menu_jaratok"
+        tools:layout="@layout/fragment_beallitasok" />
+
+    <fragment
+        android:id="@+id/nav_kedvencek"
+        android:name="com.example.szakdolgozat.ui.kedvencek.KedvencekFragment"
+        android:label="@string/menu_kedvencek"
+        tools:layout="@layout/fragment_kedvencek" />
+
+    <fragment
+        android:id="@+id/nav_beallitasok"
+        android:name="com.example.szakdolgozat.ui.beallitasok.BeallitasokFragment"
+        android:label="@string/menu_beallitasok"
+        tools:layout="@layout/fragment_jaratok" />
+
+    <fragment
+        android:id="@+id/nav_foglaltak"
+        android:name="com.example.szakdolgozat.ui.foglaltak.FoglaltakFragment"
+        android:label="@string/menu_foglaltak"
+        tools:layout="@layout/fragment_foglaltak" />
+</navigation>

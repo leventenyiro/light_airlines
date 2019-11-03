@@ -26,6 +26,10 @@
             android:name=".RegActivity"
             android:screenOrientation="portrait"
             android:theme="@style/LoginTheme" />
+
+        <activity android:name=".MainInnerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/InnerTheme" />
     </application>
 
 </manifest>
