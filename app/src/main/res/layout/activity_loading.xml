@@ -10,6 +10,6 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_centerInParent="true"
-        app:srcCompat="@drawable/tail" />
+        app:srcCompat="@drawable/icon" />
 
 </RelativeLayout>
