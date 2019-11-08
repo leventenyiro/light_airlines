@@ -46,7 +46,8 @@
         android:layout_marginTop="70dp"
         android:layout_centerHorizontal="true"
         android:hint="Felhasználónév"
-        android:fontFamily="@font/regular" />
+        android:fontFamily="@font/regular"
+        android:textColor="@color/gray"/>
     <!-- Email -->
     <EditText
         android:layout_width="340dp"
@@ -59,7 +60,8 @@
         android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"
         android:hint="E-mail"
-        android:fontFamily="@font/regular"/>
+        android:fontFamily="@font/regular"
+        android:textColor="@color/gray"/>
 
     <!-- ... -->
 

@@ -47,7 +47,8 @@
         android:layout_marginTop="70dp"
         android:layout_centerHorizontal="true"
         android:hint="Keresztnév"
-        android:fontFamily="@font/regular" />
+        android:fontFamily="@font/regular"
+        android:textColor="@color/gray"/>
     <!-- Lastname -->
     <EditText
         android:layout_width="340dp"
@@ -59,7 +60,8 @@
         android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"
         android:hint="Vezetéknév"
-        android:fontFamily="@font/regular" />
+        android:fontFamily="@font/regular"
+        android:textColor="@color/gray"/>
     <!-- BirthDate -->
     <EditText
         android:layout_width="340dp"
@@ -71,7 +73,8 @@
         android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"
         android:hint="Születési dátum"
-        android:fontFamily="@font/regular" />
+        android:fontFamily="@font/regular"
+        android:textColor="@color/gray"/>
 
     <Button
         android:layout_width="wrap_content"

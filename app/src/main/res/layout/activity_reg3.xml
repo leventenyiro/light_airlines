@@ -48,7 +48,8 @@
         android:layout_marginTop="70dp"
         android:layout_centerHorizontal="true"
         android:hint="Jelszó"
-        android:fontFamily="@font/regular" />
+        android:fontFamily="@font/regular"
+        android:textColor="@color/gray"/>
 
     <EditText
         android:layout_width="340dp"
@@ -61,7 +62,8 @@
         android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"
         android:hint="Jelszó megerősítés"
-        android:fontFamily="@font/regular" />
+        android:fontFamily="@font/regular"
+        android:textColor="@color/gray"/>
 
     <Button
         android:layout_width="wrap_content"
