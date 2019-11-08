@@ -8,9 +8,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true">
-        <activity android:name=".LoadingActivity"
-            android:theme="@style/LoginTheme"
-            android:screenOrientation="portrait">
+        <activity
+            android:name=".LoadingActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/LoginTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,15 +21,23 @@
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/LoginTheme" />
         <activity
-            android:name=".RegActivity"
+            android:name=".Reg1Activity"
             android:screenOrientation="portrait"
             android:theme="@style/LoginTheme" />
+        <activity
+            android:name=".Reg2Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/LoginTheme"/>
+        <activity
+            android:name=".Reg3Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/LoginTheme"/>
         <activity
             android:name=".MainInnerActivity"
             android:screenOrientation="portrait"

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Reg1Activity"
+    android:theme="@style/LoginTheme"
+    android:background="@color/white">
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:srcCompat="@drawable/icon"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:id="@+id/btnHome" />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        app:srcCompat="@drawable/back"
+        android:id="@+id/btnBack"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnBack"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="50dp"
+        android:id="@+id/textCim"
+        android:text="Regisztráció"
+        android:textSize="40sp"
+        android:fontFamily="@font/bold"/>
+    <!-- Username -->
+    <EditText
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="15dp"
+        android:background="@drawable/input"
+        android:id="@+id/inputUsername"
+        android:layout_below="@id/textCim"
+        android:layout_marginTop="70dp"
+        android:layout_centerHorizontal="true"
+        android:hint="Felhasználónév"
+        android:fontFamily="@font/regular" />
+    <!-- Email -->
+    <EditText
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="15dp"
+        android:background="@drawable/input"
+        android:id="@+id/inputEmail"
+        android:inputType="textEmailAddress"
+        android:layout_below="@id/inputUsername"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:hint="E-mail"
+        android:fontFamily="@font/regular"/>
+
+    <!-- ... -->
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:id="@+id/btnNext"
+        android:layout_below="@id/inputEmail"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/button"
+        android:text="Tovább"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:fontFamily="@font/regular"
+        android:textAllCaps="false" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="25dp"
+        android:layout_marginLeft="25dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Már van profilod?"
+            android:fontFamily="@font/regular"
+            android:textColor="@color/gray"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnLogin"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="4dp"
+            android:text="Jelentkezz be."
+            android:fontFamily="@font/bold"
+            android:textColor="@color/rebelBlue"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:progress="0"
+        android:progressTint="#00B000" />
+
+</RelativeLayout>
