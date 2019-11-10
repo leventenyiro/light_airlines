@@ -28,6 +28,12 @@ public class Reg2Activity extends AppCompatActivity {
 
         init();
 
+        SharedPreferences sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        inputFirstname.setText(sharedPreferences.getString("firstname", ""));
+        inputLastname.setText(sharedPreferences.getString("lastname", ""));
+        inputBirthdate.setText(sharedPreferences.getString("birthdate", ""));
+
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,14 +68,15 @@ public class Reg2Activity extends AppCompatActivity {
             {
                 if (inputFirstname.getText().toString().isEmpty() || inputLastname.getText().toString().isEmpty() || inputBirthdate.getText().toString().isEmpty())
                 {
-                    Toast.makeText(Reg2Activity.this, "Ajjaj! Valami nincs kitöltve!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Reg2Activity.this, "Hiba! Valami nincs kitöltve!", Toast.LENGTH_LONG).show();
                 }
                 else
                 {
                     SharedPreferences sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString("firstname", inputFirstname.getText().toString());
-                    editor.putString("lastname", inputLastname.getText().toString());
+                    editor.putString("firstname", elsoNagybetu(inputFirstname.getText().toString()));
+                    editor.putString("lastname", elsoNagybetu(inputLastname.getText().toString()));
+
                     editor.putString("birthdate", inputBirthdate.getText().toString());
                     editor.apply();
 
@@ -90,5 +97,15 @@ public class Reg2Activity extends AppCompatActivity {
         inputFirstname = findViewById(R.id.inputFirstname);
         inputLastname = findViewById(R.id.inputLastname);
         inputBirthdate = findViewById(R.id.inputBirthdate);
+    }
+
+    public String elsoNagybetu(String nev)
+    {
+        String[] nevek = nev.split(" ");
+        String ujNev = "";
+        for (String s : nevek) {
+            ujNev += s.toUpperCase().charAt(0) + s.toLowerCase().substring(1, s.length()) + " ";
+        }
+        return ujNev;
     }
 }

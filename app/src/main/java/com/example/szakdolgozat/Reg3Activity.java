@@ -13,6 +13,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Reg3Activity extends AppCompatActivity {
 
     private ImageView btnBack;
@@ -62,17 +65,26 @@ public class Reg3Activity extends AppCompatActivity {
             {
                 if (inputPassword.getText().toString().isEmpty() || inputPasswordAgain.getText().toString().isEmpty())
                 {
-                    Toast.makeText(Reg3Activity.this, "Ajjaj! Valami nincs kitöltve!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Reg3Activity.this, "Hiba! Valami nincs kitöltve!", Toast.LENGTH_LONG).show();
                 }
                 else if (!inputPassword.getText().toString().equals(inputPasswordAgain.getText().toString()))
                 {
-                    Toast.makeText(Reg3Activity.this, "Ajjaj! A két jelszó nem egyezik egymással!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Reg3Activity.this, "Hiba! A két jelszó nem egyezik egymással!", Toast.LENGTH_LONG).show();
+                }
+                else if (!isValidPassword(inputPassword.getText().toString().trim()))
+                {
+                    Toast.makeText(Reg3Activity.this, "A jelszónak 8 karakterből kell állnia, tartalmaznia kell egy számot egy nagybetűt!", Toast.LENGTH_LONG).show();
                 }
                 else
                 {
                     SharedPreferences sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("password", inputPassword.getText().toString());
+                    editor.apply();
+
+                    // ADATBÁZIS HELYE - regisztrált adatok rögzítése
+
+                    editor.clear();
                     editor.apply();
 
                     Intent intent = new Intent(Reg3Activity.this, LoginActivity.class);
@@ -91,5 +103,18 @@ public class Reg3Activity extends AppCompatActivity {
         btnReg = findViewById(R.id.btnReg);
         inputPassword = findViewById(R.id.inputPassword);
         inputPasswordAgain = findViewById(R.id.inputPasswordAgain);
+    }
+
+    public boolean isValidPassword(final String password)
+    {
+        Pattern pattern;
+        Matcher matcher;
+
+        final String passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{4,}$";
+
+        pattern = Pattern.compile(passwordPattern);
+        matcher = pattern.matcher(password);
+
+        return matcher.matches();
     }
 }

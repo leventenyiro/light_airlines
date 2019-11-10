@@ -29,6 +29,10 @@ public class Reg1Activity extends AppCompatActivity
 
         init();
 
+        SharedPreferences sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
+        inputUsername.setText(sharedPreferences.getString("username", ""));
+        inputEmail.setText(sharedPreferences.getString("email", ""));
+
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,7 +67,11 @@ public class Reg1Activity extends AppCompatActivity
             {
                 if (inputUsername.getText().toString().isEmpty() || inputEmail.getText().toString().isEmpty())
                 {
-                    Toast.makeText(Reg1Activity.this, "Ajjaj! Valami nincs kitöltve!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Reg1Activity.this, "Hiba! Valami nincs kitöltve!", Toast.LENGTH_LONG).show();
+                }
+                else if (!emailEllenorzes(inputEmail.getText().toString()))
+                {
+                    Toast.makeText(Reg1Activity.this, "Helytelen E-mail cím!", Toast.LENGTH_LONG).show();
                 }
                 else
                 {
@@ -90,5 +98,24 @@ public class Reg1Activity extends AppCompatActivity
         btnNext = findViewById(R.id.btnNext);
         inputUsername = findViewById(R.id.inputUsername);
         inputEmail = findViewById(R.id.inputEmail);
+    }
+
+    public boolean emailEllenorzes(String email)
+    {
+        int db = 0;
+        boolean joE = false;
+        String[] betuk = email.split("");
+        for (int i = 0; i < email.length(); i++)
+        {
+            if (betuk[i].equals("@"))
+            {
+                db++;
+            }
+        }
+        if (db == 1)
+        {
+            joE = true;
+        }
+        return joE;
     }
 }
