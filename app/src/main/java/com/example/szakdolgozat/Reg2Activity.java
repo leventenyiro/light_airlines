@@ -28,8 +28,7 @@ public class Reg2Activity extends AppCompatActivity {
 
         init();
 
-        SharedPreferences sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
+        final SharedPreferences sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
         inputFirstname.setText(sharedPreferences.getString("firstname", ""));
         inputLastname.setText(sharedPreferences.getString("lastname", ""));
         inputBirthdate.setText(sharedPreferences.getString("birthdate", ""));
@@ -46,6 +45,9 @@ public class Reg2Activity extends AppCompatActivity {
         btnHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.clear();
+                editor.apply();
                 Intent intent = new Intent(Reg2Activity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
@@ -55,6 +57,9 @@ public class Reg2Activity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.clear();
+                editor.apply();
                 Intent intent = new Intent(Reg2Activity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();

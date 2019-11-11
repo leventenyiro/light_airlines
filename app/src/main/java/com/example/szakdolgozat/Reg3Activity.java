@@ -34,6 +34,8 @@ public class Reg3Activity extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                inputPassword.setText("");
+                inputPasswordAgain.setText("");
                 Intent intent = new Intent(Reg3Activity.this, Reg2Activity.class);
                 startActivity(intent);
                 finish();
@@ -43,6 +45,10 @@ public class Reg3Activity extends AppCompatActivity {
         btnHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SharedPreferences sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.clear();
+                editor.apply();
                 Intent intent = new Intent(Reg3Activity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
@@ -52,6 +58,10 @@ public class Reg3Activity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SharedPreferences sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.clear();
+                editor.apply();
                 Intent intent = new Intent(Reg3Activity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
