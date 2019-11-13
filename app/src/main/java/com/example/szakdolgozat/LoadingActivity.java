@@ -13,14 +13,14 @@ public class LoadingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading);
-        
+
         Thread welcomeThread = new Thread() {
 
             @Override
             public void run() {
                 try {
                     super.run();
-                    sleep(5000);  //Delay of 1 seconds = 1000 millis
+                    sleep(3000);  //Delay of 1 seconds = 1000 millis
                 } catch (Exception e) {
 
                 } finally {
