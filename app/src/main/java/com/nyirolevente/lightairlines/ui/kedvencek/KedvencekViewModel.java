@@ -1,16 +1,16 @@
-package com.example.szakdolgozat.ui.beallitasok;
+package com.nyirolevente.lightairlines.ui.kedvencek;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class BeallitasokViewModel extends ViewModel {
+public class KedvencekViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public BeallitasokViewModel() {
+    public KedvencekViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is share fragment");
+        mText.setValue("This is gallery fragment");
     }
 
     public LiveData<String> getText() {

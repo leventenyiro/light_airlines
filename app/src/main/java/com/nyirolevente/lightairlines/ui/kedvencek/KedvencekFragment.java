@@ -1,4 +1,4 @@
-package com.example.szakdolgozat.ui.foglaltak;
+package com.nyirolevente.lightairlines.ui.kedvencek;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,17 +9,17 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.szakdolgozat.R;
+import com.nyirolevente.lightairlines.R;
 
-public class FoglaltakFragment extends Fragment {
+public class KedvencekFragment extends Fragment {
 
-    private FoglaltakViewModel foglaltakViewModel;
+    private KedvencekViewModel kedvencekViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        foglaltakViewModel =
-                ViewModelProviders.of(this).get(FoglaltakViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_foglaltak, container, false);
+        kedvencekViewModel =
+                ViewModelProviders.of(this).get(KedvencekViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_kedvencek, container, false);
         return root;
     }
 }

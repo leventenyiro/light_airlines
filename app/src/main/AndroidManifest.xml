@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.szakdolgozat">
+    package="com.nyirolevente.lightairlines">
 
     <application
         android:allowBackup="true"
@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true">
         <activity
-            android:name=".LoadingActivity"
+            android:name="com.nyirolevente.lightairlines.LoadingActivity"
             android:screenOrientation="portrait"
             android:theme="@style/LoadingTheme">
             <intent-filter>
@@ -19,27 +19,27 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="com.nyirolevente.lightairlines.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".LoginActivity"
+            android:name="com.nyirolevente.lightairlines.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/LoginTheme" />
         <activity
-            android:name=".Reg1Activity"
+            android:name="com.nyirolevente.lightairlines.Reg1Activity"
             android:screenOrientation="portrait"
             android:theme="@style/LoginTheme" />
         <activity
-            android:name=".Reg2Activity"
+            android:name="com.nyirolevente.lightairlines.Reg2Activity"
             android:screenOrientation="portrait"
             android:theme="@style/LoginTheme"/>
         <activity
-            android:name=".Reg3Activity"
+            android:name="com.nyirolevente.lightairlines.Reg3Activity"
             android:screenOrientation="portrait"
             android:theme="@style/LoginTheme"/>
         <activity
-            android:name=".MainInnerActivity"
+            android:name="com.nyirolevente.lightairlines.MainInnerActivity"
             android:screenOrientation="portrait"
             android:theme="@style/InnerTheme" />
     </application>

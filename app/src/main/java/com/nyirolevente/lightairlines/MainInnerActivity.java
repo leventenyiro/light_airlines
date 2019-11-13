@@ -1,4 +1,4 @@
-package com.example.szakdolgozat;
+package com.nyirolevente.lightairlines;
 
 import android.os.Bundle;
 import android.view.View;

@@ -1,4 +1,4 @@
-package com.example.szakdolgozat;
+package com.nyirolevente.lightairlines;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;

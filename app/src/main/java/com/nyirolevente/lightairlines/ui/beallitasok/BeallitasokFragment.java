@@ -1,4 +1,4 @@
-package com.example.szakdolgozat.ui.jaratok;
+package com.nyirolevente.lightairlines.ui.beallitasok;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,17 +9,17 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.szakdolgozat.R;
+import com.nyirolevente.lightairlines.R;
 
-public class JaratokFragment extends Fragment {
+public class BeallitasokFragment extends Fragment {
 
-    private JaratokViewModel jaratokViewModel;
+    private BeallitasokViewModel beallitasokViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        jaratokViewModel =
-                ViewModelProviders.of(this).get(JaratokViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_beallitasok, container, false);
+        beallitasokViewModel =
+                ViewModelProviders.of(this).get(BeallitasokViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_jaratok, container, false);
         return root;
     }
 }

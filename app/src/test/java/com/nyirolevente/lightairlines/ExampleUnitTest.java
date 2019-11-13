@@ -1,4 +1,4 @@
-package com.example.szakdolgozat;
+package com.nyirolevente.lightairlines;
 
 import org.junit.Test;
 

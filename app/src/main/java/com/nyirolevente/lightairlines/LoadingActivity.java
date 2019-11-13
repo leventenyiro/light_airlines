@@ -1,11 +1,9 @@
-package com.example.szakdolgozat;
+package com.nyirolevente.lightairlines;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
 public class LoadingActivity extends AppCompatActivity {
 
