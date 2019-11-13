@@ -11,7 +11,7 @@
         <activity
             android:name=".LoadingActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/LoginTheme">
+            android:theme="@style/LoadingTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
