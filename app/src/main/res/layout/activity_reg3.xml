@@ -37,6 +37,20 @@
         android:fontFamily="@font/bold"/>
 
     <!-- Password and again -->
+
+    <TextView
+        android:id="@+id/textLeiras"
+        android:layout_width="320dp"
+        android:textAlignment="textEnd"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/inputPassword"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="-60dp"
+        android:fontFamily="@font/regular"
+        android:text="A minimum 8 karakteres jelszónak legalább\n 1 nagybetűt és 1 számot kell tartalmaznia"
+        android:textSize="14sp" />
+
     <EditText
         android:layout_width="340dp"
         android:layout_height="wrap_content"

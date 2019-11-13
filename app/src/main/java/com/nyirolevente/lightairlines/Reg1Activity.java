@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,7 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Reg1Activity extends AppCompatActivity
+public class Reg1Activity extends AppCompatActivity implements View.OnClickListener
 {
     private ImageView btnBack;
     private ImageView btnHome;
@@ -29,74 +31,39 @@ public class Reg1Activity extends AppCompatActivity
 
         init();
 
-        final SharedPreferences sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
         inputUsername.setText(sharedPreferences.getString("username", ""));
         inputEmail.setText(sharedPreferences.getString("email", ""));
 
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.clear();
-                editor.apply();
-                Intent intent = new Intent(Reg1Activity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+        ellenorzes();
 
-        btnHome.setOnClickListener(new View.OnClickListener() {
+        inputUsername.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onClick(View v) {
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.clear();
-                editor.apply();
-                Intent intent = new Intent(Reg1Activity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
-        btnLogin.setOnClickListener(new View.OnClickListener() {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override
-            public void onClick(View v) {
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.clear();
-                editor.apply();
-                Intent intent = new Intent(Reg1Activity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
-        btnNext.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
+            public void onTextChanged(CharSequence s, int start, int before, int count)
             {
-                if (inputUsername.getText().toString().isEmpty() || inputEmail.getText().toString().isEmpty())
-                {
-                    Toast.makeText(Reg1Activity.this, "Hiba! Valami nincs kitöltve!", Toast.LENGTH_LONG).show();
-                }
-                else if (!emailEllenorzes(inputEmail.getText().toString()))
-                {
-                    Toast.makeText(Reg1Activity.this, "Helytelen E-mail cím!", Toast.LENGTH_LONG).show();
-                }
-                else
-                {
-                    SharedPreferences sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString("username", inputUsername.getText().toString());
-                    editor.putString("email", inputEmail.getText().toString());
-                    editor.apply();
-
-                    Intent intent = new Intent(Reg1Activity.this, Reg2Activity.class);
-                    startActivity(intent);
-                    finish();
-                }
+                ellenorzes();
             }
+            @Override
+            public void afterTextChanged(Editable s) { }
+        });
+        inputEmail.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count)
+            {
+                ellenorzes();
+            }
+            @Override
+            public void afterTextChanged(Editable s) { }
         });
 
+        btnBack.setOnClickListener(this);
+        btnHome.setOnClickListener(this);
+        btnLogin.setOnClickListener(this);
+        btnNext.setOnClickListener(this);
     }
 
     public void init()
@@ -107,6 +74,51 @@ public class Reg1Activity extends AppCompatActivity
         btnNext = findViewById(R.id.btnNext);
         inputUsername = findViewById(R.id.inputUsername);
         inputEmail = findViewById(R.id.inputEmail);
+    }
+
+    public void onClick(View v)
+    {
+        switch (v.getId())
+        {
+            case R.id.btnBack:
+                SharedPreferences sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.clear();
+                editor.apply();
+                Intent intent = new Intent(Reg1Activity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+            case R.id.btnHome:
+                sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
+                editor = sharedPreferences.edit();
+                editor.clear();
+                editor.apply();
+                intent = new Intent(Reg1Activity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+            case R.id.btnLogin:
+                sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
+                editor = sharedPreferences.edit();
+                editor.clear();
+                editor.apply();
+                intent = new Intent(Reg1Activity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+            case R.id.btnNext:
+                sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
+                editor = sharedPreferences.edit();
+                editor.putString("username", inputUsername.getText().toString());
+                editor.putString("email", inputEmail.getText().toString());
+                editor.apply();
+
+                intent = new Intent(Reg1Activity.this, Reg2Activity.class);
+                startActivity(intent);
+                finish();
+                break;
+        }
     }
 
     public boolean emailEllenorzes(String email)
@@ -132,6 +144,20 @@ public class Reg1Activity extends AppCompatActivity
         else
         {
             return false;
+        }
+    }
+
+    public void ellenorzes()
+    {
+        if (!inputUsername.getText().toString().isEmpty() && !inputEmail.getText().toString().isEmpty() && emailEllenorzes(inputEmail.getText().toString()))
+        {
+            btnNext.setEnabled(true);
+            btnNext.setBackground(getResources().getDrawable(R.drawable.button));
+        }
+        else
+        {
+            btnNext.setEnabled(false);
+            btnNext.setBackground(getResources().getDrawable(R.drawable.buttondisabled));
         }
     }
 }

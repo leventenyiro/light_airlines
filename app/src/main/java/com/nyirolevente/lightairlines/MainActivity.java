@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         btnReg.setOnClickListener(this);
         btnLogin.setOnClickListener(this);
+        //btnLogin.setEnabled(false); >> kell egy tiltott drawable
+        //btnLogin.setBackground(getResources().getDrawable(R.drawable.buttondisabled));
 
         /*alertDialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
             @Override

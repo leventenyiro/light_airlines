@@ -60,7 +60,7 @@
         android:layout_below="@id/inputUsername"
         android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"
-        android:hint="E-mail"
+        android:hint="example@example.com"
         android:fontFamily="@font/regular"
         android:textColor="@color/gray"/>
 
