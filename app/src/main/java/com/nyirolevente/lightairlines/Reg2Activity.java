@@ -13,16 +13,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class Reg2Activity extends AppCompatActivity implements View.OnClickListener
 {
-
     private ImageView btnBack;
     private ImageView btnHome;
     private TextView btnLogin;
     private Button btnNext;
-    private EditText inputFirstname, inputLastname, inputBirthdate;
+    private EditText inputFirstname, inputLastname, inputBirthdate; /*Birthdatehez kéne egy maszk */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,13 +89,13 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View v)
+    {
         switch (v.getId())
         {
             case R.id.btnBack:
                 SharedPreferences sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.clear();
                 editor.apply();
                 Intent intent = new Intent(Reg2Activity.this, Reg1Activity.class);
                 startActivity(intent);
@@ -126,7 +124,6 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
                 editor = sharedPreferences.edit();
                 editor.putString("firstname", elsoNagybetu(inputFirstname.getText().toString()));
                 editor.putString("lastname", elsoNagybetu(inputLastname.getText().toString()));
-
                 editor.putString("birthdate", inputBirthdate.getText().toString());
                 editor.apply();
 
