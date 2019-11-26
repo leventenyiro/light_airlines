@@ -14,10 +14,10 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import java.util.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class Reg2Activity extends AppCompatActivity implements View.OnClickListener
 {
@@ -25,7 +25,7 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
     private ImageView btnHome;
     private TextView btnLogin;
     private Button btnNext;
-    private EditText inputFirstname, inputLastname; /*Birthdatehez kéne egy maszk */
+    private EditText inputFirstname, inputLastname;
     private DatePicker inputBirthdate;
 
     @Override
@@ -39,7 +39,11 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
         SharedPreferences sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
         inputFirstname.setText(sharedPreferences.getString("firstname", ""));
         inputLastname.setText(sharedPreferences.getString("lastname", ""));
-        //inputBirthdate.setText(sharedPreferences.getString("birthdate", ""));
+        if (!sharedPreferences.getString("birthdate", "").isEmpty())
+        {
+            String[] datum = sharedPreferences.getString("birthdate", "").split("-");
+            inputBirthdate.updateDate(Integer.parseInt(datum[0]) + 0, Integer.parseInt(datum[1]) + 1, Integer.parseInt(datum[2]));
+        }
 
         ellenorzes();
 
@@ -80,8 +84,10 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
         btnNext = findViewById(R.id.btnNext);
         inputFirstname = findViewById(R.id.inputFirstname);
         inputLastname = findViewById(R.id.inputLastname);
+
         inputBirthdate = findViewById(R.id.inputBirthdate);
         inputBirthdate.setMaxDate(System.currentTimeMillis());
+        inputBirthdate.updateDate(2000,00,01);
     }
 
     @Override
@@ -116,16 +122,23 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
                 finish();
                 break;
             case R.id.btnNext:
-                sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
-                editor = sharedPreferences.edit();
-                editor.putString("firstname", elsoNagybetu(inputFirstname.getText().toString()));
-                editor.putString("lastname", elsoNagybetu(inputLastname.getText().toString()));
-                //editor.putString("birthdate", inputBirthdate.getText().toString());
-                editor.apply();
+                if (!korEllenorzes(inputBirthdate.getYear(), inputBirthdate.getMonth(), inputBirthdate.getDayOfMonth()))
+                {
+                    Toast.makeText(Reg2Activity.this, "13 éven aluliak nem regisztrálhatnak!", Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
+                    editor = sharedPreferences.edit();
+                    editor.putString("firstname", elsoNagybetu(inputFirstname.getText().toString()));
+                    editor.putString("lastname", elsoNagybetu(inputLastname.getText().toString()));
+                    editor.putString("birthdate", birthdateToString(inputBirthdate.getYear(), inputBirthdate.getMonth(), inputBirthdate.getDayOfMonth()));
+                    editor.apply();
 
-                intent = new Intent(Reg2Activity.this, Reg3Activity.class);
-                startActivity(intent);
-                finish();
+                    intent = new Intent(Reg2Activity.this, Reg3Activity.class);
+                    startActivity(intent);
+                    finish();
+                }
                 break;
         }
     }
@@ -140,14 +153,24 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
         return ujNev;
     }
 
-    public boolean datumEllenorzes(DatePicker datePicker)
-    {
-        int year = datePicker.getYear();
-        int month = datePicker.getMonth();
-        int day = datePicker.getDayOfMonth();
 
-        Date date = new Date(year, month, day);
-        return true;
+    public boolean korEllenorzes(int year, int month, int day)
+    {
+        Calendar today = GregorianCalendar.getInstance();
+        int todayYear = today.get(Calendar.YEAR);
+        int todayMonth = today.get(Calendar.MONTH);
+        int todayDay = today.get(Calendar.DAY_OF_MONTH);
+        int age = todayYear - year;
+        if (month > todayMonth || month == todayMonth && day > todayDay)
+        {
+            age--;
+        }
+        return age >= 13;
+    }
+
+    public String birthdateToString(int year, int month, int day)
+    {
+        return year + "-" + (month + 1) + "-" + day;
     }
 
     public void ellenorzes()
@@ -157,6 +180,7 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
             btnNext.setEnabled(true);
             btnNext.setBackground(getResources().getDrawable(R.drawable.button));
         }
+
         else
         {
             btnNext.setEnabled(false);
