@@ -14,6 +14,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Reg1Activity extends AppCompatActivity implements View.OnClickListener
 {
     private ImageView btnBack;
@@ -120,7 +123,7 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public boolean emailEllenorzes(String email)
+   /* public boolean emailEllenorzes(String email)
     {
         int dbBetu = 0;
         int dbPont = 0;
@@ -144,11 +147,20 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
         {
             return false;
         }
+    }*/
+    public boolean emailEllenorzes(String email)
+    {
+        String emailPattern = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
+
+        Pattern pattern = Pattern.compile(emailPattern);
+        Matcher matcher = pattern.matcher(email);
+
+        return matcher.matches();
     }
 
     public void ellenorzes()
     {
-        if (!inputUsername.getText().toString().isEmpty() && !inputEmail.getText().toString().isEmpty() && emailEllenorzes(inputEmail.getText().toString()))
+        if (!inputUsername.getText().toString().isEmpty() && !inputEmail.getText().toString().isEmpty() && emailEllenorzes(inputEmail.getText().toString()) == true)
         {
             btnNext.setEnabled(true);
             btnNext.setBackground(getResources().getDrawable(R.drawable.button));
