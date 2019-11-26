@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -25,6 +26,7 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
     private TextView btnLogin, textLeiras;
     private Button btnReg;
     private EditText inputPassword, inputPasswordAgain;
+    private DatabaseUser db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -75,6 +77,7 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
         inputPassword = findViewById(R.id.inputPassword);
         inputPasswordAgain = findViewById(R.id.inputPasswordAgain);
         textLeiras = findViewById(R.id.textLeiras);
+        db = new DatabaseUser(this);
     }
 
     @Override
@@ -114,7 +117,7 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
                 editor.putString("password", inputPassword.getText().toString());
                 editor.apply();
 
-                // ADATBÁZIS HELYE - regisztrált adatok rögzítése
+                adatbazisInsert();
 
                 editor.clear();
                 editor.apply();
@@ -150,5 +153,22 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
             btnReg.setBackground(getResources().getDrawable(R.drawable.buttondisabled));
             textLeiras.setVisibility(View.VISIBLE);
         }
+    }
+
+    public void adatbazisInsert()
+    {
+        SharedPreferences sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
+        String username = sharedPreferences.getString("username", "");
+        String email = sharedPreferences.getString("email", "");
+        String firstname = sharedPreferences.getString("firstname", "");
+        String lastname = sharedPreferences.getString("lastname", "");
+        String birthdate = sharedPreferences.getString("birthdate", "");
+        String password = sharedPreferences.getString("password", "");
+        Boolean eredmeny = db.insert(username, email, firstname, lastname, birthdate, password);
+        if (eredmeny)
+            Toast.makeText(this, "Sikeres regisztráció!", Toast.LENGTH_LONG);
+        else
+            Toast.makeText(this, "Szerverhiba! Sikertelen regisztráció!", Toast.LENGTH_SHORT).show();
+
     }
 }
