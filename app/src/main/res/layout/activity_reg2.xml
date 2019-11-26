@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnBack"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:id="@+id/textCim"
         android:text="Regisztráció"
         android:textSize="40sp"
@@ -44,7 +44,7 @@
         android:background="@drawable/input"
         android:id="@+id/inputFirstname"
         android:layout_below="@id/textCim"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"
         android:inputType="textCapSentences"
         android:hint="Keresztnév"
@@ -65,18 +65,28 @@
         android:fontFamily="@font/regular"
         android:textColor="@color/gray"/>
     <!-- BirthDate -->
-    <EditText
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Születési dátum"
+        android:fontFamily="@font/regular"
+        android:layout_below="@id/inputLastname"
+        android:id="@+id/textBirthdate"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/gray"
+        android:textSize="20sp" />
+
+    <DatePicker
         android:layout_width="340dp"
         android:layout_height="wrap_content"
-        android:paddingVertical="15dp"
-        android:background="@drawable/input"
+        android:background="@drawable/inputdatepicker"
+        android:padding="10dp"
+        android:datePickerMode="spinner"
+        android:calendarViewShown="false"
         android:id="@+id/inputBirthdate"
-        android:layout_below="@id/inputLastname"
-        android:layout_marginTop="30dp"
-        android:layout_centerHorizontal="true"
-        android:hint="Születési dátum"
-        android:fontFamily="@font/regular"
-        android:textColor="@color/gray"/>
+        android:layout_below="@id/textBirthdate"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -129,5 +139,7 @@
         android:layout_height="5dp"
         android:progress="29"
         android:progressTint="#00B000" />
+
+
 
 </RelativeLayout>

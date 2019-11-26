@@ -10,9 +10,14 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Reg2Activity extends AppCompatActivity implements View.OnClickListener
 {
@@ -20,7 +25,8 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
     private ImageView btnHome;
     private TextView btnLogin;
     private Button btnNext;
-    private EditText inputFirstname, inputLastname, inputBirthdate; /*Birthdatehez kéne egy maszk */
+    private EditText inputFirstname, inputLastname; /*Birthdatehez kéne egy maszk */
+    private DatePicker inputBirthdate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +39,7 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
         SharedPreferences sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
         inputFirstname.setText(sharedPreferences.getString("firstname", ""));
         inputLastname.setText(sharedPreferences.getString("lastname", ""));
-        inputBirthdate.setText(sharedPreferences.getString("birthdate", ""));
+        //inputBirthdate.setText(sharedPreferences.getString("birthdate", ""));
 
         ellenorzes();
 
@@ -49,17 +55,6 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
             public void afterTextChanged(Editable s) { }
         });
         inputLastname.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count)
-            {
-                ellenorzes();
-            }
-            @Override
-            public void afterTextChanged(Editable s) { }
-        });
-        inputBirthdate.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override
@@ -86,6 +81,7 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
         inputFirstname = findViewById(R.id.inputFirstname);
         inputLastname = findViewById(R.id.inputLastname);
         inputBirthdate = findViewById(R.id.inputBirthdate);
+        inputBirthdate.setMaxDate(System.currentTimeMillis());
     }
 
     @Override
@@ -124,7 +120,7 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
                 editor = sharedPreferences.edit();
                 editor.putString("firstname", elsoNagybetu(inputFirstname.getText().toString()));
                 editor.putString("lastname", elsoNagybetu(inputLastname.getText().toString()));
-                editor.putString("birthdate", inputBirthdate.getText().toString());
+                //editor.putString("birthdate", inputBirthdate.getText().toString());
                 editor.apply();
 
                 intent = new Intent(Reg2Activity.this, Reg3Activity.class);
@@ -144,9 +140,19 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
         return ujNev;
     }
 
+    public boolean datumEllenorzes(DatePicker datePicker)
+    {
+        int year = datePicker.getYear();
+        int month = datePicker.getMonth();
+        int day = datePicker.getDayOfMonth();
+
+        Date date = new Date(year, month, day);
+        return true;
+    }
+
     public void ellenorzes()
     {
-        if (!inputFirstname.getText().toString().isEmpty() && !inputLastname.getText().toString().isEmpty() && !inputBirthdate.getText().toString().isEmpty())
+        if (!inputFirstname.getText().toString().isEmpty() && !inputLastname.getText().toString().isEmpty()/* && !inputBirthdate.getText().toString().isEmpty() && datumEllenorzes(inputBirthdate.getText().toString())*/)
         {
             btnNext.setEnabled(true);
             btnNext.setBackground(getResources().getDrawable(R.drawable.button));
