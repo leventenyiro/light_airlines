@@ -128,13 +128,10 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
 
     public boolean jelszoEllenorzes(String password)
     {
-        Pattern pattern;
-        Matcher matcher;
-
         String passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{4,}$";
 
-        pattern = Pattern.compile(passwordPattern);
-        matcher = pattern.matcher(password);
+        Pattern pattern = Pattern.compile(passwordPattern);
+        Matcher matcher = pattern.matcher(password);
 
         return matcher.matches();
     }

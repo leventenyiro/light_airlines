@@ -123,31 +123,6 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-   /* public boolean emailEllenorzes(String email)
-    {
-        int dbBetu = 0;
-        int dbPont = 0;
-        String[] betuk = email.split("");
-        for (int i = 0; i < betuk.length; i++)
-        {
-            if (betuk[i].equals("@"))
-            {
-                dbBetu++;
-            }
-            if (betuk[i].equals("."))
-            {
-                dbPont++;
-            }
-        }
-        if (dbBetu == 1 && dbPont >= 1)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }*/
     public boolean emailEllenorzes(String email)
     {
         String emailPattern = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
