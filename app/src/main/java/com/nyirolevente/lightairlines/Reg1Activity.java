@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -24,6 +26,7 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
     private TextView btnLogin;
     private Button btnNext;
     private EditText inputUsername, inputEmail;
+    DatabaseUser db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +79,7 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
         btnNext = findViewById(R.id.btnNext);
         inputUsername = findViewById(R.id.inputUsername);
         inputEmail = findViewById(R.id.inputEmail);
+        db = new DatabaseUser(this);
     }
 
     public void onClick(View v)
@@ -110,16 +114,27 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
                 finish();
                 break;
             case R.id.btnNext:
-                sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
-                editor = sharedPreferences.edit();
-                editor.putString("username", inputUsername.getText().toString());
-                editor.putString("email", inputEmail.getText().toString());
-                editor.apply();
+                if (vanEUsername())
+                {
+                    Toast.makeText(this, "A felhasználónév foglalt!", Toast.LENGTH_LONG).show();
+                }
+                else if (vanEEmail())
+                {
+                    Toast.makeText(this, "Az e-mail cím foglalt!", Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
+                    editor = sharedPreferences.edit();
+                    editor.putString("username", inputUsername.getText().toString());
+                    editor.putString("email", inputEmail.getText().toString());
+                    editor.apply();
 
-                intent = new Intent(Reg1Activity.this, Reg2Activity.class);
-                startActivity(intent);
-                finish();
-                break;
+                    intent = new Intent(Reg1Activity.this, Reg2Activity.class);
+                    startActivity(intent);
+                    finish();
+                    break;
+                }
         }
     }
 
@@ -145,5 +160,19 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
             btnNext.setEnabled(false);
             btnNext.setBackground(getResources().getDrawable(R.drawable.buttondisabled));
         }
+    }
+
+    public boolean vanEUsername()
+    {
+        Cursor eredmeny = db.selectUsername();
+        StringBuffer stringBuffer = new StringBuffer();
+        return eredmeny.getCount() == 1;
+    }
+
+    public boolean vanEEmail()
+    {
+        Cursor eredmeny = db.selectEmail();
+        StringBuffer stringBuffer = new StringBuffer();
+        return eredmeny.getCount() == 1;
     }
 }

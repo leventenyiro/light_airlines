@@ -2,6 +2,7 @@ package com.nyirolevente.lightairlines;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -48,5 +49,19 @@ public class DatabaseUser extends SQLiteOpenHelper
 
         long eredmeny = db.insert(TABLE_NAME, null, contentValues);
         return eredmeny == -1 ? false : true;
+    }
+
+    public Cursor selectUsername()
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor eredmeny = db.rawQuery("SELECT username FROM " + TABLE_NAME, null);
+        return eredmeny;
+    }
+
+    public Cursor selectEmail()
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor eredmeny = db.rawQuery("SELECT email FROM " + TABLE_NAME, null);
+        return eredmeny;
     }
 }
