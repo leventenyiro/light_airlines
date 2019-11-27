@@ -65,4 +65,11 @@ public class DatabaseUser extends SQLiteOpenHelper
         Cursor eredmeny = db.rawQuery("SELECT email FROM " + TABLE_NAME + " WHERE email = '" + email + "'", null);
         return eredmeny;
     }
+
+    public Cursor selectLogin(String usernameEmail, String password)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor eredmeny = db.rawQuery("SELECT * FROM "+ TABLE_NAME + " WHERE (username = '" + usernameEmail + "' OR email = '" + usernameEmail + "') AND password = '" + password + "'", null);
+        return eredmeny;
+    }
 }
