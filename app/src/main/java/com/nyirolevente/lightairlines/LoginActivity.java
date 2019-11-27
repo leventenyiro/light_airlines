@@ -14,7 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class LoginActivity extends AppCompatActivity
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener
 {
     private ImageView btnBack, btnHome;
     private TextView btnReg;
@@ -53,54 +53,10 @@ public class LoginActivity extends AppCompatActivity
             public void afterTextChanged(Editable s) { }
         });
 
-        btnBack.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
-        btnHome.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
-        btnReg.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Intent intent = new Intent(LoginActivity.this, Reg1Activity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (login())
-                {
-                    Intent intent = new Intent(LoginActivity.this, MainInnerActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-                else
-                {
-                    Toast.makeText(LoginActivity.this, "Sikertelen belépés!", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+        btnBack.setOnClickListener(this);
+        btnHome.setOnClickListener(this);
+        btnReg.setOnClickListener(this);
+        btnLogin.setOnClickListener(this);
     }
 
     public void init()
@@ -112,6 +68,41 @@ public class LoginActivity extends AppCompatActivity
         inputUsernameEmail = findViewById(R.id.inputUsernameEmail);
         inputPassword = findViewById(R.id.inputPassword);
         db = new DatabaseUser(this);
+    }
+
+    @Override
+    public void onClick(View v)
+    {
+        switch (v.getId())
+        {
+            case R.id.btnBack:
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+            case R.id.btnHome:
+                intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+            case R.id.btnReg:
+                intent = new Intent(LoginActivity.this, Reg1Activity.class);
+                startActivity(intent);
+                finish();
+                break;
+            case R.id.btnLogin:
+                if (login())
+                {
+                    intent = new Intent(LoginActivity.this, MainInnerActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+                else
+                {
+                    Toast.makeText(LoginActivity.this, "Sikertelen belépés!", Toast.LENGTH_SHORT).show();
+                }
+                break;
+        }
     }
 
     public void ellenorzes()
