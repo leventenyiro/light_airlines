@@ -51,17 +51,18 @@ public class DatabaseUser extends SQLiteOpenHelper
         return eredmeny == -1 ? false : true;
     }
 
-    public Cursor selectUsername()
+    public Cursor selectUsername(String username)
     {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor eredmeny = db.rawQuery("SELECT username FROM " + TABLE_NAME, null);
+        //Cursor eredmeny = db.rawQuery("SELECT username FROM " + TABLE_NAME + "WHERE username = '" + username + "'", null);
+        Cursor eredmeny = db.rawQuery("SELECT username FROM " + TABLE_NAME + " WHERE username = '" + username + "'", null);
         return eredmeny;
     }
 
-    public Cursor selectEmail()
+    public Cursor selectEmail(String email)
     {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor eredmeny = db.rawQuery("SELECT email FROM " + TABLE_NAME, null);
+        Cursor eredmeny = db.rawQuery("SELECT email FROM " + TABLE_NAME + " WHERE email = '" + email + "'", null);
         return eredmeny;
     }
 }

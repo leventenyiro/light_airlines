@@ -169,6 +169,5 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(this, "Sikeres regisztráció!", Toast.LENGTH_LONG);
         else
             Toast.makeText(this, "Szerverhiba! Sikertelen regisztráció!", Toast.LENGTH_SHORT).show();
-
     }
 }

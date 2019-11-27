@@ -164,14 +164,14 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
 
     public boolean vanEUsername()
     {
-        Cursor eredmeny = db.selectUsername();
+        Cursor eredmeny = db.selectUsername(inputUsername.getText().toString());
         StringBuffer stringBuffer = new StringBuffer();
         return eredmeny.getCount() == 1;
     }
 
     public boolean vanEEmail()
     {
-        Cursor eredmeny = db.selectEmail();
+        Cursor eredmeny = db.selectEmail(inputEmail.getText().toString());
         StringBuffer stringBuffer = new StringBuffer();
         return eredmeny.getCount() == 1;
     }
