@@ -150,7 +150,17 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
 
     public void ellenorzes()
     {
-        if (!inputUsername.getText().toString().isEmpty() && !inputEmail.getText().toString().isEmpty() && emailEllenorzes(inputEmail.getText().toString()) == true)
+        if (!inputUsername.getText().toString().isEmpty())
+        {
+            inputUsername.setBackground(getResources().getDrawable(R.drawable.inputgreen));
+            inputUsername.setPaddingRelative(70, 40, 40, 40);
+        }
+        if (!inputEmail.getText().toString().isEmpty() && emailEllenorzes(inputEmail.getText().toString()))
+        {
+            inputEmail.setBackground(getResources().getDrawable(R.drawable.inputgreen));
+            inputEmail.setPaddingRelative(70, 40, 40, 40);
+        }
+        if (!inputUsername.getText().toString().isEmpty() && !inputEmail.getText().toString().isEmpty() && emailEllenorzes(inputEmail.getText().toString()))
         {
             btnNext.setEnabled(true);
             btnNext.setBackground(getResources().getDrawable(R.drawable.button));
@@ -159,6 +169,16 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
         {
             btnNext.setEnabled(false);
             btnNext.setBackground(getResources().getDrawable(R.drawable.buttondisabled));
+            if (inputUsername.getText().toString().isEmpty())
+            {
+                inputUsername.setBackground(getResources().getDrawable(R.drawable.input));
+                inputUsername.setPaddingRelative(70, 40, 40, 40);
+            }
+            if (inputEmail.getText().toString().isEmpty() && !emailEllenorzes(inputEmail.getText().toString()))
+            {
+                inputEmail.setBackground(getResources().getDrawable(R.drawable.input));
+                inputEmail.setPaddingRelative(70, 40, 40, 40);
+            }
         }
     }
 
