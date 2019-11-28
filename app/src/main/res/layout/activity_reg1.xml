@@ -50,7 +50,10 @@
         android:layout_centerHorizontal="true"
         android:hint="Felhasználónév"
         android:fontFamily="@font/regular"
-        android:textColor="@color/gray"/>
+        android:textColor="@color/gray"
+        android:maxLines="1"
+        android:lines="1"
+        android:singleLine="true" />
     <!-- Email -->
     <EditText
         android:layout_width="340dp"
@@ -66,7 +69,10 @@
         android:layout_centerHorizontal="true"
         android:hint="pelda@pelda.com"
         android:fontFamily="@font/regular"
-        android:textColor="@color/gray"/>
+        android:textColor="@color/gray"
+        android:maxLines="1"
+        android:lines="1"
+        android:singleLine="true" />
 
     <!-- ... -->
 

@@ -42,6 +42,7 @@
         android:id="@+id/textLeiras"
         android:layout_width="320dp"
         android:textAlignment="textEnd"
+        android:layout_gravity="end"
         android:layout_height="wrap_content"
         android:layout_above="@+id/inputPassword"
         android:layout_alignParentRight="true"
@@ -65,7 +66,10 @@
         android:layout_centerHorizontal="true"
         android:hint="Jelszó"
         android:fontFamily="@font/regular"
-        android:textColor="@color/gray"/>
+        android:textColor="@color/gray"
+        android:maxLines="1"
+        android:lines="1"
+        android:singleLine="true"/>
 
     <EditText
         android:layout_width="340dp"
@@ -81,7 +85,10 @@
         android:layout_centerHorizontal="true"
         android:hint="Jelszó megerősítés"
         android:fontFamily="@font/regular"
-        android:textColor="@color/gray"/>
+        android:textColor="@color/gray"
+        android:maxLines="1"
+        android:lines="1"
+        android:singleLine="true"/>
 
     <Button
         android:layout_width="wrap_content"

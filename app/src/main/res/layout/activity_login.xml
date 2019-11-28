@@ -52,7 +52,10 @@
         android:inputType="textEmailAddress"
         android:hint="Felhasználónév vagy E-mail"
         android:textColor="@color/gray"
-        android:fontFamily="@font/regular" />
+        android:fontFamily="@font/regular"
+        android:maxLines="1"
+        android:lines="1"
+        android:singleLine="true"/>
 
     <EditText
         android:layout_width="340dp"
@@ -68,7 +71,10 @@
         android:inputType="textPassword"
         android:hint="Password"
         android:textColor="@color/gray"
-        android:fontFamily="@font/regular" />
+        android:fontFamily="@font/regular"
+        android:maxLines="1"
+        android:lines="1"
+        android:singleLine="true"/>
 
     <Button
         android:layout_width="wrap_content"

@@ -51,7 +51,10 @@
         android:inputType="textCapSentences"
         android:hint="Keresztnév"
         android:fontFamily="@font/regular"
-        android:textColor="@color/gray"/>
+        android:textColor="@color/gray"
+        android:maxLines="1"
+        android:lines="1"
+        android:singleLine="true"/>
     <!-- Lastname -->
     <EditText
         android:layout_width="340dp"
@@ -67,7 +70,10 @@
         android:inputType="textCapSentences"
         android:hint="Vezetéknév"
         android:fontFamily="@font/regular"
-        android:textColor="@color/gray"/>
+        android:textColor="@color/gray"
+        android:maxLines="1"
+        android:lines="1"
+        android:singleLine="true"/>
     <!-- BirthDate -->
     <TextView
         android:layout_width="wrap_content"
