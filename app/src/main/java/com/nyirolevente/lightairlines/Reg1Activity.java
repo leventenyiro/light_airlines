@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -174,7 +175,7 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
                 inputUsername.setBackground(getResources().getDrawable(R.drawable.input));
                 inputUsername.setPaddingRelative(70, 40, 40, 40);
             }
-            if (inputEmail.getText().toString().isEmpty() && !emailEllenorzes(inputEmail.getText().toString()))
+            if (inputEmail.getText().toString().isEmpty() || !emailEllenorzes(inputEmail.getText().toString()))
             {
                 inputEmail.setBackground(getResources().getDrawable(R.drawable.input));
                 inputEmail.setPaddingRelative(70, 40, 40, 40);
