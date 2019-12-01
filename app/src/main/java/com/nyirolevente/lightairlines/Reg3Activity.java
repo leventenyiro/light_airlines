@@ -141,6 +141,16 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
 
     public void ellenorzes()
     {
+        if (!inputPassword.getText().toString().isEmpty() && jelszoEllenorzes(inputPassword.getText().toString()))
+        {
+            inputPassword.setBackground(getResources().getDrawable(R.drawable.inputgreen));
+            inputPassword.setPaddingRelative(70, 40, 40, 40);
+        }
+        if (!inputPasswordAgain.getText().toString().isEmpty() && inputPassword.getText().toString().equals(inputPasswordAgain.getText().toString()) && jelszoEllenorzes(inputPassword.getText().toString()))
+        {
+            inputPasswordAgain.setBackground(getResources().getDrawable(R.drawable.inputgreen));
+            inputPasswordAgain.setPaddingRelative(70, 40, 40, 40);
+        }
         if (!inputPassword.getText().toString().isEmpty() && inputPassword.getText().toString().equals(inputPasswordAgain.getText().toString()) && jelszoEllenorzes(inputPassword.getText().toString()))
         {
             btnReg.setEnabled(true);
@@ -152,6 +162,16 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
             btnReg.setEnabled(false);
             btnReg.setBackground(getResources().getDrawable(R.drawable.buttondisabled));
             textLeiras.setVisibility(View.VISIBLE);
+            if (inputPassword.getText().toString().isEmpty() || !jelszoEllenorzes(inputPassword.getText().toString()))
+            {
+                inputPassword.setBackground(getResources().getDrawable(R.drawable.input));
+                inputPassword.setPaddingRelative(70, 40, 40, 40);
+            }
+            if (inputPasswordAgain.getText().toString().isEmpty() || !inputPasswordAgain.getText().toString().equals(inputPassword) || !jelszoEllenorzes(inputPassword.getText().toString()))
+            {
+                inputPasswordAgain.setBackground(getResources().getDrawable(R.drawable.input));
+                inputPasswordAgain.setPaddingRelative(70, 40, 40, 40);
+            }
         }
     }
 
