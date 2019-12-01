@@ -175,16 +175,35 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
 
     public void ellenorzes()
     {
-        if (!inputFirstname.getText().toString().isEmpty() && !inputLastname.getText().toString().isEmpty()/* && !inputBirthdate.getText().toString().isEmpty() && datumEllenorzes(inputBirthdate.getText().toString())*/)
+        if (!inputFirstname.getText().toString().isEmpty())
+        {
+            inputFirstname.setBackground(getResources().getDrawable(R.drawable.inputgreen));
+            inputFirstname.setPaddingRelative(70, 40, 40, 40);
+        }
+        if (!inputLastname.getText().toString().isEmpty())
+        {
+            inputLastname.setBackground(getResources().getDrawable(R.drawable.inputgreen));
+            inputLastname.setPaddingRelative(70, 40, 40, 40);
+        }
+        if (!inputFirstname.getText().toString().isEmpty() && !inputLastname.getText().toString().isEmpty())
         {
             btnNext.setEnabled(true);
             btnNext.setBackground(getResources().getDrawable(R.drawable.button));
         }
-
         else
         {
             btnNext.setEnabled(false);
             btnNext.setBackground(getResources().getDrawable(R.drawable.buttondisabled));
+            if (inputFirstname.getText().toString().isEmpty())
+            {
+                inputFirstname.setBackground(getResources().getDrawable(R.drawable.input));
+                inputFirstname.setPaddingRelative(70, 40, 40, 40);
+            }
+            if (inputLastname.getText().toString().isEmpty())
+            {
+                inputLastname.setBackground(getResources().getDrawable(R.drawable.input));
+                inputLastname.setPaddingRelative(70, 40, 40, 40);
+            }
         }
     }
 }
