@@ -14,13 +14,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Reg3Activity extends AppCompatActivity implements View.OnClickListener
 {
-
+    /* https://stackoverflow.com/questions/41223937/how-can-i-encrypte-my-password-android-studio */
     private ImageView btnBack;
     private ImageView btnHome;
     private TextView btnLogin, textLeiras;
@@ -190,4 +189,6 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
         else
             Toast.makeText(this, "Szerverhiba! Sikertelen regisztráció!", Toast.LENGTH_SHORT).show();
     }
+
+
 }
