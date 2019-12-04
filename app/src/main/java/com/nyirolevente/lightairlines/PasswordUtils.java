@@ -1,5 +1,9 @@
 package com.nyirolevente.lightairlines;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;

@@ -18,6 +18,7 @@ public class DatabaseUser extends SQLiteOpenHelper
     public static final String COL_5 = "lastname";
     public static final String COL_6 = "birthdate";
     public static final String COL_7 = "password";
+    public static final String COL_8 = "salt";
 
     public DatabaseUser(Context context)
     {
@@ -27,7 +28,7 @@ public class DatabaseUser extends SQLiteOpenHelper
     @Override
     public void onCreate(SQLiteDatabase db)
     {
-        db.execSQL("CREATE TABLE " + TABLE_NAME + "(id INTEGER PRIMARY KEY AUTOINCREMENT, username VARCHAR(255), email VARCHAR(255), firstname VARCHAR(255), lastname VARCHAR(255), birthdate DATE, password TEXT)");
+        db.execSQL("CREATE TABLE " + TABLE_NAME + " (id INTEGER PRIMARY KEY AUTOINCREMENT, username VARCHAR(255), email VARCHAR(255), firstname VARCHAR(255), lastname VARCHAR(255), birthdate DATE, password TEXT, salt TEXT)");
     }
 
     @Override
@@ -36,7 +37,7 @@ public class DatabaseUser extends SQLiteOpenHelper
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
     }
 
-    public boolean insert(String username, String email, String firstname, String lastname, String birthdate, String password)
+    public boolean insert(String username, String email, String firstname, String lastname, String birthdate, String password, String salt)
     {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -45,7 +46,8 @@ public class DatabaseUser extends SQLiteOpenHelper
         contentValues.put(COL_4, firstname);
         contentValues.put(COL_5, lastname);
         contentValues.put(COL_6, birthdate);
-        contentValues.put(COL_7, password); // javax.crypto
+        contentValues.put(COL_7, password);
+        contentValues.put(COL_8, salt);
 
         long eredmeny = db.insert(TABLE_NAME, null, contentValues);
         return eredmeny == -1 ? false : true;
@@ -66,10 +68,17 @@ public class DatabaseUser extends SQLiteOpenHelper
         return eredmeny;
     }
 
-    public Cursor selectLogin(String usernameEmail, String password)
+    public Cursor selectLogin(String usernameEmail)
     {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor eredmeny = db.rawQuery("SELECT * FROM "+ TABLE_NAME + " WHERE (username = '" + usernameEmail + "' OR email = '" + usernameEmail + "') AND password = '" + password + "'", null);
+        Cursor eredmeny = db.rawQuery("SELECT * FROM "+ TABLE_NAME + " WHERE username = '" + usernameEmail + "' OR email = '" + usernameEmail + "'", null);
         return eredmeny;
+    }
+
+    public Cursor selectPassword(String usernameEmail)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor passwordEllenorzes = db.rawQuery("SELECT password, salt FROM " + TABLE_NAME + " WHERE username = '" + usernameEmail + "' OR email = '" + usernameEmail + "'", null);
+        return passwordEllenorzes;
     }
 }

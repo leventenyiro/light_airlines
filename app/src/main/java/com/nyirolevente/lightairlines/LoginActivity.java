@@ -1,9 +1,11 @@
 package com.nyirolevente.lightairlines;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -91,7 +93,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 finish();
                 break;
             case R.id.btnLogin:
-                if (login())
+                if (login() && passwordEllenorzes())
                 {
                     intent = new Intent(LoginActivity.this, MainInnerActivity.class);
                     startActivity(intent);
@@ -121,8 +123,27 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     public boolean login()
     {
-        Cursor eredmeny = db.selectLogin(inputUsernameEmail.getText().toString(), inputPassword.getText().toString());
+        Cursor eredmeny = db.selectLogin(inputUsernameEmail.getText().toString());
         StringBuffer stringBuffer = new StringBuffer();
         return eredmeny.getCount() == 1;
+    }
+
+    public boolean passwordEllenorzes()
+    {
+        Cursor eredmeny = db.selectPassword(inputUsernameEmail.getText().toString());
+        StringBuffer stringBuffer = new StringBuffer();
+
+        String titkositottPassword = null;
+        String salt = null;
+
+        if (eredmeny != null && eredmeny.getCount() > 0)
+        {
+            while (eredmeny.moveToNext())
+            {
+                titkositottPassword = eredmeny.getString(0);
+                salt = eredmeny.getString(1);
+            }
+        }
+        return PasswordUtils.verifyUserPassword(inputPassword.getText().toString(), titkositottPassword, salt);
     }
 }

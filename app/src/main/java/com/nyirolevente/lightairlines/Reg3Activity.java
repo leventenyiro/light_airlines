@@ -1,10 +1,12 @@
 package com.nyirolevente.lightairlines;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -182,8 +184,15 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
         String firstname = sharedPreferences.getString("firstname", "");
         String lastname = sharedPreferences.getString("lastname", "");
         String birthdate = sharedPreferences.getString("birthdate", "");
+
+
+
         String password = sharedPreferences.getString("password", "");
-        Boolean eredmeny = db.insert(username, email, firstname, lastname, birthdate, password);
+        String salt = PasswordUtils.getSalt(30);
+        String titkositottPassword = PasswordUtils.generateSecurePassword(password, salt);
+
+
+        Boolean eredmeny = db.insert(username, email, firstname, lastname, birthdate, titkositottPassword, salt);
         if (eredmeny)
             Toast.makeText(this, "Sikeres regisztráció!", Toast.LENGTH_LONG);
         else
