@@ -18,7 +18,6 @@ public class DatabaseUser extends SQLiteOpenHelper
     public static final String COL_5 = "lastname";
     public static final String COL_6 = "birthdate";
     public static final String COL_7 = "password";
-    public static final String COL_8 = "salt";
 
     public DatabaseUser(Context context)
     {
@@ -28,7 +27,7 @@ public class DatabaseUser extends SQLiteOpenHelper
     @Override
     public void onCreate(SQLiteDatabase db)
     {
-        db.execSQL("CREATE TABLE " + TABLE_NAME + " (id INTEGER PRIMARY KEY AUTOINCREMENT, username VARCHAR(255), email VARCHAR(255), firstname VARCHAR(255), lastname VARCHAR(255), birthdate DATE, password TEXT, salt TEXT)");
+        db.execSQL("CREATE TABLE " + TABLE_NAME + " (id INTEGER PRIMARY KEY AUTOINCREMENT, username VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL, firstname VARCHAR(255) NOT NULL, lastname VARCHAR(255) NOT NULL, birthdate DATE NOT NULL, password TEXT NOT NULL)");
     }
 
     @Override
@@ -37,7 +36,7 @@ public class DatabaseUser extends SQLiteOpenHelper
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
     }
 
-    public boolean insert(String username, String email, String firstname, String lastname, String birthdate, String password, String salt)
+    public boolean insert(String username, String email, String firstname, String lastname, String birthdate, String password)
     {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -47,7 +46,6 @@ public class DatabaseUser extends SQLiteOpenHelper
         contentValues.put(COL_5, lastname);
         contentValues.put(COL_6, birthdate);
         contentValues.put(COL_7, password);
-        contentValues.put(COL_8, salt);
 
         long eredmeny = db.insert(TABLE_NAME, null, contentValues);
         return eredmeny == -1 ? false : true;
@@ -78,7 +76,7 @@ public class DatabaseUser extends SQLiteOpenHelper
     public Cursor selectPassword(String usernameEmail)
     {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor passwordEllenorzes = db.rawQuery("SELECT password, salt FROM " + TABLE_NAME + " WHERE username = '" + usernameEmail + "' OR email = '" + usernameEmail + "'", null);
+        Cursor passwordEllenorzes = db.rawQuery("SELECT password FROM " + TABLE_NAME + " WHERE username = '" + usernameEmail + "' OR email = '" + usernameEmail + "'", null);
         return passwordEllenorzes;
     }
 }

@@ -133,17 +133,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Cursor eredmeny = db.selectPassword(inputUsernameEmail.getText().toString());
         StringBuffer stringBuffer = new StringBuffer();
 
-        String titkositottPassword = null;
+        String password = null;
         String salt = null;
 
         if (eredmeny != null && eredmeny.getCount() > 0)
         {
             while (eredmeny.moveToNext())
             {
-                titkositottPassword = eredmeny.getString(0);
-                salt = eredmeny.getString(1);
+                String[] adatok = eredmeny.getString(0).split(";");
+                password = adatok[0];
+                salt = adatok[1];
             }
         }
-        return PasswordUtils.verifyUserPassword(inputPassword.getText().toString(), titkositottPassword, salt);
+        return PasswordUtils.verifyUserPassword(inputPassword.getText().toString(), password, salt);
     }
 }

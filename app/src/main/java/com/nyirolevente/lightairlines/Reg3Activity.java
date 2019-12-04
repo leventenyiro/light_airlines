@@ -185,14 +185,11 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
         String lastname = sharedPreferences.getString("lastname", "");
         String birthdate = sharedPreferences.getString("birthdate", "");
 
-
-
-        String password = sharedPreferences.getString("password", "");
         String salt = PasswordUtils.getSalt(30);
-        String titkositottPassword = PasswordUtils.generateSecurePassword(password, salt);
+        String titkositottPassword = PasswordUtils.generateSecurePassword(sharedPreferences.getString("password", ""), salt);
+        String password = titkositottPassword + ";" + salt;
 
-
-        Boolean eredmeny = db.insert(username, email, firstname, lastname, birthdate, titkositottPassword, salt);
+        Boolean eredmeny = db.insert(username, email, firstname, lastname, birthdate, password);
         if (eredmeny)
             Toast.makeText(this, "Sikeres regisztráció!", Toast.LENGTH_LONG);
         else
