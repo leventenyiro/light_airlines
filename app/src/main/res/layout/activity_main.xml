@@ -27,7 +27,7 @@
         android:id="@+id/textAlcim"
         android:text="A Light Airlines menetrendkereső felületén"
         android:fontFamily="@font/regular"
-        android:textColor="@color/ligthGray"
+        android:textColor="@color/lightGray"
         android:textSize="16sp" />
 
     <Button
