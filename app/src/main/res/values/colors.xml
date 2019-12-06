@@ -9,7 +9,9 @@
     <color name="gray">#2C3E50</color>
     <color name="ligthGray">#EBEBEB</color>
     <color name="lightGreen">#DCFFDC</color>
+    <color name="lightRed">#FFDCDC</color>
     <color name="beige">#ECE9E6</color>
     <color name="white">#FFFFFF</color>
     <color name="disabledRebelBlue">#7000A1E4</color>
+
 </resources>
