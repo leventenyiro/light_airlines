@@ -99,9 +99,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     startActivity(intent);
                     finish();
                 }
+                else if (!login())
+                {
+                    Toast.makeText(LoginActivity.this, "Nincs ilyen felhasználó!", Toast.LENGTH_SHORT).show();
+                }
                 else
                 {
-                    Toast.makeText(LoginActivity.this, "Sikertelen belépés!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Helytelen jelszó!", Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
