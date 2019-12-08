@@ -86,6 +86,7 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
 
     public void onClick(View v)
     {
+        Intent intent;
         switch (v.getId())
         {
             case R.id.btnBack:
@@ -93,8 +94,6 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.clear();
                 editor.apply();
-                Intent intent = new Intent(Reg1Activity.this, LoginActivity.class);
-                startActivity(intent);
                 finish();
                 break;
             case R.id.btnHome:
@@ -104,6 +103,7 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
                 editor.apply();
                 intent = new Intent(Reg1Activity.this, MainActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 finish();
                 break;
             case R.id.btnLogin:
@@ -113,6 +113,7 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
                 editor.apply();
                 intent = new Intent(Reg1Activity.this, LoginActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();
                 break;
             case R.id.btnNext:
@@ -227,8 +228,8 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
         editor.apply();
-        Intent intent = new Intent(Reg1Activity.this, LoginActivity.class);
-        startActivity(intent);
+        /*Intent intent = new Intent(Reg1Activity.this, LoginActivity.class);
+        startActivity(intent);*/
         super.finish();
     }
 }

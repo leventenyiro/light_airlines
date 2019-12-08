@@ -68,12 +68,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent = new Intent(MainActivity.this, Reg1Activity.class);
                 startActivity(intent);
                 //overridePendingTransition(R.anim.);
-                finish();
                 break;
             case R.id.btnLogin:
                 intent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intent);
-                finish();
         }
     }
 }
