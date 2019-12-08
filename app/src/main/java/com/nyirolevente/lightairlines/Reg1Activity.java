@@ -41,7 +41,8 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
         inputUsername.setText(sharedPreferences.getString("username", ""));
         inputEmail.setText(sharedPreferences.getString("email", ""));
 
-        ellenorzes();
+        inputUsernameEllenorzes();
+        inputEmailEllenorzes();
 
         inputUsername.addTextChangedListener(new TextWatcher() {
             @Override
@@ -49,7 +50,7 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count)
             {
-                ellenorzes();
+                inputUsernameEllenorzes();
             }
             @Override
             public void afterTextChanged(Editable s) { }
@@ -60,7 +61,7 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count)
             {
-                ellenorzes();
+                inputEmailEllenorzes();
             }
             @Override
             public void afterTextChanged(Editable s) { }
@@ -115,6 +116,7 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
                 finish();
                 break;
             case R.id.btnNext:
+                ellenorzes();
                 if (vanEUsername())
                 {
                     Toast.makeText(this, "A felhasználónév foglalt!", Toast.LENGTH_LONG).show();
@@ -151,6 +153,50 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    public void inputUsernameEllenorzes()
+    {
+        if (!inputUsername.getText().toString().isEmpty())
+        {
+            inputUsername.setBackground(getResources().getDrawable(R.drawable.inputgreen));
+            inputUsername.setPaddingRelative(70, 40, 40, 40);
+        }
+        else
+        {
+            inputUsername.setBackground(getResources().getDrawable(R.drawable.input));
+            inputUsername.setPaddingRelative(70, 40, 40, 40);
+        }
+    }
+
+    public void inputEmailEllenorzes()
+    {
+
+        if (!inputEmail.getText().toString().isEmpty() && emailEllenorzes(inputEmail.getText().toString()))
+        {
+            inputEmail.setBackground(getResources().getDrawable(R.drawable.inputgreen));
+            inputEmail.setPaddingRelative(70, 40, 40, 40);
+        }
+
+        else
+        {
+            inputEmail.setBackground(getResources().getDrawable(R.drawable.input));
+            inputEmail.setPaddingRelative(70, 40, 40, 40);
+        }
+    }
+
+    public void ellenorzes()
+    {
+        if (vanEUsername() || inputUsername.getText().toString().isEmpty())
+        {
+            inputUsername.setBackground(getResources().getDrawable(R.drawable.inputred));
+            inputUsername.setPaddingRelative(70, 40, 40, 40);
+        }
+        if (vanEEmail() || inputEmail.getText().toString().isEmpty() || !emailEllenorzes(inputEmail.getText().toString()))
+        {
+            inputEmail.setBackground(getResources().getDrawable(R.drawable.inputred));
+            inputEmail.setPaddingRelative(70, 40, 40, 40);
+        }
+    }
+
     public boolean emailEllenorzes(String email)
     {
         String emailPattern = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
@@ -159,40 +205,6 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
         Matcher matcher = pattern.matcher(email);
 
         return matcher.matches();
-    }
-
-    public void ellenorzes()
-    {
-        if (!inputUsername.getText().toString().isEmpty())
-        {
-            inputUsername.setBackground(getResources().getDrawable(R.drawable.inputgreen));
-            inputUsername.setPaddingRelative(70, 40, 40, 40);
-        }
-        if (!inputEmail.getText().toString().isEmpty() && emailEllenorzes(inputEmail.getText().toString()))
-        {
-            inputEmail.setBackground(getResources().getDrawable(R.drawable.inputgreen));
-            inputEmail.setPaddingRelative(70, 40, 40, 40);
-        }
-        if (vanEUsername())
-        {
-            inputUsername.setBackground(getResources().getDrawable(R.drawable.inputred));
-            inputUsername.setPaddingRelative(70, 40, 40, 40);
-        }
-        if (vanEEmail() || !emailEllenorzes(inputEmail.getText().toString()))
-        {
-            inputEmail.setBackground(getResources().getDrawable(R.drawable.inputred));
-            inputEmail.setPaddingRelative(70, 40, 40, 40);
-        }
-        if (inputUsername.getText().toString().isEmpty())
-        {
-            inputUsername.setBackground(getResources().getDrawable(R.drawable.input));
-            inputUsername.setPaddingRelative(70, 40, 40, 40);
-        }
-        if (inputEmail.getText().toString().isEmpty())
-        {
-            inputEmail.setBackground(getResources().getDrawable(R.drawable.input));
-            inputEmail.setPaddingRelative(70, 40, 40, 40);
-        }
     }
 
     public boolean vanEUsername()
@@ -207,5 +219,16 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
         Cursor eredmeny = db.selectEmail(inputEmail.getText().toString());
         StringBuffer stringBuffer = new StringBuffer();
         return eredmeny.getCount() == 1;
+    }
+
+    @Override
+    public void finish() {
+        SharedPreferences sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+        Intent intent = new Intent(Reg1Activity.this, LoginActivity.class);
+        startActivity(intent);
+        super.finish();
     }
 }
