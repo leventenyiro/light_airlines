@@ -140,17 +140,16 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
                 }
                 else
                 {
+                    intent = new Intent(Reg1Activity.this, Reg2Activity.class);
+                    startActivity(intent);
+
                     sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
                     editor = sharedPreferences.edit();
                     editor.putString("username", inputUsername.getText().toString());
                     editor.putString("email", inputEmail.getText().toString());
                     editor.apply();
-
-                    intent = new Intent(Reg1Activity.this, Reg2Activity.class);
-                    startActivity(intent);
-                    finish();
-                    break;
                 }
+                break;
         }
     }
 
@@ -224,12 +223,6 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void finish() {
-        SharedPreferences sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.clear();
-        editor.apply();
-        /*Intent intent = new Intent(Reg1Activity.this, LoginActivity.class);
-        startActivity(intent);*/
         super.finish();
     }
 }

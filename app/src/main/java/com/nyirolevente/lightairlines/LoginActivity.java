@@ -2,7 +2,9 @@ package com.nyirolevente.lightairlines;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Editable;
@@ -149,5 +151,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
         }
         return PasswordUtils.verifyUserPassword(inputPassword.getText().toString(), password, salt);
+    }
+
+    @Override
+    public void finish()
+    {
+        super.finish();
     }
 }

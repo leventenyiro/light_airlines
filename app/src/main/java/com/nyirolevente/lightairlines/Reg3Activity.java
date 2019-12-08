@@ -92,6 +92,7 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
                 editor.apply();
                 Intent intent = new Intent(Reg3Activity.this, Reg2Activity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 finish();
                 break;
             case R.id.btnHome:
@@ -101,6 +102,7 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
                 editor.apply();
                 intent = new Intent(Reg3Activity.this, MainActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 finish();
                 break;
             case R.id.btnLogin:
@@ -110,6 +112,7 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
                 editor.apply();
                 intent = new Intent(Reg3Activity.this, LoginActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.fade_out, R.anim.fade_in);
                 finish();
                 break;
             case R.id.btnReg:
@@ -123,9 +126,10 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
                 editor.clear();
                 editor.apply();
 
-                intent = new Intent(Reg3Activity.this, LoginActivity.class);
+
+                intent = new Intent(Reg3Activity.this, MainActivity.class);
                 startActivity(intent);
-                finish();
+                finishAffinity();
                 break;
         }
     }
@@ -196,5 +200,8 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(this, "Szerverhiba! Sikertelen regisztráció!", Toast.LENGTH_SHORT).show();
     }
 
-
+    @Override
+    public void finish() {
+        super.finish();
+    }
 }

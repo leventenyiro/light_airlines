@@ -101,6 +101,7 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
                 editor.apply();
                 Intent intent = new Intent(Reg2Activity.this, Reg1Activity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 finish();
                 break;
             case R.id.btnHome:
@@ -110,6 +111,7 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
                 editor.apply();
                 intent = new Intent(Reg2Activity.this, MainActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 finish();
                 break;
             case R.id.btnLogin:
@@ -119,6 +121,7 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
                 editor.apply();
                 intent = new Intent(Reg2Activity.this, LoginActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.fade_out, R.anim.fade_in);
                 finish();
                 break;
             case R.id.btnNext:
@@ -205,5 +208,10 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
                 inputLastname.setPaddingRelative(70, 40, 40, 40);
             }
         }
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
     }
 }
