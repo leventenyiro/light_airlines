@@ -18,7 +18,6 @@ import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener
 {
-    private ImageView btnBack, btnHome;
     private TextView btnReg;
     private Button btnLogin;
     private EditText inputUsernameEmail, inputPassword;
@@ -28,7 +27,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
         init();
 
@@ -55,16 +53,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void afterTextChanged(Editable s) { }
         });
 
-        btnBack.setOnClickListener(this);
-        btnHome.setOnClickListener(this);
         btnReg.setOnClickListener(this);
         btnLogin.setOnClickListener(this);
     }
 
     public void init()
     {
-        btnBack = findViewById(R.id.btnBack);
-        btnHome = findViewById(R.id.btnHome);
         btnReg = findViewById(R.id.btnReg);
         btnLogin = findViewById(R.id.btnLogin);
         inputUsernameEmail = findViewById(R.id.inputUsernameEmail);
@@ -78,20 +72,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Intent intent;
         switch (v.getId())
         {
-            case R.id.btnBack:
-                finish();
-                break;
-            case R.id.btnHome:
-                intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                finish();
-                break;
             case R.id.btnReg:
                 intent = new Intent(LoginActivity.this, Reg1Activity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                finish();
                 break;
             case R.id.btnLogin:
                 if (login() && passwordEllenorzes())

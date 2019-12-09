@@ -109,7 +109,7 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
                 editor = sharedPreferences.edit();
                 editor.clear();
                 editor.apply();
-                intent = new Intent(Reg2Activity.this, MainActivity.class);
+                intent = new Intent(Reg2Activity.this, LoginActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 finish();

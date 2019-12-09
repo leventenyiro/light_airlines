@@ -19,25 +19,21 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.nyirolevente.lightairlines.MainActivity"
+            android:name="com.nyirolevente.lightairlines.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.nyirolevente.lightairlines.LoginActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/LoginTheme" />
-        <activity
             android:name="com.nyirolevente.lightairlines.Reg1Activity"
             android:screenOrientation="portrait"
-            android:theme="@style/LoginTheme" />
+            android:theme="@style/RegTheme" />
         <activity
             android:name="com.nyirolevente.lightairlines.Reg2Activity"
             android:screenOrientation="portrait"
-            android:theme="@style/LoginTheme"/>
+            android:theme="@style/RegTheme"/>
         <activity
             android:name="com.nyirolevente.lightairlines.Reg3Activity"
             android:screenOrientation="portrait"
-            android:theme="@style/LoginTheme"/>
+            android:theme="@style/RegTheme"/>
         <activity
             android:name="com.nyirolevente.lightairlines.MainInnerActivity"
             android:screenOrientation="portrait"

@@ -101,9 +101,9 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
                 editor = sharedPreferences.edit();
                 editor.clear();
                 editor.apply();
-                intent = new Intent(Reg1Activity.this, MainActivity.class);
+                intent = new Intent(Reg1Activity.this, LoginActivity.class);
                 startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();
                 break;
             case R.id.btnLogin:
@@ -222,7 +222,9 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void finish() {
+    public void finish()
+    {
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         super.finish();
     }
 }

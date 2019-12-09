@@ -5,36 +5,57 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LoginActivity"
-    android:theme="@style/LoginTheme"
     android:background="@drawable/bg_login">
 
 
-    <ImageView
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        app:srcCompat="@drawable/icon"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="20dp"
-        android:id="@+id/btnHome" />
-
-    <ImageView
+    <!--<ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         app:srcCompat="@drawable/back"
-        android:id="@+id/btnBack"/>
+        android:id="@+id/btnBack"/>-->
+
+    <ImageView
+        android:id="@+id/btnHome"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="30dp"
+        app:srcCompat="@drawable/icon_white" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btnBack"
+        android:id="@+id/textUdv"
+        android:text="Üdv,"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        android:fontFamily="@font/bold"
+        android:textColor="@color/white"
+        android:textSize="70sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textUdv"
+        android:layout_marginTop="-5dp"
+        android:layout_marginLeft="15dp"
+        android:id="@+id/textAlcim"
+        android:text="A Light Airlines felületén!"
+        android:fontFamily="@font/regular"
+        android:textColor="@color/lightGray"
+        android:textSize="16sp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textAlcim"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="130dp"
         android:id="@+id/textCim"
         android:text="Jelentkezz be"
-        android:textSize="40sp"
+        android:textSize="35sp"
         android:fontFamily="@font/bold"
         android:textColor="@color/gray" />
 
@@ -47,7 +68,7 @@
         android:background="@drawable/input"
         android:id="@+id/inputUsernameEmail"
         android:layout_below="@id/textCim"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"
         android:inputType="textEmailAddress"
         android:hint="Felhasználónév vagy E-mail"
