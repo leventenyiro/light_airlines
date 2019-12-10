@@ -1,4 +1,4 @@
-package com.nyirolevente.lightairlines.ui.kedvencek;
+package com.leventenyiro.lightairlines.ui.kedvencek;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

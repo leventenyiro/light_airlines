@@ -1,4 +1,4 @@
-package com.nyirolevente.lightairlines.ui.foglaltak;
+package com.leventenyiro.lightairlines.ui.beallitasok;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,17 +9,17 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.nyirolevente.lightairlines.R;
+import com.leventenyiro.lightairlines.R;
 
-public class FoglaltakFragment extends Fragment {
+public class BeallitasokFragment extends Fragment {
 
-    private FoglaltakViewModel foglaltakViewModel;
+    private BeallitasokViewModel beallitasokViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        foglaltakViewModel =
-                ViewModelProviders.of(this).get(FoglaltakViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_foglaltak, container, false);
+        beallitasokViewModel =
+                ViewModelProviders.of(this).get(BeallitasokViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_jaratok, container, false);
         return root;
     }
 }

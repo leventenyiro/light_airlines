@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.nyirolevente.lightairlines">
+    package="com.leventenyiro.lightairlines">
 
     <application
         android:allowBackup="true"
@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true">
         <activity
-            android:name="com.nyirolevente.lightairlines.LoadingActivity"
+            android:name="com.leventenyiro.lightairlines.LoadingActivity"
             android:screenOrientation="portrait"
             android:theme="@style/LoadingTheme">
             <intent-filter>
@@ -19,23 +19,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.nyirolevente.lightairlines.LoginActivity"
+            android:name="com.leventenyiro.lightairlines.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.nyirolevente.lightairlines.Reg1Activity"
+            android:name="com.leventenyiro.lightairlines.Reg1Activity"
             android:screenOrientation="portrait"
             android:theme="@style/RegTheme" />
         <activity
-            android:name="com.nyirolevente.lightairlines.Reg2Activity"
+            android:name="com.leventenyiro.lightairlines.Reg2Activity"
             android:screenOrientation="portrait"
             android:theme="@style/RegTheme"/>
         <activity
-            android:name="com.nyirolevente.lightairlines.Reg3Activity"
+            android:name="com.leventenyiro.lightairlines.Reg3Activity"
             android:screenOrientation="portrait"
             android:theme="@style/RegTheme"/>
         <activity
-            android:name="com.nyirolevente.lightairlines.MainInnerActivity"
+            android:name="com.leventenyiro.lightairlines.MainInnerActivity"
             android:screenOrientation="portrait"
             android:theme="@style/InnerTheme" />
     </application>

@@ -1,4 +1,4 @@
-package com.nyirolevente.lightairlines;
+package com.leventenyiro.lightairlines;
 
 import android.os.Bundle;
 import android.view.View;

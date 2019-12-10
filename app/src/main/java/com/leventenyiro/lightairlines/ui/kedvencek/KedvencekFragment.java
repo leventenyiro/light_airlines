@@ -1,4 +1,4 @@
-package com.nyirolevente.lightairlines.ui.kedvencek;
+package com.leventenyiro.lightairlines.ui.kedvencek;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.nyirolevente.lightairlines.R;
+import com.leventenyiro.lightairlines.R;
 
 public class KedvencekFragment extends Fragment {
 

@@ -1,4 +1,4 @@
-package com.nyirolevente.lightairlines;
+package com.leventenyiro.lightairlines;
 
 import android.content.ContentValues;
 import android.content.Context;

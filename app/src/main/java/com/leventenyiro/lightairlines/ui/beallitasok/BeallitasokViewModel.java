@@ -1,4 +1,4 @@
-package com.nyirolevente.lightairlines.ui.beallitasok;
+package com.leventenyiro.lightairlines.ui.beallitasok;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

@@ -1,8 +1,4 @@
-package com.nyirolevente.lightairlines;
-
-import android.os.Build;
-
-import androidx.annotation.RequiresApi;
+package com.leventenyiro.lightairlines;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;

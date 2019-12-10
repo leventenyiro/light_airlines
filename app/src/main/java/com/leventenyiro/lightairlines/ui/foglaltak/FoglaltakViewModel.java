@@ -1,16 +1,16 @@
-package com.nyirolevente.lightairlines.ui.jaratok;
+package com.leventenyiro.lightairlines.ui.foglaltak;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class JaratokViewModel extends ViewModel {
+public class FoglaltakViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public JaratokViewModel() {
+    public FoglaltakViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is home fragment");
+        mText.setValue("This is send fragment");
     }
 
     public LiveData<String> getText() {
