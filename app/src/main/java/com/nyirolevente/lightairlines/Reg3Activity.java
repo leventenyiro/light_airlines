@@ -87,37 +87,17 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId())
         {
             case R.id.btnBack:
-                SharedPreferences sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.apply();
-                Intent intent = new Intent(Reg3Activity.this, Reg2Activity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 finish();
                 break;
             case R.id.btnHome:
-                sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
-                editor = sharedPreferences.edit();
-                editor.clear();
-                editor.apply();
-                intent = new Intent(Reg3Activity.this, LoginActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                finish();
+                finishAffinity();
                 break;
             case R.id.btnLogin:
-                sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
-                editor = sharedPreferences.edit();
-                editor.clear();
-                editor.apply();
-                intent = new Intent(Reg3Activity.this, LoginActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.fade_out, R.anim.fade_in);
-                finish();
+                finishAffinity();
                 break;
             case R.id.btnReg:
-                sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
-                editor = sharedPreferences.edit();
+                SharedPreferences sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("password", inputPassword.getText().toString());
                 editor.apply();
 
@@ -126,9 +106,6 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
                 editor.clear();
                 editor.apply();
 
-
-                intent = new Intent(Reg3Activity.this, MainActivity.class);
-                startActivity(intent);
                 finishAffinity();
                 break;
         }
@@ -203,5 +180,17 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void finish() {
         super.finish();
+    }
+
+    @Override
+    public void finishAffinity() {
+        SharedPreferences sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+        Intent intent = new Intent(Reg3Activity.this, LoginActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        super.finishAffinity();
     }
 }

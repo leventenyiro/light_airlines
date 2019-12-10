@@ -96,33 +96,13 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId())
         {
             case R.id.btnBack:
-                SharedPreferences sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.apply();
-                Intent intent = new Intent(Reg2Activity.this, Reg1Activity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 finish();
                 break;
             case R.id.btnHome:
-                sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
-                editor = sharedPreferences.edit();
-                editor.clear();
-                editor.apply();
-                intent = new Intent(Reg2Activity.this, LoginActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                finish();
+                finishAffinity();
                 break;
             case R.id.btnLogin:
-                sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
-                editor = sharedPreferences.edit();
-                editor.clear();
-                editor.apply();
-                intent = new Intent(Reg2Activity.this, LoginActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.fade_out, R.anim.fade_in);
-                finish();
+                finishAffinity();
                 break;
             case R.id.btnNext:
                 if (!korEllenorzes(inputBirthdate.getYear(), inputBirthdate.getMonth(), inputBirthdate.getDayOfMonth()))
@@ -131,16 +111,15 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
                 }
                 else
                 {
-                    sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
-                    editor = sharedPreferences.edit();
+                    SharedPreferences sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("firstname", elsoNagybetu(inputFirstname.getText().toString()));
                     editor.putString("lastname", elsoNagybetu(inputLastname.getText().toString()));
                     editor.putString("birthdate", birthdateToString(inputBirthdate.getYear(), inputBirthdate.getMonth(), inputBirthdate.getDayOfMonth()));
                     editor.apply();
 
-                    intent = new Intent(Reg2Activity.this, Reg3Activity.class);
+                    Intent intent = new Intent(Reg2Activity.this, Reg3Activity.class);
                     startActivity(intent);
-                    finish();
                 }
                 break;
         }
@@ -213,5 +192,17 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void finish() {
         super.finish();
+    }
+
+    @Override
+    public void finishAffinity() {
+        SharedPreferences sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+        Intent intent = new Intent(Reg2Activity.this, LoginActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        super.finishAffinity();
     }
 }

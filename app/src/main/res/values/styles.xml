@@ -6,7 +6,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
-        <item name="android:windowAnimationStyle">@style/CustomActivityAnimation</item>
+        <item name="android:windowAnimationStyle">@style/FadeAnimation</item>
     </style>
 
     <style name="LoadingTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -16,7 +16,7 @@
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="android:textColor">@color/gray</item>
-        <item name="android:windowAnimationStyle">@style/CustomActivityAnimation</item>
+        <item name="android:windowAnimationStyle">@style/FadeAnimation</item>
     </style>
 
     <style name="RegTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -26,7 +26,7 @@
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="android:textColor">@color/gray</item>
-        <item name="android:windowAnimationStyle">@style/CustomActivityAnimation</item>
+        <item name="android:windowAnimationStyle">@style/SlideAnimation</item>
     </style>
 
     <style name="InnerTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -36,15 +36,23 @@
         <item name="android:textColor">@color/gray</item>
         <item name="android:fontFamily">@font/regular</item>
         <item name="android:textSize">20sp</item>
-        <item name="android:windowAnimationStyle">@style/CustomActivityAnimation</item>
+        <item name="android:windowAnimationStyle">@style/FadeAnimation</item>
     </style>
 
-    <style name="CustomActivityAnimation" parent="@android:style/Animation.Activity">
+    <style name="SlideAnimation" parent="@android:style/Animation.Activity">
         <item name="android:activityOpenEnterAnimation">@anim/slide_in_right</item>
         <item name="android:activityOpenExitAnimation">@anim/slide_out_left</item>
         <item name="android:activityCloseEnterAnimation">@anim/slide_in_left</item>
         <item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>
-        <item name="android:windowAnimationStyle">@style/CustomActivityAnimation</item>
+        <item name="android:windowAnimationStyle">@style/SlideAnimation</item>
+    </style>
+
+    <style name="FadeAnimation" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/fade_in</item>
+        <item name="android:activityOpenExitAnimation">@anim/fade_out</item>
+        <item name="android:activityCloseEnterAnimation">@anim/fade_in</item>
+        <item name="android:activityCloseExitAnimation">@anim/fade_out</item>
+        <item name="android:windowAnimationStyle">@style/FadeAnimation</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

@@ -29,30 +29,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textUdv"
-        android:text="Üdv,"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="15dp"
+        android:text="Light Airlines"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
         android:fontFamily="@font/bold"
         android:textColor="@color/white"
-        android:textSize="70sp" />
+        android:textSize="40sp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textUdv"
-        android:layout_marginTop="-5dp"
-        android:layout_marginLeft="15dp"
-        android:id="@+id/textAlcim"
-        android:text="A Light Airlines felületén!"
-        android:fontFamily="@font/regular"
-        android:textColor="@color/lightGray"
-        android:textSize="16sp" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textAlcim"
+        android:layout_below="@+id/textUdv"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="130dp"
+        android:layout_marginTop="170dp"
         android:id="@+id/textCim"
         android:text="Jelentkezz be"
         android:textSize="35sp"

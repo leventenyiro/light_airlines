@@ -76,13 +76,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 intent = new Intent(LoginActivity.this, Reg1Activity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                finish();
                 break;
             case R.id.btnLogin:
                 if (login() && passwordEllenorzes())
                 {
                     intent = new Intent(LoginActivity.this, MainInnerActivity.class);
                     startActivity(intent);
-                    finish();
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 }
                 else if (!login())
                 {

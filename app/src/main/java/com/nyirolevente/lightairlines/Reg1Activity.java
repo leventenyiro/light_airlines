@@ -90,30 +90,12 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId())
         {
             case R.id.btnBack:
-                SharedPreferences sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.clear();
-                editor.apply();
                 finish();
                 break;
             case R.id.btnHome:
-                sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
-                editor = sharedPreferences.edit();
-                editor.clear();
-                editor.apply();
-                intent = new Intent(Reg1Activity.this, LoginActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();
                 break;
             case R.id.btnLogin:
-                sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
-                editor = sharedPreferences.edit();
-                editor.clear();
-                editor.apply();
-                intent = new Intent(Reg1Activity.this, LoginActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();
                 break;
             case R.id.btnNext:
@@ -140,14 +122,14 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
                 }
                 else
                 {
-                    intent = new Intent(Reg1Activity.this, Reg2Activity.class);
-                    startActivity(intent);
-
-                    sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
-                    editor = sharedPreferences.edit();
+                    SharedPreferences sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("username", inputUsername.getText().toString());
                     editor.putString("email", inputEmail.getText().toString());
                     editor.apply();
+
+                    intent = new Intent(Reg1Activity.this, Reg2Activity.class);
+                    startActivity(intent);
                 }
                 break;
         }
@@ -224,7 +206,13 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void finish()
     {
+        SharedPreferences sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+        Intent intent = new Intent(Reg1Activity.this, LoginActivity.class);
+        startActivity(intent);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-        super.finish();
+        super.finishAffinity();
     }
 }
