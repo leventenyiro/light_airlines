@@ -19,9 +19,7 @@ import java.util.regex.Pattern;
 
 public class Reg3Activity extends AppCompatActivity implements View.OnClickListener
 {
-    /* https://stackoverflow.com/questions/41223937/how-can-i-encrypte-my-password-android-studio */
-    private ImageView btnBack;
-    private ImageView btnHome;
+    private ImageView btnBack, btnHome;
     private TextView btnLogin, textLeiras;
     private Button btnReg;
     private EditText inputPassword, inputPasswordAgain;
@@ -36,7 +34,6 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
 
         init();
 
-        ellenorzes();
 
         inputPassword.addTextChangedListener(new TextWatcher() {
             @Override
@@ -44,7 +41,8 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count)
             {
-                ellenorzes();
+                inputPassword.setBackground(getResources().getDrawable(R.drawable.input));
+                inputPassword.setPaddingRelative(70, 40, 40, 40);
             }
             @Override
             public void afterTextChanged(Editable s) { }
@@ -55,7 +53,8 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count)
             {
-                ellenorzes();
+                inputPasswordAgain.setBackground(getResources().getDrawable(R.drawable.input));
+                inputPasswordAgain.setPaddingRelative(70, 40, 40, 40);
             }
             @Override
             public void afterTextChanged(Editable s) { }
@@ -94,17 +93,37 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
                 finishAffinity();
                 break;
             case R.id.btnReg:
-                SharedPreferences sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("password", inputPassword.getText().toString());
-                editor.apply();
+                ellenorzes();
+                if (!jelszoEllenorzes(inputPassword.getText().toString()))
+                {
+                    Toast.makeText(this, "Gyenge jelszó!", Toast.LENGTH_SHORT).show();
+                }
+                else if (inputPassword.getText().toString().isEmpty())
+                {
+                    Toast.makeText(this, "Nincs megadva jelszó!", Toast.LENGTH_SHORT).show();
+                }
+                else if (inputPasswordAgain.getText().toString().isEmpty())
+                {
+                    Toast.makeText(this, "Ismételd meg a jelszót!", Toast.LENGTH_SHORT).show();
+                }
+                else if (!inputPassword.getText().toString().equals(inputPasswordAgain.getText().toString()))
+                {
+                    Toast.makeText(this, "A két jelszó nem egyezik!", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    SharedPreferences sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("password", inputPassword.getText().toString());
+                    editor.apply();
 
-                adatbazisInsert();
+                    adatbazisInsert();
 
-                editor.clear();
-                editor.apply();
+                    editor.clear();
+                    editor.apply();
 
-                finishAffinity();
+                    finishAffinity();
+                }
                 break;
         }
     }
@@ -131,27 +150,15 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
             inputPasswordAgain.setBackground(getResources().getDrawable(R.drawable.inputgreen));
             inputPasswordAgain.setPaddingRelative(70, 40, 40, 40);
         }
-        if (!inputPassword.getText().toString().isEmpty() && inputPassword.getText().toString().equals(inputPasswordAgain.getText().toString()) && jelszoEllenorzes(inputPassword.getText().toString()))
+        if (inputPassword.getText().toString().isEmpty() || !jelszoEllenorzes(inputPassword.getText().toString()))
         {
-            btnReg.setEnabled(true);
-            btnReg.setBackground(getResources().getDrawable(R.drawable.button));
-            textLeiras.setVisibility(View.INVISIBLE);
+            inputPassword.setBackground(getResources().getDrawable(R.drawable.inputred));
+            inputPassword.setPaddingRelative(70, 40, 40, 40);
         }
-        else
+        if (inputPasswordAgain.getText().toString().isEmpty() || !inputPassword.getText().toString().equals(inputPasswordAgain.getText().toString()))
         {
-            btnReg.setEnabled(false);
-            btnReg.setBackground(getResources().getDrawable(R.drawable.buttondisabled));
-            textLeiras.setVisibility(View.VISIBLE);
-            if (inputPassword.getText().toString().isEmpty() || !jelszoEllenorzes(inputPassword.getText().toString()))
-            {
-                inputPassword.setBackground(getResources().getDrawable(R.drawable.input));
-                inputPassword.setPaddingRelative(70, 40, 40, 40);
-            }
-            if (inputPasswordAgain.getText().toString().isEmpty() || !inputPasswordAgain.getText().toString().equals(inputPassword) || !jelszoEllenorzes(inputPassword.getText().toString()))
-            {
-                inputPasswordAgain.setBackground(getResources().getDrawable(R.drawable.input));
-                inputPasswordAgain.setPaddingRelative(70, 40, 40, 40);
-            }
+            inputPasswordAgain.setBackground(getResources().getDrawable(R.drawable.inputred));
+            inputPasswordAgain.setPaddingRelative(70, 40, 40, 40);
         }
     }
 
