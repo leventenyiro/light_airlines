@@ -27,14 +27,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         init();
 
-        ellenorzes();
-
         inputUsernameEmail.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                ellenorzes();
+                inputUsernameEmail.setBackground(getResources().getDrawable(R.drawable.input));
+                inputUsernameEmail.setPaddingRelative(70, 40, 40, 40);
             }
             @Override
             public void afterTextChanged(Editable s) { }
@@ -44,7 +43,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                ellenorzes();
+                inputPassword.setBackground(getResources().getDrawable(R.drawable.input));
+                inputPassword.setPaddingRelative(70, 40, 40, 40);
             }
             @Override
             public void afterTextChanged(Editable s) { }
@@ -76,36 +76,32 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 finish();
                 break;
             case R.id.btnLogin:
-                if (login() && passwordEllenorzes())
+                if (!login())
                 {
+                    Toast.makeText(LoginActivity.this, "Nincs ilyen felhasználó!", Toast.LENGTH_SHORT).show();
+                    inputUsernameEmail.setBackground(getResources().getDrawable(R.drawable.inputred));
+                    inputUsernameEmail.setPaddingRelative(70, 40, 40, 40);
+                }
+                else if (!passwordEllenorzes())
+                {
+                    Toast.makeText(LoginActivity.this, "Helytelen jelszó!", Toast.LENGTH_SHORT).show();
+                    inputUsernameEmail.setBackground(getResources().getDrawable(R.drawable.inputgreen));
+                    inputUsernameEmail.setPaddingRelative(70, 40, 40, 40);
+                    inputPassword.setBackground(getResources().getDrawable(R.drawable.inputred));
+                    inputPassword.setPaddingRelative(70, 40, 40, 40);
+                }
+                else
+                {
+                    inputUsernameEmail.setBackground(getResources().getDrawable(R.drawable.inputgreen));
+                    inputUsernameEmail.setPaddingRelative(70, 40, 40, 40);
+                    inputPassword.setBackground(getResources().getDrawable(R.drawable.inputgreen));
+                    inputPassword.setPaddingRelative(70, 40, 40, 40);
                     intent = new Intent(LoginActivity.this, MainInnerActivity.class);
                     startActivity(intent);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     finish();
                 }
-                else if (!login())
-                {
-                    Toast.makeText(LoginActivity.this, "Nincs ilyen felhasználó!", Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    Toast.makeText(LoginActivity.this, "Helytelen jelszó!", Toast.LENGTH_SHORT).show();
-                }
                 break;
-        }
-    }
-
-    public void ellenorzes()
-    {
-        if (!inputUsernameEmail.getText().toString().isEmpty() && !inputPassword.getText().toString().isEmpty())
-        {
-            btnLogin.setEnabled(true);
-            btnLogin.setBackground(getResources().getDrawable(R.drawable.button));
-        }
-        else
-        {
-            btnLogin.setEnabled(false);
-            btnLogin.setBackground(getResources().getDrawable(R.drawable.buttondisabled));
         }
     }
 
