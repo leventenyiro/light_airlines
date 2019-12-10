@@ -53,7 +53,8 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count)
             {
-                ellenorzes();
+                inputFirstname.setBackground(getResources().getDrawable(R.drawable.input));
+                inputFirstname.setPaddingRelative(70, 40, 40, 40);
             }
             @Override
             public void afterTextChanged(Editable s) { }
@@ -64,7 +65,8 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count)
             {
-                ellenorzes();
+                inputLastname.setBackground(getResources().getDrawable(R.drawable.input));
+                inputLastname.setPaddingRelative(70, 40, 40, 40);
             }
             @Override
             public void afterTextChanged(Editable s) { }
@@ -105,6 +107,7 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
                 finishAffinity();
                 break;
             case R.id.btnNext:
+                ellenorzes();
                 if (!korEllenorzes(inputBirthdate.getYear(), inputBirthdate.getMonth(), inputBirthdate.getDayOfMonth()))
                 {
                     Toast.makeText(Reg2Activity.this, "13 éven aluliak nem regisztrálhatnak!", Toast.LENGTH_LONG).show();
@@ -166,26 +169,6 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
         {
             inputLastname.setBackground(getResources().getDrawable(R.drawable.inputgreen));
             inputLastname.setPaddingRelative(70, 40, 40, 40);
-        }
-        if (!inputFirstname.getText().toString().isEmpty() && !inputLastname.getText().toString().isEmpty())
-        {
-            btnNext.setEnabled(true);
-            btnNext.setBackground(getResources().getDrawable(R.drawable.button));
-        }
-        else
-        {
-            btnNext.setEnabled(false);
-            btnNext.setBackground(getResources().getDrawable(R.drawable.buttondisabled));
-            if (inputFirstname.getText().toString().isEmpty())
-            {
-                inputFirstname.setBackground(getResources().getDrawable(R.drawable.input));
-                inputFirstname.setPaddingRelative(70, 40, 40, 40);
-            }
-            if (inputLastname.getText().toString().isEmpty())
-            {
-                inputLastname.setBackground(getResources().getDrawable(R.drawable.input));
-                inputLastname.setPaddingRelative(70, 40, 40, 40);
-            }
         }
     }
 
