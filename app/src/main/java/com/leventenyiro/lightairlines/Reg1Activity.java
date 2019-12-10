@@ -40,16 +40,14 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
         inputUsername.setText(sharedPreferences.getString("username", ""));
         inputEmail.setText(sharedPreferences.getString("email", ""));
 
-        inputUsernameEllenorzes();
-        inputEmailEllenorzes();
-
         inputUsername.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count)
             {
-                inputUsernameEllenorzes();
+                inputUsername.setBackground(getResources().getDrawable(R.drawable.input));
+                inputUsername.setPaddingRelative(70, 40, 40, 40);
             }
             @Override
             public void afterTextChanged(Editable s) { }
@@ -60,7 +58,8 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count)
             {
-                inputEmailEllenorzes();
+                inputEmail.setBackground(getResources().getDrawable(R.drawable.input));
+                inputEmail.setPaddingRelative(70, 40, 40, 40);
             }
             @Override
             public void afterTextChanged(Editable s) { }
@@ -98,10 +97,14 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
                 finish();
                 break;
             case R.id.btnNext:
-                ellenorzes();
+                utoEllenorzes();
                 if (vanEUsername())
                 {
                     Toast.makeText(this, "A felhasználónév foglalt!", Toast.LENGTH_LONG).show();
+                }
+                else if (!usernameEllenorzes(inputUsername.getText().toString()))
+                {
+                    Toast.makeText(this, "A felhasználónév túl rövid!", Toast.LENGTH_LONG).show();
                 }
                 else if (inputUsername.getText().toString().isEmpty())
                 {
@@ -134,39 +137,19 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public void inputUsernameEllenorzes()
+    public void utoEllenorzes()
     {
-        if (!inputUsername.getText().toString().isEmpty())
+        if (!inputUsername.getText().toString().isEmpty() && usernameEllenorzes(inputUsername.getText().toString()))
         {
             inputUsername.setBackground(getResources().getDrawable(R.drawable.inputgreen));
             inputUsername.setPaddingRelative(70, 40, 40, 40);
         }
-        else
-        {
-            inputUsername.setBackground(getResources().getDrawable(R.drawable.input));
-            inputUsername.setPaddingRelative(70, 40, 40, 40);
-        }
-    }
-
-    public void inputEmailEllenorzes()
-    {
-
         if (!inputEmail.getText().toString().isEmpty() && emailEllenorzes(inputEmail.getText().toString()))
         {
             inputEmail.setBackground(getResources().getDrawable(R.drawable.inputgreen));
             inputEmail.setPaddingRelative(70, 40, 40, 40);
         }
-
-        else
-        {
-            inputEmail.setBackground(getResources().getDrawable(R.drawable.input));
-            inputEmail.setPaddingRelative(70, 40, 40, 40);
-        }
-    }
-
-    public void ellenorzes()
-    {
-        if (vanEUsername() || inputUsername.getText().toString().isEmpty())
+        if (vanEUsername() || inputUsername.getText().toString().isEmpty() || !usernameEllenorzes(inputUsername.getText().toString()))
         {
             inputUsername.setBackground(getResources().getDrawable(R.drawable.inputred));
             inputUsername.setPaddingRelative(70, 40, 40, 40);
@@ -176,6 +159,14 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
             inputEmail.setBackground(getResources().getDrawable(R.drawable.inputred));
             inputEmail.setPaddingRelative(70, 40, 40, 40);
         }
+    }
+
+    public boolean usernameEllenorzes(String username)
+    {
+        if (username.length() >= 5)
+            return true;
+        else
+            return false;
     }
 
     public boolean emailEllenorzes(String email)
