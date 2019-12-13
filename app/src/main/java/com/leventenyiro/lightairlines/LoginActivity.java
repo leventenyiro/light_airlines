@@ -76,7 +76,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 finish();
                 break;
             case R.id.btnLogin:
-                if (!login())
+                if (inputUsernameEmail.getText().toString().isEmpty())
+                {
+                    Toast.makeText(this, "Nincs megadva a felhasználónév vagy e-mail!", Toast.LENGTH_SHORT).show();
+                    inputUsernameEmail.setBackground(getResources().getDrawable(R.drawable.inputred));
+                    inputUsernameEmail.setPaddingRelative(70, 40, 40, 40);
+                }
+                else if (inputPassword.getText().toString().isEmpty())
+                {
+                    Toast.makeText(this, "Nincs megadva a jelszó!", Toast.LENGTH_SHORT).show();
+                    inputPassword.setBackground(getResources().getDrawable(R.drawable.inputred));
+                    inputPassword.setPaddingRelative(70, 40, 40, 40);
+                }
+                else if (!login())
                 {
                     Toast.makeText(LoginActivity.this, "Nincs ilyen felhasználó!", Toast.LENGTH_SHORT).show();
                     inputUsernameEmail.setBackground(getResources().getDrawable(R.drawable.inputred));
@@ -133,8 +145,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     @Override
-    public void finish()
-    {
+    public void onBackPressed() {
         super.finish();
     }
 }

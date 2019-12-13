@@ -88,16 +88,16 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId())
         {
             case R.id.btnBack:
-                finish();
+                onBackPressed();
                 break;
             case R.id.btnHome:
-                finish();
+                onBackPressed();
                 break;
             case R.id.btnLogin:
-                finish();
+                onBackPressed();
                 break;
             case R.id.btnNext:
-                utoEllenorzes();
+                ellenorzes();
                 if (vanEUsername())
                 {
                     Toast.makeText(this, "A felhasználónév foglalt!", Toast.LENGTH_LONG).show();
@@ -137,7 +137,7 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public void utoEllenorzes()
+    public void ellenorzes()
     {
         if (!inputUsername.getText().toString().isEmpty() && usernameEllenorzes(inputUsername.getText().toString()))
         {
@@ -165,8 +165,7 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
     {
         if (username.length() >= 5)
             return true;
-        else
-            return false;
+        return false;
     }
 
     public boolean emailEllenorzes(String email)
@@ -194,8 +193,7 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void finish()
-    {
+    public void onBackPressed() {
         SharedPreferences sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
@@ -203,6 +201,6 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
         Intent intent = new Intent(Reg1Activity.this, LoginActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-        super.finishAffinity();
+        finishAffinity();
     }
 }

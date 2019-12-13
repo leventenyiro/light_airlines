@@ -84,7 +84,7 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId())
         {
             case R.id.btnBack:
-                finish();
+                onBackPressed();
                 break;
             case R.id.btnHome:
                 finishAffinity();
@@ -183,8 +183,8 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void finish() {
-        super.finish();
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 
     @Override
