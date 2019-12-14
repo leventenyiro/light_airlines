@@ -2,7 +2,9 @@ package com.leventenyiro.lightairlines;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Editable;
@@ -131,16 +133,26 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public boolean login()
     {
         Cursor eredmeny = db.selectLogin(inputUsernameEmail.getText().toString());
-        StringBuffer stringBuffer = new StringBuffer();
         if (eredmeny.getCount() == 1)
-            return passwordEllenorzes();
+        {
+            if (passwordEllenorzes())
+            {
+                SharedPreferences sharedPreferences = getSharedPreferences("loggedin", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                while (eredmeny.moveToNext())
+                {
+                    editor.putString("id", eredmeny.getString(0));
+                }
+                editor.apply();
+                return true;
+            }
+        }
         return false;
     }
 
     public boolean passwordEllenorzes()
     {
         Cursor eredmeny = db.selectPassword(inputUsernameEmail.getText().toString());
-        StringBuffer stringBuffer = new StringBuffer();
 
         String password = null;
         String salt = null;
