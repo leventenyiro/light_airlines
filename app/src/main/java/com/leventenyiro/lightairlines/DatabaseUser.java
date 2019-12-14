@@ -48,13 +48,12 @@ public class DatabaseUser extends SQLiteOpenHelper
         contentValues.put(COL_7, password);
 
         long eredmeny = db.insert(TABLE_NAME, null, contentValues);
-        return eredmeny == -1 ? false : true;
+        return eredmeny != -1;
     }
 
     public Cursor selectUsername(String username)
     {
         SQLiteDatabase db = this.getWritableDatabase();
-        //Cursor eredmeny = db.rawQuery("SELECT username FROM " + TABLE_NAME + "WHERE username = '" + username + "'", null);
         Cursor eredmeny = db.rawQuery("SELECT username FROM " + TABLE_NAME + " WHERE username = '" + username + "'", null);
         return eredmeny;
     }
