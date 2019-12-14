@@ -114,10 +114,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
                 else
                 {
-                    intent = new Intent(LoginActivity.this, MainInnerActivity.class);
+                    /*intent = new Intent(LoginActivity.this, MainInnerActivity.class);
                     startActivity(intent);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    finish();
+                    finish();*/
+                    Toast.makeText(this, "Sikeresen bejelentkeztél! A többi HAMAROSAN...", Toast.LENGTH_SHORT).show();
                 }
                 break;
         }

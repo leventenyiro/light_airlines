@@ -34,10 +34,6 @@
             android:name="com.leventenyiro.lightairlines.Reg3Activity"
             android:screenOrientation="portrait"
             android:theme="@style/RegTheme"/>
-        <activity
-            android:name="com.leventenyiro.lightairlines.MainInnerActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/InnerTheme" />
     </application>
 
 </manifest>
