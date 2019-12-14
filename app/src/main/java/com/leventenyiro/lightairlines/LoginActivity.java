@@ -76,38 +76,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 finish();
                 break;
             case R.id.btnLogin:
+                ellenorzes();
                 if (inputUsernameEmail.getText().toString().isEmpty())
                 {
                     Toast.makeText(this, "Nincs megadva a felhasználónév vagy e-mail!", Toast.LENGTH_SHORT).show();
-                    inputUsernameEmail.setBackground(getResources().getDrawable(R.drawable.inputred));
-                    inputUsernameEmail.setPaddingRelative(70, 40, 40, 40);
                 }
                 else if (inputPassword.getText().toString().isEmpty())
                 {
                     Toast.makeText(this, "Nincs megadva a jelszó!", Toast.LENGTH_SHORT).show();
-                    inputPassword.setBackground(getResources().getDrawable(R.drawable.inputred));
-                    inputPassword.setPaddingRelative(70, 40, 40, 40);
                 }
                 else if (!login())
                 {
-                    Toast.makeText(LoginActivity.this, "Nincs ilyen felhasználó!", Toast.LENGTH_SHORT).show();
-                    inputUsernameEmail.setBackground(getResources().getDrawable(R.drawable.inputred));
-                    inputUsernameEmail.setPaddingRelative(70, 40, 40, 40);
-                }
-                else if (!passwordEllenorzes())
-                {
-                    Toast.makeText(LoginActivity.this, "Helytelen jelszó!", Toast.LENGTH_SHORT).show();
-                    inputUsernameEmail.setBackground(getResources().getDrawable(R.drawable.inputgreen));
-                    inputUsernameEmail.setPaddingRelative(70, 40, 40, 40);
-                    inputPassword.setBackground(getResources().getDrawable(R.drawable.inputred));
-                    inputPassword.setPaddingRelative(70, 40, 40, 40);
+                    Toast.makeText(LoginActivity.this, "Helytelen bejelentkezési adatok!", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
-                    inputUsernameEmail.setBackground(getResources().getDrawable(R.drawable.inputgreen));
-                    inputUsernameEmail.setPaddingRelative(70, 40, 40, 40);
-                    inputPassword.setBackground(getResources().getDrawable(R.drawable.inputgreen));
-                    inputPassword.setPaddingRelative(70, 40, 40, 40);
                     intent = new Intent(LoginActivity.this, MainInnerActivity.class);
                     startActivity(intent);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
@@ -117,11 +100,41 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    public void ellenorzes()
+    {
+        if (inputUsernameEmail.getText().toString().isEmpty())
+        {
+            inputUsernameEmail.setBackground(getResources().getDrawable(R.drawable.inputred));
+            inputUsernameEmail.setPaddingRelative(70, 40, 40, 40);
+        }
+        if (inputPassword.getText().toString().isEmpty())
+        {
+            inputPassword.setBackground(getResources().getDrawable(R.drawable.inputred));
+            inputPassword.setPaddingRelative(70, 40, 40, 40);
+        }
+        else if (!login())
+        {
+            inputUsernameEmail.setBackground(getResources().getDrawable(R.drawable.inputred));
+            inputUsernameEmail.setPaddingRelative(70, 40, 40, 40);
+            inputPassword.setBackground(getResources().getDrawable(R.drawable.inputred));
+            inputPassword.setPaddingRelative(70, 40, 40, 40);
+        }
+        else if (login())
+        {
+            inputUsernameEmail.setBackground(getResources().getDrawable(R.drawable.inputgreen));
+            inputUsernameEmail.setPaddingRelative(70, 40, 40, 40);
+            inputPassword.setBackground(getResources().getDrawable(R.drawable.inputgreen));
+            inputPassword.setPaddingRelative(70, 40, 40, 40);
+        }
+    }
+
     public boolean login()
     {
         Cursor eredmeny = db.selectLogin(inputUsernameEmail.getText().toString());
         StringBuffer stringBuffer = new StringBuffer();
-        return eredmeny.getCount() == 1;
+        if (eredmeny.getCount() == 1)
+            return passwordEllenorzes();
+        return false;
     }
 
     public boolean passwordEllenorzes()
