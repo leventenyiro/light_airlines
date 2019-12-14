@@ -1,8 +1,10 @@
 package com.leventenyiro.lightairlines;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -21,6 +23,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Button btnLogin;
     private EditText inputUsernameEmail, inputPassword;
     private DatabaseUser db;
+    private AlertDialog alertDialog;
+    private AlertDialog.Builder alertDialogBuilder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +67,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         inputUsernameEmail = findViewById(R.id.inputUsernameEmail);
         inputPassword = findViewById(R.id.inputPassword);
         db = new DatabaseUser(this);
+
+        alertDialogBuilder = new AlertDialog.Builder(LoginActivity.this);
+        alertDialogBuilder.setMessage("Biztos elhagyod az alkalmazást?");
+        alertDialogBuilder.setPositiveButton("Nem", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        alertDialogBuilder.setNegativeButton("Igen", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        alertDialogBuilder.setTitle("Kilépés");
+        alertDialog = alertDialogBuilder.create();
     }
 
     @Override
@@ -171,6 +192,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onBackPressed() {
-        super.finish();
+        alertDialog.show();
     }
 }
