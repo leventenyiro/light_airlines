@@ -174,7 +174,7 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onBackPressed() {
-        finish();
+        super.finish();
     }
 
     @Override

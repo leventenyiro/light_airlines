@@ -34,7 +34,6 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
 
         init();
 
-
         inputPassword.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
@@ -183,8 +182,9 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void onBackPressed() {
-        super.onBackPressed();
+    public void onBackPressed()
+    {
+        super.finish();
     }
 
     @Override
