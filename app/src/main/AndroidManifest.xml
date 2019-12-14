@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true">
         <activity
-            android:name="com.leventenyiro.lightairlines.LoadingActivity"
+            android:name=".LoadingActivity"
             android:screenOrientation="portrait"
             android:theme="@style/LoadingTheme">
             <intent-filter>
@@ -19,21 +19,25 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.leventenyiro.lightairlines.LoginActivity"
+            android:name=".LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.leventenyiro.lightairlines.Reg1Activity"
+            android:name=".Reg1Activity"
             android:screenOrientation="portrait"
             android:theme="@style/RegTheme" />
         <activity
-            android:name="com.leventenyiro.lightairlines.Reg2Activity"
+            android:name=".Reg2Activity"
             android:screenOrientation="portrait"
-            android:theme="@style/RegTheme"/>
+            android:theme="@style/RegTheme" />
         <activity
-            android:name="com.leventenyiro.lightairlines.Reg3Activity"
+            android:name=".Reg3Activity"
             android:screenOrientation="portrait"
-            android:theme="@style/RegTheme"/>
+            android:theme="@style/RegTheme" />
+        <activity
+            android:name=".ComingSoonActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>
