@@ -22,20 +22,14 @@ public class ComingSoonActivity extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ComingSoonActivity.this, LoginActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-                finish();
+                onBackPressed();
             }
         });
 
         btnHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ComingSoonActivity.this, LoginActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-                finish();
+                onBackPressed();
             }
         });
     }
@@ -43,5 +37,13 @@ public class ComingSoonActivity extends AppCompatActivity {
     private void init() {
         btnBack = findViewById(R.id.btnBack);
         btnHome = findViewById(R.id.btnHome);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(ComingSoonActivity.this, LoginActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        finish();
     }
 }

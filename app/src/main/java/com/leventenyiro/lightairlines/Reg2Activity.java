@@ -174,7 +174,7 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onBackPressed() {
-        super.finish();
+        finish();
     }
 
     @Override
@@ -186,6 +186,6 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
         Intent intent = new Intent(Reg2Activity.this, LoginActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-        super.finishAffinity();
+        finishAffinity();
     }
 }
