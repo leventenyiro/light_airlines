@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_jaratok">
+
+    <fragment
+        android:id="@+id/navigation_jegyek"
+        android:name="com.leventenyiro.lightairlines.ui.jegyek.JegyekFragment"
+        android:label="Járatok"
+        tools:layout="@layout/fragment_jegyek" />
+
+    <fragment
+        android:id="@+id/navigation_jaratok"
+        android:name="com.leventenyiro.lightairlines.ui.jaratok.JaratokFragment"
+        android:label="Jegyek"
+        tools:layout="@layout/fragment_jaratok" />
+
+    <fragment
+        android:id="@+id/navigation_beallitasok"
+        android:name="com.leventenyiro.lightairlines.ui.beallitasok.BeallitasokFragment"
+        android:label="Beállítások"
+        tools:layout="@layout/fragment_beallitasok" />
+</navigation>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_jaratok"
+        android:icon="@drawable/jaratok"
+        android:title="Járatok" />
+
+    <item
+        android:id="@+id/navigation_jegyek"
+        android:icon="@drawable/jegyek"
+        android:title="Jegyek" />
+
+    <item
+        android:id="@+id/navigation_beallitasok"
+        android:icon="@drawable/beallitasok"
+        android:title="Beállítások" />
+
+</menu>
