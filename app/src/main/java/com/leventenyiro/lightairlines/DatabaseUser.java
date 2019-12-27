@@ -11,7 +11,6 @@ public class DatabaseUser extends SQLiteOpenHelper
     public static final String DATABASE_NAME = "lightairlines.db";
     public static final String TABLE_NAME = "user";
 
-    public static final String COL_1 = "id";
     public static final String COL_2 = "username";
     public static final String COL_3 = "email";
     public static final String COL_4 = "firstname";
