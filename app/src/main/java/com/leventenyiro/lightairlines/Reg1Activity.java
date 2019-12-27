@@ -26,7 +26,7 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
     private TextView btnLogin;
     private Button btnNext;
     private EditText inputUsername, inputEmail;
-    DatabaseUser db;
+    Database db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +79,7 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
         btnNext = findViewById(R.id.btnNext);
         inputUsername = findViewById(R.id.inputUsername);
         inputEmail = findViewById(R.id.inputEmail);
-        db = new DatabaseUser(this);
+        db = new Database(this);
     }
 
     public void onClick(View v)

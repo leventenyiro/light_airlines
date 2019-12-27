@@ -23,7 +23,7 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
     private TextView btnLogin, textLeiras;
     private Button btnReg;
     private EditText inputPassword, inputPasswordAgain;
-    private DatabaseUser db;
+    private Database db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -74,7 +74,7 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
         inputPassword = findViewById(R.id.inputPassword);
         inputPasswordAgain = findViewById(R.id.inputPasswordAgain);
         textLeiras = findViewById(R.id.textLeiras);
-        db = new DatabaseUser(this);
+        db = new Database(this);
     }
 
     @Override

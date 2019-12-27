@@ -22,7 +22,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private TextView btnReg;
     private Button btnLogin;
     private EditText inputUsernameEmail, inputPassword;
-    private DatabaseUser db;
+    private Database db;
     private AlertDialog alertDialog;
     private AlertDialog.Builder alertDialogBuilder;
 
@@ -66,7 +66,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         btnLogin = findViewById(R.id.btnLogin);
         inputUsernameEmail = findViewById(R.id.inputUsernameEmail);
         inputPassword = findViewById(R.id.inputPassword);
-        db = new DatabaseUser(this);
+        db = new Database(this);
 
         alertDialogBuilder = new AlertDialog.Builder(LoginActivity.this);
         alertDialogBuilder.setTitle("Kilépés");
