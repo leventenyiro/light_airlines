@@ -19,6 +19,16 @@
         <item name="android:windowAnimationStyle">@style/FadeAnimation</item>
     </style>
 
+    <style name="InnerTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/rebelBlue</item>
+        <item name="colorPrimaryDark">@color/rebelBlue</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:statusBarColor">@color/white</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowAnimationStyle">@style/FadeAnimation</item>
+    </style>
+
     <style name="WhiteTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/white</item>

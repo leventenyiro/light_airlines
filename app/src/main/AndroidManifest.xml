@@ -40,7 +40,7 @@
             android:theme="@style/BlackBlueTheme" />
         <activity android:name=".InnerActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/WhiteTheme" />
+            android:theme="@style/InnerTheme" />
     </application>
 
 </manifest>
