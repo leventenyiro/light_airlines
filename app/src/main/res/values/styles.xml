@@ -1,6 +1,16 @@
 <resources>
 
-    <style name="BlackBlueTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="LoadingTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/rebelBlue</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:windowAnimationStyle">@style/FadeAnimation</item>
+    </style>
+
+    <style name="LoginTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -9,35 +19,23 @@
         <item name="android:windowAnimationStyle">@style/FadeAnimation</item>
     </style>
 
-    <style name="LightBlueTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/rebelBlue</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="windowNoTitle">true</item>
-        <item name="windowActionBar">false</item>
-        <item name="android:textColor">@color/gray</item>
-        <item name="android:windowAnimationStyle">@style/FadeAnimation</item>
-    </style>
-
-    <style name="InnerTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="RegistrationTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/rebelBlue</item>
-        <item name="colorPrimaryDark">@color/rebelBlue</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:statusBarColor">@color/white</item>
-        <item name="windowNoTitle">true</item>
-        <item name="windowActionBar">false</item>
-        <item name="android:windowAnimationStyle">@style/FadeAnimation</item>
-    </style>
-
-    <style name="WhiteTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/white</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="android:textColor">@color/gray</item>
         <item name="android:windowAnimationStyle">@style/SlideAnimation</item>
-        <item name="android:statusBarColor">@color/white</item>
+    </style>
+
+    <style name="InnerTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/rebelBlue</item>
+        <item name="colorPrimaryDark">@color/white</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowAnimationStyle">@style/FadeAnimation</item>
     </style>
 
     <style name="SlideAnimation" parent="@android:style/Animation.Activity">

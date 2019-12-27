@@ -11,7 +11,7 @@
         <activity
             android:name=".LoadingActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/LightBlueTheme">
+            android:theme="@style/LoadingTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,23 +21,23 @@
         <activity
             android:name=".LoginActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/BlackBlueTheme" />
+            android:theme="@style/LoginTheme" />
         <activity
             android:name=".Reg1Activity"
             android:screenOrientation="portrait"
-            android:theme="@style/WhiteTheme" />
+            android:theme="@style/RegistrationTheme" />
         <activity
             android:name=".Reg2Activity"
             android:screenOrientation="portrait"
-            android:theme="@style/WhiteTheme" />
+            android:theme="@style/RegistrationTheme" />
         <activity
             android:name=".Reg3Activity"
             android:screenOrientation="portrait"
-            android:theme="@style/WhiteTheme" />
+            android:theme="@style/RegistrationTheme" />
         <activity
             android:name=".ComingSoonActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/BlackBlueTheme" />
+            android:theme="@style/LoginTheme" />
         <activity android:name=".InnerActivity"
             android:screenOrientation="portrait"
             android:theme="@style/InnerTheme" />
