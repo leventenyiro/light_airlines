@@ -69,6 +69,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         db = new DatabaseUser(this);
 
         alertDialogBuilder = new AlertDialog.Builder(LoginActivity.this);
+        alertDialogBuilder.setTitle("Kilépés");
         alertDialogBuilder.setMessage("Biztos elhagyod az alkalmazást?");
         alertDialogBuilder.setPositiveButton("Nem", new DialogInterface.OnClickListener() {
             @Override
@@ -82,7 +83,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 finish();
             }
         });
-        alertDialogBuilder.setTitle("Kilépés");
         alertDialog = alertDialogBuilder.create();
     }
 
@@ -114,7 +114,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
                 else
                 {
-                    intent = new Intent(LoginActivity.this, ComingSoonActivity.class);
+                    intent = new Intent(LoginActivity.this, InnerActivity.class);
                     startActivity(intent);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     finish();
