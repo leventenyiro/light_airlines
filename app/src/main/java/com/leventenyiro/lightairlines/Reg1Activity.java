@@ -199,6 +199,6 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
         Intent intent = new Intent(Reg1Activity.this, LoginActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-        finishAffinity();
+        super.finishAffinity();
     }
 }

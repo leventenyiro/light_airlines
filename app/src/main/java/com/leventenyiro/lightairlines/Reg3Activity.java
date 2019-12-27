@@ -189,13 +189,9 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void finishAffinity() {
-        SharedPreferences sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.clear();
-        editor.apply();
         Intent intent = new Intent(Reg3Activity.this, LoginActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-        finishAffinity();
+        super.finishAffinity();
     }
 }
