@@ -108,7 +108,15 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btnNext:
                 ellenorzes();
-                if (!korEllenorzes(inputBirthdate.getYear(), inputBirthdate.getMonth(), inputBirthdate.getDayOfMonth()))
+                if (inputFirstname.getText().toString().isEmpty())
+                {
+                    Toast.makeText(this, "Nincs megadva keresztnév!", Toast.LENGTH_SHORT).show();
+                }
+                else if (inputLastname.getText().toString().isEmpty())
+                {
+                    Toast.makeText(this, "Nincs megadva vezetéknév!", Toast.LENGTH_SHORT).show();
+                }
+                else if (!korEllenorzes(inputBirthdate.getYear(), inputBirthdate.getMonth(), inputBirthdate.getDayOfMonth()))
                 {
                     Toast.makeText(Reg2Activity.this, "13 éven aluliak nem regisztrálhatnak!", Toast.LENGTH_LONG).show();
                 }
@@ -168,6 +176,16 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
         if (!inputLastname.getText().toString().isEmpty())
         {
             inputLastname.setBackground(getResources().getDrawable(R.drawable.inputgreen));
+            inputLastname.setPaddingRelative(70, 40, 40, 40);
+        }
+        if (inputFirstname.getText().toString().isEmpty())
+        {
+            inputFirstname.setBackground(getResources().getDrawable(R.drawable.inputred));
+            inputFirstname.setPaddingRelative(70, 40, 40, 40);
+        }
+        if (inputLastname.getText().toString().isEmpty())
+        {
+            inputLastname.setBackground(getResources().getDrawable(R.drawable.inputred));
             inputLastname.setPaddingRelative(70, 40, 40, 40);
         }
     }
