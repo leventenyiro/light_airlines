@@ -116,8 +116,8 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
                 {
                     SharedPreferences sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString("firstname", elsoNagybetu(inputFirstname.getText().toString()));
-                    editor.putString("lastname", elsoNagybetu(inputLastname.getText().toString()));
+                    editor.putString("firstname", elsoNagybetu(inputFirstname.getText().toString()).trim());
+                    editor.putString("lastname", elsoNagybetu(inputLastname.getText().toString()).trim());
                     editor.putString("birthdate", birthdateToString(inputBirthdate.getYear(), inputBirthdate.getMonth(), inputBirthdate.getDayOfMonth()));
                     editor.apply();
 
