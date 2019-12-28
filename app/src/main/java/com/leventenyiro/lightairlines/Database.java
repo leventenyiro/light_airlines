@@ -11,6 +11,7 @@ public class Database extends SQLiteOpenHelper
     public static final String DATABASE_NAME = "lightairlines.db";
     public static final String TABLE_NAME = "user";
 
+    public static final String COL_1 = "id";
     public static final String COL_2 = "username";
     public static final String COL_3 = "email";
     public static final String COL_4 = "firstname";
@@ -108,5 +109,23 @@ public class Database extends SQLiteOpenHelper
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor passwordEllenorzes = db.rawQuery("SELECT password FROM " + TABLE_NAME + " WHERE username = '" + usernameEmail + "' OR email = '" + usernameEmail + "'", null);
         return passwordEllenorzes;
+    }
+
+    public Cursor selectAll(int id)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor eredmeny = db.rawQuery("SELECT username, email, firstname, lastname FROM user WHERE id = " + id, null);
+        return eredmeny;
+    }
+
+    public long update (String id, String username, String email, String firstname, String lastname)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL_2, username);
+        contentValues.put(COL_3, email);
+        contentValues.put(COL_4, firstname);
+        contentValues.put(COL_5, lastname);
+        return db.update(TABLE_NAME, contentValues, COL_1 + " = " + id, null);
     }
 }

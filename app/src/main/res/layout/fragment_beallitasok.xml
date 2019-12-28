@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <!--<TextView
         android:id="@+id/text_notifications"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,5 +15,142 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textCim"
+        android:text="Beállítások"
+        android:textSize="40sp"
+        android:fontFamily="@font/bold"
+        android:textColor="@color/gray"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp" />
+
+    <EditText
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="15dp"
+        android:paddingEnd="15dp"
+        android:paddingRight="15dp"
+        android:background="@drawable/input"
+        android:id="@+id/inputUsername"
+        android:layout_below="@id/textCim"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/regular"
+        android:textColor="@color/midGray"
+        android:hint="Felhasználónév"
+        android:enabled="false"
+        android:maxLines="1"
+        android:lines="1"
+        android:singleLine="true" />
+
+    <EditText
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="15dp"
+        android:paddingEnd="15dp"
+        android:paddingRight="15dp"
+        android:background="@drawable/input"
+        android:id="@+id/inputEmail"
+        android:layout_below="@id/inputUsername"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/regular"
+        android:textColor="@color/midGray"
+        android:hint="pelda@pelda.com"
+        android:enabled="false"
+        android:maxLines="1"
+        android:lines="1"
+        android:singleLine="true" />
+
+    <EditText
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="15dp"
+        android:paddingEnd="15dp"
+        android:paddingRight="15dp"
+        android:background="@drawable/input"
+        android:id="@+id/inputFirstname"
+        android:layout_below="@id/inputEmail"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/regular"
+        android:textColor="@color/midGray"
+        android:hint="Keresztnév"
+        android:enabled="false"
+        android:maxLines="1"
+        android:lines="1"
+        android:singleLine="true" />
+
+    <EditText
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="15dp"
+        android:paddingEnd="15dp"
+        android:paddingRight="15dp"
+        android:background="@drawable/input"
+        android:id="@+id/inputLastname"
+        android:layout_below="@id/inputFirstname"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/regular"
+        android:textColor="@color/midGray"
+        android:hint="Vezetéknév"
+        android:enabled="false"
+        android:maxLines="1"
+        android:lines="1"
+        android:singleLine="true" />
+
+    <Button
+        android:id="@+id/btnUpdate"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/inputLastname"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="40dp"
+        android:background="@drawable/button"
+        android:fontFamily="@font/regular"
+        android:paddingHorizontal="20dp"
+        android:text="Módosítás"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/btnCancel"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnUpdate"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="40dp"
+        android:background="@drawable/buttonred"
+        android:fontFamily="@font/regular"
+        android:paddingHorizontal="20dp"
+        android:visibility="invisible"
+        android:text="Elvetés"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:id="@+id/btnPasswordUpdate"
+        android:layout_alignParentBottom="true"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="60dp"
+        android:background="@drawable/button"
+        android:text="Jelszómódosítás"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:fontFamily="@font/regular"
+        android:textAllCaps="false" />
+
+
+</RelativeLayout>
