@@ -1,6 +1,7 @@
 package com.leventenyiro.lightairlines.ui.beallitasok;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.leventenyiro.lightairlines.Database;
 import com.leventenyiro.lightairlines.InnerActivity;
+import com.leventenyiro.lightairlines.PasswordUpdate;
 import com.leventenyiro.lightairlines.R;
 
 import java.util.regex.Matcher;
@@ -102,7 +104,7 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
 
         btnUpdate.setOnClickListener(this);
         btnCancel.setOnClickListener(this);
-
+        btnPasswordUpdate.setOnClickListener(this);
 
         return root;
     }
@@ -162,22 +164,7 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
                     }
                     else
                     {
-                        inputUsername.setEnabled(false);
-                        inputUsername.setTextColor(getResources().getColor(R.color.midGray));
-                        inputUsername.setBackground(getResources().getDrawable(R.drawable.input));
-                        inputUsername.setPaddingRelative(70, 40, 40, 40);
-                        inputEmail.setEnabled(false);
-                        inputEmail.setTextColor(getResources().getColor(R.color.midGray));
-                        inputEmail.setBackground(getResources().getDrawable(R.drawable.input));
-                        inputEmail.setPaddingRelative(70, 40, 40, 40);
-                        inputFirstname.setEnabled(false);
-                        inputFirstname.setTextColor(getResources().getColor(R.color.midGray));
-                        inputFirstname.setBackground(getResources().getDrawable(R.drawable.input));
-                        inputFirstname.setPaddingRelative(70, 40, 40, 40);
-                        inputLastname.setEnabled(false);
-                        inputLastname.setTextColor(getResources().getColor(R.color.midGray));
-                        inputLastname.setBackground(getResources().getDrawable(R.drawable.input));
-                        inputLastname.setPaddingRelative(70, 40, 40, 40);
+                        inputsDisable();
                         if (update())
                         {
                             btnCancel.setVisibility(View.INVISIBLE);
@@ -187,26 +174,15 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
                 }
                 break;
             case R.id.btnCancel:
-                inputUsername.setEnabled(false);
-                inputUsername.setTextColor(getResources().getColor(R.color.midGray));
-                inputUsername.setBackground(getResources().getDrawable(R.drawable.input));
-                inputUsername.setPaddingRelative(70, 40, 40, 40);
-                inputEmail.setEnabled(false);
-                inputEmail.setTextColor(getResources().getColor(R.color.midGray));
-                inputEmail.setBackground(getResources().getDrawable(R.drawable.input));
-                inputEmail.setPaddingRelative(70, 40, 40, 40);
-                inputFirstname.setEnabled(false);
-                inputFirstname.setTextColor(getResources().getColor(R.color.midGray));
-                inputFirstname.setBackground(getResources().getDrawable(R.drawable.input));
-                inputFirstname.setPaddingRelative(70, 40, 40, 40);
-                inputLastname.setEnabled(false);
-                inputLastname.setTextColor(getResources().getColor(R.color.midGray));
-                inputLastname.setBackground(getResources().getDrawable(R.drawable.input));
-                inputLastname.setPaddingRelative(70, 40, 40, 40);
+                inputsDisable();
                 beallitasok();
                 btnCancel.setVisibility(View.INVISIBLE);
                 btnUpdate.setText("Módosítás");
                 break;
+            case R.id.btnPasswordUpdate:
+                Intent intent = new Intent(getActivity(), PasswordUpdate.class);
+                startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         }
     }
 
@@ -224,6 +200,26 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
                 inputLastname.setText(eredmeny.getString(3));
             }
         }
+    }
+
+    public void inputsDisable()
+    {
+        inputUsername.setEnabled(false);
+        inputUsername.setTextColor(getResources().getColor(R.color.midGray));
+        inputUsername.setBackground(getResources().getDrawable(R.drawable.input));
+        inputUsername.setPaddingRelative(70, 40, 40, 40);
+        inputEmail.setEnabled(false);
+        inputEmail.setTextColor(getResources().getColor(R.color.midGray));
+        inputEmail.setBackground(getResources().getDrawable(R.drawable.input));
+        inputEmail.setPaddingRelative(70, 40, 40, 40);
+        inputFirstname.setEnabled(false);
+        inputFirstname.setTextColor(getResources().getColor(R.color.midGray));
+        inputFirstname.setBackground(getResources().getDrawable(R.drawable.input));
+        inputFirstname.setPaddingRelative(70, 40, 40, 40);
+        inputLastname.setEnabled(false);
+        inputLastname.setTextColor(getResources().getColor(R.color.midGray));
+        inputLastname.setBackground(getResources().getDrawable(R.drawable.input));
+        inputLastname.setPaddingRelative(70, 40, 40, 40);
     }
 
     private void ellenorzes() {
