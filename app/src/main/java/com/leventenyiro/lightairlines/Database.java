@@ -104,7 +104,7 @@ public class Database extends SQLiteOpenHelper
         return eredmeny;
     }
 
-    public Cursor selectPasswordByEmail(String usernameEmail)
+    public Cursor selectPasswordByUsernameEmail(String usernameEmail)
     {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor passwordEllenorzes = db.rawQuery("SELECT password FROM " + TABLE_NAME + " WHERE username = '" + usernameEmail + "' OR email = '" + usernameEmail + "'", null);
@@ -128,4 +128,11 @@ public class Database extends SQLiteOpenHelper
         contentValues.put(COL_5, lastname);
         return db.update(TABLE_NAME, contentValues, COL_1 + " = " + id, null);
     }
+
+    /*public Cursor selectPasswordById(String id)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor passwordEllenorzes = db.rawQuery("SELECT password FROM user WHERE username = '" + usernameEmail + "' OR email = '" + usernameEmail + "'", null);
+        return passwordEllenorzes;
+    }*/
 }
