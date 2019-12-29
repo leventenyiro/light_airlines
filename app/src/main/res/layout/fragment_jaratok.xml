@@ -1,19 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <TextView
-        android:id="@+id/text_dashboard"
+    android:layout_height="match_parent"
+    android:scrollbars="none">
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="match_parent"
+        android:paddingBottom="100dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textCim"
+            android:text="Járatok"
+            android:textSize="40sp"
+            android:fontFamily="@font/bold"
+            android:textColor="@color/gray"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp" />
+
+        <EditText
+            android:layout_width="340dp"
+            android:layout_height="wrap_content"
+            android:paddingVertical="15dp"
+            android:paddingEnd="15dp"
+            android:paddingRight="15dp"
+            android:background="@drawable/input"
+            android:id="@+id/inputHonnan"
+            android:layout_below="@id/textCim"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/regular"
+            android:textColor="@color/midGray"
+            android:hint="Honnan"
+            android:enabled="false"
+            android:maxLines="1"
+            android:lines="1"
+            android:singleLine="true" />
+
+        <EditText
+            android:layout_width="340dp"
+            android:layout_height="wrap_content"
+            android:paddingVertical="15dp"
+            android:paddingEnd="15dp"
+            android:paddingRight="15dp"
+            android:background="@drawable/input"
+            android:id="@+id/inputHova"
+            android:layout_below="@id/inputHonnan"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/regular"
+            android:textColor="@color/midGray"
+            android:hint="Hova"
+            android:enabled="false"
+            android:maxLines="1"
+            android:lines="1"
+            android:singleLine="true" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="360dp"
+            android:layout_height="200dp"
+            android:id="@+id/card1"
+            android:layout_below="@id/inputHova"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            app:cardCornerRadius="10dp"
+            android:backgroundTint="@color/deepRed">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Budapest - London"
+                android:textColor="@color/white"
+                android:fontFamily="@font/bold"
+                android:textSize="30sp"
+                android:layout_marginLeft="20dp"/>
+        </androidx.cardview.widget.CardView>
+
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="360dp"
+            android:layout_height="200dp"
+            android:id="@+id/card2"
+            android:layout_below="@id/card1"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            app:cardCornerRadius="10dp"
+            android:backgroundTint="@color/deepRebelBlue">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Budapest - Paris"
+                android:textColor="@color/white"
+                android:fontFamily="@font/bold"
+                android:textSize="30sp"
+                android:layout_marginLeft="20dp"/>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="360dp"
+            android:layout_height="200dp"
+            android:id="@+id/card3"
+            android:layout_below="@id/card2"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            app:cardCornerRadius="10dp"
+            android:backgroundTint="@color/gray">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Budapest - Paris"
+                android:textColor="@color/white"
+                android:fontFamily="@font/bold"
+                android:textSize="30sp"
+                android:layout_marginLeft="20dp"/>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="360dp"
+            android:layout_height="200dp"
+            android:id="@+id/card4"
+            android:layout_below="@id/card3"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            app:cardCornerRadius="10dp"
+            android:backgroundTint="@color/gray">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Budapest - London"
+                android:textColor="@color/white"
+                android:fontFamily="@font/bold"
+                android:textSize="30sp"
+                android:layout_marginLeft="20dp"/>
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+
+
+
+
+</ScrollView>
