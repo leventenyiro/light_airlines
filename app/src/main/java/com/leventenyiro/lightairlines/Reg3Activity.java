@@ -92,22 +92,26 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
                 finishAffinity();
                 break;
             case R.id.btnReg:
-                ellenorzes();
+                //ellenorzes();
                 if (!jelszoErossegEllenorzes(inputPassword.getText().toString()))
                 {
                     Toast.makeText(this, "Gyenge jelszó!", Toast.LENGTH_SHORT).show();
+                    inputClear();
                 }
                 else if (inputPassword.getText().toString().isEmpty())
                 {
                     Toast.makeText(this, "Nincs megadva jelszó!", Toast.LENGTH_SHORT).show();
+                    inputClear();
                 }
                 else if (inputPasswordAgain.getText().toString().isEmpty())
                 {
                     Toast.makeText(this, "Ismételd meg a jelszót!", Toast.LENGTH_SHORT).show();
+                    inputClear();
                 }
                 else if (!inputPassword.getText().toString().equals(inputPasswordAgain.getText().toString()))
                 {
                     Toast.makeText(this, "A két jelszó nem egyezik!", Toast.LENGTH_SHORT).show();
+                    inputClear();
                 }
                 else
                 {
@@ -137,28 +141,10 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
         return matcher.matches();
     }
 
-    public void ellenorzes()
+    public void inputClear()
     {
-        if (!inputPassword.getText().toString().isEmpty() && jelszoErossegEllenorzes(inputPassword.getText().toString()))
-        {
-            inputPassword.setBackground(getResources().getDrawable(R.drawable.inputgreen));
-            inputPassword.setPaddingRelative(70, 40, 40, 40);
-        }
-        if (!inputPasswordAgain.getText().toString().isEmpty() && inputPassword.getText().toString().equals(inputPasswordAgain.getText().toString()) && jelszoErossegEllenorzes(inputPassword.getText().toString()))
-        {
-            inputPasswordAgain.setBackground(getResources().getDrawable(R.drawable.inputgreen));
-            inputPasswordAgain.setPaddingRelative(70, 40, 40, 40);
-        }
-        if (inputPassword.getText().toString().isEmpty() || !jelszoErossegEllenorzes(inputPassword.getText().toString()))
-        {
-            inputPassword.setBackground(getResources().getDrawable(R.drawable.inputred));
-            inputPassword.setPaddingRelative(70, 40, 40, 40);
-        }
-        if (inputPasswordAgain.getText().toString().isEmpty() || !inputPassword.getText().toString().equals(inputPasswordAgain.getText().toString()))
-        {
-            inputPasswordAgain.setBackground(getResources().getDrawable(R.drawable.inputred));
-            inputPasswordAgain.setPaddingRelative(70, 40, 40, 40);
-        }
+        inputPassword.setText("");
+        inputPasswordAgain.setText("");
     }
 
     public void adatbazisInsert()
