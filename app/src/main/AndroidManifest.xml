@@ -35,10 +35,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/RegistrationTheme" />
         <activity
-            android:name=".ComingSoonActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/LoginTheme" />
-        <activity
             android:name=".InnerActivity"
             android:screenOrientation="portrait"
             android:theme="@style/InnerTheme" />
