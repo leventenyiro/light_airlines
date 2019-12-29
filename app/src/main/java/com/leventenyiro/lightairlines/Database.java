@@ -104,7 +104,7 @@ public class Database extends SQLiteOpenHelper
         return eredmeny;
     }
 
-    public Cursor selectPassword(String usernameEmail)
+    public Cursor selectPasswordByEmail(String usernameEmail)
     {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor passwordEllenorzes = db.rawQuery("SELECT password FROM " + TABLE_NAME + " WHERE username = '" + usernameEmail + "' OR email = '" + usernameEmail + "'", null);

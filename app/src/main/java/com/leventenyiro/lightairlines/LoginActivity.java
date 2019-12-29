@@ -173,7 +173,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     public boolean jelszoEllenorzes()
     {
-        Cursor eredmeny = db.selectPassword(inputUsernameEmail.getText().toString());
+        Cursor eredmeny = db.selectPasswordByEmail(inputUsernameEmail.getText().toString());
 
         String password = null;
         String salt = null;
