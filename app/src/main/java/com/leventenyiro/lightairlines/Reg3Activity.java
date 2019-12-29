@@ -93,7 +93,7 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btnReg:
                 ellenorzes();
-                if (!jelszoEllenorzes(inputPassword.getText().toString()))
+                if (!jelszoErossegEllenorzes(inputPassword.getText().toString()))
                 {
                     Toast.makeText(this, "Gyenge jelszó!", Toast.LENGTH_SHORT).show();
                 }
@@ -127,7 +127,7 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public boolean jelszoEllenorzes(String password)
+    public boolean jelszoErossegEllenorzes(String password)
     {
         String passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{4,}$";
 
@@ -139,17 +139,17 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
 
     public void ellenorzes()
     {
-        if (!inputPassword.getText().toString().isEmpty() && jelszoEllenorzes(inputPassword.getText().toString()))
+        if (!inputPassword.getText().toString().isEmpty() && jelszoErossegEllenorzes(inputPassword.getText().toString()))
         {
             inputPassword.setBackground(getResources().getDrawable(R.drawable.inputgreen));
             inputPassword.setPaddingRelative(70, 40, 40, 40);
         }
-        if (!inputPasswordAgain.getText().toString().isEmpty() && inputPassword.getText().toString().equals(inputPasswordAgain.getText().toString()) && jelszoEllenorzes(inputPassword.getText().toString()))
+        if (!inputPasswordAgain.getText().toString().isEmpty() && inputPassword.getText().toString().equals(inputPasswordAgain.getText().toString()) && jelszoErossegEllenorzes(inputPassword.getText().toString()))
         {
             inputPasswordAgain.setBackground(getResources().getDrawable(R.drawable.inputgreen));
             inputPasswordAgain.setPaddingRelative(70, 40, 40, 40);
         }
-        if (inputPassword.getText().toString().isEmpty() || !jelszoEllenorzes(inputPassword.getText().toString()))
+        if (inputPassword.getText().toString().isEmpty() || !jelszoErossegEllenorzes(inputPassword.getText().toString()))
         {
             inputPassword.setBackground(getResources().getDrawable(R.drawable.inputred));
             inputPassword.setPaddingRelative(70, 40, 40, 40);

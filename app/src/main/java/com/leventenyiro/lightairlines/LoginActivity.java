@@ -156,7 +156,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Cursor eredmeny = db.selectLogin(inputUsernameEmail.getText().toString());
         if (eredmeny.getCount() == 1)
         {
-            if (passwordEllenorzes())
+            if (jelszoEllenorzes())
             {
                 SharedPreferences sharedPreferences = getSharedPreferences("loggedin", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -171,7 +171,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         return false;
     }
 
-    public boolean passwordEllenorzes()
+    public boolean jelszoEllenorzes()
     {
         Cursor eredmeny = db.selectPassword(inputUsernameEmail.getText().toString());
 
