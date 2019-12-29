@@ -1,5 +1,6 @@
 package com.leventenyiro.lightairlines.ui.beallitasok;
 
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -182,7 +183,7 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
             case R.id.btnPasswordUpdate:
                 Intent intent = new Intent(getActivity(), PasswordUpdate.class);
                 startActivity(intent);
-                getActivity().overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         }
     }
 
