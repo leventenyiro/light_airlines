@@ -27,7 +27,12 @@ public class Database extends SQLiteOpenHelper
     @Override
     public void onCreate(SQLiteDatabase db)
     {
-        db.execSQL("CREATE TABLE " + TABLE_NAME + " (id INTEGER PRIMARY KEY AUTOINCREMENT, username VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL, firstname VARCHAR(255) NOT NULL, lastname VARCHAR(255) NOT NULL, birthdate DATE NOT NULL, password TEXT NOT NULL)");
+        db.execSQL("CREATE TABLE " + TABLE_NAME + " (id INTEGER PRIMARY KEY AUTOINCREMENT, username VARCHAR(255) NOT NULL, " +
+                                                    "email VARCHAR(255) NOT NULL, " +
+                                                    "firstname VARCHAR(255) NOT NULL, " +
+                                                    "lastname VARCHAR(255) NOT NULL, " +
+                                                    "birthdate DATE NOT NULL, " +
+                                                    "password TEXT NOT NULL)");
         db.execSQL("CREATE TABLE airport (id INTEGER PRIMARY KEY AUTOINCREMENT, nev varchar(100) NOT NULL UNIQUE, rovidites varchar(3) NOT NULL UNIQUE)");
         db.execSQL("INSERT INTO airport (nev, rovidites) VALUES ('Budapest', 'BUD'), ('London', 'LHR'), ('Párizs', 'CDG')");
         db.execSQL("CREATE TABLE foglalas(id INTEGER PRIMARY KEY AUTOINCREMENT, \n" +
@@ -152,7 +157,7 @@ public class Database extends SQLiteOpenHelper
                                             "INNER JOIN utvonal u ON j.utvonal_id = u.id\n" +
                                             "INNER JOIN airport ai ON u.indulas_id = ai.id\n" +
                                             "INNER JOIN airport ac ON u.celallomas_id = ac.id\n"+
-                                            "WHERE ai.nev LIKE '" + honnan + "%' AND ac.nev LIKE '" + hova + "%'", null);
+                                            "WHERE (ai.nev LIKE '%" + honnan.trim() + "%' OR ai.rovidites LIKE '%" + honnan.trim() + "%') AND (ac.nev LIKE '%" + hova.trim() + "%' OR ac.rovidites LIKE '%" + hova.trim() + "%')", null);
         return eredmeny;
     }
 }
