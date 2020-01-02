@@ -158,11 +158,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         {
             if (jelszoEllenorzes())
             {
-                SharedPreferences sharedPreferences = getSharedPreferences("loggedin", Context.MODE_PRIVATE);
+                SharedPreferences sharedPreferences = getSharedPreferences("variables", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 while (eredmeny.moveToNext())
                 {
-                    editor.putString("id", eredmeny.getString(0));
+                    editor.putString("userId", eredmeny.getString(0));
                 }
                 editor.apply();
                 return true;
