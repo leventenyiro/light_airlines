@@ -47,7 +47,7 @@ public class InnerActivity extends AppCompatActivity {
 
     private void init() {
         alertDialogBuilder = new AlertDialog.Builder(InnerActivity.this);
-        alertDialogBuilder.setTitle("Kilépés");
+        alertDialogBuilder.setTitle("Kijelentkezés");
         alertDialogBuilder.setMessage("Biztos kijelentkezel?");
         alertDialogBuilder.setPositiveButton("Nem", new DialogInterface.OnClickListener() {
             @Override
