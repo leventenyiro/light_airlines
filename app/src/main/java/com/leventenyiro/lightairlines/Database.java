@@ -157,7 +157,7 @@ public class Database extends SQLiteOpenHelper
                                             "INNER JOIN utvonal u ON j.utvonal_id = u.id\n" +
                                             "INNER JOIN airport ai ON u.indulas_id = ai.id\n" +
                                             "INNER JOIN airport ac ON u.celallomas_id = ac.id\n"+
-                                            "WHERE (ai.nev LIKE '%" + honnan.trim() + "%' OR ai.rovidites LIKE '%" + honnan.trim() + "%') AND (ac.nev LIKE '%" + hova.trim() + "%' OR ac.rovidites LIKE '%" + hova.trim() + "%')", null);
+                                            "WHERE (ai.nev LIKE '%" + honnan.trim() + "%' OR ai.rovidites LIKE '%" + honnan.trim() + "%') AND (ac.nev LIKE '%" + hova.trim() + "%' OR ac.rovidites LIKE '%" + hova.trim() + "%') AND j.idopont > NOW()", null);
         return eredmeny;
     }
 }
