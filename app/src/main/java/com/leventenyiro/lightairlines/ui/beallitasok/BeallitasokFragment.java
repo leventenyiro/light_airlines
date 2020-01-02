@@ -1,9 +1,7 @@
 package com.leventenyiro.lightairlines.ui.beallitasok;
 
-import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Editable;
@@ -16,13 +14,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.leventenyiro.lightairlines.Database;
-import com.leventenyiro.lightairlines.InnerActivity;
 import com.leventenyiro.lightairlines.PasswordUpdate;
 import com.leventenyiro.lightairlines.R;
 
@@ -35,6 +30,7 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
     private EditText inputUsername, inputEmail, inputFirstname, inputLastname;
     private Button btnUpdate, btnCancel, btnPasswordUpdate;
     private Database db;
+    private int userId;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -50,6 +46,8 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
         btnCancel = root.findViewById(R.id.btnCancel);
         btnPasswordUpdate = root.findViewById(R.id.btnPasswordUpdate);
         db = new Database(getActivity());
+        userId = Integer.parseInt(this.getActivity().getSharedPreferences("variables", Context.MODE_PRIVATE).getString("userId", ""));
+
 
         beallitasok();
 
@@ -189,8 +187,7 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
 
     public void beallitasok()
     {
-        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("loggedin", Context.MODE_PRIVATE);
-        Cursor eredmeny = db.selectAll(Integer.parseInt(sharedPreferences.getString("id", "")));
+        Cursor eredmeny = db.selectAll(userId);
         if (eredmeny != null && eredmeny.getCount() > 0)
         {
             while (eredmeny.moveToNext())
@@ -284,8 +281,7 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
     public boolean vanEUsername()
     {
         String username = "";
-        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("loggedin", Context.MODE_PRIVATE);
-        Cursor eredmeny = db.selectAll(Integer.parseInt(sharedPreferences.getString("id", "")));
+        Cursor eredmeny = db.selectAll(userId);
         if (eredmeny != null && eredmeny.getCount() > 0)
         {
             while (eredmeny.moveToNext())
@@ -306,8 +302,7 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
     public boolean vanEEmail()
     {
         String email = "";
-        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("loggedin", Context.MODE_PRIVATE);
-        Cursor eredmeny = db.selectAll(Integer.parseInt(sharedPreferences.getString("id", "")));
+        Cursor eredmeny = db.selectAll(userId);
         if (eredmeny != null && eredmeny.getCount() > 0)
         {
             while (eredmeny.moveToNext())
@@ -337,8 +332,7 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
 
     public boolean update()
     {
-        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("loggedin", Context.MODE_PRIVATE);
-        long eredmeny = db.update(sharedPreferences.getString("id", ""), inputUsername.getText().toString(), inputEmail.getText().toString(), inputFirstname.getText().toString(), inputLastname.getText().toString());
+        long eredmeny = db.update(String.valueOf(userId), inputUsername.getText().toString(), inputEmail.getText().toString(), inputFirstname.getText().toString(), inputLastname.getText().toString());
         if (eredmeny == -1 || eredmeny == 0)
         {
             Toast.makeText(getActivity(), "Szerverhiba! Sikertelen módosítás!", Toast.LENGTH_SHORT).show();
