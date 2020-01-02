@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Jarat">
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        app:srcCompat="@drawable/back"
+        android:id="@+id/btnBack"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="60sp"
+        android:text="BUD - LHR"
+        android:id="@+id/textRovidites"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/bold"
+        android:textColor="@color/gray"
+        android:layout_marginTop="50dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textNev"
+        android:textSize="20sp"
+        android:text="Budapest - London"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/textRovidites"
+        android:fontFamily="@font/regular"
+        android:textColor="@color/gray"
+        android:layout_marginTop="-10dp"
+        />
+
+    <!-- j.helyek_szama, j.idopont, ai.nev, ai.rovidites, ac.nev, ac.rovidites, u.idotartam -->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textIdopont"
+        android:text="2020.03.15 8:00"
+        android:layout_below="@id/textNev"
+        android:textColor="@color/gray"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textIdotartam"
+        android:layout_marginTop="10dp"
+        android:text="2 óra 40 perc"
+        android:layout_below="@id/textIdopont"
+        android:textColor="@color/gray"
+        android:layout_centerHorizontal="true"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textHelyekSzama"
+        android:layout_marginTop="10dp"
+        android:text="Rendelkezésre álló hely: 56"
+        android:layout_below="@id/textIdotartam"
+        android:textColor="@color/gray"
+        android:layout_centerHorizontal="true"
+        android:textSize="20sp" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/gif"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/textHelyekSzama"
+        app:lottie_fileName="plane.json"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_speed="1" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_above="@+id/btnMegse"
+        android:id="@+id/btnHelyFoglalas"
+        android:text="Helyfoglalás"
+        android:textColor="@color/white"
+        android:fontFamily="@font/regular"
+        android:textSize="16sp"
+        android:background="@drawable/button"
+        android:textAllCaps="false" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/btnMegse"
+        android:text="Mégse"
+        android:textColor="@color/white"
+        android:fontFamily="@font/regular"
+        android:textSize="16sp"
+        android:background="@drawable/buttonred"
+        android:textAllCaps="false" />
+
+</RelativeLayout>
