@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Jarat">
+    tools:context=".Jarat"
+    android:background="@color/white">
 
     <ImageView
         android:layout_width="30dp"
@@ -37,8 +38,6 @@
         android:textColor="@color/gray"
         android:layout_marginTop="-10dp"
         />
-
-    <!-- j.helyek_szama, j.idopont, ai.nev, ai.rovidites, ac.nev, ac.rovidites, u.idotartam -->
 
     <TextView
         android:layout_width="wrap_content"
