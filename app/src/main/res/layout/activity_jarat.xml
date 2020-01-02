@@ -19,31 +19,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="60sp"
-        android:text="BUD - LHR"
+
         android:id="@+id/textRovidites"
         android:layout_centerHorizontal="true"
         android:fontFamily="@font/bold"
         android:textColor="@color/gray"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="150dp"
         />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textNev"
         android:textSize="20sp"
-        android:text="Budapest - London"
+
         android:layout_centerHorizontal="true"
         android:layout_below="@id/textRovidites"
         android:fontFamily="@font/regular"
         android:textColor="@color/gray"
-        android:layout_marginTop="-10dp"
         />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textIdopont"
-        android:text="2020.03.15 8:00"
+
         android:layout_below="@id/textNev"
         android:textColor="@color/gray"
         android:layout_centerHorizontal="true"
@@ -55,7 +54,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/textIdotartam"
         android:layout_marginTop="10dp"
-        android:text="2 óra 40 perc"
+
         android:layout_below="@id/textIdopont"
         android:textColor="@color/gray"
         android:layout_centerHorizontal="true"
@@ -66,7 +65,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/textHelyekSzama"
         android:layout_marginTop="10dp"
-        android:text="Rendelkezésre álló hely: 56"
+
         android:layout_below="@id/textIdotartam"
         android:textColor="@color/gray"
         android:layout_centerHorizontal="true"
@@ -78,6 +77,7 @@
         android:id="@+id/gif"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/textHelyekSzama"
+        android:layout_marginTop="-100dp"
         app:lottie_fileName="plane.json"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
