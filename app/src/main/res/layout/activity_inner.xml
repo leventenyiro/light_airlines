@@ -6,18 +6,6 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnKijelentkezes"
-        app:layout_constraintRight_toRightOf="parent"
-        android:background="@drawable/buttonred"
-        android:textAllCaps="false"
-        android:text="Kijelentkezés"
-        android:textColor="@color/white"
-        android:paddingHorizontal="20dp"
-        android:layout_margin="10dp" />
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
         android:layout_width="0dp"

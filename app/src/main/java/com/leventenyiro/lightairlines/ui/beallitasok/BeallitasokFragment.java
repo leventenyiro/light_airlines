@@ -1,6 +1,7 @@
 package com.leventenyiro.lightairlines.ui.beallitasok;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -14,10 +15,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.leventenyiro.lightairlines.Database;
+import com.leventenyiro.lightairlines.LoginActivity;
 import com.leventenyiro.lightairlines.PasswordUpdate;
 import com.leventenyiro.lightairlines.R;
 
@@ -28,9 +31,11 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
 
     private BeallitasokViewModel beallitasokViewModel;
     private EditText inputUsername, inputEmail, inputFirstname, inputLastname;
-    private Button btnUpdate, btnCancel, btnPasswordUpdate;
+    private Button btnUpdate, btnCancel, btnPasswordUpdate, btnLogout;
     private Database db;
     private String userId;
+    private AlertDialog alertDialog;
+    private AlertDialog.Builder alertDialogBuilder;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -45,9 +50,9 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
         btnUpdate = root.findViewById(R.id.btnUpdate);
         btnCancel = root.findViewById(R.id.btnCancel);
         btnPasswordUpdate = root.findViewById(R.id.btnPasswordUpdate);
+        btnLogout = root.findViewById(R.id.btnLogout);
         db = new Database(getActivity());
         userId = this.getActivity().getSharedPreferences("variables", Context.MODE_PRIVATE).getString("userId", "");
-
 
         beallitasok();
 
@@ -103,6 +108,7 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
 
         btnUpdate.setOnClickListener(this);
         btnCancel.setOnClickListener(this);
+        btnLogout.setOnClickListener(this);
         btnPasswordUpdate.setOnClickListener(this);
 
         return root;
@@ -182,6 +188,29 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
                 Intent intent = new Intent(getActivity(), PasswordUpdate.class);
                 startActivity(intent);
                 getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                break;
+            case R.id.btnLogout:
+                alertDialogBuilder = new AlertDialog.Builder(getActivity());
+                alertDialogBuilder.setTitle("Kijelentkezés");
+                alertDialogBuilder.setMessage("Biztos kijelentkezel?");
+                alertDialogBuilder.setPositiveButton("Nem", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                alertDialogBuilder.setNegativeButton("Igen", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(getActivity(), LoginActivity.class);
+                        startActivity(intent);
+                        getActivity().overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                        getActivity().finishAffinity();
+                    }
+                });
+                alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+                break;
         }
     }
 

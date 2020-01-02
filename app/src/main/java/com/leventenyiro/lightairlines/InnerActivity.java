@@ -24,7 +24,6 @@ public class InnerActivity extends AppCompatActivity {
 
     private AlertDialog alertDialog;
     private AlertDialog.Builder alertDialogBuilder;
-    private Button btnKijelentkezes;
 
 
     @Override
@@ -45,12 +44,7 @@ public class InnerActivity extends AppCompatActivity {
 
         init();
 
-        btnKijelentkezes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+
     }
 
     private void init() {
