@@ -160,4 +160,15 @@ public class Database extends SQLiteOpenHelper
                                             "WHERE (ai.nev LIKE '%" + honnan.trim() + "%' OR ai.rovidites LIKE '%" + honnan.trim() + "%') AND (ac.nev LIKE '%" + hova.trim() + "%' OR ac.rovidites LIKE '%" + hova.trim() + "%') AND j.idopont > datetime('now')", null);
         return eredmeny;
     }
+
+    public Cursor selectJarat(String id)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor eredmeny = db.rawQuery("SELECT j.id, j.helyek_szama, j.idopont, ai.nev, ai.rovidites, ac.nev, ac.rovidites, u.idotartam FROM jarat j\n" +
+                "INNER JOIN utvonal u ON j.utvonal_id = u.id\n" +
+                "INNER JOIN airport ai ON u.indulas_id = ai.id\n" +
+                "INNER JOIN airport ac ON u.celallomas_id = ac.id\n"+
+                "WHERE id = " + id, null);
+        return eredmeny;
+    }
 }
