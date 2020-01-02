@@ -30,7 +30,7 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
     private EditText inputUsername, inputEmail, inputFirstname, inputLastname;
     private Button btnUpdate, btnCancel, btnPasswordUpdate;
     private Database db;
-    private int userId;
+    private String userId;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -46,7 +46,7 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
         btnCancel = root.findViewById(R.id.btnCancel);
         btnPasswordUpdate = root.findViewById(R.id.btnPasswordUpdate);
         db = new Database(getActivity());
-        userId = Integer.parseInt(this.getActivity().getSharedPreferences("variables", Context.MODE_PRIVATE).getString("userId", ""));
+        userId = this.getActivity().getSharedPreferences("variables", Context.MODE_PRIVATE).getString("userId", "");
 
 
         beallitasok();
@@ -332,7 +332,7 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
 
     public boolean update()
     {
-        long eredmeny = db.update(String.valueOf(userId), inputUsername.getText().toString(), inputEmail.getText().toString(), inputFirstname.getText().toString(), inputLastname.getText().toString());
+        long eredmeny = db.update(userId, inputUsername.getText().toString(), inputEmail.getText().toString(), inputFirstname.getText().toString(), inputLastname.getText().toString());
         if (eredmeny == -1 || eredmeny == 0)
         {
             Toast.makeText(getActivity(), "Szerverhiba! Sikertelen módosítás!", Toast.LENGTH_SHORT).show();

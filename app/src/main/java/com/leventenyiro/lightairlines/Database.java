@@ -116,7 +116,7 @@ public class Database extends SQLiteOpenHelper
         return passwordEllenorzes;
     }
 
-    public Cursor selectAll(int id)
+    public Cursor selectAll(String id)
     {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor eredmeny = db.rawQuery("SELECT username, email, firstname, lastname FROM user WHERE id = " + id, null);
