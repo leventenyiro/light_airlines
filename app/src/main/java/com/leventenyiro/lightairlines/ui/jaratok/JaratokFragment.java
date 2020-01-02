@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -106,7 +107,7 @@ public class JaratokFragment extends Fragment {
                 celallomasRovidites = eredmeny.getString(6);
                 idotartam = eredmeny.getString(7);
 
-                CardView card = new CardView(mContext);
+                final CardView card = new CardView(mContext);
                 RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
                 params.width = dpToPx(360);
                 params.height = dpToPx(200);
@@ -124,6 +125,14 @@ public class JaratokFragment extends Fragment {
 
                 card.setLayoutParams(params);
                 card.setBackground(getResources().getDrawable(R.drawable.bg_jarat));
+                final int finalIndex = index;
+                card.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //System.out.println(finalIndex);
+                        // innen visz majd át a járatinformációs oldalra
+                    }
+                });
                 //card.setTag("card" + index);
                 //String id = "R.id.card" + index;
                 card.setId(card.generateViewId());
