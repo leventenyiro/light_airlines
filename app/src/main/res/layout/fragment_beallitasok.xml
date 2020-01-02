@@ -25,8 +25,7 @@
         android:textSize="40sp"
         android:fontFamily="@font/bold"
         android:textColor="@color/gray"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp" />
+        android:layout_marginLeft="20dp" />
 
     <EditText
         android:layout_width="340dp"
