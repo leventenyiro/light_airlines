@@ -1,4 +1,4 @@
-package com.leventenyiro.lightairlines.ui.beallitasok;
+package com.leventenyiro.lightairlines.fragments;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -17,9 +17,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
 
-import com.leventenyiro.lightairlines.Database;
+import com.leventenyiro.lightairlines.segedOsztalyok.Database;
 import com.leventenyiro.lightairlines.LoginActivity;
 import com.leventenyiro.lightairlines.PasswordUpdate;
 import com.leventenyiro.lightairlines.R;
@@ -29,7 +28,6 @@ import java.util.regex.Pattern;
 
 public class BeallitasokFragment extends Fragment implements View.OnClickListener{
 
-    private BeallitasokViewModel beallitasokViewModel;
     private EditText inputUsername, inputEmail, inputFirstname, inputLastname;
     private Button btnUpdate, btnCancel, btnPasswordUpdate, btnLogout;
     private Database db;
@@ -37,10 +35,7 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
     private AlertDialog alertDialog;
     private AlertDialog.Builder alertDialogBuilder;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        beallitasokViewModel =
-                ViewModelProviders.of(this).get(BeallitasokViewModel.class);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_beallitasok, container, false);
 
         inputUsername = root.findViewById(R.id.inputUsername);

@@ -16,6 +16,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.leventenyiro.lightairlines.segedOsztalyok.Database;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

@@ -1,4 +1,4 @@
-package com.leventenyiro.lightairlines;
+package com.leventenyiro.lightairlines.segedOsztalyok;
 
 import android.content.ContentValues;
 import android.content.Context;

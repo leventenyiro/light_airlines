@@ -1,10 +1,9 @@
-package com.leventenyiro.lightairlines.ui.jaratok;
+package com.leventenyiro.lightairlines.fragments;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -15,14 +14,12 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
 
-import com.leventenyiro.lightairlines.Database;
+import com.leventenyiro.lightairlines.segedOsztalyok.Database;
 import com.leventenyiro.lightairlines.Jarat;
 import com.leventenyiro.lightairlines.R;
 
@@ -31,18 +28,15 @@ import java.util.List;
 
 public class JaratokFragment extends Fragment {
 
-    private JaratokViewModel jaratokViewModel;
     private Context mContext;
     private RelativeLayout mRelativeLayout;
     private Database db;
     private EditText inputHonnan, inputHova;
     private List<Integer> cardList;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        jaratokViewModel =
-                ViewModelProviders.of(this).get(JaratokViewModel.class);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_jaratok, container, false);
+
         db = new Database(getActivity());
         inputHonnan = root.findViewById(R.id.inputHonnan);
         inputHova = root.findViewById(R.id.inputHova);
