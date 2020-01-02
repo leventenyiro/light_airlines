@@ -23,7 +23,7 @@ public class PasswordUpdate extends AppCompatActivity implements View.OnClickLis
     private Button btnCancel, btnUpdate;
     private ImageView btnBack;
     private Database db;
-    private String id;
+    private String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,8 +83,8 @@ public class PasswordUpdate extends AppCompatActivity implements View.OnClickLis
         btnCancel = findViewById(R.id.btnCancel);
         btnUpdate = findViewById(R.id.btnUpdate);
         db = new Database(this);
-        SharedPreferences sharedPreferences = getSharedPreferences("loggedin", Context.MODE_PRIVATE);
-        id = sharedPreferences.getString("id", "");
+        SharedPreferences sharedPreferences = getSharedPreferences("variables", Context.MODE_PRIVATE);
+        userId = sharedPreferences.getString("userId", "");
     }
 
     @Override
@@ -143,7 +143,7 @@ public class PasswordUpdate extends AppCompatActivity implements View.OnClickLis
     public boolean jelszoEllenorzes()
     {
 
-        Cursor eredmeny = db.selectPasswordById(id);
+        Cursor eredmeny = db.selectPasswordById(userId);
 
         String password = null;
         String salt = null;
@@ -166,7 +166,7 @@ public class PasswordUpdate extends AppCompatActivity implements View.OnClickLis
         String titkositottPassword = PasswordUtils.generateSecurePassword(inputPassword.getText().toString(), salt);
         String password = titkositottPassword + ";" + salt;
 
-        if (db.updatePassword(id, password))
+        if (db.updatePassword(userId, password))
             Toast.makeText(this, "Sikeres jelszómódosítás!", Toast.LENGTH_LONG);
         else
             Toast.makeText(this, "Szerverhiba! Sikertelen jelszómódosítás!", Toast.LENGTH_SHORT).show();
