@@ -8,26 +8,15 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class Database extends SQLiteOpenHelper
 {
-    public static final String DATABASE_NAME = "lightairlines.db";
-    public static final String TABLE_NAME = "user";
-
-    public static final String COL_1 = "id";
-    public static final String COL_2 = "username";
-    public static final String COL_3 = "email";
-    public static final String COL_4 = "firstname";
-    public static final String COL_5 = "lastname";
-    public static final String COL_6 = "birthdate";
-    public static final String COL_7 = "password";
-
     public Database(Context context)
     {
-        super(context, DATABASE_NAME, null, 1);
+        super(context, "lightairlines.db", null, 1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db)
     {
-        db.execSQL("CREATE TABLE " + TABLE_NAME + " (id INTEGER PRIMARY KEY AUTOINCREMENT, username VARCHAR(255) NOT NULL, " +
+        db.execSQL("CREATE TABLE user (id INTEGER PRIMARY KEY AUTOINCREMENT, username VARCHAR(255) NOT NULL, " +
                                                     "email VARCHAR(255) NOT NULL, " +
                                                     "firstname VARCHAR(255) NOT NULL, " +
                                                     "lastname VARCHAR(255) NOT NULL, " +
@@ -66,7 +55,7 @@ public class Database extends SQLiteOpenHelper
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
     {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS user");
         db.execSQL("DROP TABLE IF EXISTS airport");
         db.execSQL("DROP TABLE IF EXISTS jarat");
         db.execSQL("DROP TABLE IF EXISTS utvonal");
@@ -77,42 +66,42 @@ public class Database extends SQLiteOpenHelper
     {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COL_2, username);
-        contentValues.put(COL_3, email);
-        contentValues.put(COL_4, firstname);
-        contentValues.put(COL_5, lastname);
-        contentValues.put(COL_6, birthdate);
-        contentValues.put(COL_7, password);
+        contentValues.put("username", username);
+        contentValues.put("email", email);
+        contentValues.put("firstname", firstname);
+        contentValues.put("lastname", lastname);
+        contentValues.put("birthdate", birthdate);
+        contentValues.put("password", password);
 
-        long eredmeny = db.insert(TABLE_NAME, null, contentValues);
+        long eredmeny = db.insert("user", null, contentValues);
         return eredmeny != -1;
     }
 
     public Cursor selectUsername(String username)
     {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor eredmeny = db.rawQuery("SELECT username FROM " + TABLE_NAME + " WHERE username = '" + username + "'", null);
+        Cursor eredmeny = db.rawQuery("SELECT username FROM user WHERE username = '" + username + "'", null);
         return eredmeny;
     }
 
     public Cursor selectEmail(String email)
     {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor eredmeny = db.rawQuery("SELECT email FROM " + TABLE_NAME + " WHERE email = '" + email + "'", null);
+        Cursor eredmeny = db.rawQuery("SELECT email FROM user WHERE email = '" + email + "'", null);
         return eredmeny;
     }
 
     public Cursor selectLogin(String usernameEmail)
     {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor eredmeny = db.rawQuery("SELECT * FROM "+ TABLE_NAME + " WHERE username = '" + usernameEmail + "' OR email = '" + usernameEmail + "'", null);
+        Cursor eredmeny = db.rawQuery("SELECT * FROM user WHERE username = '" + usernameEmail + "' OR email = '" + usernameEmail + "'", null);
         return eredmeny;
     }
 
     public Cursor selectPasswordByUsernameEmail(String usernameEmail)
     {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor passwordEllenorzes = db.rawQuery("SELECT password FROM " + TABLE_NAME + " WHERE username = '" + usernameEmail + "' OR email = '" + usernameEmail + "'", null);
+        Cursor passwordEllenorzes = db.rawQuery("SELECT password FROM user WHERE username = '" + usernameEmail + "' OR email = '" + usernameEmail + "'", null);
         return passwordEllenorzes;
     }
 
@@ -127,11 +116,11 @@ public class Database extends SQLiteOpenHelper
     {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COL_2, username);
-        contentValues.put(COL_3, email);
-        contentValues.put(COL_4, firstname);
-        contentValues.put(COL_5, lastname);
-        return db.update(TABLE_NAME, contentValues, COL_1 + " = " + id, null);
+        contentValues.put("username", username);
+        contentValues.put("email", email);
+        contentValues.put("firstname", firstname);
+        contentValues.put("lastname", lastname);
+        return db.update("user", contentValues, "id = " + id, null);
     }
 
     public Cursor selectPasswordById(String id)
@@ -145,8 +134,8 @@ public class Database extends SQLiteOpenHelper
     {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COL_7, password);
-        long eredmeny = db.update("user", contentValues, COL_1 + " = " + id, null);
+        contentValues.put("password", password);
+        long eredmeny = db.update("user", contentValues, "id = " + id, null);
         return eredmeny != -1;
     }
 
