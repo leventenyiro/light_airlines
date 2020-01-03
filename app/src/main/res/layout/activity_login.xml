@@ -7,58 +7,56 @@
     tools:context=".LoginActivity"
     android:background="@drawable/bg_login">
 
-
-    <!--<ImageView
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        app:srcCompat="@drawable/back"
-        android:id="@+id/btnBack"/>-->
+        android:layout_marginStart="20dp"
+        android:id="@+id/textUdv"
+        android:text="Light Airlines"
+        android:textSize="40sp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/bold" />
 
     <ImageView
-        android:id="@+id/btnHome"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_alignParentRight="true"
         android:layout_marginTop="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginRight="30dp"
+        android:layout_marginEnd="30dp"
+        android:id="@+id/btnHome"
         app:srcCompat="@drawable/icon_white" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textUdv"
-        android:text="Light Airlines"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="20dp"
-        android:fontFamily="@font/bold"
-        android:textColor="@color/white"
-        android:textSize="40sp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textUdv"
-        android:layout_marginLeft="30dp"
+        android:layout_below="@id/textUdv"
         android:layout_marginTop="170dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp"
         android:id="@+id/textCim"
         android:text="Jelentkezz be"
         android:textSize="35sp"
-        android:fontFamily="@font/bold"
-        android:textColor="@color/gray" />
+        android:textColor="@color/gray"
+        android:fontFamily="@font/bold" />
 
     <EditText
         android:layout_width="340dp"
         android:layout_height="wrap_content"
-        android:paddingVertical="15dp"
-        android:paddingEnd="15dp"
-        android:paddingRight="15dp"
-        android:background="@drawable/input"
-        android:id="@+id/inputUsernameEmail"
+        android:layout_centerHorizontal="true"
         android:layout_below="@id/textCim"
         android:layout_marginTop="30dp"
-        android:layout_centerHorizontal="true"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:paddingStart="20dp"
+        android:paddingLeft="20dp"
+        android:paddingEnd="15dp"
+        android:paddingRight="15dp"
+        android:id="@+id/inputUsernameEmail"
+        android:background="@drawable/input"
         android:inputType="textEmailAddress"
         android:hint="Felhasználónév vagy E-mail"
         android:textColor="@color/gray"
@@ -70,14 +68,17 @@
     <EditText
         android:layout_width="340dp"
         android:layout_height="wrap_content"
-        android:paddingVertical="15dp"
-        android:paddingEnd="15dp"
-        android:paddingRight="15dp"
-        android:background="@drawable/input"
-        android:id="@+id/inputPassword"
+        android:layout_centerHorizontal="true"
         android:layout_below="@id/inputUsernameEmail"
         android:layout_marginTop="30dp"
-        android:layout_centerHorizontal="true"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:paddingStart="20dp"
+        android:paddingLeft="20dp"
+        android:paddingEnd="15dp"
+        android:paddingRight="15dp"
+        android:id="@+id/inputPassword"
+        android:background="@drawable/input"
         android:inputType="textPassword"
         android:hint="Password"
         android:textColor="@color/gray"
@@ -87,14 +88,15 @@
         android:singleLine="true"/>
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="20dp"
-        android:id="@+id/btnLogin"
         android:layout_below="@id/inputPassword"
         android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginRight="40dp"
+        android:layout_marginEnd="40dp"
         android:layout_marginTop="30dp"
+        android:id="@+id/btnLogin"
         android:background="@drawable/button"
         android:text="Bejelentkezés"
         android:textColor="@color/white"
@@ -107,28 +109,28 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="25dp"
-        android:layout_marginLeft="25dp">
+        android:layout_marginLeft="25dp"
+        android:layout_marginStart="25dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nincs még profilod?"
-            android:fontFamily="@font/regular"
+            android:textSize="20sp"
             android:textColor="@color/gray"
-            android:textSize="20sp" />
+            android:fontFamily="@font/regular" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/btnReg"
-            android:layout_alignParentBottom="true"
             android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
+            android:id="@+id/btnReg"
             android:text="Regisztrálj."
-            android:fontFamily="@font/bold"
+            android:textSize="20sp"
             android:textColor="@color/rebelBlue"
-            android:textSize="20sp" />
+            android:fontFamily="@font/bold" />
 
     </LinearLayout>
-
 
 </RelativeLayout>

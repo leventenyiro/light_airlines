@@ -11,73 +11,67 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        app:srcCompat="@drawable/back"
-        android:id="@+id/btnBack"/>
+        android:id="@+id/btnBack"
+        app:srcCompat="@drawable/back" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="60sp"
-
-        android:id="@+id/textRovidites"
         android:layout_centerHorizontal="true"
-        android:fontFamily="@font/bold"
-        android:textColor="@color/gray"
         android:layout_marginTop="150dp"
-        />
+        android:id="@+id/textRovidites"
+        android:textSize="60sp"
+        android:textColor="@color/gray"
+        android:fontFamily="@font/bold" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textNev"
-        android:textSize="20sp"
-
         android:layout_centerHorizontal="true"
         android:layout_below="@id/textRovidites"
-        android:fontFamily="@font/regular"
+        android:id="@+id/textNev"
+        android:textSize="20sp"
         android:textColor="@color/gray"
-        />
+        android:fontFamily="@font/regular" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textIdopont"
-
+        android:layout_centerHorizontal="true"
         android:layout_below="@id/textNev"
-        android:textColor="@color/gray"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:textSize="20sp" />
+        android:id="@+id/textIdopont"
+        android:textSize="20sp"
+        android:textColor="@color/gray" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textIdotartam"
-        android:layout_marginTop="10dp"
-
+        android:layout_centerHorizontal="true"
         android:layout_below="@id/textIdopont"
-        android:textColor="@color/gray"
-        android:layout_centerHorizontal="true"
-        android:textSize="20sp" />
+        android:layout_marginTop="10dp"
+        android:id="@+id/textIdotartam"
+        android:textSize="20sp"
+        android:textColor="@color/gray" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textHelyekSzama"
-        android:layout_marginTop="10dp"
-
-        android:layout_below="@id/textIdotartam"
-        android:textColor="@color/gray"
         android:layout_centerHorizontal="true"
-        android:textSize="20sp" />
+        android:layout_below="@id/textIdotartam"
+        android:layout_marginTop="10dp"
+        android:id="@+id/textHelyekSzama"
+        android:textSize="20sp"
+        android:textColor="@color/gray" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:id="@+id/gif"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/textHelyekSzama"
         android:layout_marginTop="-100dp"
+        android:id="@+id/gif"
         app:lottie_fileName="plane.json"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
@@ -86,27 +80,30 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_above="@+id/btnMegse"
         android:id="@+id/btnHelyFoglalas"
-        android:text="Helyfoglalás"
-        android:textColor="@color/white"
-        android:fontFamily="@font/regular"
-        android:textSize="16sp"
         android:background="@drawable/button"
-        android:textAllCaps="false" />
+        android:text="Helyfoglalás"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:fontFamily="@font/regular" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
         android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
         android:id="@+id/btnMegse"
-        android:text="Mégse"
-        android:textColor="@color/white"
-        android:fontFamily="@font/regular"
-        android:textSize="16sp"
         android:background="@drawable/buttonred"
-        android:textAllCaps="false" />
+        android:text="Mégse"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:fontFamily="@font/regular" />
 
 </RelativeLayout>

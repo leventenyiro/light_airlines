@@ -12,120 +12,131 @@
         android:layout_height="30dp"
         app:srcCompat="@drawable/icon"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="20dp"
         android:id="@+id/btnHome" />
 
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_margin="20dp"
         app:srcCompat="@drawable/back"
         android:id="@+id/btnBack"/>
+
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnBack"
-        android:layout_marginLeft="30dp"
         android:layout_marginTop="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp"
         android:id="@+id/textCim"
         android:text="Regisztráció"
         android:textSize="40sp"
         android:fontFamily="@font/bold"/>
 
-    <!-- Password and again -->
-
     <TextView
         android:id="@+id/textLeiras"
         android:layout_width="320dp"
+        android:layout_height="wrap_content"
         android:textAlignment="textEnd"
         android:layout_gravity="end"
-        android:layout_height="wrap_content"
         android:layout_above="@+id/inputPassword"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="50dp"
         android:layout_marginBottom="-60dp"
-        android:fontFamily="@font/regular"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="50dp"
+        android:layout_marginEnd="50dp"
         android:text="A minimum 8 karakteres jelszónak legalább\n 1 nagybetűt és 1 számot kell tartalmaznia"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        android:fontFamily="@font/regular" />
 
     <EditText
         android:layout_width="340dp"
         android:layout_height="wrap_content"
-        android:paddingVertical="15dp"
-        android:paddingEnd="15dp"
-        android:paddingRight="15dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/textCim"
+        android:layout_marginTop="70dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:paddingStart="20dp"
+        android:paddingLeft="20dp"
+        android:paddingEnd="20dp"
+        android:paddingRight="20dp"
         android:background="@drawable/input"
         android:id="@+id/inputPassword"
-        android:layout_below="@id/textCim"
         android:inputType="textPassword"
-        android:layout_marginTop="70dp"
-        android:layout_centerHorizontal="true"
         android:hint="Jelszó"
-        android:fontFamily="@font/regular"
         android:textColor="@color/gray"
+        android:fontFamily="@font/regular"
         android:maxLines="1"
         android:lines="1"
-        android:singleLine="true"/>
+        android:singleLine="true" />
 
     <EditText
         android:layout_width="340dp"
         android:layout_height="wrap_content"
-        android:paddingVertical="15dp"
-        android:paddingEnd="15dp"
-        android:paddingRight="15dp"
-        android:background="@drawable/input"
-        android:id="@+id/inputPasswordAgain"
-        android:layout_below="@id/inputPassword"
-        android:inputType="textPassword"
-        android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"
+        android:layout_below="@id/inputPassword"
+        android:layout_marginTop="30dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:paddingStart="20dp"
+        android:paddingLeft="20dp"
+        android:paddingEnd="20dp"
+        android:paddingRight="20dp"
+        android:id="@+id/inputPasswordAgain"
+        android:background="@drawable/input"
+        android:inputType="textPassword"
         android:hint="Jelszó megerősítés"
-        android:fontFamily="@font/regular"
         android:textColor="@color/gray"
+        android:fontFamily="@font/regular"
         android:maxLines="1"
         android:lines="1"
         android:singleLine="true"/>
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:paddingHorizontal="20dp"
-        android:id="@+id/btnReg"
+
         android:layout_below="@id/inputPasswordAgain"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="40dp"
         android:layout_marginTop="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="40dp"
+        android:layout_marginEnd="40dp"
+        android:id="@+id/btnReg"
         android:background="@drawable/button"
         android:text="Regisztráció"
-        android:textColor="@color/white"
         android:textSize="16sp"
-        android:fontFamily="@font/regular"
-        android:textAllCaps="false" />
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:fontFamily="@font/regular" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="25dp"
-        android:layout_marginLeft="25dp">
+        android:layout_marginLeft="25dp"
+        android:layout_marginStart="25dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Már van profilod?"
-            android:fontFamily="@font/regular"
+            android:textSize="20sp"
             android:textColor="@color/gray"
-            android:textSize="20sp" />
+            android:fontFamily="@font/regular" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/btnLogin"
-            android:layout_alignParentBottom="true"
             android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
             android:text="Jelentkezz be."
             android:fontFamily="@font/bold"
             android:textColor="@color/rebelBlue"
