@@ -3,9 +3,9 @@
     <color name="colorPrimary">#2C3E50</color>
     <color name="colorPrimaryDark">#2C3E50</color>
     <color name="colorAccent">#00A1E4</color>
-
     <color name="black">#000000</color>
     <color name="rebelBlue">#00A1E4</color>
+    <color name="deepRebelBlue">#006FA0</color>
     <color name="gray">#2C3E50</color>
     <color name="lightGray">#EBEBEB</color>
     <color name="midGray">#AAAAAA</color>
@@ -13,8 +13,5 @@
     <color name="lightRed">#FFDCDC</color>
     <color name="red">#CE060B</color>
     <color name="deepRed">#7F0003</color>
-    <color name="beige">#ECE9E6</color>
     <color name="white">#FFFFFF</color>
-    <color name="deepRebelBlue">#006FA0</color>
-
 </resources>
