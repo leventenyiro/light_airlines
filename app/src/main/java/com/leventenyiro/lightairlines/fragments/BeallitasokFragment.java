@@ -26,14 +26,14 @@ import com.leventenyiro.lightairlines.R;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class BeallitasokFragment extends Fragment implements View.OnClickListener{
+public class BeallitasokFragment extends Fragment implements View.OnClickListener {
 
-    private EditText inputUsername, inputEmail, inputFirstname, inputLastname;
-    private Button btnUpdate, btnCancel, btnPasswordUpdate, btnLogout;
-    private Database db;
-    private String userId;
     private AlertDialog alertDialog;
     private AlertDialog.Builder alertDialogBuilder;
+    private Button btnUpdate, btnCancel, btnPasswordUpdate, btnLogout;
+    private Database db;
+    private EditText inputUsername, inputEmail, inputFirstname, inputLastname;
+    private String userId;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_beallitasok, container, false);
@@ -55,8 +55,7 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count)
-            {
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
                 inputUsername.setBackground(getResources().getDrawable(R.drawable.input));
                 inputUsername.setPaddingRelative(70, 40, 40, 40);
             }
@@ -67,8 +66,7 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count)
-            {
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
                 inputEmail.setBackground(getResources().getDrawable(R.drawable.input));
                 inputEmail.setPaddingRelative(70, 40, 40, 40);
             }
@@ -80,8 +78,7 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count)
-            {
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
                 inputFirstname.setBackground(getResources().getDrawable(R.drawable.input));
                 inputFirstname.setPaddingRelative(70, 40, 40, 40);
             }
@@ -92,8 +89,7 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count)
-            {
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
                 inputLastname.setBackground(getResources().getDrawable(R.drawable.input));
                 inputLastname.setPaddingRelative(70, 40, 40, 40);
             }
@@ -111,11 +107,9 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
-        switch (v.getId())
-        {
+        switch (v.getId()) {
             case R.id.btnUpdate:
-                if (!inputUsername.isEnabled())
-                {
+                if (!inputUsername.isEnabled()) {
                     inputUsername.setEnabled(true);
                     inputUsername.setTextColor(getResources().getColor(R.color.gray));
                     inputEmail.setEnabled(true);
@@ -127,46 +121,35 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
                     btnCancel.setVisibility(View.VISIBLE);
                     btnUpdate.setText("Mentés");
                 }
-                else
-                {
+                else {
                     ellenorzes();
-                    if (vanEUsername())
-                    {
+                    if (vanEUsername()) {
                         Toast.makeText(getActivity(), "A felhasználónév foglalt!", Toast.LENGTH_LONG).show();
                     }
-                    else if (!usernameEllenorzes(inputUsername.getText().toString()))
-                    {
+                    else if (!usernameEllenorzes(inputUsername.getText().toString())) {
                         Toast.makeText(getActivity(), "A felhasználónév túl rövid!", Toast.LENGTH_LONG).show();
                     }
-                    else if (inputUsername.getText().toString().isEmpty())
-                    {
+                    else if (inputUsername.getText().toString().isEmpty()) {
                         Toast.makeText(getActivity(), "Nincs megadva felhasználónév!", Toast.LENGTH_LONG).show();
                     }
-                    else if (vanEEmail())
-                    {
+                    else if (vanEEmail()) {
                         Toast.makeText(getActivity(), "Az e-mail cím foglalt!", Toast.LENGTH_LONG).show();
                     }
-                    else if (inputEmail.getText().toString().isEmpty())
-                    {
+                    else if (inputEmail.getText().toString().isEmpty()) {
                         Toast.makeText(getActivity(), "Nincs megadva e-mail cím!", Toast.LENGTH_LONG).show();
                     }
-                    else if (!emailEllenorzes(inputEmail.getText().toString()))
-                    {
+                    else if (!emailEllenorzes(inputEmail.getText().toString())) {
                         Toast.makeText(getActivity(), "Helytelen e-mail cím!", Toast.LENGTH_LONG).show();
                     }
-                    else if (inputFirstname.getText().toString().isEmpty())
-                    {
+                    else if (inputFirstname.getText().toString().isEmpty()) {
                         Toast.makeText(getActivity(), "Nincs megadva keresztnév!", Toast.LENGTH_SHORT).show();
                     }
-                    else if (inputLastname.getText().toString().isEmpty())
-                    {
+                    else if (inputLastname.getText().toString().isEmpty()) {
                         Toast.makeText(getActivity(), "Nincs megadva vezetéknév!", Toast.LENGTH_SHORT).show();
                     }
-                    else
-                    {
+                    else {
                         inputsDisable();
-                        if (update())
-                        {
+                        if (update()) {
                             btnCancel.setVisibility(View.INVISIBLE);
                             btnUpdate.setText("Módosítás");
                         }
@@ -209,13 +192,10 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
         }
     }
 
-    public void beallitasok()
-    {
+    public void beallitasok() {
         Cursor eredmeny = db.selectAll(userId);
-        if (eredmeny != null && eredmeny.getCount() > 0)
-        {
-            while (eredmeny.moveToNext())
-            {
+        if (eredmeny != null && eredmeny.getCount() > 0) {
+            while (eredmeny.moveToNext()) {
                 inputUsername.setText(eredmeny.getString(0));
                 inputEmail.setText(eredmeny.getString(1));
                 inputFirstname.setText(eredmeny.getString(2));
@@ -224,8 +204,7 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
         }
     }
 
-    public void inputsDisable()
-    {
+    public void inputsDisable() {
         inputUsername.setEnabled(false);
         inputUsername.setTextColor(getResources().getColor(R.color.midGray));
         inputUsername.setBackground(getResources().getDrawable(R.drawable.input));
@@ -245,107 +224,81 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
     }
 
     private void ellenorzes() {
-        if (!inputUsername.getText().toString().isEmpty() && usernameEllenorzes(inputUsername.getText().toString()))
-        {
+        if (!inputUsername.getText().toString().isEmpty() && usernameEllenorzes(inputUsername.getText().toString())) {
             inputUsername.setBackground(getResources().getDrawable(R.drawable.inputgreen));
             inputUsername.setPaddingRelative(70, 40, 40, 40);
         }
-        if (!inputEmail.getText().toString().isEmpty() && emailEllenorzes(inputEmail.getText().toString()))
-        {
+        if (!inputEmail.getText().toString().isEmpty() && emailEllenorzes(inputEmail.getText().toString())) {
             inputEmail.setBackground(getResources().getDrawable(R.drawable.inputgreen));
             inputEmail.setPaddingRelative(70, 40, 40, 40);
         }
-        if (!inputFirstname.getText().toString().isEmpty())
-        {
+        if (!inputFirstname.getText().toString().isEmpty()) {
             inputFirstname.setBackground(getResources().getDrawable(R.drawable.inputgreen));
             inputFirstname.setPaddingRelative(70, 40, 40, 40);
         }
-        if (!inputLastname.getText().toString().isEmpty())
-        {
+        if (!inputLastname.getText().toString().isEmpty()) {
             inputLastname.setBackground(getResources().getDrawable(R.drawable.inputgreen));
             inputLastname.setPaddingRelative(70, 40, 40, 40);
         }
-        if (vanEUsername() || inputUsername.getText().toString().isEmpty() || !usernameEllenorzes(inputUsername.getText().toString()))
-        {
+        if (vanEUsername() || inputUsername.getText().toString().isEmpty() || !usernameEllenorzes(inputUsername.getText().toString())) {
             inputUsername.setBackground(getResources().getDrawable(R.drawable.inputred));
             inputUsername.setPaddingRelative(70, 40, 40, 40);
         }
-        if (vanEEmail() || inputEmail.getText().toString().isEmpty() || !emailEllenorzes(inputEmail.getText().toString()))
-        {
+        if (vanEEmail() || inputEmail.getText().toString().isEmpty() || !emailEllenorzes(inputEmail.getText().toString())) {
             inputEmail.setBackground(getResources().getDrawable(R.drawable.inputred));
             inputEmail.setPaddingRelative(70, 40, 40, 40);
         }
-        if (inputFirstname.getText().toString().isEmpty())
-        {
+        if (inputFirstname.getText().toString().isEmpty()) {
             inputFirstname.setBackground(getResources().getDrawable(R.drawable.inputred));
             inputFirstname.setPaddingRelative(70, 40, 40, 40);
         }
-        if (inputLastname.getText().toString().isEmpty())
-        {
+        if (inputLastname.getText().toString().isEmpty()) {
             inputLastname.setBackground(getResources().getDrawable(R.drawable.inputred));
             inputLastname.setPaddingRelative(70, 40, 40, 40);
         }
     }
 
-    public boolean usernameEllenorzes(String username)
-    {
-        if (username.length() >= 5)
-            return true;
-        return false;
+    public boolean usernameEllenorzes(String username) {
+        return username.length() >= 5;
     }
-    public boolean emailEllenorzes(String email)
-    {
+    public boolean emailEllenorzes(String email) {
         String emailPattern = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
-
         Pattern pattern = Pattern.compile(emailPattern);
-        Matcher matcher = pattern.matcher(email);
-
-        return matcher.matches();
+        return pattern.matcher(email).matches();
     }
-    public boolean vanEUsername()
-    {
+    public boolean vanEUsername() {
         String username = "";
         Cursor eredmeny = db.selectAll(userId);
-        if (eredmeny != null && eredmeny.getCount() > 0)
-        {
-            while (eredmeny.moveToNext())
-            {
+        if (eredmeny != null && eredmeny.getCount() > 0) {
+            while (eredmeny.moveToNext()) {
                 username = eredmeny.getString(0);
             }
         }
-        if (username.equals(inputUsername.getText().toString()))
-        {
+        if (username.equals(inputUsername.getText().toString())) {
             return false;
         }
-        else
-        {
+        else {
             eredmeny = db.selectUsername(inputUsername.getText().toString());
             return eredmeny.getCount() == 1;
         }
     }
-    public boolean vanEEmail()
-    {
+    public boolean vanEEmail() {
         String email = "";
         Cursor eredmeny = db.selectAll(userId);
-        if (eredmeny != null && eredmeny.getCount() > 0)
-        {
-            while (eredmeny.moveToNext())
-            {
+        if (eredmeny != null && eredmeny.getCount() > 0) {
+            while (eredmeny.moveToNext()) {
                 email = eredmeny.getString(1);
             }
         }
-        if (email.equals(inputEmail.getText().toString()))
-        {
+        if (email.equals(inputEmail.getText().toString())) {
             return false;
         }
-        else
-        {
+        else {
             eredmeny = db.selectEmail(inputEmail.getText().toString());
             return eredmeny.getCount() == 1;
         }
     }
-    public String elsoNagybetu(String nev)
-    {
+    public String elsoNagybetu(String nev) {
         String[] nevek = nev.split(" ");
         String ujNev = "";
         for (String s : nevek) {
@@ -354,16 +307,13 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
         return ujNev;
     }
 
-    public boolean update()
-    {
+    public boolean update() {
         long eredmeny = db.update(userId, inputUsername.getText().toString(), inputEmail.getText().toString(), inputFirstname.getText().toString(), inputLastname.getText().toString());
-        if (eredmeny == -1 || eredmeny == 0)
-        {
+        if (eredmeny == -1 || eredmeny == 0) {
             Toast.makeText(getActivity(), "Szerverhiba! Sikertelen módosítás!", Toast.LENGTH_SHORT).show();
             return false;
         }
-        else
-        {
+        else {
             Toast.makeText(getActivity(), "Sikeres módosítás!", Toast.LENGTH_SHORT).show();
             return true;
         }

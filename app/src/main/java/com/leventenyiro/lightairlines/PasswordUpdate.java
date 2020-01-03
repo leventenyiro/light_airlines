@@ -21,11 +21,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PasswordUpdate extends AppCompatActivity implements View.OnClickListener{
-
-    private EditText inputOldPassword, inputPassword, inputPasswordAgain;
     private Button btnCancel, btnUpdate;
-    private ImageView btnBack;
     private Database db;
+    private EditText inputOldPassword, inputPassword, inputPasswordAgain;
+    private ImageView btnBack;
     private String userId;
 
     @Override
@@ -40,8 +39,7 @@ public class PasswordUpdate extends AppCompatActivity implements View.OnClickLis
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count)
-            {
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
                 inputOldPassword.setBackground(getResources().getDrawable(R.drawable.input));
                 inputOldPassword.setPaddingRelative(70, 40, 40, 40);
             }
@@ -52,8 +50,7 @@ public class PasswordUpdate extends AppCompatActivity implements View.OnClickLis
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count)
-            {
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
                 inputPassword.setBackground(getResources().getDrawable(R.drawable.input));
                 inputPassword.setPaddingRelative(70, 40, 40, 40);
             }
@@ -64,8 +61,7 @@ public class PasswordUpdate extends AppCompatActivity implements View.OnClickLis
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count)
-            {
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
                 inputPasswordAgain.setBackground(getResources().getDrawable(R.drawable.input));
                 inputPasswordAgain.setPaddingRelative(70, 40, 40, 40);
             }
@@ -92,43 +88,35 @@ public class PasswordUpdate extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        switch (v.getId())
-        {
+        switch (v.getId()) {
             case R.id.btnBack: onBackPressed(); break;
             case R.id.btnCancel: onBackPressed(); break;
             case R.id.btnUpdate:
-                if (inputOldPassword.getText().toString().isEmpty())
-                {
+                if (inputOldPassword.getText().toString().isEmpty()) {
                     Toast.makeText(this, "Nincs megadva a régi jelszó!", Toast.LENGTH_SHORT).show();
                     inputClear();
                 }
-                else if (!jelszoEllenorzes())
-                {
+                else if (!jelszoEllenorzes()) {
                     Toast.makeText(this, "Helytelen a régi jelszó!", Toast.LENGTH_SHORT).show();
                     inputClear();
                 }
-                else if (!jelszoErossegEllenorzes(inputPassword.getText().toString()))
-                {
+                else if (!jelszoErossegEllenorzes(inputPassword.getText().toString())) {
                     Toast.makeText(this, "Gyenge jelszó!", Toast.LENGTH_SHORT).show();
                     inputClear();
                 }
-                else if (inputPassword.getText().toString().isEmpty())
-                {
+                else if (inputPassword.getText().toString().isEmpty()) {
                     Toast.makeText(this, "Nincs megadva jelszó!", Toast.LENGTH_SHORT).show();
                     inputClear();
                 }
-                else if (inputPasswordAgain.getText().toString().isEmpty())
-                {
+                else if (inputPasswordAgain.getText().toString().isEmpty()) {
                     Toast.makeText(this, "Ismételd meg a jelszót!", Toast.LENGTH_SHORT).show();
                     inputClear();
                 }
-                else if (!inputPassword.getText().toString().equals(inputPasswordAgain.getText().toString()))
-                {
+                else if (!inputPassword.getText().toString().equals(inputPasswordAgain.getText().toString())) {
                     Toast.makeText(this, "A két jelszó nem egyezik!", Toast.LENGTH_SHORT).show();
                     inputClear();
                 }
-                else
-                {
+                else {
                     jelszoInsert();
                     onBackPressed();
                 }
@@ -136,25 +124,20 @@ public class PasswordUpdate extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    public void inputClear()
-    {
+    public void inputClear() {
         inputOldPassword.setText("");
         inputPassword.setText("");
         inputPasswordAgain.setText("");
     }
 
-    public boolean jelszoEllenorzes()
-    {
-
+    public boolean jelszoEllenorzes() {
         Cursor eredmeny = db.selectPasswordById(userId);
 
         String password = null;
         String salt = null;
 
-        if (eredmeny != null && eredmeny.getCount() > 0)
-        {
-            while (eredmeny.moveToNext())
-            {
+        if (eredmeny != null && eredmeny.getCount() > 0) {
+            while (eredmeny.moveToNext()) {
                 String[] adatok = eredmeny.getString(0).split(";");
                 password = adatok[0];
                 salt = adatok[1];
@@ -163,8 +146,7 @@ public class PasswordUpdate extends AppCompatActivity implements View.OnClickLis
         return PasswordUtils.verifyUserPassword(inputOldPassword.getText().toString(), password, salt);
     }
 
-    private void jelszoInsert()
-    {
+    private void jelszoInsert() {
         String salt = PasswordUtils.getSalt(30);
         String titkositottPassword = PasswordUtils.generateSecurePassword(inputPassword.getText().toString(), salt);
         String password = titkositottPassword + ";" + salt;
@@ -175,8 +157,7 @@ public class PasswordUpdate extends AppCompatActivity implements View.OnClickLis
             Toast.makeText(this, "Szerverhiba! Sikertelen jelszómódosítás!", Toast.LENGTH_SHORT).show();
     }
 
-    public boolean jelszoErossegEllenorzes(String password)
-    {
+    public boolean jelszoErossegEllenorzes(String password) {
         String passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{4,}$";
 
         Pattern pattern = Pattern.compile(passwordPattern);

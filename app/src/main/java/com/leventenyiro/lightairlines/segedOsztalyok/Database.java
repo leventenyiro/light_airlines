@@ -6,16 +6,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class Database extends SQLiteOpenHelper
-{
-    public Database(Context context)
-    {
+public class Database extends SQLiteOpenHelper {
+    public Database(Context context) {
         super(context, "lightairlines.db", null, 1);
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db)
-    {
+    public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE user (id INTEGER PRIMARY KEY AUTOINCREMENT, username VARCHAR(255) NOT NULL, " +
                                                     "email VARCHAR(255) NOT NULL, " +
                                                     "firstname VARCHAR(255) NOT NULL, " +
@@ -53,8 +50,7 @@ public class Database extends SQLiteOpenHelper
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
-    {
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS user");
         db.execSQL("DROP TABLE IF EXISTS airport");
         db.execSQL("DROP TABLE IF EXISTS jarat");
@@ -62,8 +58,7 @@ public class Database extends SQLiteOpenHelper
         db.execSQL("DROP TABLE IF EXISTS foglalas");
     }
 
-    public boolean insert(String username, String email, String firstname, String lastname, String birthdate, String password)
-    {
+    public boolean insert(String username, String email, String firstname, String lastname, String birthdate, String password) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("username", username);
@@ -77,43 +72,37 @@ public class Database extends SQLiteOpenHelper
         return eredmeny != -1;
     }
 
-    public Cursor selectUsername(String username)
-    {
+    public Cursor selectUsername(String username) {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor eredmeny = db.rawQuery("SELECT username FROM user WHERE username = '" + username + "'", null);
         return eredmeny;
     }
 
-    public Cursor selectEmail(String email)
-    {
+    public Cursor selectEmail(String email) {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor eredmeny = db.rawQuery("SELECT email FROM user WHERE email = '" + email + "'", null);
         return eredmeny;
     }
 
-    public Cursor selectLogin(String usernameEmail)
-    {
+    public Cursor selectLogin(String usernameEmail) {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor eredmeny = db.rawQuery("SELECT * FROM user WHERE username = '" + usernameEmail + "' OR email = '" + usernameEmail + "'", null);
         return eredmeny;
     }
 
-    public Cursor selectPasswordByUsernameEmail(String usernameEmail)
-    {
+    public Cursor selectPasswordByUsernameEmail(String usernameEmail) {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor passwordEllenorzes = db.rawQuery("SELECT password FROM user WHERE username = '" + usernameEmail + "' OR email = '" + usernameEmail + "'", null);
         return passwordEllenorzes;
     }
 
-    public Cursor selectAll(String id)
-    {
+    public Cursor selectAll(String id) {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor eredmeny = db.rawQuery("SELECT username, email, firstname, lastname FROM user WHERE id = " + id, null);
         return eredmeny;
     }
 
-    public long update (String id, String username, String email, String firstname, String lastname)
-    {
+    public long update (String id, String username, String email, String firstname, String lastname) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("username", username);
@@ -123,15 +112,13 @@ public class Database extends SQLiteOpenHelper
         return db.update("user", contentValues, "id = " + id, null);
     }
 
-    public Cursor selectPasswordById(String id)
-    {
+    public Cursor selectPasswordById(String id) {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor passwordEllenorzes = db.rawQuery("SELECT password FROM user WHERE id = " + id, null);
         return passwordEllenorzes;
     }
 
-    public boolean updatePassword(String id, String password)
-    {
+    public boolean updatePassword(String id, String password) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("password", password);
@@ -139,8 +126,7 @@ public class Database extends SQLiteOpenHelper
         return eredmeny != -1;
     }
 
-    public Cursor selectJaratok(String honnan, String hova)
-    {
+    public Cursor selectJaratok(String honnan, String hova) {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor eredmeny = db.rawQuery("SELECT j.id, j.helyek_szama - (SELECT COUNT(*) FROM foglalas WHERE jarat_id = 1), j.idopont, ai.nev, ai.rovidites, ac.nev, ac.rovidites, u.idotartam FROM jarat j\n" +
                                             "INNER JOIN utvonal u ON j.utvonal_id = u.id\n" +
@@ -152,8 +138,7 @@ public class Database extends SQLiteOpenHelper
         return eredmeny;
     }
 
-    public Cursor selectJarat(String id)
-    {
+    public Cursor selectJarat(String id) {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor eredmeny = db.rawQuery("SELECT j.helyek_szama - (SELECT COUNT(*) FROM foglalas WHERE jarat_id = " + id + "), j.idopont, ai.nev, ai.rovidites, ac.nev, ac.rovidites, u.idotartam FROM jarat j\n" +
                 "INNER JOIN utvonal u ON j.utvonal_id = u.id\n" +

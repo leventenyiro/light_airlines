@@ -20,14 +20,13 @@ import android.widget.Toast;
 import com.leventenyiro.lightairlines.segedOsztalyok.Database;
 import com.leventenyiro.lightairlines.segedOsztalyok.PasswordUtils;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener
-{
-    private TextView btnReg;
-    private Button btnLogin;
-    private EditText inputUsernameEmail, inputPassword;
-    private Database db;
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private AlertDialog alertDialog;
     private AlertDialog.Builder alertDialogBuilder;
+    private Button btnLogin;
+    private Database db;
+    private EditText inputUsernameEmail, inputPassword;
+    private TextView btnReg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,8 +62,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         btnLogin.setOnClickListener(this);
     }
 
-    public void init()
-    {
+    public void init() {
         btnReg = findViewById(R.id.btnReg);
         btnLogin = findViewById(R.id.btnLogin);
         inputUsernameEmail = findViewById(R.id.inputUsernameEmail);
@@ -90,11 +88,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     @Override
-    public void onClick(View v)
-    {
+    public void onClick(View v) {
         Intent intent;
-        switch (v.getId())
-        {
+        switch (v.getId()) {
             case R.id.btnReg:
                 intent = new Intent(LoginActivity.this, Reg1Activity.class);
                 startActivity(intent);
@@ -103,20 +99,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.btnLogin:
                 ellenorzes();
-                if (inputUsernameEmail.getText().toString().isEmpty())
-                {
+                if (inputUsernameEmail.getText().toString().isEmpty()) {
                     Toast.makeText(this, "Nincs megadva a felhasználónév vagy e-mail!", Toast.LENGTH_SHORT).show();
                 }
-                else if (inputPassword.getText().toString().isEmpty())
-                {
+                else if (inputPassword.getText().toString().isEmpty()) {
                     Toast.makeText(this, "Nincs megadva a jelszó!", Toast.LENGTH_SHORT).show();
                 }
-                else if (!login())
-                {
+                else if (!login()) {
                     Toast.makeText(LoginActivity.this, "Helytelen bejelentkezési adatok!", Toast.LENGTH_SHORT).show();
                 }
-                else
-                {
+                else {
                     intent = new Intent(LoginActivity.this, InnerActivity.class);
                     startActivity(intent);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
@@ -126,27 +118,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    public void ellenorzes()
-    {
-        if (inputUsernameEmail.getText().toString().isEmpty())
-        {
+    public void ellenorzes() {
+        if (inputUsernameEmail.getText().toString().isEmpty()) {
             inputUsernameEmail.setBackground(getResources().getDrawable(R.drawable.inputred));
             inputUsernameEmail.setPaddingRelative(70, 40, 40, 40);
         }
-        if (inputPassword.getText().toString().isEmpty())
-        {
+        if (inputPassword.getText().toString().isEmpty()) {
             inputPassword.setBackground(getResources().getDrawable(R.drawable.inputred));
             inputPassword.setPaddingRelative(70, 40, 40, 40);
         }
-        else if (!login())
-        {
+        else if (!login()) {
             inputUsernameEmail.setBackground(getResources().getDrawable(R.drawable.inputred));
             inputUsernameEmail.setPaddingRelative(70, 40, 40, 40);
             inputPassword.setBackground(getResources().getDrawable(R.drawable.inputred));
             inputPassword.setPaddingRelative(70, 40, 40, 40);
         }
-        else if (login())
-        {
+        else if (login()) {
             inputUsernameEmail.setBackground(getResources().getDrawable(R.drawable.inputgreen));
             inputUsernameEmail.setPaddingRelative(70, 40, 40, 40);
             inputPassword.setBackground(getResources().getDrawable(R.drawable.inputgreen));
@@ -154,17 +141,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    public boolean login()
-    {
+    public boolean login() {
         Cursor eredmeny = db.selectLogin(inputUsernameEmail.getText().toString());
-        if (eredmeny.getCount() == 1)
-        {
-            if (jelszoEllenorzes())
-            {
+        if (eredmeny.getCount() == 1) {
+            if (jelszoEllenorzes()) {
                 SharedPreferences sharedPreferences = getSharedPreferences("variables", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                while (eredmeny.moveToNext())
-                {
+                while (eredmeny.moveToNext()) {
                     editor.putString("userId", eredmeny.getString(0));
                 }
                 editor.apply();
@@ -174,17 +157,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         return false;
     }
 
-    public boolean jelszoEllenorzes()
-    {
+    public boolean jelszoEllenorzes() {
         Cursor eredmeny = db.selectPasswordByUsernameEmail(inputUsernameEmail.getText().toString());
 
         String password = null;
         String salt = null;
 
-        if (eredmeny != null && eredmeny.getCount() > 0)
-        {
-            while (eredmeny.moveToNext())
-            {
+        if (eredmeny != null && eredmeny.getCount() > 0) {
+            while (eredmeny.moveToNext()) {
                 String[] adatok = eredmeny.getString(0).split(";");
                 password = adatok[0];
                 salt = adatok[1];

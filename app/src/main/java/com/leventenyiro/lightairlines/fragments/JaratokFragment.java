@@ -29,22 +29,22 @@ import java.util.List;
 public class JaratokFragment extends Fragment {
 
     private Context mContext;
-    private RelativeLayout mRelativeLayout;
     private Database db;
     private EditText inputHonnan, inputHova;
     private List<Integer> cardList;
+    private RelativeLayout mRelativeLayout;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_jaratok, container, false);
 
+        // https://android--code.blogspot.com/2015/12/android-how-to-create-cardview.html
         db = new Database(getActivity());
         inputHonnan = root.findViewById(R.id.inputHonnan);
         inputHova = root.findViewById(R.id.inputHova);
         cardList = new ArrayList<>();
-
-        // https://android--code.blogspot.com/2015/12/android-how-to-create-cardview.html
         mContext = root.getContext();
         mRelativeLayout = root.findViewById(R.id.relativeLayout);
+
         select();
 
         inputHonnan.addTextChangedListener(new TextWatcher() {
@@ -69,14 +69,11 @@ public class JaratokFragment extends Fragment {
             public void afterTextChanged(Editable s) { }
         });
 
-
         return root;
     }
 
-    public void select()
-    {
-        for (int i : cardList)
-        {
+    public void select() {
+        for (int i : cardList) {
             CardView c = mRelativeLayout.findViewById(i);
             mRelativeLayout.removeView(c);
         }
@@ -91,12 +88,9 @@ public class JaratokFragment extends Fragment {
         String celallomas = "";
         String celallomasRovidites = "";
         String idotartam = "";
-        if (eredmeny != null && eredmeny.getCount() > 0)
-        {
-            int index = 1;
+        if (eredmeny != null && eredmeny.getCount() > 0) {
             int id = 0;
-            while (eredmeny.moveToNext())
-            {
+            while (eredmeny.moveToNext()) {
                 jaratId = eredmeny.getString(0);
                 helyekSzama = eredmeny.getString(1);
                 idopont = eredmeny.getString(2);
@@ -111,13 +105,10 @@ public class JaratokFragment extends Fragment {
                 params.width = dpToPx(360);
                 params.height = dpToPx(200);
                 params.addRule(RelativeLayout.CENTER_HORIZONTAL);
-                if (index == 1)
-                {
+                if (cardList.size() == 0) {
                     params.addRule(RelativeLayout.BELOW, R.id.inputHova);
                 }
-                else
-                {
-                    //String below = "R.id.card" + (index - 1);
+                else {
                     params.addRule(RelativeLayout.BELOW, id);
                 }
                 params.setMargins(0,0,0,dpToPx(20));
@@ -128,8 +119,6 @@ public class JaratokFragment extends Fragment {
                 card.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //System.out.println(finalJaratId);
-                        // innen visz majd át a járatinformációs oldalra
                         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("variables", Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("jaratId", finalJaratId);
@@ -139,8 +128,6 @@ public class JaratokFragment extends Fragment {
                         getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     }
                 });
-                //card.setTag("card" + index);
-                //String id = "R.id.card" + index;
                 card.setId(card.generateViewId());
                 id = card.getId();
                 cardList.add(id);
@@ -165,22 +152,17 @@ public class JaratokFragment extends Fragment {
                 // below a másik textview alá
                 tvVaros.setTextSize(15);
 
-
                 card.addView(tvRovidites);
                 card.addView(tvVaros);
                 mRelativeLayout.addView(card);
-
-                index++;
             }
         }
-        else
-        {
-
+        else {
+            // NINCS JÁRAT
         }
     }
 
-    public int dpToPx(int dp)
-    {
+    public int dpToPx(int dp) {
         return Math.round(dp * mContext.getResources().getDisplayMetrics().density);
     }
 }

@@ -21,14 +21,12 @@ import com.leventenyiro.lightairlines.segedOsztalyok.Database;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Reg1Activity extends AppCompatActivity implements View.OnClickListener
-{
-    private ImageView btnBack;
-    private ImageView btnHome;
-    private TextView btnLogin;
+public class Reg1Activity extends AppCompatActivity implements View.OnClickListener {
     private Button btnNext;
+    private Database db;
     private EditText inputUsername, inputEmail;
-    Database db;
+    private ImageView btnBack, btnHome;
+    private TextView btnLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +71,7 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
         btnNext.setOnClickListener(this);
     }
 
-    public void init()
-    {
+    public void init() {
         btnBack = findViewById(R.id.btnBack);
         btnHome = findViewById(R.id.btnHome);
         btnLogin = findViewById(R.id.btnLogin);
@@ -84,11 +81,9 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
         db = new Database(this);
     }
 
-    public void onClick(View v)
-    {
+    public void onClick(View v) {
         Intent intent;
-        switch (v.getId())
-        {
+        switch (v.getId()) {
             case R.id.btnBack:
                 onBackPressed();
                 break;
@@ -100,32 +95,25 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btnNext:
                 ellenorzes();
-                if (vanEUsername())
-                {
+                if (vanEUsername()) {
                     Toast.makeText(this, "A felhasználónév foglalt!", Toast.LENGTH_LONG).show();
                 }
-                else if (!usernameEllenorzes(inputUsername.getText().toString()))
-                {
+                else if (!usernameEllenorzes(inputUsername.getText().toString())) {
                     Toast.makeText(this, "A felhasználónév túl rövid!", Toast.LENGTH_LONG).show();
                 }
-                else if (inputUsername.getText().toString().isEmpty())
-                {
+                else if (inputUsername.getText().toString().isEmpty()) {
                     Toast.makeText(this, "Nincs megadva felhasználónév!", Toast.LENGTH_LONG).show();
                 }
-                else if (vanEEmail())
-                {
+                else if (vanEEmail()) {
                     Toast.makeText(this, "Az e-mail cím foglalt!", Toast.LENGTH_LONG).show();
                 }
-                else if (inputEmail.getText().toString().isEmpty())
-                {
+                else if (inputEmail.getText().toString().isEmpty()) {
                     Toast.makeText(this, "Nincs megadva e-mail cím!", Toast.LENGTH_LONG).show();
                 }
-                else if (!emailEllenorzes(inputEmail.getText().toString()))
-                {
+                else if (!emailEllenorzes(inputEmail.getText().toString())) {
                     Toast.makeText(this, "Helytelen e-mail cím!", Toast.LENGTH_LONG).show();
                 }
-                else
-                {
+                else {
                     SharedPreferences sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("username", inputUsername.getText().toString());
@@ -139,55 +127,41 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public void ellenorzes()
-    {
-        if (!inputUsername.getText().toString().isEmpty() && usernameEllenorzes(inputUsername.getText().toString()))
-        {
+    public void ellenorzes() {
+        if (!inputUsername.getText().toString().isEmpty() && usernameEllenorzes(inputUsername.getText().toString())) {
             inputUsername.setBackground(getResources().getDrawable(R.drawable.inputgreen));
             inputUsername.setPaddingRelative(70, 40, 40, 40);
         }
-        if (!inputEmail.getText().toString().isEmpty() && emailEllenorzes(inputEmail.getText().toString()))
-        {
+        if (!inputEmail.getText().toString().isEmpty() && emailEllenorzes(inputEmail.getText().toString())) {
             inputEmail.setBackground(getResources().getDrawable(R.drawable.inputgreen));
             inputEmail.setPaddingRelative(70, 40, 40, 40);
         }
-        if (vanEUsername() || inputUsername.getText().toString().isEmpty() || !usernameEllenorzes(inputUsername.getText().toString()))
-        {
+        if (vanEUsername() || inputUsername.getText().toString().isEmpty() || !usernameEllenorzes(inputUsername.getText().toString())) {
             inputUsername.setBackground(getResources().getDrawable(R.drawable.inputred));
             inputUsername.setPaddingRelative(70, 40, 40, 40);
         }
-        if (vanEEmail() || inputEmail.getText().toString().isEmpty() || !emailEllenorzes(inputEmail.getText().toString()))
-        {
+        if (vanEEmail() || inputEmail.getText().toString().isEmpty() || !emailEllenorzes(inputEmail.getText().toString())) {
             inputEmail.setBackground(getResources().getDrawable(R.drawable.inputred));
             inputEmail.setPaddingRelative(70, 40, 40, 40);
         }
     }
 
-    public boolean usernameEllenorzes(String username)
-    {
-        if (username.length() >= 5)
-            return true;
-        return false;
+    public boolean usernameEllenorzes(String username) {
+        return username.length() >= 5;
     }
 
-    public boolean emailEllenorzes(String email)
-    {
+    public boolean emailEllenorzes(String email) {
         String emailPattern = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
-
         Pattern pattern = Pattern.compile(emailPattern);
-        Matcher matcher = pattern.matcher(email);
-
-        return matcher.matches();
+        return pattern.matcher(email).matches();
     }
 
-    public boolean vanEUsername()
-    {
+    public boolean vanEUsername() {
         Cursor eredmeny = db.selectUsername(inputUsername.getText().toString());
         return eredmeny.getCount() == 1;
     }
 
-    public boolean vanEEmail()
-    {
+    public boolean vanEEmail() {
         Cursor eredmeny = db.selectEmail(inputEmail.getText().toString());
         return eredmeny.getCount() == 1;
     }

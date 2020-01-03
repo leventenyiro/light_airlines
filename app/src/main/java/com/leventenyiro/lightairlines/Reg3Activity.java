@@ -21,17 +21,15 @@ import com.leventenyiro.lightairlines.segedOsztalyok.PasswordUtils;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Reg3Activity extends AppCompatActivity implements View.OnClickListener
-{
+public class Reg3Activity extends AppCompatActivity implements View.OnClickListener {
+    private Button btnReg;
+    private Database db;
+    private EditText inputPassword, inputPasswordAgain;
     private ImageView btnBack, btnHome;
     private TextView btnLogin, textLeiras;
-    private Button btnReg;
-    private EditText inputPassword, inputPasswordAgain;
-    private Database db;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reg3);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
@@ -42,8 +40,7 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count)
-            {
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
                 inputPassword.setBackground(getResources().getDrawable(R.drawable.input));
                 inputPassword.setPaddingRelative(70, 40, 40, 40);
             }
@@ -54,8 +51,7 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count)
-            {
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
                 inputPasswordAgain.setBackground(getResources().getDrawable(R.drawable.input));
                 inputPasswordAgain.setPaddingRelative(70, 40, 40, 40);
             }
@@ -69,8 +65,7 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
         btnReg.setOnClickListener(this);
     }
 
-    public void init()
-    {
+    public void init() {
         btnBack = findViewById(R.id.btnBack);
         btnHome = findViewById(R.id.btnHome);
         btnLogin = findViewById(R.id.btnLogin);
@@ -82,8 +77,7 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void onClick(View v)
-    {
+    public void onClick(View v) {
         switch (v.getId())
         {
             case R.id.btnBack:
@@ -96,29 +90,23 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
                 finishAffinity();
                 break;
             case R.id.btnReg:
-                //ellenorzes();
-                if (!jelszoErossegEllenorzes(inputPassword.getText().toString()))
-                {
+                if (!jelszoErossegEllenorzes(inputPassword.getText().toString())) {
                     Toast.makeText(this, "Gyenge jelszó!", Toast.LENGTH_SHORT).show();
                     inputClear();
                 }
-                else if (inputPassword.getText().toString().isEmpty())
-                {
+                else if (inputPassword.getText().toString().isEmpty()) {
                     Toast.makeText(this, "Nincs megadva jelszó!", Toast.LENGTH_SHORT).show();
                     inputClear();
                 }
-                else if (inputPasswordAgain.getText().toString().isEmpty())
-                {
+                else if (inputPasswordAgain.getText().toString().isEmpty()) {
                     Toast.makeText(this, "Ismételd meg a jelszót!", Toast.LENGTH_SHORT).show();
                     inputClear();
                 }
-                else if (!inputPassword.getText().toString().equals(inputPasswordAgain.getText().toString()))
-                {
+                else if (!inputPassword.getText().toString().equals(inputPasswordAgain.getText().toString())) {
                     Toast.makeText(this, "A két jelszó nem egyezik!", Toast.LENGTH_SHORT).show();
                     inputClear();
                 }
-                else
-                {
+                else {
                     SharedPreferences sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("password", inputPassword.getText().toString());
@@ -135,8 +123,7 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public boolean jelszoErossegEllenorzes(String password)
-    {
+    public boolean jelszoErossegEllenorzes(String password) {
         String passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{4,}$";
 
         Pattern pattern = Pattern.compile(passwordPattern);
@@ -145,14 +132,12 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
         return matcher.matches();
     }
 
-    public void inputClear()
-    {
+    public void inputClear() {
         inputPassword.setText("");
         inputPasswordAgain.setText("");
     }
 
-    public void adatbazisInsert()
-    {
+    public void adatbazisInsert() {
         SharedPreferences sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
         String username = sharedPreferences.getString("username", "");
         String email = sharedPreferences.getString("email", "");
@@ -172,8 +157,7 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void onBackPressed()
-    {
+    public void onBackPressed() {
         finish();
     }
 

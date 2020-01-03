@@ -10,51 +10,41 @@ import java.util.Random;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
-public class PasswordUtils
-{
+public class PasswordUtils {
+    private static final int iterations = 10000, keyLength = 256;
     private static final Random rnd = new SecureRandom();
     private static final String alphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-    private static final int iterations = 10000;
-    private static final int keyLength = 256;
 
-    public static String getSalt(int length)
-    {
+    public static String getSalt(int length) {
         StringBuilder returnValue = new StringBuilder(length);
-        for (int i = 0; i < length; i++)
-        {
+        for (int i = 0; i < length; i++) {
             returnValue.append(alphabet.charAt(rnd.nextInt(alphabet.length())));
         }
         return new String(returnValue);
     }
 
-    public static byte[] hash(char[] password, byte[] salt)
-    {
+    public static byte[] hash(char[] password, byte[] salt) {
         PBEKeySpec spec = new PBEKeySpec(password, salt, iterations, keyLength);
         Arrays.fill(password, Character.MIN_VALUE);
-        try
-        {
+        try {
             SecretKeyFactory secretKeyFactory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
             return secretKeyFactory.generateSecret(spec).getEncoded();
         }
-        catch (NoSuchAlgorithmException | InvalidKeySpecException e)
-        {
+        catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
             throw new AssertionError("Hiba a jelszótitkosítás közben!");
         }
-        finally
-        {
+        finally {
             spec.clearPassword();
         }
     }
 
-    public static String generateSecurePassword(String password, String salt)
-    {
+    public static String generateSecurePassword(String password, String salt) {
         byte[] securePassword = hash(password.toCharArray(), salt.getBytes());
         String returnValue = Base64.getEncoder().encodeToString(securePassword);
         return returnValue;
     }
 
-    public static boolean verifyUserPassword(String providedPassword, String securedPassword, String salt)
-    {
+    public static boolean verifyUserPassword(String providedPassword, String securedPassword, String salt) {
         String newSecurePassword = generateSecurePassword(providedPassword, salt);
         boolean returnValue = newSecurePassword.equalsIgnoreCase(securedPassword);
         return returnValue;

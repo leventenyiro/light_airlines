@@ -19,14 +19,12 @@ import android.widget.Toast;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class Reg2Activity extends AppCompatActivity implements View.OnClickListener
-{
-    private ImageView btnBack;
-    private ImageView btnHome;
-    private TextView btnLogin;
+public class Reg2Activity extends AppCompatActivity implements View.OnClickListener {
     private Button btnNext;
-    private EditText inputFirstname, inputLastname;
     private DatePicker inputBirthdate;
+    private EditText inputFirstname, inputLastname;
+    private ImageView btnBack, btnHome;
+    private TextView btnLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,20 +37,16 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
         SharedPreferences sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
         inputFirstname.setText(sharedPreferences.getString("firstname", ""));
         inputLastname.setText(sharedPreferences.getString("lastname", ""));
-        if (!sharedPreferences.getString("birthdate", "").isEmpty())
-        {
+        if (!sharedPreferences.getString("birthdate", "").isEmpty()) {
             String[] datum = sharedPreferences.getString("birthdate", "").split("-");
             inputBirthdate.updateDate(Integer.parseInt(datum[0]) + 0, Integer.parseInt(datum[1]) + 1, Integer.parseInt(datum[2]));
         }
-
-        ellenorzes();
 
         inputFirstname.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count)
-            {
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
                 inputFirstname.setBackground(getResources().getDrawable(R.drawable.input));
                 inputFirstname.setPaddingRelative(70, 40, 40, 40);
             }
@@ -63,8 +57,7 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count)
-            {
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
                 inputLastname.setBackground(getResources().getDrawable(R.drawable.input));
                 inputLastname.setPaddingRelative(70, 40, 40, 40);
             }
@@ -78,8 +71,7 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
         btnNext.setOnClickListener(this);
     }
 
-    public void init()
-    {
+    public void init() {
         btnBack = findViewById(R.id.btnBack);
         btnHome = findViewById(R.id.btnHome);
         btnLogin = findViewById(R.id.btnLogin);
@@ -93,10 +85,8 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void onClick(View v)
-    {
-        switch (v.getId())
-        {
+    public void onClick(View v) {
+        switch (v.getId()) {
             case R.id.btnBack:
                 onBackPressed();
                 break;
@@ -108,20 +98,16 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btnNext:
                 ellenorzes();
-                if (inputFirstname.getText().toString().isEmpty())
-                {
+                if (inputFirstname.getText().toString().isEmpty()) {
                     Toast.makeText(this, "Nincs megadva keresztnév!", Toast.LENGTH_SHORT).show();
                 }
-                else if (inputLastname.getText().toString().isEmpty())
-                {
+                else if (inputLastname.getText().toString().isEmpty()) {
                     Toast.makeText(this, "Nincs megadva vezetéknév!", Toast.LENGTH_SHORT).show();
                 }
-                else if (!korEllenorzes(inputBirthdate.getYear(), inputBirthdate.getMonth(), inputBirthdate.getDayOfMonth()))
-                {
+                else if (!korEllenorzes(inputBirthdate.getYear(), inputBirthdate.getMonth(), inputBirthdate.getDayOfMonth())) {
                     Toast.makeText(Reg2Activity.this, "13 éven aluliak nem regisztrálhatnak!", Toast.LENGTH_LONG).show();
                 }
-                else
-                {
+                else {
                     SharedPreferences sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("firstname", elsoNagybetu(inputFirstname.getText().toString()).trim());
@@ -136,8 +122,7 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public String elsoNagybetu(String nev)
-    {
+    public String elsoNagybetu(String nev) {
         String[] nevek = nev.split(" ");
         String ujNev = "";
         for (String s : nevek) {
@@ -147,44 +132,36 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    public boolean korEllenorzes(int year, int month, int day)
-    {
+    public boolean korEllenorzes(int year, int month, int day) {
         Calendar today = GregorianCalendar.getInstance();
         int todayYear = today.get(Calendar.YEAR);
         int todayMonth = today.get(Calendar.MONTH);
         int todayDay = today.get(Calendar.DAY_OF_MONTH);
         int age = todayYear - year;
-        if (month > todayMonth || month == todayMonth && day > todayDay)
-        {
+        if (month > todayMonth || month == todayMonth && day > todayDay) {
             age--;
         }
         return age >= 13;
     }
 
-    public String birthdateToString(int year, int month, int day)
-    {
+    public String birthdateToString(int year, int month, int day) {
         return year + "-" + (month + 1) + "-" + day;
     }
 
-    public void ellenorzes()
-    {
-        if (!inputFirstname.getText().toString().isEmpty())
-        {
+    public void ellenorzes() {
+        if (!inputFirstname.getText().toString().isEmpty()) {
             inputFirstname.setBackground(getResources().getDrawable(R.drawable.inputgreen));
             inputFirstname.setPaddingRelative(70, 40, 40, 40);
         }
-        if (!inputLastname.getText().toString().isEmpty())
-        {
+        if (!inputLastname.getText().toString().isEmpty()) {
             inputLastname.setBackground(getResources().getDrawable(R.drawable.inputgreen));
             inputLastname.setPaddingRelative(70, 40, 40, 40);
         }
-        if (inputFirstname.getText().toString().isEmpty())
-        {
+        if (inputFirstname.getText().toString().isEmpty()) {
             inputFirstname.setBackground(getResources().getDrawable(R.drawable.inputred));
             inputFirstname.setPaddingRelative(70, 40, 40, 40);
         }
-        if (inputLastname.getText().toString().isEmpty())
-        {
+        if (inputLastname.getText().toString().isEmpty()) {
             inputLastname.setBackground(getResources().getDrawable(R.drawable.inputred));
             inputLastname.setPaddingRelative(70, 40, 40, 40);
         }
