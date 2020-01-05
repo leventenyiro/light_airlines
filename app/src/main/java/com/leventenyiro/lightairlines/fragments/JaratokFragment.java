@@ -20,7 +20,7 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import com.leventenyiro.lightairlines.segedOsztalyok.Database;
-import com.leventenyiro.lightairlines.Jarat;
+import com.leventenyiro.lightairlines.JaratActivity;
 import com.leventenyiro.lightairlines.R;
 
 import java.util.ArrayList;
@@ -123,7 +123,7 @@ public class JaratokFragment extends Fragment {
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("jaratId", finalJaratId);
                         editor.apply();
-                        Intent intent = new Intent(getActivity(), Jarat.class);
+                        Intent intent = new Intent(getActivity(), JaratActivity.class);
                         startActivity(intent);
                         getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     }

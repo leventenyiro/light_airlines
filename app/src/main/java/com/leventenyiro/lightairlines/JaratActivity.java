@@ -3,6 +3,7 @@ package com.leventenyiro.lightairlines;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -13,7 +14,7 @@ import android.widget.TextView;
 
 import com.leventenyiro.lightairlines.segedOsztalyok.Database;
 
-public class Jarat extends AppCompatActivity implements View.OnClickListener {
+public class JaratActivity extends AppCompatActivity implements View.OnClickListener {
     private Button btnHelyFoglalas, btnMegse;
     private Database db;
     private ImageView btnBack;
@@ -54,6 +55,9 @@ public class Jarat extends AppCompatActivity implements View.OnClickListener {
             case R.id.btnMegse: onBackPressed(); break;
             case R.id.btnHelyFoglalas:
                 // helyfoglalas activity...
+                Intent intent = new Intent(JaratActivity.this, FoglalasActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
         }
     }
 
