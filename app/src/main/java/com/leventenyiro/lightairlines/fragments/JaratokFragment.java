@@ -31,7 +31,7 @@ public class JaratokFragment extends Fragment {
     private Context mContext;
     private Database db;
     private EditText inputHonnan, inputHova;
-    private List<Integer> cardList;
+    private List<Integer> cardLista;
     private RelativeLayout mRelativeLayout;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -41,7 +41,7 @@ public class JaratokFragment extends Fragment {
         db = new Database(getActivity());
         inputHonnan = root.findViewById(R.id.inputHonnan);
         inputHova = root.findViewById(R.id.inputHova);
-        cardList = new ArrayList<>();
+        cardLista = new ArrayList<>();
         mContext = root.getContext();
         mRelativeLayout = root.findViewById(R.id.relativeLayout);
 
@@ -73,11 +73,11 @@ public class JaratokFragment extends Fragment {
     }
 
     public void select() {
-        for (int i : cardList) {
+        for (int i : cardLista) {
             CardView c = mRelativeLayout.findViewById(i);
             mRelativeLayout.removeView(c);
         }
-        cardList.clear();
+        cardLista.clear();
 
         Cursor eredmeny = db.selectJaratok(inputHonnan.getText().toString(), inputHova.getText().toString());
         String jaratId = "";
@@ -105,7 +105,7 @@ public class JaratokFragment extends Fragment {
                 params.width = dpToPx(360);
                 params.height = dpToPx(200);
                 params.addRule(RelativeLayout.CENTER_HORIZONTAL);
-                if (cardList.size() == 0) {
+                if (cardLista.size() == 0) {
                     params.addRule(RelativeLayout.BELOW, R.id.inputHova);
                 }
                 else {
@@ -130,7 +130,7 @@ public class JaratokFragment extends Fragment {
                 });
                 card.setId(card.generateViewId());
                 id = card.getId();
-                cardList.add(id);
+                cardLista.add(id);
 
                 //BUD-LHR
                 TextView tvRovidites = new TextView(mContext);
