@@ -57,7 +57,7 @@ public class JaratActivity extends AppCompatActivity implements View.OnClickList
                 // helyfoglalas activity...
                 Intent intent = new Intent(JaratActivity.this, FoglalasActivity.class);
                 startActivity(intent);
-                overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         }
     }
 

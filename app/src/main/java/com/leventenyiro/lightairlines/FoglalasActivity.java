@@ -10,15 +10,20 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class FoglalasActivity extends AppCompatActivity {
 
     private Context mContext;
     private RelativeLayout mRelativeLayout;
+    private List<Integer> ulesLista;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_foglalas);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
         init();
 
@@ -76,6 +81,7 @@ public class FoglalasActivity extends AppCompatActivity {
     public void init() {
         mContext = getApplicationContext();
         mRelativeLayout = findViewById(R.id.plane);
+        ulesLista = new ArrayList<>();
     }
 
     public int dpToPx(int dp) {
