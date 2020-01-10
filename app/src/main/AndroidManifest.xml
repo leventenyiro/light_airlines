@@ -41,15 +41,15 @@
         <activity
             android:name=".PasswordUpdate"
             android:screenOrientation="portrait"
-            android:theme="@style/RegistrationTheme" />
+            android:theme="@style/InnerTheme" />
         <activity
             android:name=".JaratActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/RegistrationTheme" />
+            android:theme="@style/InnerTheme" />
         <activity
             android:name=".FoglalasActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/RegistrationTheme" />
+            android:theme="@style/InnerTheme" />
     </application>
 
 </manifest>
