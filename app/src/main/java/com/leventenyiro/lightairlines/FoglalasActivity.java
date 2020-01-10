@@ -1,14 +1,18 @@
 package com.leventenyiro.lightairlines;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -25,8 +29,10 @@ public class FoglalasActivity extends AppCompatActivity {
     private RelativeLayout mRelativeLayout;
     private List<Integer> helyLista;
     private int sorId;
-    private LinearLayout btnFoglalas;
+    private Button btnFoglalas, btnBack;
     private TextView tv;
+    private AlertDialog alertDialog;
+    private AlertDialog.Builder alertDialogBuilder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +55,7 @@ public class FoglalasActivity extends AppCompatActivity {
             }
             else {
                 if (i == 20)
-                    paramsSor.setMargins(0, dpToPx(10), 0, dpToPx(70));
+                    paramsSor.setMargins(0, dpToPx(10), 0, dpToPx(200));
                 else
                     paramsSor.setMargins(0, dpToPx(10), 0, dpToPx(10));
                 paramsSor.addRule(RelativeLayout.BELOW, sorId);
@@ -81,7 +87,7 @@ public class FoglalasActivity extends AppCompatActivity {
                                 }
                             }
                             findViewById(helyLista.get(finalUlesId)).setBackground(getResources().getDrawable(R.drawable.ic_seatgreen));
-                            SharedPreferences sharedPreferences = getSharedPreferences("adatok", Context.MODE_PRIVATE);
+                            SharedPreferences sharedPreferences = getSharedPreferences("variables", Context.MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putString("ules", ulesKodolas(finalUlesId));
                             editor.apply();
@@ -122,7 +128,7 @@ public class FoglalasActivity extends AppCompatActivity {
                                 }
                             }
                             findViewById(helyLista.get(finalUlesId)).setBackground(getResources().getDrawable(R.drawable.ic_seatgreen));
-                            SharedPreferences sharedPreferences = getSharedPreferences("adatok", Context.MODE_PRIVATE);
+                            SharedPreferences sharedPreferences = getSharedPreferences("variables", Context.MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putString("ules", ulesKodolas(finalUlesId));
                             editor.apply();
@@ -138,14 +144,19 @@ public class FoglalasActivity extends AppCompatActivity {
         btnFoglalas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!getSharedPreferences("adatok", Context.MODE_PRIVATE).getString("ules", "").isEmpty()) {
-                    Intent intent = new Intent(FoglalasActivity.this, JegyekFragment.class);
-                    startActivity(intent);
-                    finish();
+                if (!getSharedPreferences("variables", Context.MODE_PRIVATE).getString("ules", "").isEmpty()) {
+                    alertDialog.show();
                 }
                 else {
                     Toast.makeText(mContext, "Nincs kiválasztott hely!", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
             }
         });
     }
@@ -155,6 +166,33 @@ public class FoglalasActivity extends AppCompatActivity {
         mRelativeLayout = findViewById(R.id.plane);
         helyLista = new ArrayList<>();
         btnFoglalas = findViewById(R.id.btnFoglalas);
+        btnBack = findViewById(R.id.btnBack);
+
+        alertDialogBuilder = new AlertDialog.Builder(FoglalasActivity.this);
+        alertDialogBuilder.setTitle("Véglegesítés");
+        alertDialogBuilder.setMessage("Ezzel a lépéssel véglegesíted a helyfoglalást.");
+        alertDialogBuilder.setPositiveButton("Nem", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        alertDialogBuilder.setNegativeButton("Igen", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(FoglalasActivity.this, JegyekFragment.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                finishAffinity();
+            }
+        });
+        alertDialog = alertDialogBuilder.create();
+    }
+
+    @Override
+    public void onBackPressed() {
+        getSharedPreferences("variables", Context.MODE_PRIVATE).edit().remove("ules");
+        finish();
     }
 
     /*public int dpToPx(int dp) {
