@@ -97,7 +97,7 @@
         </RelativeLayout>
     </ScrollView>
 
-    <LinearLayout
+    <!--<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@color/rebelBlue"
@@ -113,6 +113,35 @@
             android:textAlignment="center"
             android:textColor="@color/white" />
 
-    </LinearLayout>
+    </LinearLayout>-->
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_above="@id/btnBack"
+        android:id="@+id/btnFoglalas"
+        android:background="@drawable/button"
+        android:text="Véglegesítés"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:fontFamily="@font/regular" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:id="@+id/btnBack"
+        android:background="@drawable/buttonred"
+        android:text="Vissza"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:fontFamily="@font/regular" />
 
 </RelativeLayout>

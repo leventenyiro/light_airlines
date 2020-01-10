@@ -54,7 +54,6 @@ public class JaratActivity extends AppCompatActivity implements View.OnClickList
             case R.id.btnBack: onBackPressed(); break;
             case R.id.btnMegse: onBackPressed(); break;
             case R.id.btnHelyFoglalas:
-                // helyfoglalas activity...
                 Intent intent = new Intent(JaratActivity.this, FoglalasActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
