@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -163,6 +164,6 @@ public class JaratokFragment extends Fragment {
     }
 
     public int dpToPx(int dp) {
-        return Math.round(dp * mContext.getResources().getDisplayMetrics().density);
+        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, getResources().getDisplayMetrics()));
     }
 }

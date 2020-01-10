@@ -147,4 +147,21 @@ public class Database extends SQLiteOpenHelper {
                 "WHERE j.id = " + id, null);
         return eredmeny;
     }
+
+    public boolean insertFoglalas(String jaratId, String userId, String ules) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("jarat_id", jaratId);
+        contentValues.put("user_id", userId);
+        contentValues.put("ules", ules);
+
+        long eredmeny = db.insert("foglalas", null, contentValues);
+        return eredmeny != -1;
+    }
+
+    public Cursor selectUlesek(String jaratId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor eredmeny = db.rawQuery("SELECT ules FROM `foglalas` WHERE jarat_id = " + jaratId, null);
+        return eredmeny;
+    }
 }

@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.leventenyiro.lightairlines.fragments.JegyekFragment;
+import com.leventenyiro.lightairlines.segedOsztalyok.Database;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +35,7 @@ public class FoglalasActivity extends AppCompatActivity {
     private TextView tv;
     private AlertDialog alertDialog;
     private AlertDialog.Builder alertDialogBuilder;
+    private Database db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +76,12 @@ public class FoglalasActivity extends AppCompatActivity {
                 final int finalUlesId = ulesId;
                 if (foglaltE(finalUlesId)) {
                     tv.setBackground(getResources().getDrawable(R.drawable.ic_seatred));
+                    tv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(mContext, "Ez a hely már foglalt!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
                 else {
                     tv.setBackground(getResources().getDrawable(R.drawable.ic_seatfree));
@@ -114,6 +123,12 @@ public class FoglalasActivity extends AppCompatActivity {
                 final int finalUlesId = ulesId;
                 if (foglaltE(finalUlesId)) {
                     tv.setBackground(getResources().getDrawable(R.drawable.ic_seatred));
+                    tv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(mContext, "Ez a hely már foglalt!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
                 else {
                     tv.setBackground(getResources().getDrawable(R.drawable.ic_seatfree));
@@ -165,6 +180,7 @@ public class FoglalasActivity extends AppCompatActivity {
         helyLista = new ArrayList<>();
         btnFoglalas = findViewById(R.id.btnFoglalas);
         btnBack = findViewById(R.id.btnBack);
+        db = new Database(this);
 
         alertDialogBuilder = new AlertDialog.Builder(FoglalasActivity.this);
         alertDialogBuilder.setTitle("Véglegesítés");
@@ -178,7 +194,8 @@ public class FoglalasActivity extends AppCompatActivity {
         alertDialogBuilder.setNegativeButton("Igen", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(FoglalasActivity.this, JegyekFragment.class);
+                insertFoglalas();
+                Intent intent = new Intent(FoglalasActivity.this, InnerActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 finishAffinity();
@@ -192,15 +209,6 @@ public class FoglalasActivity extends AppCompatActivity {
         getSharedPreferences("variables", Context.MODE_PRIVATE).edit().remove("ules");
         finish();
     }
-
-    /*public int dpToPx(int dp) {
-        return Math.round(dp * mContext.getResources().getDisplayMetrics().density);
-    }*/
-
-    /*public int dpToPx(int dp) {
-        DisplayMetrics displayMetrics = getApplicationContext().getResources().getDisplayMetrics();
-        return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
-    }*/
 
     public int dpToPx(int dp) {
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, getResources().getDisplayMetrics()));
@@ -248,7 +256,7 @@ public class FoglalasActivity extends AppCompatActivity {
     }
 
     public boolean foglaltE(int id) {
-        for (String hely : foglaltHelyek()) {
+        for (String hely : selectFoglaltHelyek()) {
             if (id == ulesDekodolas(hely)) {
                 return true;
             }
@@ -256,12 +264,28 @@ public class FoglalasActivity extends AppCompatActivity {
         return false;
     }
 
-    public List<String> foglaltHelyek() {
+    public List<String> selectFoglaltHelyek() {
         List<String> foglaltHelyek = new ArrayList<>();
-        foglaltHelyek.add("1F");
-        foglaltHelyek.add("12D");
-        foglaltHelyek.add("15A");
-        foglaltHelyek.add("8B");
+        Cursor eredmeny = db.selectUlesek(getSharedPreferences("variables", Context.MODE_PRIVATE).getString("jaratId", ""));
+        if (eredmeny != null && eredmeny.getCount() > 0) {
+            while (eredmeny.moveToNext()) {
+                foglaltHelyek.add(eredmeny.getString(0));
+            }
+        }
         return foglaltHelyek;
+    }
+
+    public void insertFoglalas() {
+        SharedPreferences sharedPreferences = getSharedPreferences("variables", Context.MODE_PRIVATE);
+        String jaratId = sharedPreferences.getString("jaratId", "");
+        String userId = sharedPreferences.getString("userId", "");
+        String ules = sharedPreferences.getString("ules", "");
+        Boolean eredmeny = db.insertFoglalas(jaratId, userId, ules);
+        if (eredmeny)
+            Toast.makeText(this, "Sikeres foglalás!", Toast.LENGTH_LONG);
+        else
+            Toast.makeText(this, "Szerverhiba! Sikertelen foglalás!", Toast.LENGTH_SHORT).show();
+        sharedPreferences.edit().remove("jaratId").apply();
+        sharedPreferences.edit().remove("ules").apply();
     }
 }
