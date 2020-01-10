@@ -3,12 +3,18 @@ package com.leventenyiro.lightairlines;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.leventenyiro.lightairlines.fragments.JegyekFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +23,10 @@ public class FoglalasActivity extends AppCompatActivity {
 
     private Context mContext;
     private RelativeLayout mRelativeLayout;
-    private List<Integer> ulesLista;
+    private List<Integer> helyLista;
+    private int sorId;
+    private LinearLayout btnFoglalas;
+    private TextView tv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,64 +36,196 @@ public class FoglalasActivity extends AppCompatActivity {
 
         init();
 
-        LinearLayout ll = new LinearLayout(mContext);
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        params.height=dpToPx(35);
-        params.addRule(RelativeLayout.CENTER_HORIZONTAL);
-        params.setMargins(dpToPx(20), dpToPx(20), dpToPx(20), dpToPx(20));
-        ll.setId(ll.generateViewId());
-        int id = ll.getId();
+        init();
+        foglaltHelyek();
 
-        for (int i = 0; i < 3; i++)
-        {
-            TextView tv = new TextView(mContext);
-            tv.setLayoutParams(params);
-            tv.setBackground(getResources().getDrawable(R.drawable.ic_seatfree));
-            params.width = dpToPx(35);
-            params.setMargins(dpToPx(8), 0, dpToPx(8), 0);
-            ll.addView(tv);
-        }
-        TextView tv = new TextView(mContext);
-        tv.setLayoutParams(params);
-        params.width = dpToPx(35);
-        tv.setText("1");
-        //tv.setTextSize(dpToPx(25));
-        tv.setGravity(Gravity.CENTER);
-        params.setMargins(dpToPx(8), 0, dpToPx(8), 0);
-        ll.addView(tv);
-        for (int i = 0; i < 3; i++)
-        {
+        int ulesId = 0;
+        for (int i = 1; i < 21; i++) {
+            LinearLayout ll = new LinearLayout(mContext);
+            RelativeLayout.LayoutParams paramsSor = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, dpToPx(35));
+            if (i == 1) {
+                paramsSor.setMargins(0, dpToPx(10), 0, dpToPx(10));
+                paramsSor.addRule(RelativeLayout.BELOW, R.id.betuk);
+            }
+            else {
+                if (i == 20)
+                    paramsSor.setMargins(0, dpToPx(10), 0, dpToPx(70));
+                else
+                    paramsSor.setMargins(0, dpToPx(10), 0, dpToPx(10));
+                paramsSor.addRule(RelativeLayout.BELOW, sorId);
+            }
+            ll.setLayoutParams(paramsSor);
+            ll.setGravity(Gravity.CENTER);
+            ll.setOrientation(LinearLayout.HORIZONTAL);
+            ll.setId(ll.generateViewId());
+            sorId = ll.getId();
+            for (int j = 0; j < 3; j++) {
+                tv = new TextView(mContext);
+                LinearLayout.LayoutParams paramsUles = new LinearLayout.LayoutParams(dpToPx(35), LinearLayout.LayoutParams.WRAP_CONTENT);
+                paramsUles.setMargins(dpToPx(8), 0, dpToPx(8), 0);
+                tv.setLayoutParams(paramsUles);
+                tv.setId(tv.generateViewId());
+                helyLista.add(tv.getId());
+                final int finalUlesId = ulesId;
+                if (foglaltE(finalUlesId)) {
+                    tv.setBackground(getResources().getDrawable(R.drawable.ic_seatred));
+                }
+                else {
+                    tv.setBackground(getResources().getDrawable(R.drawable.ic_seatfree));
+                    tv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            for (int id : helyLista) {
+                                if (!foglaltE(helyLista.indexOf(id))) {
+                                    findViewById(id).setBackground(getResources().getDrawable(R.drawable.ic_seatfree));
+                                }
+                            }
+                            findViewById(helyLista.get(finalUlesId)).setBackground(getResources().getDrawable(R.drawable.ic_seatgreen));
+                            SharedPreferences sharedPreferences = getSharedPreferences("adatok", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString("ules", ulesKodolas(finalUlesId));
+                            editor.apply();
+                        }
+                    });
+                }
+                ulesId++;
+                ll.addView(tv);
+            }
             tv = new TextView(mContext);
-            tv.setLayoutParams(params);
-            tv.setBackground(getResources().getDrawable(R.drawable.ic_seatfree));
-            params.width = dpToPx(35);
-            params.setMargins(dpToPx(8), 0, dpToPx(8), 0);
+            LinearLayout.LayoutParams paramsSorszam = new LinearLayout.LayoutParams(dpToPx(35), LinearLayout.LayoutParams.WRAP_CONTENT);
+            paramsSorszam.setMargins(20, 0, 20, 0);
+            paramsSorszam.gravity = Gravity.CENTER;
+            tv.setLayoutParams(paramsSorszam);
+            tv.setText(String.valueOf(i));
+            tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+            tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             ll.addView(tv);
+            for (int j = 0; j < 3; j++) {
+                tv = new TextView(mContext);
+                LinearLayout.LayoutParams paramsUles = new LinearLayout.LayoutParams(dpToPx(35), LinearLayout.LayoutParams.WRAP_CONTENT);
+                paramsUles.setMargins(dpToPx(8), 0, dpToPx(8), 0);
+                tv.setLayoutParams(paramsUles);
+                tv.setId(tv.generateViewId());
+                helyLista.add(tv.getId());
+                final int finalUlesId = ulesId;
+                if (foglaltE(finalUlesId)) {
+                    tv.setBackground(getResources().getDrawable(R.drawable.ic_seatred));
+                }
+                else {
+                    tv.setBackground(getResources().getDrawable(R.drawable.ic_seatfree));
+                    tv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            for (int id : helyLista) {
+                                if (!foglaltE(helyLista.indexOf(id))) {
+                                    findViewById(id).setBackground(getResources().getDrawable(R.drawable.ic_seatfree));
+                                }
+                            }
+                            findViewById(helyLista.get(finalUlesId)).setBackground(getResources().getDrawable(R.drawable.ic_seatgreen));
+                            SharedPreferences sharedPreferences = getSharedPreferences("adatok", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString("ules", ulesKodolas(finalUlesId));
+                            editor.apply();
+                        }
+                    });
+                }
+                ulesId++;
+                ll.addView(tv);
+            }
+            mRelativeLayout.addView(ll);
         }
-        mRelativeLayout.addView(ll);
 
-        /*for (int i = 0; i < 19; i++)
-        {
-            LinearLayout ll2 = new LinearLayout(mContext);
-            RelativeLayout.LayoutParams params1 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-            params1.height = dpToPx(35);
-            params1.addRule(RelativeLayout.BELOW, id);
-            ll2.setGravity(View.TEXT_ALIGNMENT_CENTER);
-            params1.setMargins(dpToPx(20), 0, dpToPx(20), dpToPx(20));
-            ll2.setBackground(getResources().getDrawable(R.drawable.ic_seatfree));
-            ll2.setId(ll2.generateViewId());
-            id = ll2.getId();
-            mRelativeLayout.addView(ll2);
-        }*/
+        btnFoglalas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!getSharedPreferences("adatok", Context.MODE_PRIVATE).getString("ules", "").isEmpty()) {
+                    Intent intent = new Intent(FoglalasActivity.this, JegyekFragment.class);
+                    startActivity(intent);
+                    finish();
+                }
+                else {
+                    Toast.makeText(mContext, "Nincs kiválasztott hely!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
-    public void init() {
+    private void init() {
         mContext = getApplicationContext();
         mRelativeLayout = findViewById(R.id.plane);
-        ulesLista = new ArrayList<>();
+        helyLista = new ArrayList<>();
+        btnFoglalas = findViewById(R.id.btnFoglalas);
     }
 
-    public int dpToPx(int dp) {
+    /*public int dpToPx(int dp) {
         return Math.round(dp * mContext.getResources().getDisplayMetrics().density);
+    }*/
+
+    /*public int dpToPx(int dp) {
+        DisplayMetrics displayMetrics = getApplicationContext().getResources().getDisplayMetrics();
+        return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+    }*/
+
+    public int dpToPx(int dp) {
+        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, getResources().getDisplayMetrics()));
+    }
+
+    public String ulesKodolas(int szam) {
+        String ules = "";
+        ules += szam / 6 + 1;
+        switch (szam % 6) {
+            case 0: ules += "A"; break;
+            case 1: ules += "B"; break;
+            case 2: ules += "C"; break;
+            case 3: ules += "D"; break;
+            case 4: ules += "E"; break;
+            case 5: ules += "F"; break;
+        }
+        return ules;
+    }
+
+    public int ulesDekodolas(String ules) {
+        int szam;
+        if (ules.length() == 2) {
+            szam = (Integer.parseInt(ules.substring(0,1)) - 1) * 6;
+            switch (ules.substring(1,2)) {
+                case "A": szam += 0; break;
+                case "B": szam += 1; break;
+                case "C": szam += 2; break;
+                case "D": szam += 3; break;
+                case "E": szam += 4; break;
+                case "F": szam += 5; break;
+            }
+        }
+        else {
+            szam = (Integer.parseInt(ules.substring(0, 2)) - 1) * 6;
+            switch (ules.substring(2, 3)) {
+                case "A": szam += 0; break;
+                case "B": szam += 1; break;
+                case "C": szam += 2; break;
+                case "D": szam += 3; break;
+                case "E": szam += 4; break;
+                case "F": szam += 5; break;
+            }
+        }
+        return szam;
+    }
+
+    public boolean foglaltE(int id) {
+        for (String hely : foglaltHelyek()) {
+            if (id == ulesDekodolas(hely)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public List<String> foglaltHelyek() {
+        List<String> foglaltHelyek = new ArrayList<>();
+        foglaltHelyek.add("1F");
+        foglaltHelyek.add("12D");
+        foglaltHelyek.add("15A");
+        foglaltHelyek.add("8B");
+        return foglaltHelyek;
     }
 }

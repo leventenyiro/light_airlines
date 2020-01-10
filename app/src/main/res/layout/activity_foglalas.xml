@@ -4,127 +4,115 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".FoglalasActivity"
-    android:id="@+id/plane"
     android:background="@color/white">
 
-    <!--<LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:layout_margin="20dp"
-        android:gravity="center"
-        android:id="@+id/sor1">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="35dp"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/ic_seatfree"
-            android:layout_marginHorizontal="8dp"
-            />
+            android:id="@+id/plane">
 
-        <TextView
-            android:layout_width="35dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_seatfree"
-            android:layout_marginHorizontal="8dp"
-            />
-        <TextView
-            android:layout_width="35dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_seatfree"
-            android:layout_marginHorizontal="8dp"
-            />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/betuk"
+                android:layout_marginTop="40dp"
+                android:gravity="center">
 
-        <TextView
-            android:layout_width="35dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="8dp"
-            android:text="1"
-            android:textAlignment="center"
-            android:layout_gravity="center"
-            android:textSize="25dp" />
+                <TextView
+                    android:layout_width="35dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:textAlignment="center"
+                    android:text="A" />
+                <TextView
+                    android:layout_width="35dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:textAlignment="center"
+                    android:text="B" />
+                <TextView
+                    android:layout_width="35dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:textAlignment="center"
+                    android:text="C" />
+                <TextView
+                    android:layout_width="35dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:textAlignment="center"
+                    android:text=" "
+                    android:layout_marginRight="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginEnd="8dp" />
+                <TextView
+                    android:layout_width="35dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:textAlignment="center"
+                    android:text="D" />
+                <TextView
+                    android:layout_width="35dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:textAlignment="center"
+                    android:text="E" />
+                <TextView
+                    android:layout_width="35dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:textAlignment="center"
+                    android:text="F" />
 
-        <TextView
-            android:layout_width="35dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_seatfree"
-            android:layout_marginHorizontal="8dp"
-            />
-
-        <TextView
-            android:layout_width="35dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_seatfree"
-            android:layout_marginHorizontal="8dp"
-            />
-
-        <TextView
-            android:layout_width="35dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_seatfree"
-            android:layout_marginHorizontal="8dp"
-            />
-
-    </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginBottom="20dp"
-        android:layout_below="@id/sor1"
+        android:layout_height="60dp"
+        android:background="@color/rebelBlue"
+        android:layout_alignParentBottom="true"
         android:gravity="center"
-        android:id="@+id/sor2">
+        android:id="@+id/btnFoglalas">
 
         <TextView
-            android:layout_width="35dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/ic_seatfree"
-            android:layout_marginHorizontal="8dp"
-            />
-
-        <TextView
-            android:layout_width="35dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_seatfree"
-            android:layout_marginHorizontal="8dp"
-            />
-        <TextView
-            android:layout_width="35dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_seatfree"
-            android:layout_marginHorizontal="8dp"
-            />
-
-        <TextView
-            android:layout_width="35dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="8dp"
-            android:text="2"
+            android:text="Foglalás"
+            android:textSize="20sp"
             android:textAlignment="center"
-            android:layout_gravity="center"
-            android:textSize="25dp"
+            android:textColor="@color/white" />
 
-        <TextView
-            android:layout_width="35dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_seatfree"
-            android:layout_marginHorizontal="8dp"
-            />
-
-        <TextView
-            android:layout_width="35dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_seatfree"
-            android:layout_marginHorizontal="8dp"
-            />
-
-        <TextView
-            android:layout_width="35dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_seatfree"
-            android:layout_marginHorizontal="8dp"
-            />
-
-    </LinearLayout> -->
+    </LinearLayout>
 
 </RelativeLayout>
