@@ -30,14 +30,14 @@ public class Database extends SQLiteOpenHelper {
                                 "helyek_szama INTEGER NOT NULL,\n" +
                                 "idopont DATETIME NOT NULL)");
         db.execSQL("INSERT INTO jarat (utvonal_id, helyek_szama, idopont) VALUES " +
-                        "(1, 180, '2020-03-15 08:00:00'), " +
-                        "(2, 180, '2020-03-15 14:00:00'), " +
-                        "(3, 180, '2020-04-15 09:00:00'), " +
-                        "(4, 180, '2020-04-15 15:00:00'), " +
-                        "(1, 180, '2020-05-15 08:00:00'), " +
-                        "(2, 180, '2020-05-15 14:00:00'), " +
-                        "(3, 180, '2020-06-15 09:00:00'), " +
-                        "(4, 180, '2020-06-15 15:00:00')");
+                        "(1, 120, '2020-03-15 08:00:00'), " +
+                        "(2, 120, '2020-03-15 14:00:00'), " +
+                        "(3, 120, '2020-04-15 09:00:00'), " +
+                        "(4, 120, '2020-04-15 15:00:00'), " +
+                        "(1, 120, '2020-05-15 08:00:00'), " +
+                        "(2, 120, '2020-05-15 14:00:00'), " +
+                        "(3, 120, '2020-06-15 09:00:00'), " +
+                        "(4, 120, '2020-06-15 15:00:00')");
         db.execSQL("CREATE TABLE utvonal(id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
                                         "indulas_id INTEGER NOT NULL REFERENCES airport ON UPDATE cascade ON DELETE restrict,\n" +
                                         "celallomas_id INTEGER NOT NULL REFERENCES airport ON UPDATE cascade ON DELETE restrict,\n" +
@@ -175,6 +175,20 @@ public class Database extends SQLiteOpenHelper {
     public Cursor selectUlesek(String jaratId) {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor eredmeny = db.rawQuery("SELECT ules FROM `foglalas` WHERE jarat_id = " + jaratId, null);
+        return eredmeny;
+    }
+
+    public Cursor selectJegyek(String userId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor eredmeny = db.rawQuery("SELECT f.id, f.ules, j.idopont, ai.nev, ai.rovidites, ac.nev, ac.rovidites, u.idotartam\n" +
+                "FROM foglalas f \n" +
+                "INNER JOIN jarat j ON f.jarat_id = j.id\n" +
+                "INNER JOIN utvonal u ON j.utvonal_id = u.id\n" +
+                "INNER JOIN airport ai ON u.indulas_id = ai.id\n" +
+                "INNER JOIN airport ac ON u.celallomas_id = ac.id\n" +
+                "WHERE f.user_id = " + userId + "\n" +
+                "AND j.idopont > NOW()\n" +
+                "ORDER BY f.id", null);
         return eredmeny;
     }
 }
