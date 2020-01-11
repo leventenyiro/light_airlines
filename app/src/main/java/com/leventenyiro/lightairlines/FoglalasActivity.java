@@ -44,7 +44,7 @@ public class FoglalasActivity extends AppCompatActivity {
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
         init();
-        foglaltHelyek();
+        selectFoglaltHelyek();
 
         int ulesId = 0;
         for (int i = 1; i < 21; i++) {
