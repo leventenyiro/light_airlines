@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -102,9 +104,7 @@ public class JaratokFragment extends Fragment {
                 idotartam = eredmeny.getString(7);
 
                 final CardView card = new CardView(mContext);
-                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-                params.width = dpToPx(360);
-                params.height = dpToPx(200);
+                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(dpToPx(360), dpToPx(200));
                 params.addRule(RelativeLayout.CENTER_HORIZONTAL);
                 if (cardLista.size() == 0) {
                     params.addRule(RelativeLayout.BELOW, R.id.inputHova);
@@ -115,6 +115,7 @@ public class JaratokFragment extends Fragment {
                 params.setMargins(0,0,0,dpToPx(20));
 
                 card.setLayoutParams(params);
+                card.setCardElevation(50);
                 card.setBackground(getResources().getDrawable(R.drawable.bg_jarat));
                 final String finalJaratId = jaratId;
                 card.setOnClickListener(new View.OnClickListener() {
@@ -133,9 +134,19 @@ public class JaratokFragment extends Fragment {
                 id = card.getId();
                 cardLista.add(id);
 
+                //Budapest - London
+                TextView tvVaros = new TextView(mContext);
+                tvVaros.setText(indulas + " - " + celallomas);
+                tvVaros.setGravity(Gravity.CENTER_HORIZONTAL);
+                tvVaros.setPadding(0,dpToPx(5),0,0);
+                //params.addRule(RelativeLayout.BELOW, tvId);
+                // below a másik textview alá
+                tvVaros.setTextSize(15);
+
                 //BUD-LHR
                 TextView tvRovidites = new TextView(mContext);
-                tvRovidites.setLayoutParams(params);
+                RelativeLayout.LayoutParams paramsRovidites = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                tvRovidites.setLayoutParams(paramsRovidites);
                 tvRovidites.setText(indulasRovidites + " \u2192 " + celallomasRovidites);
                 tvRovidites.setGravity(Gravity.CENTER_HORIZONTAL);
                 tvRovidites.setPadding(0,dpToPx(10),0,0);
@@ -143,23 +154,24 @@ public class JaratokFragment extends Fragment {
                 tvRovidites.setId(tvRovidites.generateViewId());
                 int tvId = card.getId();
 
-                //Budapest - London
-                TextView tvVaros = new TextView(mContext);
-                tvVaros.setLayoutParams(params);
-                tvVaros.setText(indulas + " \u2192 " + celallomas);
-                tvVaros.setGravity(Gravity.CENTER_HORIZONTAL);
-                tvVaros.setPadding(0,dpToPx(5),0,0);
-                //params.addRule(RelativeLayout.BELOW, tvId);
-                // below a másik textview alá
-                tvVaros.setTextSize(15);
 
-                card.addView(tvRovidites);
+                //card.addView(tvRovidites);
                 card.addView(tvVaros);
                 mRelativeLayout.addView(card);
             }
         }
         else {
-            // NINCS JÁRAT
+            TextView tv = new TextView(mContext);
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            params.addRule(RelativeLayout.BELOW, R.id.inputHova);
+            params.topMargin = dpToPx(40);
+            tv.setLayoutParams(params);
+            tv.setTypeface(getActivity().getResources().getFont(R.font.regular));
+            tv.setTextColor(getActivity().getResources().getColor(R.color.gray));
+            tv.setTextSize(dpToPx(15));
+            tv.setText("Nincs ilyen járat!");
+            tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            mRelativeLayout.addView(tv);
         }
     }
 
