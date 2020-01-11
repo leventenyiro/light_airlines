@@ -129,19 +129,19 @@ public class Database extends SQLiteOpenHelper {
     public Cursor selectJaratok(String honnan, String hova, String userId) {
         SQLiteDatabase db = this.getWritableDatabase();
 
-        Cursor szam = db.rawQuery("SELECT COUNT(*) FROM foglalas f WHERE user_id = 1",null);
+        Cursor szam = db.rawQuery("SELECT f.id FROM foglalas f WHERE user_id = " + userId,null);
         if (szam.getCount() > 0) {
-            return db.rawQuery("SELECT j.id, j.helyek_szama - (SELECT COUNT(*) FROM foglalas WHERE jarat_id = 1), j.idopont, ai.nev, ai.rovidites, ac.nev, ac.rovidites, u.idotartam FROM jarat j\n" +
+            return db.rawQuery("SELECT j.id, j.helyek_szama - (SELECT COUNT(*) FROM foglalas WHERE jarat_id = j.id), j.idopont, ai.nev, ai.rovidites, ac.nev, ac.rovidites, u.idotartam FROM jarat j\n" +
                     "LEFT JOIN utvonal u ON j.utvonal_id = u.id\n" +
                     "LEFT JOIN airport ai ON u.indulas_id = ai.id\n" +
                     "LEFT JOIN airport ac ON u.celallomas_id = ac.id\n"+
                     "WHERE (ai.nev LIKE '%" + honnan.trim() + "%' OR ai.rovidites LIKE '%" + honnan.trim() + "%') AND (ac.nev LIKE '%" + hova.trim() + "%' OR ac.rovidites LIKE '%" + hova.trim() + "%') " +
                     "AND j.idopont > datetime('now') " +
-                    "AND j.helyek_szama - (SELECT COUNT(*) FROM foglalas f WHERE f.jarat_id = j.id) > 0" +
+                    "AND j.helyek_szama - (SELECT COUNT(*) FROM foglalas f WHERE f.jarat_id = j.id) > 0 " +
                     "AND j.id <> (SELECT f.jarat_id FROM foglalas f WHERE user_id = " + userId + ")", null);
         }
         else {
-            return db.rawQuery("SELECT j.id, j.helyek_szama - (SELECT COUNT(*) FROM foglalas WHERE jarat_id = 1), j.idopont, ai.nev, ai.rovidites, ac.nev, ac.rovidites, u.idotartam FROM jarat j\n" +
+            return db.rawQuery("SELECT j.id, j.helyek_szama - (SELECT COUNT(*) FROM foglalas WHERE jarat_id = j.id), j.idopont, ai.nev, ai.rovidites, ac.nev, ac.rovidites, u.idotartam FROM jarat j\n" +
                     "INNER JOIN utvonal u ON j.utvonal_id = u.id\n" +
                     "INNER JOIN airport ai ON u.indulas_id = ai.id\n" +
                     "INNER JOIN airport ac ON u.celallomas_id = ac.id\n"+
