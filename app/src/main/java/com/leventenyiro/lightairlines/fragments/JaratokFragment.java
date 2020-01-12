@@ -148,24 +148,26 @@ public class JaratokFragment extends Fragment {
                 tvVaros.setTypeface(getActivity().getResources().getFont(R.font.regular));
                 tvVaros.setTextColor(getActivity().getResources().getColor(R.color.gray));
                 tvVaros.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                tvVaros.setId(tvVaros.generateViewId());
+                int tvId = tvVaros.getId();
                 //params.addRule(RelativeLayout.BELOW, tvId);
                 // below a másik textview alá
                 tvVaros.setTextSize(dpToPx(10));
 
-                //BUD-LHR
-                TextView tvRovidites = new TextView(mContext);
-                RelativeLayout.LayoutParams paramsRovidites = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                tvRovidites.setLayoutParams(paramsRovidites);
-                tvRovidites.setText(indulasRovidites + " \u2192 " + celallomasRovidites);
-                tvRovidites.setGravity(Gravity.CENTER_HORIZONTAL);
-                tvRovidites.setPadding(0,dpToPx(10),0,0);
-                tvRovidites.setTextSize(35);
-                tvRovidites.setId(tvRovidites.generateViewId());
-                int tvId = card.getId();
+                TextView tvIdopont = new TextView(mContext);
+                RelativeLayout.LayoutParams paramsIdopont = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                paramsIdopont.addRule(RelativeLayout.BELOW, tvId);
+                //paramsVaros.topMargin = dpToPx(20);
+                tvIdopont.setLayoutParams(paramsIdopont);
+                tvIdopont.setText(idopont);
+                tvIdopont.setTypeface(getActivity().getResources().getFont(R.font.regular));
+                tvIdopont.setTextColor(getActivity().getResources().getColor(R.color.gray));
+                tvIdopont.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
 
                 //card.addView(tvRovidites);
                 card.addView(tvVaros);
+                card.addView(tvIdopont);
                 mRelativeLayout.addView(card);
             }
         }
