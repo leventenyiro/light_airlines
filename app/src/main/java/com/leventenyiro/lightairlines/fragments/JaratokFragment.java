@@ -112,7 +112,12 @@ public class JaratokFragment extends Fragment {
                 else {
                     params.addRule(RelativeLayout.BELOW, id);
                 }
-                params.setMargins(0,0,0,dpToPx(20));
+                if (eredmeny.getCount() - 1 == cardLista.size()) {
+                    params.setMargins(0,0,0,dpToPx(100));
+                }
+                else {
+                    params.setMargins(0,0,0,dpToPx(20));
+                }
 
                 card.setLayoutParams(params);
                 card.setCardElevation(50);
