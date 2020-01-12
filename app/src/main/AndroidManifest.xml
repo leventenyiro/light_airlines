@@ -45,11 +45,11 @@
         <activity
             android:name=".JaratActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/InnerTheme" />
+            android:theme="@style/InfoTheme" />
         <activity
             android:name=".FoglalasActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/InnerTheme" />
+            android:theme="@style/InfoTheme" />
     </application>
 
 </manifest>
