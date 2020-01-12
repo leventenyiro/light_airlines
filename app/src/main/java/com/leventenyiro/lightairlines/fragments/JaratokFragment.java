@@ -141,12 +141,16 @@ public class JaratokFragment extends Fragment {
 
                 //Budapest - London
                 TextView tvVaros = new TextView(mContext);
+                RelativeLayout.LayoutParams paramsVaros = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                paramsVaros.topMargin = dpToPx(20);
+                tvVaros.setLayoutParams(paramsVaros);
                 tvVaros.setText(indulas + " - " + celallomas);
-                tvVaros.setGravity(Gravity.CENTER_HORIZONTAL);
-                tvVaros.setPadding(0,dpToPx(5),0,0);
+                tvVaros.setTypeface(getActivity().getResources().getFont(R.font.regular));
+                tvVaros.setTextColor(getActivity().getResources().getColor(R.color.gray));
+                tvVaros.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 //params.addRule(RelativeLayout.BELOW, tvId);
                 // below a másik textview alá
-                tvVaros.setTextSize(15);
+                tvVaros.setTextSize(dpToPx(10));
 
                 //BUD-LHR
                 TextView tvRovidites = new TextView(mContext);
