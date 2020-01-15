@@ -8,9 +8,11 @@
     <color name="deepRebelBlue">#006FA0</color>
     <color name="gray">#2C3E50</color>
     <color name="lightGray">#EBEBEB</color>
+    <color name="lightGrayOpacity15">#26EBEBEB</color>
     <color name="midGray">#AAAAAA</color>
     <color name="lightGreen">#DCFFDC</color>
     <color name="lightRed">#FFDCDC</color>
+    <color name="lightRedOpacity15">#66CE060B</color>
     <color name="red">#CE060B</color>
     <color name="deepRed">#7F0003</color>
     <color name="white">#FFFFFF</color>

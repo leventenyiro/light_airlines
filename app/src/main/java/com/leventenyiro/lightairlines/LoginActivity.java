@@ -40,7 +40,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                inputUsernameEmail.setBackground(getResources().getDrawable(R.drawable.input));
+                inputUsernameEmail.setBackground(getResources().getDrawable(R.drawable.inputlogin));
                 inputUsernameEmail.setPaddingRelative(70, 40, 40, 40);
             }
             @Override
@@ -51,7 +51,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                inputPassword.setBackground(getResources().getDrawable(R.drawable.input));
+                inputPassword.setBackground(getResources().getDrawable(R.drawable.inputlogin));
                 inputPassword.setPaddingRelative(70, 40, 40, 40);
             }
             @Override
@@ -120,23 +120,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     public void ellenorzes() {
         if (inputUsernameEmail.getText().toString().isEmpty()) {
-            inputUsernameEmail.setBackground(getResources().getDrawable(R.drawable.inputred));
+            inputUsernameEmail.setBackground(getResources().getDrawable(R.drawable.inputloginred));
             inputUsernameEmail.setPaddingRelative(70, 40, 40, 40);
         }
         if (inputPassword.getText().toString().isEmpty()) {
-            inputPassword.setBackground(getResources().getDrawable(R.drawable.inputred));
+            inputPassword.setBackground(getResources().getDrawable(R.drawable.inputloginred));
             inputPassword.setPaddingRelative(70, 40, 40, 40);
         }
         else if (!login()) {
-            inputUsernameEmail.setBackground(getResources().getDrawable(R.drawable.inputred));
+            inputUsernameEmail.setBackground(getResources().getDrawable(R.drawable.inputloginred));
             inputUsernameEmail.setPaddingRelative(70, 40, 40, 40);
-            inputPassword.setBackground(getResources().getDrawable(R.drawable.inputred));
+            inputPassword.setBackground(getResources().getDrawable(R.drawable.inputloginred));
             inputPassword.setPaddingRelative(70, 40, 40, 40);
         }
         else if (login()) {
-            inputUsernameEmail.setBackground(getResources().getDrawable(R.drawable.inputgreen));
+            inputUsernameEmail.setBackground(getResources().getDrawable(R.drawable.inputlogin));
             inputUsernameEmail.setPaddingRelative(70, 40, 40, 40);
-            inputPassword.setBackground(getResources().getDrawable(R.drawable.inputgreen));
+            inputPassword.setBackground(getResources().getDrawable(R.drawable.inputlogin));
             inputPassword.setPaddingRelative(70, 40, 40, 40);
         }
     }

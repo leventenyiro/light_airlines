@@ -7,7 +7,7 @@
     tools:context=".LoginActivity"
     android:background="@drawable/bg_login">
 
-    <TextView
+    <!--<TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -17,7 +17,7 @@
         android:text="Light Airlines"
         android:textSize="40sp"
         android:textColor="@color/white"
-        android:fontFamily="@font/bold" />
+        android:fontFamily="@font/bold" />-->
 
     <ImageView
         android:layout_width="50dp"
@@ -33,14 +33,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textUdv"
-        android:layout_marginTop="110dp"
+        android:layout_below="@id/btnHome"
+        android:layout_marginTop="50dp"
         android:layout_marginLeft="30dp"
         android:layout_marginStart="30dp"
         android:id="@+id/textCim"
         android:text="Jelentkezz be"
         android:textSize="35sp"
-        android:textColor="@color/gray"
+        android:textColor="@color/white"
         android:fontFamily="@font/bold" />
 
     <EditText
@@ -56,10 +56,11 @@
         android:paddingEnd="15dp"
         android:paddingRight="15dp"
         android:id="@+id/inputUsernameEmail"
-        android:background="@drawable/input"
+        android:background="@drawable/inputlogin"
         android:inputType="textEmailAddress"
         android:hint="Felhasználónév vagy E-mail"
-        android:textColor="@color/gray"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
         android:fontFamily="@font/regular"
         android:maxLines="1"
         android:lines="1"
@@ -78,10 +79,11 @@
         android:paddingEnd="15dp"
         android:paddingRight="15dp"
         android:id="@+id/inputPassword"
-        android:background="@drawable/input"
+        android:background="@drawable/inputlogin"
         android:inputType="textPassword"
         android:hint="Password"
-        android:textColor="@color/gray"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
         android:fontFamily="@font/regular"
         android:maxLines="1"
         android:lines="1"
@@ -117,7 +119,7 @@
             android:layout_height="wrap_content"
             android:text="Nincs még profilod?"
             android:textSize="20sp"
-            android:textColor="@color/gray"
+            android:textColor="@color/lightGray"
             android:fontFamily="@font/regular" />
 
         <TextView
@@ -128,7 +130,7 @@
             android:id="@+id/btnReg"
             android:text="Regisztrálj."
             android:textSize="20sp"
-            android:textColor="@color/rebelBlue"
+            android:textColor="@color/white"
             android:fontFamily="@font/bold" />
 
     </LinearLayout>
