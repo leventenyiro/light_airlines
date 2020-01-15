@@ -68,14 +68,7 @@ public class JaratActivity extends AppCompatActivity implements View.OnClickList
                 textRovidites.setText(e.getString(3) + " - " + e.getString(5));
                 textNev.setText(e.getString(2) + " - " + e.getString(4));
                 textIdopont.setText(e.getString(1).substring(0, 16).replace('-', '.'));
-
-                String[] idoresz = e.getString(6).split(":");
-                if (Integer.parseInt(idoresz[0]) < 10) {
-                    textIdotartam.setText(idoresz[0].substring(1, 2) + " óra " + idoresz[1] + " perc ");
-                }
-                else {
-                    textIdotartam.setText(idoresz[0] + " óra " + idoresz[1] + " perc ");
-                }
+                textIdotartam.setText(idotartamAtalakitas(e.getString(6)));
                 textHelyekSzama.setText("Még " + e.getString(0) + " elérhető hely");
             }
         }
@@ -84,5 +77,15 @@ public class JaratActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onBackPressed() {
         finish();
+    }
+
+    public String idotartamAtalakitas(String idotartam) {
+        String[] idoresz = idotartam.split(":");
+        if (Integer.parseInt(idoresz[0]) < 10) {
+            return idoresz[0].substring(1, 2) + " óra " + idoresz[1] + " perc";
+        }
+        else {
+            return idoresz[0] + " óra " + idoresz[1] + " perc";
+        }
     }
 }
