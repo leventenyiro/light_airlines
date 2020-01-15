@@ -3,10 +3,15 @@ package com.leventenyiro.lightairlines;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,17 +23,36 @@ public class JegyActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView btnBack;
     private TextView textRovidites, textNev, textIdopont, textIdotartam, textUles;
 
+    private int brightness;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jegy);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
 
         init();
 
         select();
 
+        setFenyesseg(255);
+
         btnBack.setOnClickListener(this);
+    }
+
+    private void setFenyesseg(int brightness) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (Settings.System.canWrite(getApplicationContext())) {
+                Settings.System.putInt(getApplicationContext().getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, brightness);
+            }
+            else {
+                Intent intent = new Intent(android.provider.Settings.ACTION_MANAGE_WRITE_SETTINGS);
+                intent.setData(Uri.parse("package:" + getPackageName()));
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        }
     }
 
     private void init() {
@@ -39,6 +63,8 @@ public class JegyActivity extends AppCompatActivity implements View.OnClickListe
         textIdotartam = findViewById(R.id.textIdotartam);
         textUles = findViewById(R.id.textUles);
         db = new Database(this);
+
+        brightness = Settings.System.getInt(getApplicationContext().getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, 0);
     }
 
     @Override
@@ -50,7 +76,7 @@ public class JegyActivity extends AppCompatActivity implements View.OnClickListe
 
     private void select() {
         SharedPreferences sharedPreferences = getSharedPreferences("variables", Context.MODE_PRIVATE);
-        Cursor e = db.selectJarat(sharedPreferences.getString("foglalasId", ""));
+        Cursor e = db.selectJegy(sharedPreferences.getString("foglalasId", ""));
         if (e != null && e.getCount() > 0) {
             while (e.moveToNext()) {
                 textRovidites.setText(e.getString(3) + " - " + e.getString(5));
@@ -64,6 +90,7 @@ public class JegyActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onBackPressed() {
+        setFenyesseg(brightness);
         super.onBackPressed();
     }
 

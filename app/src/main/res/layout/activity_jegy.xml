@@ -74,4 +74,14 @@
         android:id="@+id/qr"
         app:srcCompat="@drawable/qr" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/qr"
+        android:layout_marginTop="10dp"
+        android:text="A kódot le kell olvasni a beléptető kapunál"
+        android:textSize="15sp"
+        android:textColor="@color/gray" />
+
 </RelativeLayout>
