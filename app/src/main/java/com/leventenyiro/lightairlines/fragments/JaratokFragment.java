@@ -4,17 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -98,25 +95,20 @@ public class JaratokFragment extends Fragment {
                 celallomas = eredmeny.getString(4);
                 idotartam = eredmeny.getString(5);
 
-                final CardView card = new CardView(mContext);
+                CardView card = new CardView(mContext);
                 RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(dpToPx(360), dpToPx(200));
                 params.addRule(RelativeLayout.CENTER_HORIZONTAL);
-                if (cardLista.size() == 0) {
+                if (cardLista.size() == 0)
                     params.addRule(RelativeLayout.BELOW, R.id.inputHova);
-                }
-                else {
+                else
                     params.addRule(RelativeLayout.BELOW, id);
-                }
-                if (eredmeny.getCount() - 1 == cardLista.size()) {
+                if (eredmeny.getCount() - 1 == cardLista.size())
                     params.setMargins(0,0,0,dpToPx(100));
-                }
-                else {
+                else
                     params.setMargins(0,0,0,dpToPx(20));
-                }
-
                 card.setLayoutParams(params);
                 card.setCardElevation(50);
-                card.setBackground(getResources().getDrawable(R.drawable.bg_jarat));
+                card.setBackground(getResources().getDrawable(R.drawable.bg_card));
                 final String finalJaratId = jaratId;
                 card.setOnClickListener(new View.OnClickListener() {
                     @Override
