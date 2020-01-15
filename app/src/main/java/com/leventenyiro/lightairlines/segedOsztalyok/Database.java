@@ -180,15 +180,27 @@ public class Database extends SQLiteOpenHelper {
 
     public Cursor selectJegyek(String userId) {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor eredmeny = db.rawQuery("SELECT f.id, f.ules, j.idopont, ai.nev, ai.rovidites, ac.nev, ac.rovidites, u.idotartam\n" +
+        Cursor eredmeny = db.rawQuery("SELECT f.id, f.ules, j.idopont, ai.nev, ac.nev, u.idotartam\n" +
                 "FROM foglalas f \n" +
                 "INNER JOIN jarat j ON f.jarat_id = j.id\n" +
                 "INNER JOIN utvonal u ON j.utvonal_id = u.id\n" +
                 "INNER JOIN airport ai ON u.indulas_id = ai.id\n" +
                 "INNER JOIN airport ac ON u.celallomas_id = ac.id\n" +
                 "WHERE f.user_id = " + userId + "\n" +
-                "AND j.idopont > NOW()\n" +
-                "ORDER BY f.id", null);
+                "AND j.idopont > datetime('now')\n" +
+                "ORDER BY j.idopont", null);
+        return eredmeny;
+    }
+
+    public Cursor selectJegy(String foglalasId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor eredmeny = db.rawQuery("SELECT f.id, f.ules, j.idopont, ai.nev, ai.rovidites, ac.nev, ac.rovidites, u.idotartam\n" +
+                "FROM foglalas f \n" +
+                "INNER JOIN jarat j ON f.jarat_id = j.id\n" +
+                "INNER JOIN utvonal u ON j.utvonal_id = u.id\n" +
+                "INNER JOIN airport ai ON u.indulas_id = ai.id\n" +
+                "INNER JOIN airport ac ON u.celallomas_id = ac.id\n" +
+                "WHERE f.id = " + foglalasId, null);
         return eredmeny;
     }
 }
