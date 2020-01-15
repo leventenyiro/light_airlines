@@ -7,18 +7,6 @@
     tools:context=".LoginActivity"
     android:background="@drawable/bg_login">
 
-    <!--<TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginStart="20dp"
-        android:id="@+id/textUdv"
-        android:text="Light Airlines"
-        android:textSize="40sp"
-        android:textColor="@color/white"
-        android:fontFamily="@font/bold" />-->
-
     <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"

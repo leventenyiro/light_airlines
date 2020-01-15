@@ -17,7 +17,7 @@ public class LoadingActivity extends AppCompatActivity {
             public void run() {
                 try {
                     super.run();
-                    sleep(3000);  //Delay of 1 seconds = 1000 millis
+                    sleep(1300);  //Delay of 1 seconds = 1000 millis
                 }
                 catch (Exception e) { }
                 finally {
