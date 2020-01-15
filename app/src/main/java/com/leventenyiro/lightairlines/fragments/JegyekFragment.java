@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
+import com.leventenyiro.lightairlines.JegyActivity;
 import com.leventenyiro.lightairlines.R;
 import com.leventenyiro.lightairlines.segedOsztalyok.Database;
 
@@ -90,10 +91,9 @@ public class JegyekFragment extends Fragment {
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("foglalasId", finalFoglalasId);
                         editor.apply();
-                        // itt megy majd át
-                        /*Intent intent = new Intent(getActivity(), .class);
+                        Intent intent = new Intent(getActivity(), JegyActivity.class);
                         startActivity(intent);
-                        getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);*/
+                        getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     }
                 });
                 card.setId(card.generateViewId());
@@ -144,7 +144,7 @@ public class JegyekFragment extends Fragment {
                 paramsUles.addRule(RelativeLayout.BELOW, tvIdotartam.getId());
                 paramsUles.topMargin = dpToPx(20);
                 tvUles.setLayoutParams(paramsUles);
-                tvUles.setText("Ülésszám: " + ules);
+                tvUles.setText("Ülőhely: " + ules);
                 tvUles.setTypeface(getActivity().getResources().getFont(R.font.regular));
                 tvUles.setTextColor(getActivity().getResources().getColor(R.color.gray));
                 tvUles.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);

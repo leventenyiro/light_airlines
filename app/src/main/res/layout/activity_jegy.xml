@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".JaratActivity"
+    tools:context=".JegyActivity"
     android:background="@color/white">
 
     <ImageView
@@ -25,7 +25,6 @@
         android:textSize="60sp"
         android:textColor="@color/gray"
         android:fontFamily="@font/bold" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -62,49 +61,17 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@id/textIdotartam"
         android:layout_marginTop="10dp"
-        android:id="@+id/textHelyekSzama"
+        android:id="@+id/textUles"
         android:textSize="20sp"
         android:textColor="@color/gray" />
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/textHelyekSzama"
-        android:layout_marginTop="-100dp"
-        android:id="@+id/gif"
-        app:lottie_fileName="plane.json"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_speed="1" />
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_above="@+id/btnMegse"
-        android:id="@+id/btnHelyFoglalas"
-        android:background="@drawable/button"
-        android:text="Helyfoglalás"
-        android:textSize="16sp"
-        android:textColor="@color/white"
-        android:textAllCaps="false"
-        android:fontFamily="@font/regular" />
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="10dp"
-        android:id="@+id/btnMegse"
-        android:background="@drawable/buttonred"
-        android:text="Mégse"
-        android:textSize="16sp"
-        android:textColor="@color/white"
-        android:textAllCaps="false"
-        android:fontFamily="@font/regular" />
+        android:layout_below="@id/textUles"
+        android:layout_marginTop="60dp"
+        android:id="@+id/qr"
+        app:srcCompat="@drawable/qr" />
 
 </RelativeLayout>

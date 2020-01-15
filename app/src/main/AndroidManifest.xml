@@ -50,6 +50,11 @@
             android:name=".FoglalasActivity"
             android:screenOrientation="portrait"
             android:theme="@style/InfoTheme" />
+        <activity
+            android:name=".JegyActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/InfoTheme" />
+            />
     </application>
 
 </manifest>

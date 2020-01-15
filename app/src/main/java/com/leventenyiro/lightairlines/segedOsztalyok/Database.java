@@ -194,7 +194,7 @@ public class Database extends SQLiteOpenHelper {
 
     public Cursor selectJegy(String foglalasId) {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor eredmeny = db.rawQuery("SELECT f.id, f.ules, j.idopont, ai.nev, ai.rovidites, ac.nev, ac.rovidites, u.idotartam\n" +
+        Cursor eredmeny = db.rawQuery("SELECT f.ules, j.idopont, ai.nev, ai.rovidites, ac.nev, ac.rovidites, u.idotartam\n" +
                 "FROM foglalas f \n" +
                 "INNER JOIN jarat j ON f.jarat_id = j.id\n" +
                 "INNER JOIN utvonal u ON j.utvonal_id = u.id\n" +
