@@ -131,7 +131,7 @@ public class Database extends SQLiteOpenHelper {
 
         Cursor szam = db.rawQuery("SELECT f.id FROM foglalas f WHERE user_id = " + userId,null);
         if (szam.getCount() > 0) {
-            return db.rawQuery("SELECT j.id, j.helyek_szama - (SELECT COUNT(*) FROM foglalas WHERE jarat_id = j.id), j.idopont, ai.nev, ai.rovidites, ac.nev, ac.rovidites, u.idotartam FROM jarat j\n" +
+            return db.rawQuery("SELECT j.id, j.helyek_szama - (SELECT COUNT(*) FROM foglalas WHERE jarat_id = j.id), j.idopont, ai.nev, ac.nev, u.idotartam FROM jarat j\n" +
                     "LEFT JOIN utvonal u ON j.utvonal_id = u.id\n" +
                     "LEFT JOIN airport ai ON u.indulas_id = ai.id\n" +
                     "LEFT JOIN airport ac ON u.celallomas_id = ac.id\n"+
@@ -141,7 +141,7 @@ public class Database extends SQLiteOpenHelper {
                     "AND j.id <> (SELECT f.jarat_id FROM foglalas f WHERE user_id = " + userId + ")", null);
         }
         else {
-            return db.rawQuery("SELECT j.id, j.helyek_szama - (SELECT COUNT(*) FROM foglalas WHERE jarat_id = j.id), j.idopont, ai.nev, ai.rovidites, ac.nev, ac.rovidites, u.idotartam FROM jarat j\n" +
+            return db.rawQuery("SELECT j.id, j.helyek_szama - (SELECT COUNT(*) FROM foglalas WHERE jarat_id = j.id), j.idopont, ai.nev, ac.nev, u.idotartam FROM jarat j\n" +
                     "INNER JOIN utvonal u ON j.utvonal_id = u.id\n" +
                     "INNER JOIN airport ai ON u.indulas_id = ai.id\n" +
                     "INNER JOIN airport ac ON u.celallomas_id = ac.id\n"+

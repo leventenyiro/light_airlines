@@ -40,7 +40,6 @@ public class JaratokFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_jaratok, container, false);
 
-        // https://android--code.blogspot.com/2015/12/android-how-to-create-cardview.html
         db = new Database(getActivity());
         inputHonnan = root.findViewById(R.id.inputHonnan);
         inputHova = root.findViewById(R.id.inputHova);
@@ -83,14 +82,12 @@ public class JaratokFragment extends Fragment {
         cardLista.clear();
 
         Cursor eredmeny = db.selectJaratok(inputHonnan.getText().toString(), inputHova.getText().toString(), getActivity().getSharedPreferences("variables", Context.MODE_PRIVATE).getString("userId", ""));
-        String jaratId = "";
-        String helyekSzama = "";
-        String idopont = "";
-        String indulas = "";
-        String indulasRovidites = "";
-        String celallomas = "";
-        String celallomasRovidites = "";
-        String idotartam = "";
+        String jaratId;
+        String helyekSzama;
+        String idopont;
+        String indulas;
+        String celallomas;
+        String idotartam;
         if (eredmeny != null && eredmeny.getCount() > 0) {
             int id = 0;
             while (eredmeny.moveToNext()) {
@@ -98,10 +95,8 @@ public class JaratokFragment extends Fragment {
                 helyekSzama = eredmeny.getString(1);
                 idopont = eredmeny.getString(2);
                 indulas = eredmeny.getString(3);
-                indulasRovidites = eredmeny.getString(4);
-                celallomas = eredmeny.getString(5);
-                celallomasRovidites = eredmeny.getString(6);
-                idotartam = eredmeny.getString(7);
+                celallomas = eredmeny.getString(4);
+                idotartam = eredmeny.getString(5);
 
                 final CardView card = new CardView(mContext);
                 RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(dpToPx(360), dpToPx(200));
@@ -139,7 +134,10 @@ public class JaratokFragment extends Fragment {
                 id = card.getId();
                 cardLista.add(id);
 
-                //Budapest - London
+                RelativeLayout rlCard = new RelativeLayout(mContext);
+                RelativeLayout.LayoutParams paramsRlCard = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                rlCard.setLayoutParams(paramsRlCard);
+
                 TextView tvVaros = new TextView(mContext);
                 RelativeLayout.LayoutParams paramsVaros = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
                 paramsVaros.topMargin = dpToPx(20);
@@ -149,25 +147,48 @@ public class JaratokFragment extends Fragment {
                 tvVaros.setTextColor(getActivity().getResources().getColor(R.color.gray));
                 tvVaros.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 tvVaros.setId(tvVaros.generateViewId());
-                int tvId = tvVaros.getId();
-                //params.addRule(RelativeLayout.BELOW, tvId);
-                // below a másik textview alá
                 tvVaros.setTextSize(dpToPx(10));
 
                 TextView tvIdopont = new TextView(mContext);
-                RelativeLayout.LayoutParams paramsIdopont = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                paramsIdopont.addRule(RelativeLayout.BELOW, tvId);
-                //paramsVaros.topMargin = dpToPx(20);
+                RelativeLayout.LayoutParams paramsIdopont = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                paramsIdopont.addRule(RelativeLayout.BELOW, tvVaros.getId());
+                paramsIdopont.topMargin = dpToPx(15);
                 tvIdopont.setLayoutParams(paramsIdopont);
-                tvIdopont.setText(idopont);
+                tvIdopont.setText(idopont.substring(0, 16).replace('-', '.'));
                 tvIdopont.setTypeface(getActivity().getResources().getFont(R.font.regular));
                 tvIdopont.setTextColor(getActivity().getResources().getColor(R.color.gray));
                 tvIdopont.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                tvIdopont.setId(tvIdopont.generateViewId());
+                tvIdopont.setTextSize(dpToPx(7));
 
+                TextView tvIdotartam = new TextView(mContext);
+                RelativeLayout.LayoutParams paramsIdotartam = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                paramsIdotartam.addRule(RelativeLayout.BELOW, tvIdopont.getId());
+                paramsIdotartam.topMargin = dpToPx(15);
+                tvIdotartam.setLayoutParams(paramsIdotartam);
+                tvIdotartam.setText(idotartamAtalakitas(idotartam));
+                tvIdotartam.setTypeface(getActivity().getResources().getFont(R.font.regular));
+                tvIdotartam.setTextColor(getActivity().getResources().getColor(R.color.gray));
+                tvIdotartam.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                tvIdotartam.setId(tvIdotartam.generateViewId());
+                tvIdotartam.setTextSize(dpToPx(7));
 
-                //card.addView(tvRovidites);
-                card.addView(tvVaros);
-                card.addView(tvIdopont);
+                TextView tvHelyekSzama = new TextView(mContext);
+                RelativeLayout.LayoutParams paramsHelyek = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                paramsHelyek.addRule(RelativeLayout.BELOW, tvIdotartam.getId());
+                paramsHelyek.topMargin = dpToPx(20);
+                tvHelyekSzama.setLayoutParams(paramsHelyek);
+                tvHelyekSzama.setText("Már csak " + helyekSzama + " elérhető hely áll rendelkezésre");
+                tvHelyekSzama.setTypeface(getActivity().getResources().getFont(R.font.regular));
+                tvHelyekSzama.setTextColor(getActivity().getResources().getColor(R.color.gray));
+                tvHelyekSzama.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                tvHelyekSzama.setTextSize(dpToPx(5));
+
+                rlCard.addView(tvVaros);
+                rlCard.addView(tvIdopont);
+                rlCard.addView(tvIdotartam);
+                rlCard.addView(tvHelyekSzama);
+                card.addView(rlCard);
                 mRelativeLayout.addView(card);
             }
         }
@@ -188,5 +209,15 @@ public class JaratokFragment extends Fragment {
 
     public int dpToPx(int dp) {
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, getResources().getDisplayMetrics()));
+    }
+
+    public String idotartamAtalakitas(String idotartam) {
+        String[] idoresz = idotartam.split(":");
+        if (Integer.parseInt(idoresz[0]) < 10) {
+            return idoresz[0].substring(1, 2) + " óra " + idoresz[1] + " perc";
+        }
+        else {
+            return idoresz[0] + " óra " + idoresz[1] + " perc";
+        }
     }
 }
