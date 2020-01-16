@@ -7,7 +7,7 @@
     tools:context=".LoginActivity"
     android:background="@drawable/bg_login">
 
-                                                                                                                                                                                                                                                                                                                                                                              <ImageView
+    <ImageView
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_margin="20dp"
@@ -15,13 +15,13 @@
         android:layout_alignParentEnd="true"
         android:layout_marginRight="30dp"
         android:layout_marginEnd="30dp"
-        android:id="@+id/btnHome"
+        android:id="@+id/btnIcon"
         app:srcCompat="@drawable/icon_white" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btnHome"
+        android:layout_below="@id/btnIcon"
         android:layout_marginTop="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginStart="30dp"

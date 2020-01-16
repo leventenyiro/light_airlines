@@ -1,9 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Megerosites">
+    tools:context=".Megerosites"
+    android:background="@drawable/bg_login">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:id="@+id/btnBack"
+        app:srcCompat="@drawable/back_white" />
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="20dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="30dp"
+        android:layout_marginEnd="30dp"
+        android:id="@+id/btnIcon"
+        app:srcCompat="@drawable/icon_white" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnIcon"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp"
+        android:id="@+id/textCim"
+        android:text="Jóváhagyás"
+        android:textSize="35sp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/bold" />
+
+    <EditText
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/textCim"
+        android:layout_marginTop="50dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:paddingStart="20dp"
+        android:paddingLeft="20dp"
+        android:paddingEnd="15dp"
+        android:paddingRight="15dp"
+        android:id="@+id/inputPassword"
+        android:background="@drawable/inputlogin"
+        android:inputType="textPassword"
+        android:hint="Jelszó"
+        android:textColorHint="@color/midGray"
+        android:textColor="@color/white"
+        android:fontFamily="@font/regular"
+        android:maxLines="1"
+        android:lines="1"
+        android:singleLine="true"/>
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/inputPassword"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="30dp"
+        android:id="@+id/btnVerify"
+        android:background="@drawable/button"
+        android:text="Megerősítés"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:fontFamily="@font/regular"
+        android:textAllCaps="false" />
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnVerify"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="40dp"
+        android:layout_marginEnd="40dp"
+        android:id="@+id/btnCancel"
+        android:background="@drawable/buttonred"
+        android:text="Mégse"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:fontFamily="@font/regular" />
+
+</RelativeLayout>
