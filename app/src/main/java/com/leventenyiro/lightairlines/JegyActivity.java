@@ -95,6 +95,10 @@ public class JegyActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    public void delete() {
+        
+    }
+
     @Override
     public void onBackPressed() {
         setFenyesseg(brightness);

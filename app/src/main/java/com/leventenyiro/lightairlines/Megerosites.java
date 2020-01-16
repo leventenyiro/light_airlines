@@ -9,7 +9,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.leventenyiro.lightairlines.fragments.BeallitasokFragment;
+import com.leventenyiro.lightairlines.fragments.JaratokFragment;
 import com.leventenyiro.lightairlines.segedOsztalyok.Database;
 import com.leventenyiro.lightairlines.segedOsztalyok.PasswordUtils;
 
@@ -44,10 +47,23 @@ public class Megerosites extends AppCompatActivity implements View.OnClickListen
         switch (v.getId()) {
             case R.id.btnBack: onBackPressed(); break;
             case R.id.btnCancel: onBackPressed(); break;
-            case btnVerify:
+            case R.id.btnVerify:
                 if (jelszoEllenorzes()) {
-
+                    // továbblépés
+                    String muvelet = getSharedPreferences("variables", Context.MODE_PRIVATE).getString("muvelet", "");
+                    if (muvelet.equals("jegytorles")) {
+                        JegyActivity ja = new JegyActivity();
+                        ja.
+                    }
+                    else if (muvelet.equals("profilmodositas")) {
+                        BeallitasokFragment bf = new BeallitasokFragment();
+                        bf.update()
+                    }
                 }
+                else {
+                    Toast.makeText(this, "Sikertelen jóváhagyás!", Toast.LENGTH_SHORT).show();
+                }
+                break;
         }
     }
 
