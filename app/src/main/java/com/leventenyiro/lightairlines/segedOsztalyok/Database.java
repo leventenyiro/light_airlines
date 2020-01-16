@@ -203,4 +203,10 @@ public class Database extends SQLiteOpenHelper {
                 "WHERE f.id = " + foglalasId, null);
         return eredmeny;
     }
+
+    public boolean delete(String jegyId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        long eredmeny = db.delete("foglalas", "id = ?", new String[] { jegyId });
+        return eredmeny != -1;
+    }
 }
