@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,10 +20,10 @@ import com.leventenyiro.lightairlines.segedOsztalyok.Database;
 
 public class JegyActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private Button btnDelete;
     private Database db;
     private ImageView btnBack;
     private TextView textRovidites, textNev, textIdopont, textIdotartam, textUles;
-
     private int brightness;
 
     @Override
@@ -39,6 +40,7 @@ public class JegyActivity extends AppCompatActivity implements View.OnClickListe
         setFenyesseg(255);
 
         btnBack.setOnClickListener(this);
+        btnDelete.setOnClickListener(this);
     }
 
     private void setFenyesseg(int brightness) {
@@ -57,6 +59,7 @@ public class JegyActivity extends AppCompatActivity implements View.OnClickListe
 
     private void init() {
         btnBack = findViewById(R.id.btnBack);
+        btnDelete = findViewById(R.id.btnDelete);
         textRovidites = findViewById(R.id.textRovidites);
         textNev = findViewById(R.id.textNev);
         textIdopont = findViewById(R.id.textIdopont);
@@ -71,6 +74,10 @@ public class JegyActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnBack: onBackPressed(); break;
+            case R.id.btnDelete:
+                // verify
+                //getSharedPreferences("variables", Context.MODE_PRIVATE).edit().putString("muvelet", "jegytorles").apply();
+                //intent
         }
     }
 
@@ -91,6 +98,7 @@ public class JegyActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onBackPressed() {
         setFenyesseg(brightness);
+        getSharedPreferences("variables", Context.MODE_PRIVATE).edit().remove("foglalasId");
         super.onBackPressed();
     }
 

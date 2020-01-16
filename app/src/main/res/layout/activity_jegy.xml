@@ -20,11 +20,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="100dp"
         android:id="@+id/textRovidites"
         android:textSize="60sp"
         android:textColor="@color/gray"
         android:fontFamily="@font/bold" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -83,5 +84,18 @@
         android:text="A kódot le kell olvasni a beléptető kapunál"
         android:textSize="15sp"
         android:textColor="@color/gray" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:id="@+id/btnDelete"
+        android:background="@drawable/buttonred"
+        android:text="Lemondás"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:fontFamily="@font/regular" />
 
 </RelativeLayout>
