@@ -2,7 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.leventenyiro.lightairlines">
-    <uses-permission android:name="android.permission.WRITE_SETTINGS"
+
+    <uses-permission
+        android:name="android.permission.WRITE_SETTINGS"
         tools:ignore="ProtectedPermissions" />
 
     <application
@@ -56,9 +58,11 @@
         <activity
             android:name=".JegyActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/InfoTheme" >
-        </activity>
-
+            android:theme="@style/InfoTheme" />
+        <activity
+            android:name=".Megerosites"
+            android:screenOrientation="portrait"
+            android:theme="@style/LoginTheme" />
     </application>
 
 </manifest>
