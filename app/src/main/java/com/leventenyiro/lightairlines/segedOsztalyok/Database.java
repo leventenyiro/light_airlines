@@ -102,14 +102,15 @@ public class Database extends SQLiteOpenHelper {
         return eredmeny;
     }
 
-    public long update (String id, String username, String email, String firstname, String lastname) {
+    public boolean updateUser(String id, String username, String email, String firstname, String lastname) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("username", username);
         contentValues.put("email", email);
         contentValues.put("firstname", firstname);
         contentValues.put("lastname", lastname);
-        return db.update("user", contentValues, "id = " + id, null);
+        long eredmeny = db.update("user", contentValues, "id = " + id, null);
+        return eredmeny == 1;
     }
 
     public Cursor selectPasswordById(String id) {
@@ -123,7 +124,7 @@ public class Database extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
         contentValues.put("password", password);
         long eredmeny = db.update("user", contentValues, "id = " + id, null);
-        return eredmeny != -1;
+        return eredmeny == 1;
     }
 
     public Cursor selectJaratok(String honnan, String hova, String userId) {
@@ -204,9 +205,9 @@ public class Database extends SQLiteOpenHelper {
         return eredmeny;
     }
 
-    public boolean delete(String jegyId) {
+    public boolean deleteJegy(String jegyId) {
         SQLiteDatabase db = this.getWritableDatabase();
         long eredmeny = db.delete("foglalas", "id = ?", new String[] { jegyId });
-        return eredmeny != -1;
+        return eredmeny == 1;
     }
 }
