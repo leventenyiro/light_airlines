@@ -190,7 +190,7 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
     }
 
     public void beallitasok() {
-        Cursor eredmeny = db.selectAll(userId);
+        Cursor eredmeny = db.selectUser(userId);
         if (eredmeny != null && eredmeny.getCount() > 0) {
             while (eredmeny.moveToNext()) {
                 inputUsername.setText(eredmeny.getString(0));
@@ -265,7 +265,7 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
     }
     public boolean vanEUsername() {
         String username = "";
-        Cursor eredmeny = db.selectAll(userId);
+        Cursor eredmeny = db.selectUser(userId);
         if (eredmeny != null && eredmeny.getCount() > 0) {
             while (eredmeny.moveToNext()) {
                 username = eredmeny.getString(0);
@@ -281,7 +281,7 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
     }
     public boolean vanEEmail() {
         String email = "";
-        Cursor eredmeny = db.selectAll(userId);
+        Cursor eredmeny = db.selectUser(userId);
         if (eredmeny != null && eredmeny.getCount() > 0) {
             while (eredmeny.moveToNext()) {
                 email = eredmeny.getString(1);

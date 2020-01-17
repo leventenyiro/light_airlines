@@ -58,7 +58,7 @@ public class Database extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS foglalas");
     }
 
-    public boolean insert(String username, String email, String firstname, String lastname, String birthdate, String password) {
+    public boolean insertUser(String username, String email, String firstname, String lastname, String birthdate, String password) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("username", username);
@@ -96,7 +96,7 @@ public class Database extends SQLiteOpenHelper {
         return passwordEllenorzes;
     }
 
-    public Cursor selectAll(String id) {
+    public Cursor selectUser(String id) {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor eredmeny = db.rawQuery("SELECT username, email, firstname, lastname FROM user WHERE id = " + id, null);
         return eredmeny;
