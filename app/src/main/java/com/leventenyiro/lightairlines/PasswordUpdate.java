@@ -117,7 +117,7 @@ public class PasswordUpdate extends AppCompatActivity implements View.OnClickLis
                     inputClear();
                 }
                 else {
-                    jelszoInsert();
+                    update();
                     onBackPressed();
                 }
                 break;
@@ -146,7 +146,7 @@ public class PasswordUpdate extends AppCompatActivity implements View.OnClickLis
         return PasswordUtils.verifyUserPassword(inputOldPassword.getText().toString(), password, salt);
     }
 
-    private void jelszoInsert() {
+    private void update() {
         String salt = PasswordUtils.getSalt(30);
         String titkositottPassword = PasswordUtils.generateSecurePassword(inputPassword.getText().toString(), salt);
         String password = titkositottPassword + ";" + salt;
@@ -170,5 +170,6 @@ public class PasswordUpdate extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onBackPressed() {
         finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 }
