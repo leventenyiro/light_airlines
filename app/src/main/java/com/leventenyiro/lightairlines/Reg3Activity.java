@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,7 +27,9 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
     private Database db;
     private EditText inputPassword, inputPasswordAgain;
     private ImageView btnBack, btnHome;
-    private TextView btnLogin, textLeiras;
+    private SharedPreferences s;
+    private SharedPreferences.Editor se;
+    private TextView btnLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +45,7 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 inputPassword.setBackground(getResources().getDrawable(R.drawable.input));
-                inputPassword.setPaddingRelative(70, 40, 40, 40);
+                inputPassword.setPaddingRelative(dpToPx(20), dpToPx(15), dpToPx(20), dpToPx(15));
             }
             @Override
             public void afterTextChanged(Editable s) { }
@@ -53,7 +56,7 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 inputPasswordAgain.setBackground(getResources().getDrawable(R.drawable.input));
-                inputPasswordAgain.setPaddingRelative(70, 40, 40, 40);
+                inputPasswordAgain.setPaddingRelative(dpToPx(20), dpToPx(15), dpToPx(20), dpToPx(15));
             }
             @Override
             public void afterTextChanged(Editable s) { }
@@ -72,8 +75,9 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
         btnReg = findViewById(R.id.btnReg);
         inputPassword = findViewById(R.id.inputPassword);
         inputPasswordAgain = findViewById(R.id.inputPasswordAgain);
-        textLeiras = findViewById(R.id.textLeiras);
         db = new Database(this);
+        s = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
+        se = s.edit();
     }
 
     @Override
@@ -84,17 +88,11 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
                 onBackPressed();
                 break;
             case R.id.btnHome:
-                finishAffinity();
-                break;
             case R.id.btnLogin:
                 finishAffinity();
                 break;
             case R.id.btnReg:
-                if (!jelszoErossegEllenorzes(inputPassword.getText().toString())) {
-                    Toast.makeText(this, "Gyenge jelszó!", Toast.LENGTH_SHORT).show();
-                    inputClear();
-                }
-                else if (inputPassword.getText().toString().isEmpty()) {
+                if (inputPassword.getText().toString().isEmpty()) {
                     Toast.makeText(this, "Nincs megadva jelszó!", Toast.LENGTH_SHORT).show();
                     inputClear();
                 }
@@ -106,17 +104,13 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
                     Toast.makeText(this, "A két jelszó nem egyezik!", Toast.LENGTH_SHORT).show();
                     inputClear();
                 }
+                else if (!jelszoErossegEllenorzes(inputPassword.getText().toString())) {
+                    Toast.makeText(this, "Gyenge jelszó!", Toast.LENGTH_SHORT).show();
+                    inputClear();
+                }
                 else {
-                    SharedPreferences sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString("password", inputPassword.getText().toString());
-                    editor.apply();
-
-                    adatbazisInsert();
-
-                    editor.clear();
-                    editor.apply();
-
+                    se.putString("password", inputPassword.getText().toString()).apply();
+                    insertUser();
                     finishAffinity();
                 }
                 break;
@@ -125,10 +119,8 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
 
     public boolean jelszoErossegEllenorzes(String password) {
         String passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{4,}$";
-
         Pattern pattern = Pattern.compile(passwordPattern);
         Matcher matcher = pattern.matcher(password);
-
         return matcher.matches();
     }
 
@@ -137,24 +129,28 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
         inputPasswordAgain.setText("");
     }
 
-    public void adatbazisInsert() {
-        SharedPreferences sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
-        String username = sharedPreferences.getString("username", "");
-        String email = sharedPreferences.getString("email", "");
-        String firstname = sharedPreferences.getString("firstname", "");
-        String lastname = sharedPreferences.getString("lastname", "");
-        String birthdate = sharedPreferences.getString("birthdate", "");
+    public void insertUser() {
+        String username = s.getString("username", "");
+        String email = s.getString("email", "");
+        String firstname = s.getString("firstname", "");
+        String lastname = s.getString("lastname", "");
+        String birthdate = s.getString("birthdate", "");
 
         String salt = PasswordUtils.getSalt(30);
-        String titkositottPassword = PasswordUtils.generateSecurePassword(sharedPreferences.getString("password", ""), salt);
+        String titkositottPassword = PasswordUtils.generateSecurePassword(s.getString("password", ""), salt);
         String password = titkositottPassword + ";" + salt;
 
-        Boolean eredmeny = db.insert(username, email, firstname, lastname, birthdate, password);
+        Boolean eredmeny = db.insertUser(username, email, firstname, lastname, birthdate, password);
         if (eredmeny)
             Toast.makeText(this, "Sikeres regisztráció!", Toast.LENGTH_LONG);
         else
             Toast.makeText(this, "Szerverhiba! Sikertelen regisztráció!", Toast.LENGTH_SHORT).show();
     }
+
+    public int dpToPx(int dp) {
+        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, getResources().getDisplayMetrics()));
+    }
+
 
     @Override
     public void onBackPressed() {
@@ -163,9 +159,12 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void finishAffinity() {
+        se.clear().apply();
         Intent intent = new Intent(Reg3Activity.this, LoginActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         super.finishAffinity();
     }
+
+
 }

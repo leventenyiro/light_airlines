@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -24,6 +25,8 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
     private DatePicker inputBirthdate;
     private EditText inputFirstname, inputLastname;
     private ImageView btnBack, btnHome;
+    private SharedPreferences s;
+    private SharedPreferences.Editor se;
     private TextView btnLogin;
 
     @Override
@@ -34,11 +37,10 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
 
         init();
 
-        SharedPreferences sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
-        inputFirstname.setText(sharedPreferences.getString("firstname", ""));
-        inputLastname.setText(sharedPreferences.getString("lastname", ""));
-        if (!sharedPreferences.getString("birthdate", "").isEmpty()) {
-            String[] datum = sharedPreferences.getString("birthdate", "").split("-");
+        inputFirstname.setText(s.getString("firstname", ""));
+        inputLastname.setText(s.getString("lastname", ""));
+        if (!s.getString("birthdate", "").isEmpty()) {
+            String[] datum = s.getString("birthdate", "").split("-");
             inputBirthdate.updateDate(Integer.parseInt(datum[0]) + 0, Integer.parseInt(datum[1]) + 1, Integer.parseInt(datum[2]));
         }
 
@@ -47,8 +49,7 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                inputFirstname.setBackground(getResources().getDrawable(R.drawable.input));
-                inputFirstname.setPaddingRelative(70, 40, 40, 40);
+                inputSzin("firstname");
             }
             @Override
             public void afterTextChanged(Editable s) { }
@@ -58,8 +59,7 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                inputLastname.setBackground(getResources().getDrawable(R.drawable.input));
-                inputLastname.setPaddingRelative(70, 40, 40, 40);
+                inputSzin("lastname");
             }
             @Override
             public void afterTextChanged(Editable s) { }
@@ -78,10 +78,11 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
         btnNext = findViewById(R.id.btnNext);
         inputFirstname = findViewById(R.id.inputFirstname);
         inputLastname = findViewById(R.id.inputLastname);
-
         inputBirthdate = findViewById(R.id.inputBirthdate);
         inputBirthdate.setMaxDate(System.currentTimeMillis());
         inputBirthdate.updateDate(2000,00,01);
+        s = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
+        se = s.edit();
     }
 
     @Override
@@ -91,30 +92,29 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
                 onBackPressed();
                 break;
             case R.id.btnHome:
-                finishAffinity();
-                break;
             case R.id.btnLogin:
                 finishAffinity();
                 break;
             case R.id.btnNext:
-                ellenorzes();
                 if (inputFirstname.getText().toString().isEmpty()) {
+                    inputSzin("firstnameRed");
                     Toast.makeText(this, "Nincs megadva keresztnév!", Toast.LENGTH_SHORT).show();
                 }
                 else if (inputLastname.getText().toString().isEmpty()) {
+                    inputSzin("firstnameGreen");
+                    inputSzin("lastnameRed");
                     Toast.makeText(this, "Nincs megadva vezetéknév!", Toast.LENGTH_SHORT).show();
                 }
                 else if (!korEllenorzes(inputBirthdate.getYear(), inputBirthdate.getMonth(), inputBirthdate.getDayOfMonth())) {
                     Toast.makeText(Reg2Activity.this, "13 éven aluliak nem regisztrálhatnak!", Toast.LENGTH_LONG).show();
                 }
                 else {
-                    SharedPreferences sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString("firstname", elsoNagybetu(inputFirstname.getText().toString()).trim());
-                    editor.putString("lastname", elsoNagybetu(inputLastname.getText().toString()).trim());
-                    editor.putString("birthdate", birthdateToString(inputBirthdate.getYear(), inputBirthdate.getMonth(), inputBirthdate.getDayOfMonth()));
-                    editor.apply();
-
+                    inputSzin("firstnameGreen");
+                    inputSzin("lastnameGreen");
+                    se.putString("firstname", elsoNagybetu(inputFirstname.getText().toString()).trim());
+                    se.putString("lastname", elsoNagybetu(inputLastname.getText().toString()).trim());
+                    se.putString("birthdate", birthdateToString(inputBirthdate.getYear(), inputBirthdate.getMonth(), inputBirthdate.getDayOfMonth()));
+                    se.apply();
                     Intent intent = new Intent(Reg2Activity.this, Reg3Activity.class);
                     startActivity(intent);
                 }
@@ -148,23 +148,37 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
         return year + "-" + (month + 1) + "-" + day;
     }
 
-    public void ellenorzes() {
-        if (!inputFirstname.getText().toString().isEmpty()) {
-            inputFirstname.setBackground(getResources().getDrawable(R.drawable.inputgreen));
-            inputFirstname.setPaddingRelative(70, 40, 40, 40);
+    public void inputSzin(String mod) {
+        switch (mod) {
+            case "firstname":
+                inputFirstname.setBackground(getResources().getDrawable(R.drawable.input));
+                inputFirstname.setPaddingRelative(dpToPx(20), dpToPx(15), dpToPx(20), dpToPx(15));
+                break;
+            case "firstnameGreen":
+                inputFirstname.setBackground(getResources().getDrawable(R.drawable.inputgreen));
+                inputFirstname.setPaddingRelative(dpToPx(20), dpToPx(15), dpToPx(20), dpToPx(15));
+                break;
+            case "firstnameRed":
+                inputFirstname.setBackground(getResources().getDrawable(R.drawable.inputred));
+                inputFirstname.setPaddingRelative(dpToPx(20), dpToPx(15), dpToPx(20), dpToPx(15));
+                break;
+            case "lastname":
+                inputLastname.setBackground(getResources().getDrawable(R.drawable.input));
+                inputLastname.setPaddingRelative(dpToPx(20), dpToPx(15), dpToPx(20), dpToPx(15));
+                break;
+            case "lastnameGreen":
+                inputLastname.setBackground(getResources().getDrawable(R.drawable.inputgreen));
+                inputLastname.setPaddingRelative(dpToPx(20), dpToPx(15), dpToPx(20), dpToPx(15));
+                break;
+            case "lastnameRed":
+                inputLastname.setBackground(getResources().getDrawable(R.drawable.inputred));
+                inputLastname.setPaddingRelative(dpToPx(20), dpToPx(15), dpToPx(20), dpToPx(15));
+                break;
         }
-        if (!inputLastname.getText().toString().isEmpty()) {
-            inputLastname.setBackground(getResources().getDrawable(R.drawable.inputgreen));
-            inputLastname.setPaddingRelative(70, 40, 40, 40);
-        }
-        if (inputFirstname.getText().toString().isEmpty()) {
-            inputFirstname.setBackground(getResources().getDrawable(R.drawable.inputred));
-            inputFirstname.setPaddingRelative(70, 40, 40, 40);
-        }
-        if (inputLastname.getText().toString().isEmpty()) {
-            inputLastname.setBackground(getResources().getDrawable(R.drawable.inputred));
-            inputLastname.setPaddingRelative(70, 40, 40, 40);
-        }
+    }
+
+    public int dpToPx(int dp) {
+        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, getResources().getDisplayMetrics()));
     }
 
     @Override
@@ -174,10 +188,7 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void finishAffinity() {
-        SharedPreferences sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.clear();
-        editor.apply();
+        se.clear().apply();
         Intent intent = new Intent(Reg2Activity.this, LoginActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);

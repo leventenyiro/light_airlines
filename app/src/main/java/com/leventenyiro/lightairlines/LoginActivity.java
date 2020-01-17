@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Editable;
@@ -73,9 +72,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         alertDialogBuilder.setMessage("Biztos elhagyod az alkalmazást?");
         alertDialogBuilder.setPositiveButton("Nem", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-            }
+            public void onClick(DialogInterface dialog, int which) { }
         });
         alertDialogBuilder.setNegativeButton("Igen", new DialogInterface.OnClickListener() {
             @Override
@@ -101,17 +98,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 if (inputUsernameEmail.getText().toString().isEmpty()) {
                     Toast.makeText(this, "Nincs megadva a felhasználónév vagy e-mail!", Toast.LENGTH_LONG).show();
                     inputPassword.setText("");
-                    inputSzin("usernameEmailRossz");
+                    inputSzin("usernameEmailRed");
                 }
                 else if (inputPassword.getText().toString().isEmpty()) {
                     Toast.makeText(this, "Nincs megadva a jelszó!", Toast.LENGTH_LONG).show();
-                    inputSzin("passwordRossz");
+                    inputSzin("passwordRed");
                 }
                 else if (!login()) {
                     Toast.makeText(LoginActivity.this, "Helytelen bejelentkezési adatok!", Toast.LENGTH_LONG).show();
                     inputPassword.setText("");
-                    inputSzin("usernameEmailRossz");
-                    inputSzin("passwordRossz");
+                    inputSzin("usernameEmailRed");
+                    inputSzin("passwordRed");
                 }
                 else {
                     intent = new Intent(LoginActivity.this, InnerActivity.class);
@@ -129,7 +126,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 inputUsernameEmail.setBackground(getResources().getDrawable(R.drawable.inputlogin));
                 inputUsernameEmail.setPaddingRelative(dpToPx(20), dpToPx(15), dpToPx(20), dpToPx(15));
                 break;
-            case "usernameEmailRossz":
+            case "usernameEmailRed":
                 inputUsernameEmail.setBackground(getResources().getDrawable(R.drawable.inputloginred));
                 inputUsernameEmail.setPaddingRelative(dpToPx(20), dpToPx(15), dpToPx(20), dpToPx(15));
                 break;
@@ -137,7 +134,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 inputPassword.setBackground(getResources().getDrawable(R.drawable.inputlogin));
                 inputPassword.setPaddingRelative(dpToPx(20), dpToPx(15), dpToPx(20), dpToPx(15));
                 break;
-            case "passwordRossz":
+            case "passwordRed":
                 inputPassword.setBackground(getResources().getDrawable(R.drawable.inputloginred));
                 inputPassword.setPaddingRelative(dpToPx(20), dpToPx(15), dpToPx(20), dpToPx(15));
                 break;

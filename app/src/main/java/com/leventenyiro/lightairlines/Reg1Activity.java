@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,7 +19,6 @@ import android.widget.Toast;
 
 import com.leventenyiro.lightairlines.segedOsztalyok.Database;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Reg1Activity extends AppCompatActivity implements View.OnClickListener {
@@ -26,6 +26,8 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
     private Database db;
     private EditText inputUsername, inputEmail;
     private ImageView btnBack, btnHome;
+    private SharedPreferences s;
+    private SharedPreferences.Editor se;
     private TextView btnLogin;
 
     @Override
@@ -36,18 +38,15 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
 
         init();
 
-        SharedPreferences sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
-        inputUsername.setText(sharedPreferences.getString("username", ""));
-        inputEmail.setText(sharedPreferences.getString("email", ""));
+        inputUsername.setText(s.getString("username", ""));
+        inputEmail.setText(s.getString("email", ""));
 
         inputUsername.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count)
-            {
-                inputUsername.setBackground(getResources().getDrawable(R.drawable.input));
-                inputUsername.setPaddingRelative(70, 40, 40, 40);
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                inputSzin("username");
             }
             @Override
             public void afterTextChanged(Editable s) { }
@@ -56,10 +55,8 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count)
-            {
-                inputEmail.setBackground(getResources().getDrawable(R.drawable.input));
-                inputEmail.setPaddingRelative(70, 40, 40, 40);
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                inputSzin("email");
             }
             @Override
             public void afterTextChanged(Editable s) { }
@@ -79,46 +76,52 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
         inputUsername = findViewById(R.id.inputUsername);
         inputEmail = findViewById(R.id.inputEmail);
         db = new Database(this);
+        s = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
+        se = s.edit();
     }
 
     public void onClick(View v) {
         Intent intent;
         switch (v.getId()) {
             case R.id.btnBack:
-                onBackPressed();
-                break;
             case R.id.btnHome:
-                onBackPressed();
-                break;
             case R.id.btnLogin:
                 onBackPressed();
                 break;
             case R.id.btnNext:
-                ellenorzes();
                 if (vanEUsername()) {
                     Toast.makeText(this, "A felhasználónév foglalt!", Toast.LENGTH_LONG).show();
+                    inputSzin("usernameRed");
                 }
                 else if (!usernameEllenorzes(inputUsername.getText().toString())) {
                     Toast.makeText(this, "A felhasználónév túl rövid!", Toast.LENGTH_LONG).show();
+                    inputSzin("usernameRed");
                 }
                 else if (inputUsername.getText().toString().isEmpty()) {
                     Toast.makeText(this, "Nincs megadva felhasználónév!", Toast.LENGTH_LONG).show();
+                    inputSzin("usernameRed");
                 }
                 else if (vanEEmail()) {
                     Toast.makeText(this, "Az e-mail cím foglalt!", Toast.LENGTH_LONG).show();
+                    inputSzin("usernameGreen");
+                    inputSzin("emailRed");
                 }
                 else if (inputEmail.getText().toString().isEmpty()) {
                     Toast.makeText(this, "Nincs megadva e-mail cím!", Toast.LENGTH_LONG).show();
+                    inputSzin("usernameGreen");
+                    inputSzin("emailRed");
                 }
                 else if (!emailEllenorzes(inputEmail.getText().toString())) {
                     Toast.makeText(this, "Helytelen e-mail cím!", Toast.LENGTH_LONG).show();
+                    inputSzin("usernameGreen");
+                    inputSzin("emailRed");
                 }
                 else {
-                    SharedPreferences sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString("username", inputUsername.getText().toString());
-                    editor.putString("email", inputEmail.getText().toString());
-                    editor.apply();
+                    inputSzin("usernameGreen");
+                    inputSzin("emailGreen");
+                    se.putString("username", inputUsername.getText().toString());
+                    se.putString("email", inputEmail.getText().toString());
+                    se.apply();
 
                     intent = new Intent(Reg1Activity.this, Reg2Activity.class);
                     startActivity(intent);
@@ -127,22 +130,32 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public void ellenorzes() {
-        if (!inputUsername.getText().toString().isEmpty() && usernameEllenorzes(inputUsername.getText().toString())) {
-            inputUsername.setBackground(getResources().getDrawable(R.drawable.inputgreen));
-            inputUsername.setPaddingRelative(70, 40, 40, 40);
-        }
-        if (!inputEmail.getText().toString().isEmpty() && emailEllenorzes(inputEmail.getText().toString())) {
-            inputEmail.setBackground(getResources().getDrawable(R.drawable.inputgreen));
-            inputEmail.setPaddingRelative(70, 40, 40, 40);
-        }
-        if (vanEUsername() || inputUsername.getText().toString().isEmpty() || !usernameEllenorzes(inputUsername.getText().toString())) {
-            inputUsername.setBackground(getResources().getDrawable(R.drawable.inputred));
-            inputUsername.setPaddingRelative(70, 40, 40, 40);
-        }
-        if (vanEEmail() || inputEmail.getText().toString().isEmpty() || !emailEllenorzes(inputEmail.getText().toString())) {
-            inputEmail.setBackground(getResources().getDrawable(R.drawable.inputred));
-            inputEmail.setPaddingRelative(70, 40, 40, 40);
+    public void inputSzin(String mod) {
+        switch (mod) {
+            case "username":
+                inputUsername.setBackground(getResources().getDrawable(R.drawable.input));
+                inputUsername.setPaddingRelative(dpToPx(20), dpToPx(15), dpToPx(20), dpToPx(15));
+                break;
+            case "usernameGreen":
+                inputUsername.setBackground(getResources().getDrawable(R.drawable.inputgreen));
+                inputUsername.setPaddingRelative(dpToPx(20), dpToPx(15), dpToPx(20), dpToPx(15));
+                break;
+            case "usernameRed":
+                inputUsername.setBackground(getResources().getDrawable(R.drawable.inputred));
+                inputUsername.setPaddingRelative(dpToPx(20), dpToPx(15), dpToPx(20), dpToPx(15));
+                break;
+            case "email":
+                inputEmail.setBackground(getResources().getDrawable(R.drawable.input));
+                inputEmail.setPaddingRelative(dpToPx(20), dpToPx(15), dpToPx(20), dpToPx(15));
+                break;
+            case "emailGreen":
+                inputEmail.setBackground(getResources().getDrawable(R.drawable.inputgreen));
+                inputEmail.setPaddingRelative(dpToPx(20), dpToPx(15), dpToPx(20), dpToPx(15));
+                break;
+            case "emailRed":
+                inputEmail.setBackground(getResources().getDrawable(R.drawable.inputred));
+                inputEmail.setPaddingRelative(dpToPx(20), dpToPx(15), dpToPx(20), dpToPx(15));
+                break;
         }
     }
 
@@ -166,15 +179,16 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
         return eredmeny.getCount() == 1;
     }
 
+    public int dpToPx(int dp) {
+        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, getResources().getDisplayMetrics()));
+    }
+
     @Override
     public void onBackPressed() {
-        SharedPreferences sharedPreferences = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.clear();
-        editor.apply();
+        se.clear().apply();
         Intent intent = new Intent(Reg1Activity.this, LoginActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-        super.finishAffinity();
+        finishAffinity();
     }
 }
