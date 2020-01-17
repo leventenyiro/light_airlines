@@ -11,6 +11,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,8 +41,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                inputUsernameEmail.setBackground(getResources().getDrawable(R.drawable.inputlogin));
-                inputUsernameEmail.setPaddingRelative(70, 40, 40, 40);
+                inputSzin("usernameEmail");
             }
             @Override
             public void afterTextChanged(Editable s) { }
@@ -51,8 +51,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                inputPassword.setBackground(getResources().getDrawable(R.drawable.inputlogin));
-                inputPassword.setPaddingRelative(70, 40, 40, 40);
+                inputSzin("password");
             }
             @Override
             public void afterTextChanged(Editable s) { }
@@ -82,6 +81,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 finishAffinity();
+                System.exit(0);
             }
         });
         alertDialog = alertDialogBuilder.create();
@@ -98,48 +98,49 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 finish();
                 break;
             case R.id.btnLogin:
-                ellenorzes();
                 if (inputUsernameEmail.getText().toString().isEmpty()) {
-                    Toast.makeText(this, "Nincs megadva a felhasználónév vagy e-mail!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Nincs megadva a felhasználónév vagy e-mail!", Toast.LENGTH_LONG).show();
                     inputPassword.setText("");
+                    inputSzin("usernameEmailRossz");
                 }
                 else if (inputPassword.getText().toString().isEmpty()) {
-                    Toast.makeText(this, "Nincs megadva a jelszó!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Nincs megadva a jelszó!", Toast.LENGTH_LONG).show();
+                    inputSzin("passwordRossz");
                 }
                 else if (!login()) {
-                    Toast.makeText(LoginActivity.this, "Helytelen bejelentkezési adatok!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Helytelen bejelentkezési adatok!", Toast.LENGTH_LONG).show();
                     inputPassword.setText("");
+                    inputSzin("usernameEmailRossz");
+                    inputSzin("passwordRossz");
                 }
                 else {
                     intent = new Intent(LoginActivity.this, InnerActivity.class);
                     startActivity(intent);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    finishAffinity();
+                    finish();
                 }
                 break;
         }
     }
 
-    public void ellenorzes() {
-        if (inputUsernameEmail.getText().toString().isEmpty()) {
-            inputUsernameEmail.setBackground(getResources().getDrawable(R.drawable.inputloginred));
-            inputUsernameEmail.setPaddingRelative(70, 40, 40, 40);
-        }
-        if (inputPassword.getText().toString().isEmpty()) {
-            inputPassword.setBackground(getResources().getDrawable(R.drawable.inputloginred));
-            inputPassword.setPaddingRelative(70, 40, 40, 40);
-        }
-        else if (!login()) {
-            inputUsernameEmail.setBackground(getResources().getDrawable(R.drawable.inputloginred));
-            inputUsernameEmail.setPaddingRelative(70, 40, 40, 40);
-            inputPassword.setBackground(getResources().getDrawable(R.drawable.inputloginred));
-            inputPassword.setPaddingRelative(70, 40, 40, 40);
-        }
-        else if (login()) {
-            inputUsernameEmail.setBackground(getResources().getDrawable(R.drawable.inputlogin));
-            inputUsernameEmail.setPaddingRelative(70, 40, 40, 40);
-            inputPassword.setBackground(getResources().getDrawable(R.drawable.inputlogin));
-            inputPassword.setPaddingRelative(70, 40, 40, 40);
+    public void inputSzin(String mod) {
+        switch (mod) {
+            case "usernameEmail":
+                inputUsernameEmail.setBackground(getResources().getDrawable(R.drawable.inputlogin));
+                inputUsernameEmail.setPaddingRelative(dpToPx(20), dpToPx(15), dpToPx(20), dpToPx(15));
+                break;
+            case "usernameEmailRossz":
+                inputUsernameEmail.setBackground(getResources().getDrawable(R.drawable.inputloginred));
+                inputUsernameEmail.setPaddingRelative(dpToPx(20), dpToPx(15), dpToPx(20), dpToPx(15));
+                break;
+            case "password":
+                inputPassword.setBackground(getResources().getDrawable(R.drawable.inputlogin));
+                inputPassword.setPaddingRelative(dpToPx(20), dpToPx(15), dpToPx(20), dpToPx(15));
+                break;
+            case "passwordRossz":
+                inputPassword.setBackground(getResources().getDrawable(R.drawable.inputloginred));
+                inputPassword.setPaddingRelative(dpToPx(20), dpToPx(15), dpToPx(20), dpToPx(15));
+                break;
         }
     }
 
@@ -147,12 +148,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Cursor eredmeny = db.selectLogin(inputUsernameEmail.getText().toString());
         if (eredmeny.getCount() == 1) {
             if (jelszoEllenorzes()) {
-                SharedPreferences sharedPreferences = getSharedPreferences("variables", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
                 while (eredmeny.moveToNext()) {
-                    editor.putString("userId", eredmeny.getString(0));
+                    getSharedPreferences("variables",Context.MODE_PRIVATE).edit().putString("userId", eredmeny.getString(0)).apply();
                 }
-                editor.apply();
                 return true;
             }
         }
@@ -173,6 +171,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
         }
         return PasswordUtils.verifyUserPassword(inputPassword.getText().toString(), password, salt);
+    }
+
+    public int dpToPx(int dp) {
+        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, getResources().getDisplayMetrics()));
     }
 
     @Override
