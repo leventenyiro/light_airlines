@@ -149,10 +149,7 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
                     }
                     else {
                         inputsDisable();
-                        if (update()) {
-                            btnCancel.setVisibility(View.INVISIBLE);
-                            btnUpdate.setText("Módosítás");
-                        }
+                        update();
                     }
                 }
                 break;
@@ -307,15 +304,15 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
         return ujNev;
     }
 
-    public boolean update() {
-        long eredmeny = db.update(userId, inputUsername.getText().toString(), inputEmail.getText().toString(), inputFirstname.getText().toString(), inputLastname.getText().toString());
-        if (eredmeny == -1 || eredmeny == 0) {
-            Toast.makeText(getActivity(), "Szerverhiba! Sikertelen módosítás!", Toast.LENGTH_SHORT).show();
-            return false;
+    public void update() {
+        boolean eredmeny = db.updateUser(userId, inputUsername.getText().toString(), inputEmail.getText().toString(), inputFirstname.getText().toString(), inputLastname.getText().toString());
+        if (eredmeny) {
+            Toast.makeText(getActivity(), "Sikeres módosítás!", Toast.LENGTH_SHORT).show();
+            btnCancel.setVisibility(View.INVISIBLE);
+            btnUpdate.setText("Módosítás");
         }
         else {
-            Toast.makeText(getActivity(), "Sikeres módosítás!", Toast.LENGTH_SHORT).show();
-            return true;
+            Toast.makeText(getActivity(), "Szerverhiba! Sikertelen módosítás!", Toast.LENGTH_SHORT).show();
         }
     }
 }
