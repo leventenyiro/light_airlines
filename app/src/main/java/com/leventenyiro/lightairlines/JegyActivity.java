@@ -15,6 +15,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.leventenyiro.lightairlines.segedOsztalyok.Database;
 
@@ -75,9 +76,8 @@ public class JegyActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.btnBack: onBackPressed(); break;
             case R.id.btnDelete:
-                // verify
-                //getSharedPreferences("variables", Context.MODE_PRIVATE).edit().putString("muvelet", "jegytorles").apply();
-                //intent
+                Intent intent = new Intent(JegyActivity.this, Megerosites.class);
+                startActivity(intent);
         }
     }
 
@@ -93,10 +93,6 @@ public class JegyActivity extends AppCompatActivity implements View.OnClickListe
                 textUles.setText("Ülőhely: " + e.getString(0));
             }
         }
-    }
-
-    public void delete() {
-        
     }
 
     @Override

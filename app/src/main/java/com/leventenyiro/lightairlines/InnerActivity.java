@@ -47,7 +47,7 @@ public class InnerActivity extends AppCompatActivity {
                 Intent intent = new Intent(InnerActivity.this, LoginActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-                finish();
+                finishAffinity();
             }
         });
         alertDialog = alertDialogBuilder.create();

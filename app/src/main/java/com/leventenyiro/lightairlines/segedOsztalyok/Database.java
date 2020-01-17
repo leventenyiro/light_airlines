@@ -205,9 +205,9 @@ public class Database extends SQLiteOpenHelper {
         return eredmeny;
     }
 
-    public boolean deleteJegy(String jegyId) {
+    public boolean deleteJegy(String foglalasId) {
         SQLiteDatabase db = this.getWritableDatabase();
-        long eredmeny = db.delete("foglalas", "id = ?", new String[] { jegyId });
+        long eredmeny = db.delete("foglalas", "id = ?", new String[] { foglalasId });
         return eredmeny == 1;
     }
 }
