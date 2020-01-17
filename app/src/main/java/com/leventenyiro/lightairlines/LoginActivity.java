@@ -81,8 +81,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         alertDialogBuilder.setNegativeButton("Igen", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                finish();
-                // finishAffinity();
+                finishAffinity();
             }
         });
         alertDialog = alertDialogBuilder.create();
@@ -102,12 +101,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 ellenorzes();
                 if (inputUsernameEmail.getText().toString().isEmpty()) {
                     Toast.makeText(this, "Nincs megadva a felhasználónév vagy e-mail!", Toast.LENGTH_SHORT).show();
+                    inputPassword.setText("");
                 }
                 else if (inputPassword.getText().toString().isEmpty()) {
                     Toast.makeText(this, "Nincs megadva a jelszó!", Toast.LENGTH_SHORT).show();
                 }
                 else if (!login()) {
                     Toast.makeText(LoginActivity.this, "Helytelen bejelentkezési adatok!", Toast.LENGTH_SHORT).show();
+                    inputPassword.setText("");
                 }
                 else {
                     intent = new Intent(LoginActivity.this, InnerActivity.class);
