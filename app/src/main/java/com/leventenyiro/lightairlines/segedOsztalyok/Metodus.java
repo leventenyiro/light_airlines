@@ -30,15 +30,8 @@ public final class Metodus {
         return pattern.matcher(email).matches();
     }
 
-    public boolean vanEUsername(String username) {
-        Cursor eredmeny = db.selectUsername(username);
-        return eredmeny.getCount() == 1;
-    }
 
-    public boolean vanEEmail(String email) {
-        Cursor eredmeny = db.selectEmail(email);
-        return eredmeny.getCount() == 1;
-    }
+
 
     public boolean jelszoEllenorzes(String userId, String inputPassword) {
         Cursor eredmeny = db.selectPasswordById(userId);
@@ -72,5 +65,13 @@ public final class Metodus {
         return matcher.matches();
     }
 
-
+    public String idotartamAtalakitas(String idotartam) {
+        String[] idoresz = idotartam.split(":");
+        if (Integer.parseInt(idoresz[0]) < 10) {
+            return idoresz[0].substring(1, 2) + " óra " + idoresz[1] + " perc";
+        }
+        else {
+            return idoresz[0] + " óra " + idoresz[1] + " perc";
+        }
+    }
 }

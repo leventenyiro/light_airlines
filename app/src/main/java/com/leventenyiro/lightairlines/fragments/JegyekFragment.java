@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import com.leventenyiro.lightairlines.JegyActivity;
 import com.leventenyiro.lightairlines.R;
 import com.leventenyiro.lightairlines.segedOsztalyok.Database;
+import com.leventenyiro.lightairlines.segedOsztalyok.Metodus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,9 @@ public class JegyekFragment extends Fragment {
 
     private Context mContext;
     private Database db;
+    private int dp7, dp8, dp10, dp11, dp15, dp20, dp100, dp200, dp360;
     private List<Integer> cardLista;
+    private Metodus m;
     private RelativeLayout mRelativeLayout;
     private SharedPreferences s;
 
@@ -43,6 +45,16 @@ public class JegyekFragment extends Fragment {
         cardLista = new ArrayList<>();
         mContext = root.getContext();
         mRelativeLayout = root.findViewById(R.id.relativeLayout);
+        m = new Metodus(getActivity());
+        dp7 = m.dpToPx(7, getResources());
+        dp8 = m.dpToPx(8, getResources());
+        dp10 = m.dpToPx(10, getResources());
+        dp11 = m.dpToPx(11, getResources());
+        dp15 = m.dpToPx(15, getResources());
+        dp20 = m.dpToPx(20, getResources());
+        dp100 = m.dpToPx(100, getResources());
+        dp200 = m.dpToPx(200, getResources());
+        dp360 = m.dpToPx(360, getResources());
         s = getActivity().getSharedPreferences("variables", Context.MODE_PRIVATE);
     }
 
@@ -71,16 +83,16 @@ public class JegyekFragment extends Fragment {
                 idotartam = eredmeny.getString(5);
 
                 CardView card = new CardView(mContext);
-                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(dpToPx(360), dpToPx(200));
+                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(dp360, dp200);
                 params.addRule(RelativeLayout.CENTER_HORIZONTAL);
                 if (cardLista.size() == 0)
                     params.addRule(RelativeLayout.BELOW, R.id.textCim);
                 else
                     params.addRule(RelativeLayout.BELOW, id);
                 if (eredmeny.getCount() - 1 == cardLista.size())
-                    params.setMargins(0,0,0,dpToPx(100));
+                    params.setMargins(0,0,0,dp100);
                 else
-                    params.setMargins(0,0,0,dpToPx(20));
+                    params.setMargins(0,0,0,dp20);
                 card.setLayoutParams(params);
                 card.setCardElevation(50);
                 card.setBackground(getResources().getDrawable(R.drawable.bg_card));
@@ -104,49 +116,49 @@ public class JegyekFragment extends Fragment {
 
                 TextView tvVaros = new TextView(mContext);
                 RelativeLayout.LayoutParams paramsVaros = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-                paramsVaros.topMargin = dpToPx(20);
+                paramsVaros.topMargin = dp20;
                 tvVaros.setLayoutParams(paramsVaros);
                 tvVaros.setText(indulas + " - " + celallomas);
                 tvVaros.setTypeface(getActivity().getResources().getFont(R.font.regular));
                 tvVaros.setTextColor(getActivity().getResources().getColor(R.color.gray));
                 tvVaros.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 tvVaros.setId(tvVaros.generateViewId());
-                tvVaros.setTextSize(dpToPx(10));
+                tvVaros.setTextSize(dp10);
 
                 TextView tvIdopont = new TextView(mContext);
                 RelativeLayout.LayoutParams paramsIdopont = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
                 paramsIdopont.addRule(RelativeLayout.BELOW, tvVaros.getId());
-                paramsIdopont.topMargin = dpToPx(15);
+                paramsIdopont.topMargin = dp15;
                 tvIdopont.setLayoutParams(paramsIdopont);
                 tvIdopont.setText(idopont.substring(0, 16).replace('-', '.'));
                 tvIdopont.setTypeface(getActivity().getResources().getFont(R.font.regular));
                 tvIdopont.setTextColor(getActivity().getResources().getColor(R.color.gray));
                 tvIdopont.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 tvIdopont.setId(tvIdopont.generateViewId());
-                tvIdopont.setTextSize(dpToPx(7));
+                tvIdopont.setTextSize(dp7);
 
                 TextView tvIdotartam = new TextView(mContext);
                 RelativeLayout.LayoutParams paramsIdotartam = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
                 paramsIdotartam.addRule(RelativeLayout.BELOW, tvIdopont.getId());
-                paramsIdotartam.topMargin = dpToPx(15);
+                paramsIdotartam.topMargin = dp15;
                 tvIdotartam.setLayoutParams(paramsIdotartam);
-                tvIdotartam.setText(idotartamAtalakitas(idotartam));
+                tvIdotartam.setText(m.idotartamAtalakitas(idotartam));
                 tvIdotartam.setTypeface(getActivity().getResources().getFont(R.font.regular));
                 tvIdotartam.setTextColor(getActivity().getResources().getColor(R.color.gray));
                 tvIdotartam.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 tvIdotartam.setId(tvIdotartam.generateViewId());
-                tvIdotartam.setTextSize(dpToPx(7));
+                tvIdotartam.setTextSize(dp7);
 
                 TextView tvUles = new TextView(mContext);
                 RelativeLayout.LayoutParams paramsUles = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
                 paramsUles.addRule(RelativeLayout.BELOW, tvIdotartam.getId());
-                paramsUles.topMargin = dpToPx(20);
+                paramsUles.topMargin = dp20;
                 tvUles.setLayoutParams(paramsUles);
                 tvUles.setText("Ülőhely: " + ules);
                 tvUles.setTypeface(getActivity().getResources().getFont(R.font.regular));
                 tvUles.setTextColor(getActivity().getResources().getColor(R.color.gray));
                 tvUles.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                tvUles.setTextSize(dpToPx(8));
+                tvUles.setTextSize(dp8);
 
                 rlCard.addView(tvVaros);
                 rlCard.addView(tvIdopont);
@@ -160,28 +172,14 @@ public class JegyekFragment extends Fragment {
             TextView tv = new TextView(mContext);
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
             params.addRule(RelativeLayout.BELOW, R.id.textCim);
-            params.topMargin = dpToPx(200);
+            params.topMargin = dp200;
             tv.setLayoutParams(params);
             tv.setTypeface(getActivity().getResources().getFont(R.font.regular));
             tv.setTextColor(getActivity().getResources().getColor(R.color.gray));
-            tv.setTextSize(dpToPx(11));
+            tv.setTextSize(dp11);
             tv.setText("Még nincs foglalt járat.");
             tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             mRelativeLayout.addView(tv);
-        }
-    }
-
-    public int dpToPx(int dp) {
-        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, getResources().getDisplayMetrics()));
-    }
-
-    public String idotartamAtalakitas(String idotartam) {
-        String[] idoresz = idotartam.split(":");
-        if (Integer.parseInt(idoresz[0]) < 10) {
-            return idoresz[0].substring(1, 2) + " óra " + idoresz[1] + " perc";
-        }
-        else {
-            return idoresz[0] + " óra " + idoresz[1] + " perc";
         }
     }
 }

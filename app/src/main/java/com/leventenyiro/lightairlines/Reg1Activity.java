@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -24,6 +25,7 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
     private Database db;
     private EditText inputUsername, inputEmail;
     private ImageView btnBack, btnHome;
+    private int dp15, dp20;
     private Metodus m;
     private SharedPreferences s;
     private SharedPreferences.Editor se;
@@ -76,6 +78,8 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
         inputEmail = findViewById(R.id.inputEmail);
         db = new Database(this);
         m = new Metodus(this);
+        dp15 = m.dpToPx(15, getResources());
+        dp20 = m.dpToPx(20, getResources());
         s = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
         se = s.edit();
     }
@@ -89,7 +93,7 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
                 onBackPressed();
                 break;
             case R.id.btnNext:
-                if (m.vanEUsername(inputUsername.getText().toString())) {
+                if (vanEUsername()) {
                     Toast.makeText(this, "A felhasználónév foglalt!", Toast.LENGTH_LONG).show();
                     inputSzin("usernameRed");
                 }
@@ -101,7 +105,7 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
                     Toast.makeText(this, "Nincs megadva felhasználónév!", Toast.LENGTH_LONG).show();
                     inputSzin("usernameRed");
                 }
-                else if (m.vanEEmail(inputEmail.getText().toString())) {
+                else if (vanEEmail()) {
                     Toast.makeText(this, "Az e-mail cím foglalt!", Toast.LENGTH_LONG).show();
                     inputSzin("usernameGreen");
                     inputSzin("emailRed");
@@ -135,29 +139,39 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
         switch (mod) {
             case "username":
                 inputUsername.setBackground(getResources().getDrawable(R.drawable.input));
-                inputUsername.setPaddingRelative(m.dpToPx(20, r), m.dpToPx(15, r), m.dpToPx(20, r), m.dpToPx(15, r));
+                inputUsername.setPaddingRelative(dp20, dp15, dp20, dp15);
                 break;
             case "usernameGreen":
                 inputUsername.setBackground(getResources().getDrawable(R.drawable.inputgreen));
-                inputUsername.setPaddingRelative(m.dpToPx(20, r), m.dpToPx(15, r), m.dpToPx(20, r), m.dpToPx(15, r));
+                inputUsername.setPaddingRelative(dp20, dp15, dp20, dp15);
                 break;
             case "usernameRed":
                 inputUsername.setBackground(getResources().getDrawable(R.drawable.inputred));
-                inputUsername.setPaddingRelative(m.dpToPx(20, r), m.dpToPx(15, r), m.dpToPx(20, r), m.dpToPx(15, r));
+                inputUsername.setPaddingRelative(dp20, dp15, dp20, dp15);
                 break;
             case "email":
                 inputEmail.setBackground(getResources().getDrawable(R.drawable.input));
-                inputEmail.setPaddingRelative(m.dpToPx(20, r), m.dpToPx(15, r), m.dpToPx(20, r), m.dpToPx(15, r));
+                inputEmail.setPaddingRelative(dp20, dp15, dp20, dp15);
                 break;
             case "emailGreen":
                 inputEmail.setBackground(getResources().getDrawable(R.drawable.inputgreen));
-                inputEmail.setPaddingRelative(m.dpToPx(20, r), m.dpToPx(15, r), m.dpToPx(20, r), m.dpToPx(15, r));
+                inputEmail.setPaddingRelative(dp20, dp15, dp20, dp15);
                 break;
             case "emailRed":
                 inputEmail.setBackground(getResources().getDrawable(R.drawable.inputred));
-                inputEmail.setPaddingRelative(m.dpToPx(20, r), m.dpToPx(15, r), m.dpToPx(20, r), m.dpToPx(15, r));
+                inputEmail.setPaddingRelative(dp20, dp15, dp20, dp15);
                 break;
         }
+    }
+
+    public boolean vanEUsername() {
+        Cursor eredmeny = db.selectUsername(inputUsername.getText().toString());
+        return eredmeny.getCount() == 1;
+    }
+
+    public boolean vanEEmail() {
+        Cursor eredmeny = db.selectEmail(inputEmail.getText().toString());
+        return eredmeny.getCount() == 1;
     }
 
     @Override
