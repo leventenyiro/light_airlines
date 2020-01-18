@@ -95,8 +95,12 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
                     Toast.makeText(this, "A felhasználónév foglalt!", Toast.LENGTH_LONG).show();
                     inputSzin("usernameRed");
                 }
-                else if (!m.usernameEllenorzes(inputUsername.getText().toString())) {
-                    Toast.makeText(this, "A felhasználónév túl rövid!", Toast.LENGTH_LONG).show();
+                else if (!m.usernameWhiteSpaceEllenorzes(inputUsername.getText().toString())) {
+                    Toast.makeText(this, "A felhasználónévben nem lehet üres karakter!", Toast.LENGTH_LONG).show();
+                    inputSzin("usernameRed");
+                }
+                else if (!m.usernameHosszEllenorzes(inputUsername.getText().toString())) {
+                    Toast.makeText(this, "A felhasználónév minimum 5 karakterből álljon!", Toast.LENGTH_LONG).show();
                     inputSzin("usernameRed");
                 }
                 else if (inputUsername.getText().toString().isEmpty()) {

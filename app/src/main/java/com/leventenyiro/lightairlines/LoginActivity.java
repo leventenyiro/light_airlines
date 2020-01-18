@@ -146,7 +146,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public boolean login() {
-        Cursor eredmeny = db.selectLogin(inputUsernameEmail.getText().toString());
+        Cursor eredmeny = db.selectLogin(inputUsernameEmail.getText().toString().trim());
         if (eredmeny.getCount() == 1) {
             while (eredmeny.moveToNext()) {
                 String userId = eredmeny.getString(0);

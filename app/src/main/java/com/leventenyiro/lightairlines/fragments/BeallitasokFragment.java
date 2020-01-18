@@ -118,9 +118,13 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
                         inputSzin("usernameRed");
                         Toast.makeText(getActivity(), "A felhasználónév foglalt!", Toast.LENGTH_LONG).show();
                     }
-                    else if (!m.usernameEllenorzes(inputUsername.getText().toString())) {
+                    else if (!m.usernameWhiteSpaceEllenorzes(inputUsername.getText().toString())) {
+                        Toast.makeText(getActivity(), "A felhasználónévben nem lehet üres karakter!", Toast.LENGTH_LONG).show();
                         inputSzin("usernameRed");
-                        Toast.makeText(getActivity(), "A felhasználónév túl rövid!", Toast.LENGTH_LONG).show();
+                    }
+                    else if (!m.usernameHosszEllenorzes(inputUsername.getText().toString())) {
+                        Toast.makeText(getActivity(), "A felhasználónév minimum 5 karakterből álljon!", Toast.LENGTH_LONG).show();
+                        inputSzin("usernameRed");
                     }
                     else if (inputUsername.getText().toString().isEmpty()) {
                         inputSzin("usernameRed");

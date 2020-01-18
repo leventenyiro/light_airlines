@@ -20,8 +20,12 @@ public final class Metodus {
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
     }
 
-    public boolean usernameEllenorzes(String username) {
+    public boolean usernameHosszEllenorzes(String username) {
         return username.length() >= 5;
+    }
+
+    public boolean usernameWhiteSpaceEllenorzes(String username) {
+        return !username.contains(" ");
     }
 
     public boolean emailEllenorzes(String email) {

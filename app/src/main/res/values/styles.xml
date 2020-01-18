@@ -12,7 +12,7 @@
     <style name="GrayTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/rebelBlue</item>
         <item name="colorPrimaryDark">@color/gray</item>
-        <item name="colorAccent">@color/gray</item>
+        <item name="colorAccent">@color/rebelBlue</item>
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
     </style>
