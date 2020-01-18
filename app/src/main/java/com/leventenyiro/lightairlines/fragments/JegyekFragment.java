@@ -29,20 +29,21 @@ public class JegyekFragment extends Fragment {
     private Database db;
     private List<Integer> cardLista;
     private RelativeLayout mRelativeLayout;
+    private SharedPreferences s;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_jegyek, container, false);
+        init(root);
+        select();
+        return root;
+    }
 
+    private void init(View root) {
         db = new Database(getActivity());
         cardLista = new ArrayList<>();
         mContext = root.getContext();
         mRelativeLayout = root.findViewById(R.id.relativeLayout);
-
-        select();
-
-
-
-        return root;
+        s = getActivity().getSharedPreferences("variables", Context.MODE_PRIVATE);
     }
 
     private void select() {
@@ -52,7 +53,7 @@ public class JegyekFragment extends Fragment {
         }
         cardLista.clear();
 
-        Cursor eredmeny = db.selectJegyek(getActivity().getSharedPreferences("variables", Context.MODE_PRIVATE).getString("userId", ""));
+        Cursor eredmeny = db.selectJegyek(s.getString("userId", ""));
         String foglalasId;
         String ules;
         String idopont;
@@ -87,10 +88,7 @@ public class JegyekFragment extends Fragment {
                 card.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("variables", Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putString("foglalasId", finalFoglalasId);
-                        editor.apply();
+                        s.edit().putString("foglalasId", finalFoglalasId).apply();
                         Intent intent = new Intent(getActivity(), JegyActivity.class);
                         startActivity(intent);
                         getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

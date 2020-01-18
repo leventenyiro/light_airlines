@@ -33,19 +33,12 @@ public class JaratokFragment extends Fragment {
     private EditText inputHonnan, inputHova;
     private List<Integer> cardLista;
     private RelativeLayout mRelativeLayout;
+    private SharedPreferences s;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_jaratok, container, false);
-
-        db = new Database(getActivity());
-        inputHonnan = root.findViewById(R.id.inputHonnan);
-        inputHova = root.findViewById(R.id.inputHova);
-        cardLista = new ArrayList<>();
-        mContext = root.getContext();
-        mRelativeLayout = root.findViewById(R.id.relativeLayout);
-
+        init(root);
         select();
-
         inputHonnan.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
@@ -67,8 +60,17 @@ public class JaratokFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable s) { }
         });
-
         return root;
+    }
+
+    private void init(View root) {
+        db = new Database(getActivity());
+        inputHonnan = root.findViewById(R.id.inputHonnan);
+        inputHova = root.findViewById(R.id.inputHova);
+        cardLista = new ArrayList<>();
+        mContext = root.getContext();
+        mRelativeLayout = root.findViewById(R.id.relativeLayout);
+        s = getActivity().getSharedPreferences("variables", Context.MODE_PRIVATE);
     }
 
     public void select() {
@@ -78,7 +80,7 @@ public class JaratokFragment extends Fragment {
         }
         cardLista.clear();
 
-        Cursor eredmeny = db.selectJaratok(inputHonnan.getText().toString(), inputHova.getText().toString(), getActivity().getSharedPreferences("variables", Context.MODE_PRIVATE).getString("userId", ""));
+        Cursor eredmeny = db.selectJaratok(inputHonnan.getText().toString(), inputHova.getText().toString(), s.getString("userId", ""));
         String jaratId;
         String helyekSzama;
         String idopont;
@@ -113,10 +115,7 @@ public class JaratokFragment extends Fragment {
                 card.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("variables", Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putString("jaratId", finalJaratId);
-                        editor.apply();
+                        s.edit().putString("jaratId", finalJaratId).apply();
                         Intent intent = new Intent(getActivity(), JaratActivity.class);
                         startActivity(intent);
                         getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

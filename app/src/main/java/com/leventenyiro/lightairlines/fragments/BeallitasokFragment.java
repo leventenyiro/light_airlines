@@ -1,12 +1,12 @@
 package com.leventenyiro.lightairlines.fragments;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,21 +15,16 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.leventenyiro.lightairlines.segedOsztalyok.Database;
-import com.leventenyiro.lightairlines.LoginActivity;
 import com.leventenyiro.lightairlines.PasswordUpdate;
 import com.leventenyiro.lightairlines.R;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class BeallitasokFragment extends Fragment implements View.OnClickListener {
 
-    private AlertDialog alertDialog;
-    private AlertDialog.Builder alertDialogBuilder;
     private Button btnUpdate, btnCancel, btnPasswordUpdate, btnLogout;
     private Database db;
     private EditText inputUsername, inputEmail, inputFirstname, inputLastname;
@@ -37,27 +32,14 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_beallitasok, container, false);
-
-        inputUsername = root.findViewById(R.id.inputUsername);
-        inputEmail = root.findViewById(R.id.inputEmail);
-        inputFirstname = root.findViewById(R.id.inputFirstname);
-        inputLastname = root.findViewById(R.id.inputLastname);
-        btnUpdate = root.findViewById(R.id.btnUpdate);
-        btnCancel = root.findViewById(R.id.btnCancel);
-        btnPasswordUpdate = root.findViewById(R.id.btnPasswordUpdate);
-        btnLogout = root.findViewById(R.id.btnLogout);
-        db = new Database(getActivity());
-        userId = this.getActivity().getSharedPreferences("variables", Context.MODE_PRIVATE).getString("userId", "");
-
+        init(root);
         beallitasok();
-
         inputUsername.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                inputUsername.setBackground(getResources().getDrawable(R.drawable.input));
-                inputUsername.setPaddingRelative(70, 40, 40, 40);
+                inputSzin("username");
             }
             @Override
             public void afterTextChanged(Editable s) { }
@@ -67,8 +49,7 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                inputEmail.setBackground(getResources().getDrawable(R.drawable.input));
-                inputEmail.setPaddingRelative(70, 40, 40, 40);
+                inputSzin("email");
             }
             @Override
             public void afterTextChanged(Editable s) { }
@@ -79,8 +60,7 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                inputFirstname.setBackground(getResources().getDrawable(R.drawable.input));
-                inputFirstname.setPaddingRelative(70, 40, 40, 40);
+                inputSzin("firstname");
             }
             @Override
             public void afterTextChanged(Editable s) { }
@@ -90,8 +70,7 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                inputLastname.setBackground(getResources().getDrawable(R.drawable.input));
-                inputLastname.setPaddingRelative(70, 40, 40, 40);
+                inputSzin("lastname");
             }
             @Override
             public void afterTextChanged(Editable s) { }
@@ -103,6 +82,19 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
         btnPasswordUpdate.setOnClickListener(this);
 
         return root;
+    }
+
+    private void init(View root) {
+        inputUsername = root.findViewById(R.id.inputUsername);
+        inputEmail = root.findViewById(R.id.inputEmail);
+        inputFirstname = root.findViewById(R.id.inputFirstname);
+        inputLastname = root.findViewById(R.id.inputLastname);
+        btnUpdate = root.findViewById(R.id.btnUpdate);
+        btnCancel = root.findViewById(R.id.btnCancel);
+        btnPasswordUpdate = root.findViewById(R.id.btnPasswordUpdate);
+        btnLogout = root.findViewById(R.id.btnLogout);
+        db = new Database(getActivity());
+        userId = this.getActivity().getSharedPreferences("variables", Context.MODE_PRIVATE).getString("userId", "");
     }
 
     @Override
@@ -122,29 +114,44 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
                     btnUpdate.setText("Mentés");
                 }
                 else {
-                    ellenorzes();
                     if (vanEUsername()) {
+                        inputSzin("usernameRed");
                         Toast.makeText(getActivity(), "A felhasználónév foglalt!", Toast.LENGTH_LONG).show();
                     }
                     else if (!usernameEllenorzes(inputUsername.getText().toString())) {
+                        inputSzin("usernameRed");
                         Toast.makeText(getActivity(), "A felhasználónév túl rövid!", Toast.LENGTH_LONG).show();
                     }
                     else if (inputUsername.getText().toString().isEmpty()) {
+                        inputSzin("usernameRed");
                         Toast.makeText(getActivity(), "Nincs megadva felhasználónév!", Toast.LENGTH_LONG).show();
                     }
                     else if (vanEEmail()) {
+                        inputSzin("usernameGreen");
+                        inputSzin("emailRed");
                         Toast.makeText(getActivity(), "Az e-mail cím foglalt!", Toast.LENGTH_LONG).show();
                     }
                     else if (inputEmail.getText().toString().isEmpty()) {
+                        inputSzin("usernameGreen");
+                        inputSzin("emailRed");
                         Toast.makeText(getActivity(), "Nincs megadva e-mail cím!", Toast.LENGTH_LONG).show();
                     }
                     else if (!emailEllenorzes(inputEmail.getText().toString())) {
+                        inputSzin("usernameGreen");
+                        inputSzin("emailRed");
                         Toast.makeText(getActivity(), "Helytelen e-mail cím!", Toast.LENGTH_LONG).show();
                     }
                     else if (inputFirstname.getText().toString().isEmpty()) {
+                        inputSzin("usernameGreen");
+                        inputSzin("emailGreen");
+                        inputSzin("firstnameRed");
                         Toast.makeText(getActivity(), "Nincs megadva keresztnév!", Toast.LENGTH_SHORT).show();
                     }
                     else if (inputLastname.getText().toString().isEmpty()) {
+                        inputSzin("usernameGreen");
+                        inputSzin("emailGreen");
+                        inputSzin("firstnameGreen");
+                        inputSzin("lastnameRed");
                         Toast.makeText(getActivity(), "Nincs megadva vezetéknév!", Toast.LENGTH_SHORT).show();
                     }
                     else {
@@ -162,29 +169,10 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
             case R.id.btnPasswordUpdate:
                 Intent intent = new Intent(getActivity(), PasswordUpdate.class);
                 startActivity(intent);
-                getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                //getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 break;
             case R.id.btnLogout:
-                alertDialogBuilder = new AlertDialog.Builder(getActivity());
-                alertDialogBuilder.setTitle("Kijelentkezés");
-                alertDialogBuilder.setMessage("Biztos kijelentkezel?");
-                alertDialogBuilder.setPositiveButton("Nem", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-                alertDialogBuilder.setNegativeButton("Igen", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(getActivity(), LoginActivity.class);
-                        startActivity(intent);
-                        getActivity().overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-                        getActivity().finishAffinity();
-                    }
-                });
-                alertDialog = alertDialogBuilder.create();
-                alertDialog.show();
+                getActivity().onBackPressed();
                 break;
         }
     }
@@ -204,65 +192,86 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
     public void inputsDisable() {
         inputUsername.setEnabled(false);
         inputUsername.setTextColor(getResources().getColor(R.color.midGray));
-        inputUsername.setBackground(getResources().getDrawable(R.drawable.input));
-        inputUsername.setPaddingRelative(70, 40, 40, 40);
+        inputSzin("username");
         inputEmail.setEnabled(false);
         inputEmail.setTextColor(getResources().getColor(R.color.midGray));
-        inputEmail.setBackground(getResources().getDrawable(R.drawable.input));
-        inputEmail.setPaddingRelative(70, 40, 40, 40);
+        inputSzin("email");
         inputFirstname.setEnabled(false);
         inputFirstname.setTextColor(getResources().getColor(R.color.midGray));
-        inputFirstname.setBackground(getResources().getDrawable(R.drawable.input));
-        inputFirstname.setPaddingRelative(70, 40, 40, 40);
+        inputSzin("firstname");
         inputLastname.setEnabled(false);
         inputLastname.setTextColor(getResources().getColor(R.color.midGray));
-        inputLastname.setBackground(getResources().getDrawable(R.drawable.input));
-        inputLastname.setPaddingRelative(70, 40, 40, 40);
+        inputSzin("lastname");
     }
 
-    private void ellenorzes() {
-        if (!inputUsername.getText().toString().isEmpty() && usernameEllenorzes(inputUsername.getText().toString())) {
-            inputUsername.setBackground(getResources().getDrawable(R.drawable.inputgreen));
-            inputUsername.setPaddingRelative(70, 40, 40, 40);
-        }
-        if (!inputEmail.getText().toString().isEmpty() && emailEllenorzes(inputEmail.getText().toString())) {
-            inputEmail.setBackground(getResources().getDrawable(R.drawable.inputgreen));
-            inputEmail.setPaddingRelative(70, 40, 40, 40);
-        }
-        if (!inputFirstname.getText().toString().isEmpty()) {
-            inputFirstname.setBackground(getResources().getDrawable(R.drawable.inputgreen));
-            inputFirstname.setPaddingRelative(70, 40, 40, 40);
-        }
-        if (!inputLastname.getText().toString().isEmpty()) {
-            inputLastname.setBackground(getResources().getDrawable(R.drawable.inputgreen));
-            inputLastname.setPaddingRelative(70, 40, 40, 40);
-        }
-        if (vanEUsername() || inputUsername.getText().toString().isEmpty() || !usernameEllenorzes(inputUsername.getText().toString())) {
-            inputUsername.setBackground(getResources().getDrawable(R.drawable.inputred));
-            inputUsername.setPaddingRelative(70, 40, 40, 40);
-        }
-        if (vanEEmail() || inputEmail.getText().toString().isEmpty() || !emailEllenorzes(inputEmail.getText().toString())) {
-            inputEmail.setBackground(getResources().getDrawable(R.drawable.inputred));
-            inputEmail.setPaddingRelative(70, 40, 40, 40);
-        }
-        if (inputFirstname.getText().toString().isEmpty()) {
-            inputFirstname.setBackground(getResources().getDrawable(R.drawable.inputred));
-            inputFirstname.setPaddingRelative(70, 40, 40, 40);
-        }
-        if (inputLastname.getText().toString().isEmpty()) {
-            inputLastname.setBackground(getResources().getDrawable(R.drawable.inputred));
-            inputLastname.setPaddingRelative(70, 40, 40, 40);
+    public void inputSzin(String mod) {
+        switch (mod) {
+            case "username":
+                inputUsername.setBackground(getResources().getDrawable(R.drawable.input));
+                inputUsername.setPaddingRelative(dpToPx(20), dpToPx(15), dpToPx(20), dpToPx(15));
+                break;
+            case "usernameGreen":
+                inputUsername.setBackground(getResources().getDrawable(R.drawable.inputgreen));
+                inputUsername.setPaddingRelative(dpToPx(20), dpToPx(15), dpToPx(20), dpToPx(15));
+                break;
+            case "usernameRed":
+                inputUsername.setBackground(getResources().getDrawable(R.drawable.inputred));
+                inputUsername.setPaddingRelative(dpToPx(20), dpToPx(15), dpToPx(20), dpToPx(15));
+                break;
+            case "email":
+                inputEmail.setBackground(getResources().getDrawable(R.drawable.input));
+                inputEmail.setPaddingRelative(dpToPx(20), dpToPx(15), dpToPx(20), dpToPx(15));
+                break;
+            case "emailGreen":
+                inputEmail.setBackground(getResources().getDrawable(R.drawable.inputgreen));
+                inputEmail.setPaddingRelative(dpToPx(20), dpToPx(15), dpToPx(20), dpToPx(15));
+                break;
+            case "emailRed":
+                inputEmail.setBackground(getResources().getDrawable(R.drawable.inputred));
+                inputEmail.setPaddingRelative(dpToPx(20), dpToPx(15), dpToPx(20), dpToPx(15));
+                break;
+            case "firstname":
+                inputFirstname.setBackground(getResources().getDrawable(R.drawable.input));
+                inputFirstname.setPaddingRelative(dpToPx(20), dpToPx(15), dpToPx(20), dpToPx(15));
+                break;
+            case "firstnameGreen":
+                inputFirstname.setBackground(getResources().getDrawable(R.drawable.inputgreen));
+                inputFirstname.setPaddingRelative(dpToPx(20), dpToPx(15), dpToPx(20), dpToPx(15));
+                break;
+            case "firstnameRed":
+                inputFirstname.setBackground(getResources().getDrawable(R.drawable.inputred));
+                inputFirstname.setPaddingRelative(dpToPx(20), dpToPx(15), dpToPx(20), dpToPx(15));
+                break;
+            case "lastname":
+                inputLastname.setBackground(getResources().getDrawable(R.drawable.input));
+                inputLastname.setPaddingRelative(dpToPx(20), dpToPx(15), dpToPx(20), dpToPx(15));
+                break;
+            case "lastnameGreen":
+                inputLastname.setBackground(getResources().getDrawable(R.drawable.inputgreen));
+                inputLastname.setPaddingRelative(dpToPx(20), dpToPx(15), dpToPx(20), dpToPx(15));
+                break;
+            case "lastnameRed":
+                inputLastname.setBackground(getResources().getDrawable(R.drawable.inputred));
+                inputLastname.setPaddingRelative(dpToPx(20), dpToPx(15), dpToPx(20), dpToPx(15));
+                break;
         }
     }
+
+    public int dpToPx(int dp) {
+        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, getResources().getDisplayMetrics()));
+    }
+
 
     public boolean usernameEllenorzes(String username) {
         return username.length() >= 5;
     }
+
     public boolean emailEllenorzes(String email) {
         String emailPattern = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
         Pattern pattern = Pattern.compile(emailPattern);
         return pattern.matcher(email).matches();
     }
+
     public boolean vanEUsername() {
         String username = "";
         Cursor eredmeny = db.selectUser(userId);
@@ -279,6 +288,7 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
             return eredmeny.getCount() == 1;
         }
     }
+
     public boolean vanEEmail() {
         String email = "";
         Cursor eredmeny = db.selectUser(userId);
@@ -295,6 +305,7 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
             return eredmeny.getCount() == 1;
         }
     }
+
     public String elsoNagybetu(String nev) {
         String[] nevek = nev.split(" ");
         String ujNev = "";
@@ -305,7 +316,7 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
     }
 
     public void update() {
-        boolean eredmeny = db.updateUser(userId, inputUsername.getText().toString(), inputEmail.getText().toString(), inputFirstname.getText().toString(), inputLastname.getText().toString());
+        boolean eredmeny = db.updateUser(userId, inputUsername.getText().toString(), inputEmail.getText().toString(), elsoNagybetu(inputFirstname.getText().toString()), elsoNagybetu(inputLastname.getText().toString()));
         if (eredmeny) {
             Toast.makeText(getActivity(), "Sikeres módosítás!", Toast.LENGTH_SHORT).show();
             btnCancel.setVisibility(View.INVISIBLE);
