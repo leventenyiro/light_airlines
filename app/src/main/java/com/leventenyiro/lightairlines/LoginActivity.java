@@ -10,7 +10,6 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,7 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.leventenyiro.lightairlines.segedOsztalyok.Database;
-import com.leventenyiro.lightairlines.segedOsztalyok.PasswordUtils;
+import com.leventenyiro.lightairlines.segedOsztalyok.Metodus;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private AlertDialog alertDialog;
@@ -26,6 +25,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Button btnLogin;
     private Database db;
     private EditText inputUsernameEmail, inputPassword;
+    private int dp15, dp20;
+    private Metodus m;
     private TextView btnReg;
 
     @Override
@@ -66,6 +67,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         inputUsernameEmail = findViewById(R.id.inputUsernameEmail);
         inputPassword = findViewById(R.id.inputPassword);
         db = new Database(this);
+        m = new Metodus(this);
+        dp15 = m.dpToPx(15, getResources());
+        dp20 = m.dpToPx(20, getResources());
 
         alertDialogBuilder = new AlertDialog.Builder(LoginActivity.this);
         alertDialogBuilder.setTitle("Kilépés");
@@ -124,19 +128,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         switch (mod) {
             case "usernameEmail":
                 inputUsernameEmail.setBackground(getResources().getDrawable(R.drawable.inputlogin));
-                inputUsernameEmail.setPaddingRelative(dpToPx(20), dpToPx(15), dpToPx(20), dpToPx(15));
+                inputUsernameEmail.setPaddingRelative(dp20, dp15, dp20, dp15);
                 break;
             case "usernameEmailRed":
                 inputUsernameEmail.setBackground(getResources().getDrawable(R.drawable.inputloginred));
-                inputUsernameEmail.setPaddingRelative(dpToPx(20), dpToPx(15), dpToPx(20), dpToPx(15));
+                inputUsernameEmail.setPaddingRelative(dp20, dp15, dp20, dp15);
                 break;
             case "password":
                 inputPassword.setBackground(getResources().getDrawable(R.drawable.inputlogin));
-                inputPassword.setPaddingRelative(dpToPx(20), dpToPx(15), dpToPx(20), dpToPx(15));
+                inputPassword.setPaddingRelative(dp20, dp15, dp20, dp15);
                 break;
             case "passwordRed":
                 inputPassword.setBackground(getResources().getDrawable(R.drawable.inputloginred));
-                inputPassword.setPaddingRelative(dpToPx(20), dpToPx(15), dpToPx(20), dpToPx(15));
+                inputPassword.setPaddingRelative(dp20, dp15, dp20, dp15);
                 break;
         }
     }
@@ -144,34 +148,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public boolean login() {
         Cursor eredmeny = db.selectLogin(inputUsernameEmail.getText().toString());
         if (eredmeny.getCount() == 1) {
-            if (jelszoEllenorzes()) {
-                while (eredmeny.moveToNext()) {
+            while (eredmeny.moveToNext()) {
+                String userId = eredmeny.getString(0);
+                if (m.jelszoEllenorzes(userId, inputPassword.getText().toString())) {
                     getSharedPreferences("variables",Context.MODE_PRIVATE).edit().putString("userId", eredmeny.getString(0)).apply();
+                    return true;
                 }
-                return true;
             }
         }
         return false;
-    }
-
-    public boolean jelszoEllenorzes() {
-        Cursor eredmeny = db.selectPasswordByUsernameEmail(inputUsernameEmail.getText().toString());
-
-        String password = null;
-        String salt = null;
-
-        if (eredmeny != null && eredmeny.getCount() > 0) {
-            while (eredmeny.moveToNext()) {
-                String[] adatok = eredmeny.getString(0).split(";");
-                password = adatok[0];
-                salt = adatok[1];
-            }
-        }
-        return PasswordUtils.verifyUserPassword(inputPassword.getText().toString(), password, salt);
-    }
-
-    public int dpToPx(int dp) {
-        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, getResources().getDisplayMetrics()));
     }
 
     @Override

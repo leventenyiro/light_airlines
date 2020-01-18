@@ -5,11 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,14 +17,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.leventenyiro.lightairlines.segedOsztalyok.Database;
-
-import java.util.regex.Pattern;
+import com.leventenyiro.lightairlines.segedOsztalyok.Metodus;
 
 public class Reg1Activity extends AppCompatActivity implements View.OnClickListener {
     private Button btnNext;
     private Database db;
     private EditText inputUsername, inputEmail;
     private ImageView btnBack, btnHome;
+    private Metodus m;
     private SharedPreferences s;
     private SharedPreferences.Editor se;
     private TextView btnLogin;
@@ -76,6 +75,7 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
         inputUsername = findViewById(R.id.inputUsername);
         inputEmail = findViewById(R.id.inputEmail);
         db = new Database(this);
+        m = new Metodus(this);
         s = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
         se = s.edit();
     }
@@ -89,11 +89,11 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
                 onBackPressed();
                 break;
             case R.id.btnNext:
-                if (vanEUsername()) {
+                if (m.vanEUsername(inputUsername.getText().toString())) {
                     Toast.makeText(this, "A felhasználónév foglalt!", Toast.LENGTH_LONG).show();
                     inputSzin("usernameRed");
                 }
-                else if (!usernameEllenorzes(inputUsername.getText().toString())) {
+                else if (!m.usernameEllenorzes(inputUsername.getText().toString())) {
                     Toast.makeText(this, "A felhasználónév túl rövid!", Toast.LENGTH_LONG).show();
                     inputSzin("usernameRed");
                 }
@@ -101,7 +101,7 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
                     Toast.makeText(this, "Nincs megadva felhasználónév!", Toast.LENGTH_LONG).show();
                     inputSzin("usernameRed");
                 }
-                else if (vanEEmail()) {
+                else if (m.vanEEmail(inputEmail.getText().toString())) {
                     Toast.makeText(this, "Az e-mail cím foglalt!", Toast.LENGTH_LONG).show();
                     inputSzin("usernameGreen");
                     inputSzin("emailRed");
@@ -111,7 +111,7 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
                     inputSzin("usernameGreen");
                     inputSzin("emailRed");
                 }
-                else if (!emailEllenorzes(inputEmail.getText().toString())) {
+                else if (!m.emailEllenorzes(inputEmail.getText().toString())) {
                     Toast.makeText(this, "Helytelen e-mail cím!", Toast.LENGTH_LONG).show();
                     inputSzin("usernameGreen");
                     inputSzin("emailRed");
@@ -131,56 +131,33 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void inputSzin(String mod) {
+        Resources r = getResources();
         switch (mod) {
             case "username":
                 inputUsername.setBackground(getResources().getDrawable(R.drawable.input));
-                inputUsername.setPaddingRelative(dpToPx(20), dpToPx(15), dpToPx(20), dpToPx(15));
+                inputUsername.setPaddingRelative(m.dpToPx(20, r), m.dpToPx(15, r), m.dpToPx(20, r), m.dpToPx(15, r));
                 break;
             case "usernameGreen":
                 inputUsername.setBackground(getResources().getDrawable(R.drawable.inputgreen));
-                inputUsername.setPaddingRelative(dpToPx(20), dpToPx(15), dpToPx(20), dpToPx(15));
+                inputUsername.setPaddingRelative(m.dpToPx(20, r), m.dpToPx(15, r), m.dpToPx(20, r), m.dpToPx(15, r));
                 break;
             case "usernameRed":
                 inputUsername.setBackground(getResources().getDrawable(R.drawable.inputred));
-                inputUsername.setPaddingRelative(dpToPx(20), dpToPx(15), dpToPx(20), dpToPx(15));
+                inputUsername.setPaddingRelative(m.dpToPx(20, r), m.dpToPx(15, r), m.dpToPx(20, r), m.dpToPx(15, r));
                 break;
             case "email":
                 inputEmail.setBackground(getResources().getDrawable(R.drawable.input));
-                inputEmail.setPaddingRelative(dpToPx(20), dpToPx(15), dpToPx(20), dpToPx(15));
+                inputEmail.setPaddingRelative(m.dpToPx(20, r), m.dpToPx(15, r), m.dpToPx(20, r), m.dpToPx(15, r));
                 break;
             case "emailGreen":
                 inputEmail.setBackground(getResources().getDrawable(R.drawable.inputgreen));
-                inputEmail.setPaddingRelative(dpToPx(20), dpToPx(15), dpToPx(20), dpToPx(15));
+                inputEmail.setPaddingRelative(m.dpToPx(20, r), m.dpToPx(15, r), m.dpToPx(20, r), m.dpToPx(15, r));
                 break;
             case "emailRed":
                 inputEmail.setBackground(getResources().getDrawable(R.drawable.inputred));
-                inputEmail.setPaddingRelative(dpToPx(20), dpToPx(15), dpToPx(20), dpToPx(15));
+                inputEmail.setPaddingRelative(m.dpToPx(20, r), m.dpToPx(15, r), m.dpToPx(20, r), m.dpToPx(15, r));
                 break;
         }
-    }
-
-    public boolean usernameEllenorzes(String username) {
-        return username.length() >= 5;
-    }
-
-    public boolean emailEllenorzes(String email) {
-        String emailPattern = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
-        Pattern pattern = Pattern.compile(emailPattern);
-        return pattern.matcher(email).matches();
-    }
-
-    public boolean vanEUsername() {
-        Cursor eredmeny = db.selectUsername(inputUsername.getText().toString());
-        return eredmeny.getCount() == 1;
-    }
-
-    public boolean vanEEmail() {
-        Cursor eredmeny = db.selectEmail(inputEmail.getText().toString());
-        return eredmeny.getCount() == 1;
-    }
-
-    public int dpToPx(int dp) {
-        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, getResources().getDisplayMetrics()));
     }
 
     @Override

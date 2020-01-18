@@ -8,7 +8,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -16,6 +15,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.leventenyiro.lightairlines.segedOsztalyok.Metodus;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -25,6 +26,8 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
     private DatePicker inputBirthdate;
     private EditText inputFirstname, inputLastname;
     private ImageView btnBack, btnHome;
+    private int dp15, dp20;
+    private Metodus m;
     private SharedPreferences s;
     private SharedPreferences.Editor se;
     private TextView btnLogin;
@@ -81,6 +84,9 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
         inputBirthdate = findViewById(R.id.inputBirthdate);
         inputBirthdate.setMaxDate(System.currentTimeMillis());
         inputBirthdate.updateDate(2000,00,01);
+        m = new Metodus(this);
+        dp15 = m.dpToPx(15, getResources());
+        dp20 = m.dpToPx(20, getResources());
         s = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
         se = s.edit();
     }
@@ -111,8 +117,8 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
                 else {
                     inputSzin("firstnameGreen");
                     inputSzin("lastnameGreen");
-                    se.putString("firstname", elsoNagybetu(inputFirstname.getText().toString()).trim());
-                    se.putString("lastname", elsoNagybetu(inputLastname.getText().toString()).trim());
+                    se.putString("firstname", m.elsoNagybetu(inputFirstname.getText().toString()).trim());
+                    se.putString("lastname", m.elsoNagybetu(inputLastname.getText().toString()).trim());
                     se.putString("birthdate", birthdateToString(inputBirthdate.getYear(), inputBirthdate.getMonth(), inputBirthdate.getDayOfMonth()));
                     se.apply();
                     Intent intent = new Intent(Reg2Activity.this, Reg3Activity.class);
@@ -122,15 +128,34 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public String elsoNagybetu(String nev) {
-        String[] nevek = nev.split(" ");
-        String ujNev = "";
-        for (String s : nevek) {
-            ujNev += s.toUpperCase().charAt(0) + s.toLowerCase().substring(1, s.length()) + " ";
+    public void inputSzin(String mod) {
+        switch (mod) {
+            case "firstname":
+                inputFirstname.setBackground(getResources().getDrawable(R.drawable.input));
+                inputFirstname.setPaddingRelative(dp20, dp15, dp20, dp15);
+                break;
+            case "firstnameGreen":
+                inputFirstname.setBackground(getResources().getDrawable(R.drawable.inputgreen));
+                inputFirstname.setPaddingRelative(dp20, dp15, dp20, dp15);
+                break;
+            case "firstnameRed":
+                inputFirstname.setBackground(getResources().getDrawable(R.drawable.inputred));
+                inputFirstname.setPaddingRelative(dp20, dp15, dp20, dp15);
+                break;
+            case "lastname":
+                inputLastname.setBackground(getResources().getDrawable(R.drawable.input));
+                inputLastname.setPaddingRelative(dp20, dp15, dp20, dp15);
+                break;
+            case "lastnameGreen":
+                inputLastname.setBackground(getResources().getDrawable(R.drawable.inputgreen));
+                inputLastname.setPaddingRelative(dp20, dp15, dp20, dp15);
+                break;
+            case "lastnameRed":
+                inputLastname.setBackground(getResources().getDrawable(R.drawable.inputred));
+                inputLastname.setPaddingRelative(dp20, dp15, dp20, dp15);
+                break;
         }
-        return ujNev;
     }
-
 
     public boolean korEllenorzes(int year, int month, int day) {
         Calendar today = GregorianCalendar.getInstance();
@@ -146,39 +171,6 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
 
     public String birthdateToString(int year, int month, int day) {
         return year + "-" + (month + 1) + "-" + day;
-    }
-
-    public void inputSzin(String mod) {
-        switch (mod) {
-            case "firstname":
-                inputFirstname.setBackground(getResources().getDrawable(R.drawable.input));
-                inputFirstname.setPaddingRelative(dpToPx(20), dpToPx(15), dpToPx(20), dpToPx(15));
-                break;
-            case "firstnameGreen":
-                inputFirstname.setBackground(getResources().getDrawable(R.drawable.inputgreen));
-                inputFirstname.setPaddingRelative(dpToPx(20), dpToPx(15), dpToPx(20), dpToPx(15));
-                break;
-            case "firstnameRed":
-                inputFirstname.setBackground(getResources().getDrawable(R.drawable.inputred));
-                inputFirstname.setPaddingRelative(dpToPx(20), dpToPx(15), dpToPx(20), dpToPx(15));
-                break;
-            case "lastname":
-                inputLastname.setBackground(getResources().getDrawable(R.drawable.input));
-                inputLastname.setPaddingRelative(dpToPx(20), dpToPx(15), dpToPx(20), dpToPx(15));
-                break;
-            case "lastnameGreen":
-                inputLastname.setBackground(getResources().getDrawable(R.drawable.inputgreen));
-                inputLastname.setPaddingRelative(dpToPx(20), dpToPx(15), dpToPx(20), dpToPx(15));
-                break;
-            case "lastnameRed":
-                inputLastname.setBackground(getResources().getDrawable(R.drawable.inputred));
-                inputLastname.setPaddingRelative(dpToPx(20), dpToPx(15), dpToPx(20), dpToPx(15));
-                break;
-        }
-    }
-
-    public int dpToPx(int dp) {
-        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, getResources().getDisplayMetrics()));
     }
 
     @Override
