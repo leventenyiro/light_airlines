@@ -46,7 +46,7 @@
         <activity
             android:name=".PasswordUpdate"
             android:screenOrientation="portrait"
-            android:theme="@style/InnerTheme" />
+            android:theme="@style/InfoTheme" />
         <activity
             android:name=".JaratActivity"
             android:screenOrientation="portrait"

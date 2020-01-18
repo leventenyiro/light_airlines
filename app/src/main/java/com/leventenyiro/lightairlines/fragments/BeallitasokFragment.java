@@ -75,12 +75,10 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
             @Override
             public void afterTextChanged(Editable s) { }
         });
-
         btnUpdate.setOnClickListener(this);
         btnCancel.setOnClickListener(this);
         btnLogout.setOnClickListener(this);
         btnPasswordUpdate.setOnClickListener(this);
-
         return root;
     }
 
@@ -172,7 +170,6 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
             case R.id.btnPasswordUpdate:
                 Intent intent = new Intent(getActivity(), PasswordUpdate.class);
                 startActivity(intent);
-                getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 break;
             case R.id.btnLogout:
                 getActivity().onBackPressed();

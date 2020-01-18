@@ -3,7 +3,6 @@ package com.leventenyiro.lightairlines;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Editable;
@@ -15,16 +14,16 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.leventenyiro.lightairlines.segedOsztalyok.Database;
+import com.leventenyiro.lightairlines.segedOsztalyok.Metodus;
 import com.leventenyiro.lightairlines.segedOsztalyok.PasswordUtils;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class PasswordUpdate extends AppCompatActivity implements View.OnClickListener{
     private Button btnCancel, btnUpdate;
     private Database db;
     private EditText inputOldPassword, inputPassword, inputPasswordAgain;
     private ImageView btnBack;
+    private int dp15, dp20;
+    private Metodus m;
     private String userId;
 
     @Override
@@ -32,16 +31,14 @@ public class PasswordUpdate extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_passwordupdate);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-
         init();
-
         inputOldPassword.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 inputOldPassword.setBackground(getResources().getDrawable(R.drawable.input));
-                inputOldPassword.setPaddingRelative(70, 40, 40, 40);
+                inputOldPassword.setPaddingRelative(dp20, dp15, dp20, dp15);
             }
             @Override
             public void afterTextChanged(Editable s) { }
@@ -52,7 +49,7 @@ public class PasswordUpdate extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 inputPassword.setBackground(getResources().getDrawable(R.drawable.input));
-                inputPassword.setPaddingRelative(70, 40, 40, 40);
+                inputPassword.setPaddingRelative(dp20, dp15, dp20, dp15);
             }
             @Override
             public void afterTextChanged(Editable s) { }
@@ -63,12 +60,11 @@ public class PasswordUpdate extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 inputPasswordAgain.setBackground(getResources().getDrawable(R.drawable.input));
-                inputPasswordAgain.setPaddingRelative(70, 40, 40, 40);
+                inputPasswordAgain.setPaddingRelative(dp20, dp15, dp20, dp15);
             }
             @Override
             public void afterTextChanged(Editable s) { }
         });
-
         btnBack.setOnClickListener(this);
         btnCancel.setOnClickListener(this);
         btnUpdate.setOnClickListener(this);
@@ -82,14 +78,16 @@ public class PasswordUpdate extends AppCompatActivity implements View.OnClickLis
         btnCancel = findViewById(R.id.btnCancel);
         btnUpdate = findViewById(R.id.btnUpdate);
         db = new Database(this);
-        SharedPreferences sharedPreferences = getSharedPreferences("variables", Context.MODE_PRIVATE);
-        userId = sharedPreferences.getString("userId", "");
+        m = new Metodus(this);
+        dp15 = m.dpToPx(15, getResources());
+        dp20 = m.dpToPx(20, getResources());
+        userId = getSharedPreferences("variables", Context.MODE_PRIVATE).getString("userId", "");
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btnBack: onBackPressed(); break;
+            case R.id.btnBack:
             case R.id.btnCancel: onBackPressed(); break;
             case R.id.btnUpdate:
                 if (inputOldPassword.getText().toString().isEmpty()) {
@@ -100,7 +98,7 @@ public class PasswordUpdate extends AppCompatActivity implements View.OnClickLis
                     Toast.makeText(this, "Helytelen a régi jelszó!", Toast.LENGTH_SHORT).show();
                     inputClear();
                 }
-                else if (!jelszoErossegEllenorzes(inputPassword.getText().toString())) {
+                else if (!m.jelszoErossegEllenorzes(inputPassword.getText().toString())) {
                     Toast.makeText(this, "Gyenge jelszó!", Toast.LENGTH_SHORT).show();
                     inputClear();
                 }
@@ -132,10 +130,8 @@ public class PasswordUpdate extends AppCompatActivity implements View.OnClickLis
 
     public boolean jelszoEllenorzes() {
         Cursor eredmeny = db.selectPasswordById(userId);
-
         String password = null;
         String salt = null;
-
         if (eredmeny != null && eredmeny.getCount() > 0) {
             while (eredmeny.moveToNext()) {
                 String[] adatok = eredmeny.getString(0).split(";");
@@ -150,26 +146,14 @@ public class PasswordUpdate extends AppCompatActivity implements View.OnClickLis
         String salt = PasswordUtils.getSalt(30);
         String titkositottPassword = PasswordUtils.generateSecurePassword(inputPassword.getText().toString(), salt);
         String password = titkositottPassword + ";" + salt;
-
         if (db.updatePassword(userId, password))
             Toast.makeText(this, "Sikeres jelszómódosítás!", Toast.LENGTH_LONG);
         else
             Toast.makeText(this, "Szerverhiba! Sikertelen jelszómódosítás!", Toast.LENGTH_SHORT).show();
     }
 
-    public boolean jelszoErossegEllenorzes(String password) {
-        String passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{4,}$";
-
-        Pattern pattern = Pattern.compile(passwordPattern);
-        Matcher matcher = pattern.matcher(password);
-
-        return matcher.matches();
-    }
-
-
     @Override
     public void onBackPressed() {
         finish();
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 }
