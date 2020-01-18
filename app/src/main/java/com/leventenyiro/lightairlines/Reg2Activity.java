@@ -99,17 +99,17 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btnHome:
             case R.id.btnLogin:
-                finishAffinity();
+                backToLogin();
                 break;
             case R.id.btnNext:
                 if (inputFirstname.getText().toString().isEmpty()) {
                     inputSzin("firstnameRed");
-                    Toast.makeText(this, "Nincs megadva keresztnév!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Nincs megadva keresztnév!", Toast.LENGTH_LONG).show();
                 }
                 else if (inputLastname.getText().toString().isEmpty()) {
                     inputSzin("firstnameGreen");
                     inputSzin("lastnameRed");
-                    Toast.makeText(this, "Nincs megadva vezetéknév!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Nincs megadva vezetéknév!", Toast.LENGTH_LONG).show();
                 }
                 else if (!korEllenorzes(inputBirthdate.getYear(), inputBirthdate.getMonth(), inputBirthdate.getDayOfMonth())) {
                     Toast.makeText(Reg2Activity.this, "13 éven aluliak nem regisztrálhatnak!", Toast.LENGTH_LONG).show();
@@ -123,6 +123,7 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
                     se.apply();
                     Intent intent = new Intent(Reg2Activity.this, Reg3Activity.class);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 }
                 break;
         }
@@ -163,9 +164,8 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
         int todayMonth = today.get(Calendar.MONTH);
         int todayDay = today.get(Calendar.DAY_OF_MONTH);
         int age = todayYear - year;
-        if (month > todayMonth || month == todayMonth && day > todayDay) {
+        if (month > todayMonth || month == todayMonth && day > todayDay)
             age--;
-        }
         return age >= 13;
     }
 
@@ -175,15 +175,17 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onBackPressed() {
+        Intent intent = new Intent(Reg2Activity.this, Reg1Activity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         finish();
     }
 
-    @Override
-    public void finishAffinity() {
+    public void backToLogin() {
         se.clear().apply();
         Intent intent = new Intent(Reg2Activity.this, LoginActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-        super.finishAffinity();
+        finish();
     }
 }

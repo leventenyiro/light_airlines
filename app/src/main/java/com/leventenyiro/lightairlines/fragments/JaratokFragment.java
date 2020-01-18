@@ -132,6 +132,7 @@ public class JaratokFragment extends Fragment {
                         Intent intent = new Intent(getActivity(), JaratActivity.class);
                         startActivity(intent);
                         getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                        getActivity().finish();
                     }
                 });
                 card.setId(card.generateViewId());

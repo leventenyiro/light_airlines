@@ -89,9 +89,7 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.btnBack:
             case R.id.btnHome:
-            case R.id.btnLogin:
-                onBackPressed();
-                break;
+            case R.id.btnLogin: onBackPressed(); break;
             case R.id.btnNext:
                 if (vanEUsername()) {
                     Toast.makeText(this, "A felhasználónév foglalt!", Toast.LENGTH_LONG).show();
@@ -126,16 +124,16 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
                     se.putString("username", inputUsername.getText().toString());
                     se.putString("email", inputEmail.getText().toString());
                     se.apply();
-
                     intent = new Intent(Reg1Activity.this, Reg2Activity.class);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                    finish();
                 }
                 break;
         }
     }
 
     public void inputSzin(String mod) {
-        Resources r = getResources();
         switch (mod) {
             case "username":
                 inputUsername.setBackground(getResources().getDrawable(R.drawable.input));

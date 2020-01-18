@@ -54,7 +54,6 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
             @Override
             public void afterTextChanged(Editable s) { }
         });
-
         inputFirstname.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
@@ -146,14 +145,14 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
                         inputSzin("usernameGreen");
                         inputSzin("emailGreen");
                         inputSzin("firstnameRed");
-                        Toast.makeText(getActivity(), "Nincs megadva keresztnév!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Nincs megadva keresztnév!", Toast.LENGTH_LONG).show();
                     }
                     else if (inputLastname.getText().toString().isEmpty()) {
                         inputSzin("usernameGreen");
                         inputSzin("emailGreen");
                         inputSzin("firstnameGreen");
                         inputSzin("lastnameRed");
-                        Toast.makeText(getActivity(), "Nincs megadva vezetéknév!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Nincs megadva vezetéknév!", Toast.LENGTH_LONG).show();
                     }
                     else {
                         inputsDisable();
@@ -170,6 +169,8 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
             case R.id.btnPasswordUpdate:
                 Intent intent = new Intent(getActivity(), PasswordUpdate.class);
                 startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                getActivity().finish();
                 break;
             case R.id.btnLogout:
                 getActivity().onBackPressed();

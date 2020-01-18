@@ -51,10 +51,10 @@ public class Megerosites extends AppCompatActivity implements View.OnClickListen
             case R.id.btnCancel: onBackPressed(); break;
             case R.id.btnVerify:
                 if (inputPassword.getText().toString().isEmpty()) {
-                    Toast.makeText(this, "Nincs megadva jelszó!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Nincs megadva jelszó!", Toast.LENGTH_LONG).show();
                 }
                 else if (!m.jelszoEllenorzes(s.getString("userId", ""), inputPassword.getText().toString())) {
-                    Toast.makeText(this, "Sikertelen jóváhagyás!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Sikertelen jóváhagyás!", Toast.LENGTH_LONG).show();
                     inputPassword.setText("");
                 }
                 else {
@@ -63,7 +63,7 @@ public class Megerosites extends AppCompatActivity implements View.OnClickListen
                     Intent intent = new Intent(Megerosites.this, InnerActivity.class);
                     startActivity(intent);
                     overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-                    finishAffinity();
+                    finish();
                 }
                 break;
         }
@@ -71,13 +71,16 @@ public class Megerosites extends AppCompatActivity implements View.OnClickListen
 
     public void deleteJegy() {
         if (db.deleteJegy(s.getString("foglalasId", "")))
-            Toast.makeText(this, "Sikeres jegytörlés!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Sikeres jegytörlés!", Toast.LENGTH_LONG).show();
         else
-            Toast.makeText(this, "Szerverhiba! Sikertelen jegytörlés!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Szerverhiba! Sikertelen jegytörlés!", Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onBackPressed() {
+        Intent intent = new Intent(Megerosites.this,JegyActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         finish();
     }
 }

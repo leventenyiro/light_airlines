@@ -16,7 +16,7 @@
         <activity
             android:name=".LoadingActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/LoadingTheme">
+            android:theme="@style/BlueTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,43 +26,43 @@
         <activity
             android:name=".LoginActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/LoginTheme" />
+            android:theme="@style/GrayTheme" />
         <activity
             android:name=".Reg1Activity"
             android:screenOrientation="portrait"
-            android:theme="@style/RegistrationTheme" />
+            android:theme="@style/WhiteGrayTheme" />
         <activity
             android:name=".Reg2Activity"
             android:screenOrientation="portrait"
-            android:theme="@style/RegistrationTheme" />
+            android:theme="@style/WhiteGrayTheme" />
         <activity
             android:name=".Reg3Activity"
             android:screenOrientation="portrait"
-            android:theme="@style/RegistrationTheme" />
+            android:theme="@style/WhiteGrayTheme" />
         <activity
             android:name=".InnerActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/InnerTheme" />
+            android:theme="@style/WhiteTheme" />
         <activity
             android:name=".PasswordUpdate"
             android:screenOrientation="portrait"
-            android:theme="@style/InfoTheme" />
+            android:theme="@style/WhiteTheme" />
         <activity
             android:name=".JaratActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/InfoTheme" />
+            android:theme="@style/WhiteTheme" />
         <activity
             android:name=".FoglalasActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/InfoTheme" />
+            android:theme="@style/WhiteTheme" />
         <activity
             android:name=".JegyActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/InfoTheme" />
+            android:theme="@style/WhiteTheme" />
         <activity
             android:name=".Megerosites"
             android:screenOrientation="portrait"
-            android:theme="@style/MegerositesTheme" />
+            android:theme="@style/GrayTheme" />
     </application>
 
 </manifest>

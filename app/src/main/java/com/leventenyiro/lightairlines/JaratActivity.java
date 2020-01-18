@@ -58,6 +58,7 @@ public class JaratActivity extends AppCompatActivity implements View.OnClickList
                 Intent intent = new Intent(JaratActivity.this, FoglalasActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                finish();
         }
     }
 
@@ -77,6 +78,9 @@ public class JaratActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onBackPressed() {
         s.edit().remove("jaratId").apply();
+        Intent intent = new Intent(JaratActivity.this, InnerActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         finish();
     }
 }

@@ -3,6 +3,7 @@ package com.leventenyiro.lightairlines;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Editable;
@@ -91,27 +92,27 @@ public class PasswordUpdate extends AppCompatActivity implements View.OnClickLis
             case R.id.btnCancel: onBackPressed(); break;
             case R.id.btnUpdate:
                 if (inputOldPassword.getText().toString().isEmpty()) {
-                    Toast.makeText(this, "Nincs megadva a régi jelszó!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Nincs megadva a régi jelszó!", Toast.LENGTH_LONG).show();
                     inputClear();
                 }
                 else if (!jelszoEllenorzes()) {
-                    Toast.makeText(this, "Helytelen a régi jelszó!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Helytelen a régi jelszó!", Toast.LENGTH_LONG).show();
                     inputClear();
                 }
                 else if (!m.jelszoErossegEllenorzes(inputPassword.getText().toString())) {
-                    Toast.makeText(this, "Gyenge jelszó!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Gyenge jelszó!", Toast.LENGTH_LONG).show();
                     inputClear();
                 }
                 else if (inputPassword.getText().toString().isEmpty()) {
-                    Toast.makeText(this, "Nincs megadva jelszó!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Nincs megadva jelszó!", Toast.LENGTH_LONG).show();
                     inputClear();
                 }
                 else if (inputPasswordAgain.getText().toString().isEmpty()) {
-                    Toast.makeText(this, "Ismételd meg a jelszót!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Ismételd meg a jelszót!", Toast.LENGTH_LONG).show();
                     inputClear();
                 }
                 else if (!inputPassword.getText().toString().equals(inputPasswordAgain.getText().toString())) {
-                    Toast.makeText(this, "A két jelszó nem egyezik!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "A két jelszó nem egyezik!", Toast.LENGTH_LONG).show();
                     inputClear();
                 }
                 else {
@@ -149,11 +150,14 @@ public class PasswordUpdate extends AppCompatActivity implements View.OnClickLis
         if (db.updatePassword(userId, password))
             Toast.makeText(this, "Sikeres jelszómódosítás!", Toast.LENGTH_LONG);
         else
-            Toast.makeText(this, "Szerverhiba! Sikertelen jelszómódosítás!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Szerverhiba! Sikertelen jelszómódosítás!", Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onBackPressed() {
+        Intent intent = new Intent(PasswordUpdate.this, InnerActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         finish();
     }
 }

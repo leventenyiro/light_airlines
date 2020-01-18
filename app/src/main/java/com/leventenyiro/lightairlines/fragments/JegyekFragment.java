@@ -104,6 +104,7 @@ public class JegyekFragment extends Fragment {
                         Intent intent = new Intent(getActivity(), JegyActivity.class);
                         startActivity(intent);
                         getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                        getActivity().finish();
                     }
                 });
                 card.setId(card.generateViewId());

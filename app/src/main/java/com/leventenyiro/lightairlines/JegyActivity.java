@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.leventenyiro.lightairlines.fragments.JegyekFragment;
 import com.leventenyiro.lightairlines.segedOsztalyok.Database;
 import com.leventenyiro.lightairlines.segedOsztalyok.Metodus;
 
@@ -29,7 +30,6 @@ public class JegyActivity extends AppCompatActivity implements View.OnClickListe
     private SharedPreferences s;
     private TextView textRovidites, textNev, textIdopont, textIdotartam, textUles;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,20 +41,6 @@ public class JegyActivity extends AppCompatActivity implements View.OnClickListe
         setFenyesseg(255);
         btnBack.setOnClickListener(this);
         btnDelete.setOnClickListener(this);
-    }
-
-    private void setFenyesseg(int brightness) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (Settings.System.canWrite(getApplicationContext())) {
-                Settings.System.putInt(getApplicationContext().getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, brightness);
-            }
-            else {
-                Intent intent = new Intent(android.provider.Settings.ACTION_MANAGE_WRITE_SETTINGS);
-                intent.setData(Uri.parse("package:" + getPackageName()));
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-            }
-        }
     }
 
     private void init() {
@@ -78,7 +64,23 @@ public class JegyActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btnDelete:
                 setFenyesseg(brightness);
                 Intent intent = new Intent(JegyActivity.this, Megerosites.class);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 startActivity(intent);
+                finish();
+        }
+    }
+
+    private void setFenyesseg(int brightness) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (Settings.System.canWrite(getApplicationContext())) {
+                Settings.System.putInt(getApplicationContext().getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, brightness);
+            }
+            else {
+                Intent intent = new Intent(android.provider.Settings.ACTION_MANAGE_WRITE_SETTINGS);
+                intent.setData(Uri.parse("package:" + getPackageName()));
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
         }
     }
 
@@ -99,6 +101,9 @@ public class JegyActivity extends AppCompatActivity implements View.OnClickListe
     public void onBackPressed() {
         setFenyesseg(brightness);
         s.edit().remove("foglalasId").apply();
+        Intent intent = new Intent(JegyActivity.this, InnerActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         finish();
     }
 }

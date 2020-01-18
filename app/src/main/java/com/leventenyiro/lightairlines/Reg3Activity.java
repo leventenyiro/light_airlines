@@ -86,34 +86,30 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId())
         {
-            case R.id.btnBack:
-                onBackPressed();
-                break;
+            case R.id.btnBack: onBackPressed(); break;
             case R.id.btnHome:
-            case R.id.btnLogin:
-                finishAffinity();
-                break;
+            case R.id.btnLogin: backToLogin(); break;
             case R.id.btnReg:
                 if (inputPassword.getText().toString().isEmpty()) {
-                    Toast.makeText(this, "Nincs megadva jelszó!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Nincs megadva jelszó!", Toast.LENGTH_LONG).show();
                     inputClear();
                 }
                 else if (inputPasswordAgain.getText().toString().isEmpty()) {
-                    Toast.makeText(this, "Ismételd meg a jelszót!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Ismételd meg a jelszót!", Toast.LENGTH_LONG).show();
                     inputClear();
                 }
                 else if (!inputPassword.getText().toString().equals(inputPasswordAgain.getText().toString())) {
-                    Toast.makeText(this, "A két jelszó nem egyezik!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "A két jelszó nem egyezik!", Toast.LENGTH_LONG).show();
                     inputClear();
                 }
                 else if (!m.jelszoErossegEllenorzes(inputPassword.getText().toString())) {
-                    Toast.makeText(this, "Gyenge jelszó!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Gyenge jelszó!", Toast.LENGTH_LONG).show();
                     inputClear();
                 }
                 else {
                     se.putString("password", inputPassword.getText().toString()).apply();
                     insertUser();
-                    finishAffinity();
+                    backToLogin();
                 }
                 break;
         }
@@ -139,20 +135,22 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
         if (eredmeny)
             Toast.makeText(this, "Sikeres regisztráció!", Toast.LENGTH_LONG);
         else
-            Toast.makeText(this, "Szerverhiba! Sikertelen regisztráció!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Szerverhiba! Sikertelen regisztráció!", Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onBackPressed() {
+        Intent intent = new Intent(Reg3Activity.this, Reg2Activity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         finish();
     }
 
-    @Override
-    public void finishAffinity() {
+    public void backToLogin() {
         se.clear().apply();
         Intent intent = new Intent(Reg3Activity.this, LoginActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-        super.finishAffinity();
+        finish();
     }
 }

@@ -80,7 +80,7 @@ public class FoglalasActivity extends AppCompatActivity {
                     tv.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Toast.makeText(mContext, "Ez a hely már foglalt!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mContext, "Ez a hely már foglalt!", Toast.LENGTH_LONG).show();
                         }
                     });
                 }
@@ -124,7 +124,7 @@ public class FoglalasActivity extends AppCompatActivity {
                     tv.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Toast.makeText(mContext, "Ez a hely már foglalt!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mContext, "Ez a hely már foglalt!", Toast.LENGTH_LONG).show();
                         }
                     });
                 }
@@ -155,7 +155,7 @@ public class FoglalasActivity extends AppCompatActivity {
                     alertDialog.show();
                 }
                 else {
-                    Toast.makeText(mContext, "Nincs kiválasztott hely!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, "Nincs kiválasztott hely!", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -197,16 +197,10 @@ public class FoglalasActivity extends AppCompatActivity {
                 Intent intent = new Intent(FoglalasActivity.this, InnerActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                finishAffinity();
+                finish();
             }
         });
         alertDialog = alertDialogBuilder.create();
-    }
-
-    @Override
-    public void onBackPressed() {
-        s.edit().remove("ules").apply();
-        finish();
     }
 
     public String ulesKodolas(int szam) {
@@ -278,8 +272,17 @@ public class FoglalasActivity extends AppCompatActivity {
         if (eredmeny)
             Toast.makeText(this, "Sikeres foglalás!", Toast.LENGTH_LONG);
         else
-            Toast.makeText(this, "Szerverhiba! Sikertelen foglalás!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Szerverhiba! Sikertelen foglalás!", Toast.LENGTH_LONG).show();
         s.edit().remove("jaratId").apply();
         s.edit().remove("ules").apply();
+    }
+
+    @Override
+    public void onBackPressed() {
+        s.edit().remove("ules").apply();
+        Intent intent = new Intent(FoglalasActivity.this, JaratActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        finish();
     }
 }
