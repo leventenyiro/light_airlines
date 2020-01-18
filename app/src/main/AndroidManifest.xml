@@ -62,7 +62,7 @@
         <activity
             android:name=".Megerosites"
             android:screenOrientation="portrait"
-            android:theme="@style/LoginTheme" />
+            android:theme="@style/MegerositesTheme" />
     </application>
 
 </manifest>

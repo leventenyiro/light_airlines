@@ -1,5 +1,6 @@
 package com.leventenyiro.lightairlines;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -54,6 +55,7 @@ public class InnerActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        getSharedPreferences("variables", Context.MODE_PRIVATE).edit().remove("userId").apply();
         alertDialog.show();
     }
 }

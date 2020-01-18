@@ -15,17 +15,20 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.leventenyiro.lightairlines.segedOsztalyok.Database;
+import com.leventenyiro.lightairlines.segedOsztalyok.Metodus;
 
 public class JegyActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button btnDelete;
     private Database db;
     private ImageView btnBack;
-    private TextView textRovidites, textNev, textIdopont, textIdotartam, textUles;
     private int brightness;
+    private Metodus m;
+    private SharedPreferences s;
+    private TextView textRovidites, textNev, textIdopont, textIdotartam, textUles;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,13 +36,9 @@ public class JegyActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_jegy);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
-
         init();
-
         select();
-
         setFenyesseg(255);
-
         btnBack.setOnClickListener(this);
         btnDelete.setOnClickListener(this);
     }
@@ -67,7 +66,8 @@ public class JegyActivity extends AppCompatActivity implements View.OnClickListe
         textIdotartam = findViewById(R.id.textIdotartam);
         textUles = findViewById(R.id.textUles);
         db = new Database(this);
-
+        m = new Metodus(this);
+        s = getSharedPreferences("variables", Context.MODE_PRIVATE);
         brightness = Settings.System.getInt(getApplicationContext().getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, 0);
     }
 
@@ -76,20 +76,20 @@ public class JegyActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.btnBack: onBackPressed(); break;
             case R.id.btnDelete:
+                setFenyesseg(brightness);
                 Intent intent = new Intent(JegyActivity.this, Megerosites.class);
                 startActivity(intent);
         }
     }
 
     private void select() {
-        SharedPreferences sharedPreferences = getSharedPreferences("variables", Context.MODE_PRIVATE);
-        Cursor e = db.selectJegy(sharedPreferences.getString("foglalasId", ""));
+        Cursor e = db.selectJegy(s.getString("foglalasId", ""));
         if (e != null && e.getCount() > 0) {
             while (e.moveToNext()) {
                 textRovidites.setText(e.getString(3) + " - " + e.getString(5));
                 textNev.setText(e.getString(2) + " - " + e.getString(4));
                 textIdopont.setText(e.getString(1).substring(0, 16).replace('-', '.'));
-                textIdotartam.setText(idotartamAtalakitas(e.getString(6)));
+                textIdotartam.setText(m.idotartamAtalakitas(e.getString(6)));
                 textUles.setText("Ülőhely: " + e.getString(0));
             }
         }
@@ -98,17 +98,7 @@ public class JegyActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onBackPressed() {
         setFenyesseg(brightness);
-        getSharedPreferences("variables", Context.MODE_PRIVATE).edit().remove("foglalasId");
-        super.onBackPressed();
-    }
-
-    public String idotartamAtalakitas(String idotartam) {
-        String[] idoresz = idotartam.split(":");
-        if (Integer.parseInt(idoresz[0]) < 10) {
-            return idoresz[0].substring(1, 2) + " óra " + idoresz[1] + " perc";
-        }
-        else {
-            return idoresz[0] + " óra " + idoresz[1] + " perc";
-        }
+        s.edit().remove("foglalasId").apply();
+        finish();
     }
 }

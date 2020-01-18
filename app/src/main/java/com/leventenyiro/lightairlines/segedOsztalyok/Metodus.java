@@ -30,9 +30,6 @@ public final class Metodus {
         return pattern.matcher(email).matches();
     }
 
-
-
-
     public boolean jelszoEllenorzes(String userId, String inputPassword) {
         Cursor eredmeny = db.selectPasswordById(userId);
 
