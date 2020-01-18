@@ -21,8 +21,6 @@ import com.leventenyiro.lightairlines.PasswordUpdate;
 import com.leventenyiro.lightairlines.R;
 import com.leventenyiro.lightairlines.segedOsztalyok.Metodus;
 
-import java.util.regex.Pattern;
-
 public class BeallitasokFragment extends Fragment implements View.OnClickListener {
 
     private Button btnUpdate, btnCancel, btnPasswordUpdate, btnLogout;
@@ -174,7 +172,7 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
             case R.id.btnPasswordUpdate:
                 Intent intent = new Intent(getActivity(), PasswordUpdate.class);
                 startActivity(intent);
-                //getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 break;
             case R.id.btnLogout:
                 getActivity().onBackPressed();
