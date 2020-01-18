@@ -13,29 +13,30 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.leventenyiro.lightairlines.fragments.JegyekFragment;
 import com.leventenyiro.lightairlines.segedOsztalyok.Database;
+import com.leventenyiro.lightairlines.segedOsztalyok.Metodus;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FoglalasActivity extends AppCompatActivity {
 
-    private Context mContext;
-    private RelativeLayout mRelativeLayout;
-    private List<Integer> helyLista;
-    private int sorId;
-    private Button btnFoglalas, btnBack;
-    private TextView tv;
     private AlertDialog alertDialog;
     private AlertDialog.Builder alertDialogBuilder;
+    private Button btnFoglalas, btnBack;
+    private Context mContext;
     private Database db;
+    private int sorId, dp8, dp10, dp35, dp200;
+    private List<Integer> helyLista;
+    private Metodus m;
+    private RelativeLayout mRelativeLayout;
+    private SharedPreferences s;
+    private TextView tv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,16 +50,16 @@ public class FoglalasActivity extends AppCompatActivity {
         int ulesId = 0;
         for (int i = 1; i < 21; i++) {
             LinearLayout ll = new LinearLayout(mContext);
-            RelativeLayout.LayoutParams paramsSor = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, dpToPx(35));
+            RelativeLayout.LayoutParams paramsSor = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, dp35);
             if (i == 1) {
-                paramsSor.setMargins(0, dpToPx(10), 0, dpToPx(10));
+                paramsSor.setMargins(0, dp10, 0, dp10);
                 paramsSor.addRule(RelativeLayout.BELOW, R.id.betuk);
             }
             else {
                 if (i == 20)
-                    paramsSor.setMargins(0, dpToPx(10), 0, dpToPx(200));
+                    paramsSor.setMargins(0, dp10, 0, dp200);
                 else
-                    paramsSor.setMargins(0, dpToPx(10), 0, dpToPx(10));
+                    paramsSor.setMargins(0, dp10, 0, dp10);
                 paramsSor.addRule(RelativeLayout.BELOW, sorId);
             }
             ll.setLayoutParams(paramsSor);
@@ -68,8 +69,8 @@ public class FoglalasActivity extends AppCompatActivity {
             sorId = ll.getId();
             for (int j = 0; j < 3; j++) {
                 tv = new TextView(mContext);
-                LinearLayout.LayoutParams paramsUles = new LinearLayout.LayoutParams(dpToPx(35), LinearLayout.LayoutParams.WRAP_CONTENT);
-                paramsUles.setMargins(dpToPx(8), 0, dpToPx(8), 0);
+                LinearLayout.LayoutParams paramsUles = new LinearLayout.LayoutParams(dp35, LinearLayout.LayoutParams.WRAP_CONTENT);
+                paramsUles.setMargins(dp8, 0, dp8, 0);
                 tv.setLayoutParams(paramsUles);
                 tv.setId(tv.generateViewId());
                 helyLista.add(tv.getId());
@@ -94,10 +95,7 @@ public class FoglalasActivity extends AppCompatActivity {
                                 }
                             }
                             findViewById(helyLista.get(finalUlesId)).setBackground(getResources().getDrawable(R.drawable.ic_seatgreen));
-                            SharedPreferences sharedPreferences = getSharedPreferences("variables", Context.MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putString("ules", ulesKodolas(finalUlesId));
-                            editor.apply();
+                            s.edit().putString("ules", ulesKodolas(finalUlesId)).apply();
                         }
                     });
                 }
@@ -105,7 +103,7 @@ public class FoglalasActivity extends AppCompatActivity {
                 ll.addView(tv);
             }
             tv = new TextView(mContext);
-            LinearLayout.LayoutParams paramsSorszam = new LinearLayout.LayoutParams(dpToPx(35), LinearLayout.LayoutParams.WRAP_CONTENT);
+            LinearLayout.LayoutParams paramsSorszam = new LinearLayout.LayoutParams(dp35, LinearLayout.LayoutParams.WRAP_CONTENT);
             paramsSorszam.setMargins(20, 0, 20, 0);
             paramsSorszam.gravity = Gravity.CENTER;
             tv.setLayoutParams(paramsSorszam);
@@ -115,8 +113,8 @@ public class FoglalasActivity extends AppCompatActivity {
             ll.addView(tv);
             for (int j = 0; j < 3; j++) {
                 tv = new TextView(mContext);
-                LinearLayout.LayoutParams paramsUles = new LinearLayout.LayoutParams(dpToPx(35), LinearLayout.LayoutParams.WRAP_CONTENT);
-                paramsUles.setMargins(dpToPx(8), 0, dpToPx(8), 0);
+                LinearLayout.LayoutParams paramsUles = new LinearLayout.LayoutParams(dp35, LinearLayout.LayoutParams.WRAP_CONTENT);
+                paramsUles.setMargins(dp8, 0, dp8, 0);
                 tv.setLayoutParams(paramsUles);
                 tv.setId(tv.generateViewId());
                 helyLista.add(tv.getId());
@@ -141,10 +139,7 @@ public class FoglalasActivity extends AppCompatActivity {
                                 }
                             }
                             findViewById(helyLista.get(finalUlesId)).setBackground(getResources().getDrawable(R.drawable.ic_seatgreen));
-                            SharedPreferences sharedPreferences = getSharedPreferences("variables", Context.MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putString("ules", ulesKodolas(finalUlesId));
-                            editor.apply();
+                            s.edit().putString("ules", ulesKodolas(finalUlesId)).apply();
                         }
                     });
                 }
@@ -153,11 +148,10 @@ public class FoglalasActivity extends AppCompatActivity {
             }
             mRelativeLayout.addView(ll);
         }
-
         btnFoglalas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!getSharedPreferences("variables", Context.MODE_PRIVATE).getString("ules", "").isEmpty()) {
+                if (!s.getString("ules", "").isEmpty()) {
                     alertDialog.show();
                 }
                 else {
@@ -165,7 +159,6 @@ public class FoglalasActivity extends AppCompatActivity {
                 }
             }
         });
-
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -181,6 +174,12 @@ public class FoglalasActivity extends AppCompatActivity {
         btnFoglalas = findViewById(R.id.btnFoglalas);
         btnBack = findViewById(R.id.btnBack);
         db = new Database(this);
+        m = new Metodus(this);
+        dp8 = m.dpToPx(8, getResources());
+        dp10 = m.dpToPx(10, getResources());
+        dp35 = m.dpToPx(35, getResources());
+        dp200 = m.dpToPx(200, getResources());
+        s = getSharedPreferences("variables", Context.MODE_PRIVATE);
 
         alertDialogBuilder = new AlertDialog.Builder(FoglalasActivity.this);
         alertDialogBuilder.setTitle("Véglegesítés");
@@ -206,12 +205,8 @@ public class FoglalasActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        getSharedPreferences("variables", Context.MODE_PRIVATE).edit().remove("ules");
+        s.edit().remove("ules").apply();
         finish();
-    }
-
-    public int dpToPx(int dp) {
-        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, getResources().getDisplayMetrics()));
     }
 
     public String ulesKodolas(int szam) {
@@ -266,7 +261,7 @@ public class FoglalasActivity extends AppCompatActivity {
 
     public List<String> selectFoglaltHelyek() {
         List<String> foglaltHelyek = new ArrayList<>();
-        Cursor eredmeny = db.selectUlesek(getSharedPreferences("variables", Context.MODE_PRIVATE).getString("jaratId", ""));
+        Cursor eredmeny = db.selectUlesek(s.getString("jaratId", ""));
         if (eredmeny != null && eredmeny.getCount() > 0) {
             while (eredmeny.moveToNext()) {
                 foglaltHelyek.add(eredmeny.getString(0));
@@ -276,16 +271,15 @@ public class FoglalasActivity extends AppCompatActivity {
     }
 
     public void insertFoglalas() {
-        SharedPreferences sharedPreferences = getSharedPreferences("variables", Context.MODE_PRIVATE);
-        String jaratId = sharedPreferences.getString("jaratId", "");
-        String userId = sharedPreferences.getString("userId", "");
-        String ules = sharedPreferences.getString("ules", "");
+        String jaratId = s.getString("jaratId", "");
+        String userId = s.getString("userId", "");
+        String ules = s.getString("ules", "");
         Boolean eredmeny = db.insertFoglalas(jaratId, userId, ules);
         if (eredmeny)
             Toast.makeText(this, "Sikeres foglalás!", Toast.LENGTH_LONG);
         else
             Toast.makeText(this, "Szerverhiba! Sikertelen foglalás!", Toast.LENGTH_SHORT).show();
-        sharedPreferences.edit().remove("jaratId").apply();
-        sharedPreferences.edit().remove("ules").apply();
+        s.edit().remove("jaratId").apply();
+        s.edit().remove("ules").apply();
     }
 }

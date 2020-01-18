@@ -13,23 +13,23 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.leventenyiro.lightairlines.segedOsztalyok.Database;
+import com.leventenyiro.lightairlines.segedOsztalyok.Metodus;
 
 public class JaratActivity extends AppCompatActivity implements View.OnClickListener {
     private Button btnHelyFoglalas, btnMegse;
     private Database db;
     private ImageView btnBack;
+    private Metodus m;
     private TextView textRovidites, textNev, textIdopont, textIdotartam, textHelyekSzama;
+    private SharedPreferences s;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jarat);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-
         init();
-
         select();
-
         btnBack.setOnClickListener(this);
         btnHelyFoglalas.setOnClickListener(this);
         btnMegse.setOnClickListener(this);
@@ -45,13 +45,14 @@ public class JaratActivity extends AppCompatActivity implements View.OnClickList
         btnHelyFoglalas = findViewById(R.id.btnHelyFoglalas);
         btnMegse = findViewById(R.id.btnMegse);
         db = new Database(this);
+        m = new Metodus(this);
+        s = getSharedPreferences("variables", Context.MODE_PRIVATE);
     }
-
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btnBack: onBackPressed(); break;
+            case R.id.btnBack:
             case R.id.btnMegse: onBackPressed(); break;
             case R.id.btnHelyFoglalas:
                 Intent intent = new Intent(JaratActivity.this, FoglalasActivity.class);
@@ -61,14 +62,13 @@ public class JaratActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void select() {
-        SharedPreferences sharedPreferences = getSharedPreferences("variables", Context.MODE_PRIVATE);
-        Cursor e = db.selectJarat(sharedPreferences.getString("jaratId", ""));
+        Cursor e = db.selectJarat(s.getString("jaratId", ""));
         if (e != null && e.getCount() > 0) {
             while (e.moveToNext()) {
                 textRovidites.setText(e.getString(3) + " - " + e.getString(5));
                 textNev.setText(e.getString(2) + " - " + e.getString(4));
                 textIdopont.setText(e.getString(1).substring(0, 16).replace('-', '.'));
-                textIdotartam.setText(idotartamAtalakitas(e.getString(6)));
+                textIdotartam.setText(m.idotartamAtalakitas(e.getString(6)));
                 textHelyekSzama.setText("Még " + e.getString(0) + " elérhető hely");
             }
         }
@@ -76,16 +76,7 @@ public class JaratActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onBackPressed() {
+        s.edit().remove("jaratId").apply();
         finish();
-    }
-
-    public String idotartamAtalakitas(String idotartam) {
-        String[] idoresz = idotartam.split(":");
-        if (Integer.parseInt(idoresz[0]) < 10) {
-            return idoresz[0].substring(1, 2) + " óra " + idoresz[1] + " perc";
-        }
-        else {
-            return idoresz[0] + " óra " + idoresz[1] + " perc";
-        }
     }
 }
