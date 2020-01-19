@@ -67,33 +67,28 @@ public class Database extends SQLiteOpenHelper {
         contentValues.put("lastname", lastname);
         contentValues.put("birthdate", birthdate);
         contentValues.put("password", password);
-
         long eredmeny = db.insert("user", null, contentValues);
         return eredmeny != -1;
     }
 
     public Cursor selectUsername(String username) {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor eredmeny = db.rawQuery("SELECT username FROM user WHERE username = '" + username + "'", null);
-        return eredmeny;
+        return db.rawQuery("SELECT username FROM user WHERE username = '" + username + "'", null);
     }
 
     public Cursor selectEmail(String email) {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor eredmeny = db.rawQuery("SELECT email FROM user WHERE email = '" + email + "'", null);
-        return eredmeny;
+        return db.rawQuery("SELECT email FROM user WHERE email = '" + email + "'", null);
     }
 
     public Cursor selectLogin(String usernameEmail) {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor eredmeny = db.rawQuery("SELECT * FROM user WHERE username = '" + usernameEmail + "' OR email = '" + usernameEmail + "'", null);
-        return eredmeny;
+        return db.rawQuery("SELECT * FROM user WHERE username = '" + usernameEmail + "' OR email = '" + usernameEmail + "'", null);
     }
 
     public Cursor selectUser(String id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor eredmeny = db.rawQuery("SELECT username, email, firstname, lastname FROM user WHERE id = " + id, null);
-        return eredmeny;
+        return db.rawQuery("SELECT username, email, firstname, lastname FROM user WHERE id = " + id, null);
     }
 
     public boolean updateUser(String id, String username, String email, String firstname, String lastname) {
@@ -109,8 +104,7 @@ public class Database extends SQLiteOpenHelper {
 
     public Cursor selectPasswordById(String id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor passwordEllenorzes = db.rawQuery("SELECT password FROM user WHERE id = " + id, null);
-        return passwordEllenorzes;
+        return db.rawQuery("SELECT password FROM user WHERE id = " + id, null);
     }
 
     public boolean updatePassword(String id, String password) {
@@ -148,12 +142,11 @@ public class Database extends SQLiteOpenHelper {
 
     public Cursor selectJarat(String id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor eredmeny = db.rawQuery("SELECT j.helyek_szama - (SELECT COUNT(*) FROM foglalas WHERE jarat_id = " + id + "), j.idopont, ai.nev, ai.rovidites, ac.nev, ac.rovidites, u.idotartam FROM jarat j\n" +
+        return db.rawQuery("SELECT j.helyek_szama - (SELECT COUNT(*) FROM foglalas WHERE jarat_id = " + id + "), j.idopont, ai.nev, ai.rovidites, ac.nev, ac.rovidites, u.idotartam FROM jarat j\n" +
                 "INNER JOIN utvonal u ON j.utvonal_id = u.id\n" +
                 "INNER JOIN airport ai ON u.indulas_id = ai.id\n" +
                 "INNER JOIN airport ac ON u.celallomas_id = ac.id\n"+
                 "WHERE j.id = " + id, null);
-        return eredmeny;
     }
 
     public boolean insertFoglalas(String jaratId, String userId, String ules) {
@@ -162,20 +155,18 @@ public class Database extends SQLiteOpenHelper {
         contentValues.put("jarat_id", jaratId);
         contentValues.put("user_id", userId);
         contentValues.put("ules", ules);
-
         long eredmeny = db.insert("foglalas", null, contentValues);
         return eredmeny != -1;
     }
 
     public Cursor selectUlesek(String jaratId) {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor eredmeny = db.rawQuery("SELECT ules FROM `foglalas` WHERE jarat_id = " + jaratId, null);
-        return eredmeny;
+        return db.rawQuery("SELECT ules FROM `foglalas` WHERE jarat_id = " + jaratId, null);
     }
 
     public Cursor selectJegyek(String userId) {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor eredmeny = db.rawQuery("SELECT f.id, f.ules, j.idopont, ai.nev, ac.nev, u.idotartam\n" +
+        return db.rawQuery("SELECT f.id, f.ules, j.idopont, ai.nev, ac.nev, u.idotartam\n" +
                 "FROM foglalas f \n" +
                 "INNER JOIN jarat j ON f.jarat_id = j.id\n" +
                 "INNER JOIN utvonal u ON j.utvonal_id = u.id\n" +
@@ -184,19 +175,17 @@ public class Database extends SQLiteOpenHelper {
                 "WHERE f.user_id = " + userId + "\n" +
                 "AND j.idopont > datetime('now')\n" +
                 "ORDER BY j.idopont", null);
-        return eredmeny;
     }
 
     public Cursor selectJegy(String foglalasId) {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor eredmeny = db.rawQuery("SELECT f.ules, j.idopont, ai.nev, ai.rovidites, ac.nev, ac.rovidites, u.idotartam\n" +
+        return db.rawQuery("SELECT f.ules, j.idopont, ai.nev, ai.rovidites, ac.nev, ac.rovidites, u.idotartam\n" +
                 "FROM foglalas f \n" +
                 "INNER JOIN jarat j ON f.jarat_id = j.id\n" +
                 "INNER JOIN utvonal u ON j.utvonal_id = u.id\n" +
                 "INNER JOIN airport ai ON u.indulas_id = ai.id\n" +
                 "INNER JOIN airport ac ON u.celallomas_id = ac.id\n" +
                 "WHERE f.id = " + foglalasId, null);
-        return eredmeny;
     }
 
     public boolean deleteJegy(String foglalasId) {
