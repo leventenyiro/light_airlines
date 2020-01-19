@@ -28,8 +28,9 @@
         android:layout_marginTop="80dp"
         android:layout_marginStart="30dp"
         android:id="@+id/textCim"
-        android:text="Regisztráció"
+        android:text="@string/reg"
         android:textSize="40sp"
+        android:textColor="@color/gray"
         android:fontFamily="@font/bold" />
 
     <EditText
@@ -44,7 +45,7 @@
         android:paddingEnd="15dp"
         android:id="@+id/inputUsername"
         android:background="@drawable/input"
-        android:hint="Felhasználónév"
+        android:hint="@string/username"
         android:textColor="@color/gray"
         android:maxLines="1"
         android:lines="1"
@@ -65,7 +66,7 @@
         android:id="@+id/inputEmail"
         android:background="@drawable/input"
         android:inputType="textEmailAddress"
-        android:hint="pelda@pelda.com"
+        android:hint="@string/emailExample"
         android:textColor="@color/gray"
         android:maxLines="1"
         android:lines="1"
@@ -80,7 +81,7 @@
         android:layout_marginEnd="40dp"
         android:id="@+id/btnNext"
         android:background="@drawable/button"
-        android:text="Tovább"
+        android:text="@string/next"
         android:textSize="16sp"
         android:textColor="@color/white"
         android:textAllCaps="false" />
@@ -95,7 +96,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Már van profilod?"
+            android:text="@string/marVanProfil"
             android:textSize="20sp"
             android:textColor="@color/gray" />
 
@@ -104,7 +105,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:id="@+id/btnLogin"
-            android:text="Jelentkezz be."
+            android:text="@string/jelentkezzBe"
             android:textColor="@color/rebelBlue"
             android:textSize="20sp"
             android:fontFamily="@font/bold" />

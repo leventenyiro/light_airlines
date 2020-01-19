@@ -22,7 +22,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginStart="30dp"
         android:id="@+id/textCim"
-        android:text="Bejelentkezés"
+        android:text="@string/loginLogin"
         android:textSize="35sp"
         android:fontFamily="@font/bold" />
 
@@ -39,8 +39,9 @@
         android:id="@+id/inputUsernameEmail"
         android:background="@drawable/inputlogin"
         android:inputType="textEmailAddress"
-        android:hint="Felhasználónév vagy E-mail"
+        android:hint="@string/loginHintUsernameEmail"
         android:textColorHint="@color/midGray"
+        android:textColor="@color/white"
         android:maxLines="1"
         android:lines="1"
         android:singleLine="true"/>
@@ -58,8 +59,9 @@
         android:id="@+id/inputPassword"
         android:background="@drawable/inputlogin"
         android:inputType="textPassword"
-        android:hint="Jelszó"
+        android:hint="@string/password"
         android:textColorHint="@color/midGray"
+        android:textColor="@color/white"
         android:maxLines="1"
         android:lines="1"
         android:singleLine="true"/>
@@ -73,7 +75,7 @@
         android:layout_marginTop="30dp"
         android:id="@+id/btnLogin"
         android:background="@drawable/button"
-        android:text="Bejelentkezés"
+        android:text="@string/loginLogin"
         android:textSize="16sp"
         android:textAllCaps="false" />
 
@@ -87,7 +89,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nincs még profilod?"
+            android:text="@string/nincsMegProfil"
             android:textSize="20sp" />
 
         <TextView
@@ -95,7 +97,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:id="@+id/btnReg"
-            android:text="Regisztrálj."
+            android:text="@string/regisztralj"
             android:textSize="20sp"
             android:fontFamily="@font/bold" />
 

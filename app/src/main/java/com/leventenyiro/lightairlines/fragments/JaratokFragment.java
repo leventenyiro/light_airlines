@@ -85,7 +85,7 @@ public class JaratokFragment extends Fragment {
         s = getActivity().getSharedPreferences("variables", Context.MODE_PRIVATE);
     }
 
-    public void select() {
+    private void select() {
         for (int i : cardLista) {
             CardView c = mRelativeLayout.findViewById(i);
             mRelativeLayout.removeView(c);
@@ -146,7 +146,8 @@ public class JaratokFragment extends Fragment {
                 RelativeLayout.LayoutParams paramsVaros = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
                 paramsVaros.topMargin = dp20;
                 tvVaros.setLayoutParams(paramsVaros);
-                tvVaros.setText(indulas + " - " + celallomas);
+                String fromTo = indulas + R.string.fromTo + celallomas;
+                tvVaros.setText(fromTo);
                 tvVaros.setTypeface(getActivity().getResources().getFont(R.font.regular));
                 tvVaros.setTextColor(getActivity().getResources().getColor(R.color.gray));
                 tvVaros.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
@@ -182,7 +183,8 @@ public class JaratokFragment extends Fragment {
                 paramsHelyek.addRule(RelativeLayout.BELOW, tvIdotartam.getId());
                 paramsHelyek.topMargin = dp20;
                 tvHelyekSzama.setLayoutParams(paramsHelyek);
-                tvHelyekSzama.setText("Már csak " + helyekSzama + " elérhető hely áll rendelkezésre");
+                String helyInfo = R.string.seatInfo1 + helyekSzama + R.string.seatInfo2
+                tvHelyekSzama.setText(helyInfo);
                 tvHelyekSzama.setTypeface(getActivity().getResources().getFont(R.font.regular));
                 tvHelyekSzama.setTextColor(getActivity().getResources().getColor(R.color.gray));
                 tvHelyekSzama.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
@@ -205,7 +207,7 @@ public class JaratokFragment extends Fragment {
             tv.setTypeface(getActivity().getResources().getFont(R.font.regular));
             tv.setTextColor(getActivity().getResources().getColor(R.color.gray));
             tv.setTextSize(dp15);
-            tv.setText("Nincs ilyen járat!");
+            tv.setText(R.string.noFlight);
             tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             mRelativeLayout.addView(tv);
         }

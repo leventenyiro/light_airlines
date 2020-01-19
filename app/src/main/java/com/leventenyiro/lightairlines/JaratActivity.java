@@ -66,11 +66,14 @@ public class JaratActivity extends AppCompatActivity implements View.OnClickList
         Cursor e = db.selectJarat(s.getString("jaratId", ""));
         if (e != null && e.getCount() > 0) {
             while (e.moveToNext()) {
-                textRovidites.setText(e.getString(3) + " - " + e.getString(5));
-                textNev.setText(e.getString(2) + " - " + e.getString(4));
+                String roviditesInfo = e.getString(3) + R.string.fromTo + e.getString(5);
+                textRovidites.setText(roviditesInfo);
+                String nevInfo = e.getString(2) + R.string.fromTo + e.getString(4);
+                textNev.setText(nevInfo);
                 textIdopont.setText(e.getString(1).substring(0, 16).replace('-', '.'));
                 textIdotartam.setText(m.idotartamAtalakitas(e.getString(6)));
-                textHelyekSzama.setText("Még " + e.getString(0) + " elérhető hely");
+                String helyInfo = R.string.seatInfo1 + e.getString(0) + R.string.seatInfo2;
+                textHelyekSzama.setText(helyInfo);
             }
         }
     }

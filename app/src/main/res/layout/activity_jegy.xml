@@ -78,7 +78,7 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@id/qr"
         android:layout_marginTop="10dp"
-        android:text="A kódot le kell olvasni a beléptető kapunál"
+        android:text="@string/codeInfo"
         android:textSize="15sp"
         android:textColor="@color/gray" />
 
@@ -89,7 +89,7 @@
         android:layout_margin="10dp"
         android:id="@+id/btnDelete"
         android:background="@drawable/buttonred"
-        android:text="Lemondás"
+        android:text="@string/renounce"
         android:textSize="16sp"
         android:textColor="@color/white"
         android:textAllCaps="false" />

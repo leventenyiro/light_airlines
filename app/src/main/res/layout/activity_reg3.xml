@@ -28,7 +28,7 @@
         android:layout_marginTop="50dp"
         android:layout_marginStart="30dp"
         android:id="@+id/textCim"
-        android:text="Regisztráció"
+        android:text="@string/reg"
         android:textSize="40sp"
         android:textColor="@color/gray"
         android:fontFamily="@font/bold"/>
@@ -42,7 +42,7 @@
         android:layout_marginEnd="50dp"
         android:layout_gravity="end"
         android:id="@+id/textLeiras"
-        android:text="A minimum 8 karakteres jelszónak legalább\n 1 nagybetűt és 1 számot kell tartalmaznia"
+        android:text="@string/passwordInfo"
         android:textSize="14sp"
         android:textColor="@color/gray"
         android:textAlignment="textEnd"
@@ -63,7 +63,7 @@
         android:background="@drawable/input"
         android:id="@+id/inputPassword"
         android:inputType="textPassword"
-        android:hint="Jelszó"
+        android:hint="@string/password"
         android:textColor="@color/gray"
         android:maxLines="1"
         android:lines="1"
@@ -84,7 +84,7 @@
         android:id="@+id/inputPasswordAgain"
         android:background="@drawable/input"
         android:inputType="textPassword"
-        android:hint="Jelszó megerősítés"
+        android:hint="@string/passwordAgain"
         android:textColor="@color/gray"
         android:maxLines="1"
         android:lines="1"
@@ -99,7 +99,7 @@
         android:layout_marginEnd="40dp"
         android:id="@+id/btnReg"
         android:background="@drawable/button"
-        android:text="Regisztráció"
+        android:text="@string/reg"
         android:textSize="16sp"
         android:textColor="@color/white"
         android:textAllCaps="false" />
@@ -114,7 +114,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Már van profilod?"
+            android:text="@string/marVanProfil"
             android:textSize="20sp"
             android:textColor="@color/gray" />
 
@@ -123,7 +123,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:id="@+id/btnLogin"
-            android:text="Jelentkezz be."
+            android:text="@string/jelentkezzBe"
             android:textSize="20sp"
             android:textColor="@color/rebelBlue"
             android:fontFamily="@font/bold" />

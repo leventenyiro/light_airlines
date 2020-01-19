@@ -131,7 +131,7 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
         String titkositottPassword = PasswordUtils.generateSecurePassword(s.getString("password", ""), salt);
         String password = titkositottPassword + ";" + salt;
 
-        Boolean eredmeny = db.insertUser(username, email, firstname, lastname, birthdate, password);
+        boolean eredmeny = db.insertUser(username, email, firstname, lastname, birthdate, password);
         if (eredmeny)
             Toast.makeText(this, "Sikeres regisztráció!", Toast.LENGTH_LONG);
         else

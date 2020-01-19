@@ -1,3 +1,55 @@
 <resources>
     <string name="app_name">Light Airlines</string>
+
+    <string name="password">Jelszó</string>
+    <string name="nincsMegProfil">Nincs még profilod?</string>
+    <string name="regisztralj">Regisztrálj.</string>
+
+    <string name="loginLogin">Bejelentkezés</string>
+    <string name="loginHintUsernameEmail">Felhasználónév vagy E-mail</string>
+
+    <string name="reg">Regisztráció</string>
+    <string name="username">Felhasználónév</string>
+    <string name="emailExample">pelda@pelda.com</string>
+    <string name="next">Tovább</string>
+    <string name="marVanProfil">Már van profilod?</string>
+    <string name="jelentkezzBe">Jelentkezz be.</string>
+    <string name="firstname">Keresztnév</string>
+    <string name="lastname">Vezetéknév</string>
+    <string name="birthdate">Születési dátum</string>
+    <string name="passwordInfo">A minimum 8 karakteres jelszónak legalább\n 1 nagybetűt és 1 számot kell tartalmaznia</string>
+    <string name="passwordAgain">Jelszó megerősítés</string>
+
+    <!-- Inner -->
+    <string name="jaratok">Járatok</string>
+    <string name="jegyek">Jegyek</string>
+    <string name="beallitasok">Beállítások</string>
+    <string name="fromTo"> - </string>
+    <string name="seatInfo1">Még </string>
+    <string name="seatInfo2"> elérhető hely</string>
+
+    <!-- Jarat -->
+    <string name="from">Honnan</string>
+    <string name="to">Hova</string>
+    <string name="reserve">Helyfoglalás</string>
+    <string name="cancel">Mégse</string>
+    <string name="finalize">Véglegesítés</string>
+    <string name="back">Vissza</string>
+    <string name="noFlight">Nincs ilyen járat!</string>
+
+    <!-- Jegyek -->
+    <string name="codeInfo">A kódot le kell olvasni a beléptető kapunál</string>
+    <string name="renounce">Lemondás</string>
+    <string name="verify">Jóváhagyás</string>
+    <string name="seatInfo">Ülőhely: </string>
+    <string name="noReserve">Még nincs foglalt járat!</string>
+
+    <!-- Beallitasok -->
+    <string name="modify">Módosítás</string>
+    <string name="reject">Elvetés</string>
+    <string name="passwordUpdate">Jelszómódosítás</string>
+    <string name="logout">Kijelentkezés</string>
+    <string name="passwordOld">Régi jelszó</string>
+    <string name="passwordNew">Új jelszó</string>
+    <string name="save">Mentés</string>
 </resources>

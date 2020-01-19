@@ -113,7 +113,7 @@
         android:layout_above="@id/btnBack"
         android:id="@+id/btnFoglalas"
         android:background="@drawable/button"
-        android:text="Véglegesítés"
+        android:text="@string/finalize"
         android:textSize="16sp"
         android:textColor="@color/white"
         android:textAllCaps="false" />
@@ -125,7 +125,7 @@
         android:layout_margin="10dp"
         android:id="@+id/btnBack"
         android:background="@drawable/buttonred"
-        android:text="Vissza"
+        android:text="@string/back"
         android:textSize="16sp"
         android:textColor="@color/white"
         android:textAllCaps="false" />

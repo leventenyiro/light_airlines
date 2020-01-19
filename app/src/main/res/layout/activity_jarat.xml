@@ -86,7 +86,7 @@
         android:layout_above="@+id/btnMegse"
         android:id="@+id/btnHelyFoglalas"
         android:background="@drawable/button"
-        android:text="Helyfoglalás"
+        android:text="@string/reserve"
         android:textSize="16sp"
         android:textColor="@color/white"
         android:textAllCaps="false" />
@@ -98,7 +98,7 @@
         android:layout_margin="10dp"
         android:id="@+id/btnMegse"
         android:background="@drawable/buttonred"
-        android:text="Mégse"
+        android:text="@string/cancel"
         android:textSize="16sp"
         android:textColor="@color/white"
         android:textAllCaps="false" />

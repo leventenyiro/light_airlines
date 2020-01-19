@@ -4,16 +4,16 @@
     <item
         android:id="@+id/navigation_jaratok"
         android:icon="@drawable/jaratok"
-        android:title="Járatok" />
+        android:title="@string/jaratok" />
 
     <item
         android:id="@+id/navigation_jegyek"
         android:icon="@drawable/jegyek"
-        android:title="Jegyek" />
+        android:title="@string/jegyek" />
 
     <item
         android:id="@+id/navigation_beallitasok"
         android:icon="@drawable/beallitasok"
-        android:title="Beállítások" />
+        android:title="@string/beallitasok" />
 
 </menu>
