@@ -171,9 +171,10 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
                 btnUpdate.setText("Módosítás");
                 break;
             case R.id.btnPasswordUpdate:
+                getActivity().getSharedPreferences("variables", Context.MODE_PRIVATE).edit().putString("fragment", "beallitasok").apply();
                 Intent intent = new Intent(getActivity(), PasswordUpdate.class);
                 startActivity(intent);
-                //getActivity().finish();
+                getActivity().finish();
                 getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 break;
             case R.id.btnLogout:

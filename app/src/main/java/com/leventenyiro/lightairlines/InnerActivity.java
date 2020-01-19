@@ -3,6 +3,7 @@ package com.leventenyiro.lightairlines;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import androidx.appcompat.app.AlertDialog;
@@ -17,6 +18,8 @@ public class InnerActivity extends AppCompatActivity {
 
     private AlertDialog alertDialog;
     private AlertDialog.Builder alertDialogBuilder;
+    private SharedPreferences s;
+    private String fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,9 +30,24 @@ public class InnerActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         init();
+
+        switch (fragment) {
+            case "jegyek":
+                navView.setSelectedItemId(R.id.navigation_jegyek);
+                break;
+            case "beallitasok":
+                navView.setSelectedItemId(R.id.navigation_beallitasok);
+                break;
+            default:
+                navView.setSelectedItemId(R.id.navigation_jaratok);
+                break;
+        }
+        s.edit().remove("fragment").apply();
     }
 
     private void init() {
+        s = getSharedPreferences("variables", Context.MODE_PRIVATE);
+        fragment = s.getString("fragment", "");
         alertDialogBuilder = new AlertDialog.Builder(InnerActivity.this);
         alertDialogBuilder.setTitle("Kijelentkezés");
         alertDialogBuilder.setMessage("Biztos kijelentkezel?");

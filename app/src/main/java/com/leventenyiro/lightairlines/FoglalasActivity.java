@@ -2,8 +2,6 @@ package com.leventenyiro.lightairlines;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -196,7 +194,7 @@ public class FoglalasActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 insertFoglalas();
-                // átdobás a jegyek fragmentbe
+                s.edit().putString("fragment", "jegyek").apply();
                 Intent intent = new Intent(FoglalasActivity.this, InnerActivity.class);
                 startActivity(intent);
                 finish();

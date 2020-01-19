@@ -155,8 +155,8 @@ public class PasswordUpdate extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onBackPressed() {
-        /*Intent intent = new Intent(PasswordUpdate.this, InnerActivity.class);
-        startActivity(intent);*/
+        Intent intent = new Intent(PasswordUpdate.this, InnerActivity.class);
+        startActivity(intent);
         finish();
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }

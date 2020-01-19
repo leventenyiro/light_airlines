@@ -101,6 +101,7 @@ public class JegyekFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         s.edit().putString("foglalasId", finalFoglalasId).apply();
+                        s.edit().putString("fragment", "jegyek").apply();
                         Intent intent = new Intent(getActivity(), JegyActivity.class);
                         startActivity(intent);
                         getActivity().finish();
