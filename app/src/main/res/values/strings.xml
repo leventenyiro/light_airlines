@@ -24,9 +24,9 @@
     <string name="jaratok">Járatok</string>
     <string name="jegyek">Jegyek</string>
     <string name="beallitasok">Beállítások</string>
-    <string name="fromTo"> - </string>
-    <string name="seatInfo1">Még </string>
-    <string name="seatInfo2"> elérhető hely</string>
+    <string name="fromTo">-</string>
+    <string name="seatInfo1">Még</string>
+    <string name="seatInfo2">elérhető hely</string>
 
     <!-- Jarat -->
     <string name="from">Honnan</string>

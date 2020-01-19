@@ -146,7 +146,7 @@ public class JaratokFragment extends Fragment {
                 RelativeLayout.LayoutParams paramsVaros = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
                 paramsVaros.topMargin = dp20;
                 tvVaros.setLayoutParams(paramsVaros);
-                String fromTo = indulas + R.string.fromTo + celallomas;
+                String fromTo = indulas + " " + getString(R.string.fromTo) + " " + celallomas;
                 tvVaros.setText(fromTo);
                 tvVaros.setTypeface(getActivity().getResources().getFont(R.font.regular));
                 tvVaros.setTextColor(getActivity().getResources().getColor(R.color.gray));
@@ -183,7 +183,7 @@ public class JaratokFragment extends Fragment {
                 paramsHelyek.addRule(RelativeLayout.BELOW, tvIdotartam.getId());
                 paramsHelyek.topMargin = dp20;
                 tvHelyekSzama.setLayoutParams(paramsHelyek);
-                String helyInfo = R.string.seatInfo1 + helyekSzama + R.string.seatInfo2;
+                String helyInfo = getString(R.string.seatInfo1) + " " + helyekSzama + " " + getString(R.string.seatInfo2);
                 tvHelyekSzama.setText(helyInfo);
                 tvHelyekSzama.setTypeface(getActivity().getResources().getFont(R.font.regular));
                 tvHelyekSzama.setTextColor(getActivity().getResources().getColor(R.color.gray));
@@ -207,7 +207,7 @@ public class JaratokFragment extends Fragment {
             tv.setTypeface(getActivity().getResources().getFont(R.font.regular));
             tv.setTextColor(getActivity().getResources().getColor(R.color.gray));
             tv.setTextSize(dp15);
-            tv.setText(R.string.noFlight);
+            tv.setText(getString(R.string.noFlight));
             tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             mRelativeLayout.addView(tv);
         }

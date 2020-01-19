@@ -111,7 +111,7 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
                     inputLastname.setEnabled(true);
                     inputLastname.setTextColor(getResources().getColor(R.color.gray));
                     btnCancel.setVisibility(View.VISIBLE);
-                    btnUpdate.setText(R.string.save);
+                    btnUpdate.setText(getString(R.string.save));
                 }
                 else {
                     if (vanEUsername()) {
@@ -168,7 +168,7 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
                 inputsDisable();
                 beallitasok();
                 btnCancel.setVisibility(View.INVISIBLE);
-                btnUpdate.setText(R.string.modify);
+                btnUpdate.setText(getString(R.string.modify));
                 break;
             case R.id.btnPasswordUpdate:
                 getActivity().getSharedPreferences("variables", Context.MODE_PRIVATE).edit().putString("fragment", "beallitasok").apply();
@@ -302,7 +302,7 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
         if (eredmeny) {
             Toast.makeText(getActivity(), "Sikeres módosítás!", Toast.LENGTH_SHORT).show();
             btnCancel.setVisibility(View.INVISIBLE);
-            btnUpdate.setText(R.string.modify);
+            btnUpdate.setText(getString(R.string.modify));
         }
         else {
             Toast.makeText(getActivity(), "Szerverhiba! Sikertelen módosítás!", Toast.LENGTH_SHORT).show();

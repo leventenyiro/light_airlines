@@ -88,13 +88,13 @@ public class JegyActivity extends AppCompatActivity implements View.OnClickListe
         Cursor e = db.selectJegy(s.getString("foglalasId", ""));
         if (e != null && e.getCount() > 0) {
             while (e.moveToNext()) {
-                String roviditesInfo = e.getString(3) + R.string.fromTo + e.getString(5);
+                String roviditesInfo = e.getString(3) + " " + getString(R.string.fromTo) + " " + e.getString(5);
                 textRovidites.setText(roviditesInfo);
-                String nevInfo = e.getString(2) + R.string.fromTo + e.getString(4);
+                String nevInfo = e.getString(2) + " " + getString(R.string.fromTo) + " " + e.getString(4);
                 textNev.setText(nevInfo);
                 textIdopont.setText(e.getString(1).substring(0, 16).replace('-', '.'));
                 textIdotartam.setText(m.idotartamAtalakitas(e.getString(6)));
-                String ulesInfo = R.string.seatInfo + e.getString(0);
+                String ulesInfo = getString(R.string.seatInfo) + e.getString(0);
                 textUles.setText(ulesInfo);
             }
         }

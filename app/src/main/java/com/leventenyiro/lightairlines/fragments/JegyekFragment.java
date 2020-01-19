@@ -120,7 +120,7 @@ public class JegyekFragment extends Fragment {
                 RelativeLayout.LayoutParams paramsVaros = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
                 paramsVaros.topMargin = dp20;
                 tvVaros.setLayoutParams(paramsVaros);
-                String fromTo = indulas + R.string.fromTo + celallomas;
+                String fromTo = indulas + " " + getString(R.string.fromTo) + " " + celallomas;
                 tvVaros.setText(fromTo);
                 tvVaros.setTypeface(getActivity().getResources().getFont(R.font.regular));
                 tvVaros.setTextColor(getActivity().getResources().getColor(R.color.gray));
@@ -157,7 +157,7 @@ public class JegyekFragment extends Fragment {
                 paramsUles.addRule(RelativeLayout.BELOW, tvIdotartam.getId());
                 paramsUles.topMargin = dp20;
                 tvUles.setLayoutParams(paramsUles);
-                String ulesInfo = R.string.seatInfo + ules;
+                String ulesInfo = getString(R.string.seatInfo) + " " + ules;
                 tvUles.setText(ulesInfo);
                 tvUles.setTypeface(getActivity().getResources().getFont(R.font.regular));
                 tvUles.setTextColor(getActivity().getResources().getColor(R.color.gray));
@@ -181,7 +181,7 @@ public class JegyekFragment extends Fragment {
             tv.setTypeface(getActivity().getResources().getFont(R.font.regular));
             tv.setTextColor(getActivity().getResources().getColor(R.color.gray));
             tv.setTextSize(dp11);
-            tv.setText(R.string.noReserve);
+            tv.setText(getString(R.string.noReserve));
             tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             mRelativeLayout.addView(tv);
         }
