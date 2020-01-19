@@ -29,7 +29,6 @@
         android:background="@drawable/input"
         android:hint="Felhasználónév"
         android:textColor="@color/midGray"
-        android:fontFamily="@font/regular"
         android:enabled="false"
         android:maxLines="1"
         android:lines="1"
@@ -51,7 +50,6 @@
         android:background="@drawable/input"
         android:hint="pelda@pelda.com"
         android:textColor="@color/midGray"
-        android:fontFamily="@font/regular"
         android:enabled="false"
         android:maxLines="1"
         android:lines="1"
@@ -73,7 +71,6 @@
         android:background="@drawable/input"
         android:hint="Keresztnév"
         android:textColor="@color/midGray"
-        android:fontFamily="@font/regular"
         android:enabled="false"
         android:maxLines="1"
         android:lines="1"
@@ -95,7 +92,6 @@
         android:background="@drawable/input"
         android:hint="Vezetéknév"
         android:textColor="@color/midGray"
-        android:fontFamily="@font/regular"
         android:enabled="false"
         android:maxLines="1"
         android:lines="1"
@@ -113,8 +109,7 @@
         android:text="Módosítás"
         android:textSize="16sp"
         android:textColor="@color/white"
-        android:textAllCaps="false"
-        android:fontFamily="@font/regular" />
+        android:textAllCaps="false" />
 
     <Button
         android:layout_width="150dp"
@@ -129,7 +124,6 @@
         android:textSize="16sp"
         android:textColor="@color/white"
         android:textAllCaps="false"
-        android:fontFamily="@font/regular"
         android:visibility="invisible" />
 
     <Button
@@ -142,8 +136,7 @@
         android:text="Jelszómódosítás"
         android:textSize="16sp"
         android:textColor="@color/white"
-        android:textAllCaps="false"
-        android:fontFamily="@font/regular" />
+        android:textAllCaps="false" />
 
     <Button
         android:layout_width="match_parent"
@@ -159,8 +152,7 @@
         android:text="Kijelentkezés"
         android:textSize="16sp"
         android:textColor="@color/white"
-        android:textAllCaps="false"
-        android:fontFamily="@font/regular" />
+        android:textAllCaps="false" />
 
 
 </RelativeLayout>

@@ -30,6 +30,7 @@
         android:id="@+id/textCim"
         android:text="Regisztráció"
         android:textSize="40sp"
+        android:textColor="@color/gray"
         android:fontFamily="@font/bold"/>
 
     <TextView
@@ -43,6 +44,7 @@
         android:id="@+id/textLeiras"
         android:text="A minimum 8 karakteres jelszónak legalább\n 1 nagybetűt és 1 számot kell tartalmaznia"
         android:textSize="14sp"
+        android:textColor="@color/gray"
         android:textAlignment="textEnd"
         android:fontFamily="@font/regular" />
 
@@ -63,7 +65,6 @@
         android:inputType="textPassword"
         android:hint="Jelszó"
         android:textColor="@color/gray"
-        android:fontFamily="@font/regular"
         android:maxLines="1"
         android:lines="1"
         android:singleLine="true" />
@@ -85,7 +86,6 @@
         android:inputType="textPassword"
         android:hint="Jelszó megerősítés"
         android:textColor="@color/gray"
-        android:fontFamily="@font/regular"
         android:maxLines="1"
         android:lines="1"
         android:singleLine="true"/>
@@ -102,8 +102,7 @@
         android:text="Regisztráció"
         android:textSize="16sp"
         android:textColor="@color/white"
-        android:textAllCaps="false"
-        android:fontFamily="@font/regular" />
+        android:textAllCaps="false" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -117,8 +116,7 @@
             android:layout_height="wrap_content"
             android:text="Már van profilod?"
             android:textSize="20sp"
-            android:textColor="@color/gray"
-            android:fontFamily="@font/regular" />
+            android:textColor="@color/gray" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -128,7 +126,7 @@
             android:text="Jelentkezz be."
             android:textSize="20sp"
             android:textColor="@color/rebelBlue"
-            android:fontFamily="@font/bold"/>
+            android:fontFamily="@font/bold" />
 
     </LinearLayout>
 

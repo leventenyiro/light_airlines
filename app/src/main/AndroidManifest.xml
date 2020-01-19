@@ -30,15 +30,15 @@
         <activity
             android:name=".Reg1Activity"
             android:screenOrientation="portrait"
-            android:theme="@style/WhiteGrayTheme" />
+            android:theme="@style/WhiteTheme" />
         <activity
             android:name=".Reg2Activity"
             android:screenOrientation="portrait"
-            android:theme="@style/WhiteGrayTheme" />
+            android:theme="@style/WhiteTheme" />
         <activity
             android:name=".Reg3Activity"
             android:screenOrientation="portrait"
-            android:theme="@style/WhiteGrayTheme" />
+            android:theme="@style/WhiteTheme" />
         <activity
             android:name=".InnerActivity"
             android:screenOrientation="portrait"

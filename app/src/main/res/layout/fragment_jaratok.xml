@@ -35,7 +35,6 @@
             android:background="@drawable/input"
             android:hint="Honnan"
             android:textColor="@color/gray"
-            android:fontFamily="@font/regular"
             android:maxLines="1"
             android:lines="1"
             android:singleLine="true" />
@@ -57,7 +56,6 @@
             android:background="@drawable/input"
             android:hint="Hova"
             android:textColor="@color/gray"
-            android:fontFamily="@font/regular"
             android:maxLines="1"
             android:lines="1"
             android:singleLine="true" />

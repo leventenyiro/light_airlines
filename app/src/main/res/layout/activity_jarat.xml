@@ -32,8 +32,7 @@
         android:layout_below="@id/textRovidites"
         android:id="@+id/textNev"
         android:textSize="20sp"
-        android:textColor="@color/gray"
-        android:fontFamily="@font/regular" />
+        android:textColor="@color/gray" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -90,8 +89,7 @@
         android:text="Helyfoglalás"
         android:textSize="16sp"
         android:textColor="@color/white"
-        android:textAllCaps="false"
-        android:fontFamily="@font/regular" />
+        android:textAllCaps="false" />
 
     <Button
         android:layout_width="match_parent"
@@ -103,7 +101,6 @@
         android:text="Mégse"
         android:textSize="16sp"
         android:textColor="@color/white"
-        android:textAllCaps="false"
-        android:fontFamily="@font/regular" />
+        android:textAllCaps="false" />
 
 </RelativeLayout>

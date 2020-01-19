@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Megerosites"
-    android:id="@+id/megerosites"
     android:background="@drawable/bg_login">
 
     <ImageView
@@ -32,8 +31,8 @@
         android:layout_marginTop="30dp"
         android:layout_marginStart="30dp"
         android:id="@+id/textCim"
+        android:text="Jóváhagyás"
         android:textSize="35sp"
-        android:textColor="@color/white"
         android:fontFamily="@font/bold" />
 
     <EditText
@@ -51,8 +50,6 @@
         android:inputType="textPassword"
         android:hint="Jelszó"
         android:textColorHint="@color/midGray"
-        android:textColor="@color/white"
-        android:fontFamily="@font/regular"
         android:maxLines="1"
         android:lines="1"
         android:singleLine="true"/>
@@ -67,9 +64,7 @@
         android:id="@+id/btnVerify"
         android:background="@drawable/button"
         android:text="Megerősítés"
-        android:textColor="@color/white"
         android:textSize="16sp"
-        android:fontFamily="@font/regular"
         android:textAllCaps="false" />
 
     <Button
@@ -83,8 +78,6 @@
         android:background="@drawable/buttonred"
         android:text="Mégse"
         android:textSize="16sp"
-        android:textColor="@color/white"
-        android:textAllCaps="false"
-        android:fontFamily="@font/regular" />
+        android:textAllCaps="false" />
 
 </RelativeLayout>

@@ -31,6 +31,6 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_margin="20dp"
-        app:srcCompat="@drawable/icon" />
+        android:src="@drawable/icon" />
 
 </RelativeLayout>

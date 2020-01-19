@@ -46,7 +46,6 @@
         android:background="@drawable/input"
         android:hint="Felhasználónév"
         android:textColor="@color/gray"
-        android:fontFamily="@font/regular"
         android:maxLines="1"
         android:lines="1"
         android:singleLine="true" />
@@ -68,7 +67,6 @@
         android:inputType="textEmailAddress"
         android:hint="pelda@pelda.com"
         android:textColor="@color/gray"
-        android:fontFamily="@font/regular"
         android:maxLines="1"
         android:lines="1"
         android:singleLine="true" />
@@ -85,8 +83,7 @@
         android:text="Tovább"
         android:textSize="16sp"
         android:textColor="@color/white"
-        android:textAllCaps="false"
-        android:fontFamily="@font/regular" />
+        android:textAllCaps="false" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -100,8 +97,7 @@
             android:layout_height="wrap_content"
             android:text="Már van profilod?"
             android:textSize="20sp"
-            android:textColor="@color/gray"
-            android:fontFamily="@font/regular" />
+            android:textColor="@color/gray" />
 
         <TextView
             android:layout_width="wrap_content"

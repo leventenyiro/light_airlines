@@ -31,6 +31,7 @@
                     android:layout_marginEnd="8dp"
                     android:text="A"
                     android:textSize="20sp"
+                    android:textColor="@color/gray"
                     android:textAlignment="center" />
                 <TextView
                     android:layout_width="35dp"
@@ -41,6 +42,7 @@
                     android:layout_marginEnd="8dp"
                     android:text="B"
                     android:textSize="20sp"
+                    android:textColor="@color/gray"
                     android:textAlignment="center" />
                 <TextView
                     android:layout_width="35dp"
@@ -51,6 +53,7 @@
                     android:layout_marginEnd="8dp"
                     android:text="C"
                     android:textSize="20sp"
+                    android:textColor="@color/gray"
                     android:textAlignment="center" />
                 <TextView
                     android:layout_width="35dp"
@@ -71,6 +74,7 @@
                     android:layout_marginEnd="8dp"
                     android:text="D"
                     android:textSize="20sp"
+                    android:textColor="@color/gray"
                     android:textAlignment="center"/>
                 <TextView
                     android:layout_width="35dp"
@@ -81,6 +85,7 @@
                     android:layout_marginEnd="8dp"
                     android:text="E"
                     android:textSize="20sp"
+                    android:textColor="@color/gray"
                     android:textAlignment="center"/>
                 <TextView
                     android:layout_width="35dp"
@@ -91,6 +96,7 @@
                     android:layout_marginEnd="8dp"
                     android:text="F"
                     android:textSize="20sp"
+                    android:textColor="@color/gray"
                     android:textAlignment="center"/>
 
             </LinearLayout>
@@ -110,8 +116,7 @@
         android:text="Véglegesítés"
         android:textSize="16sp"
         android:textColor="@color/white"
-        android:textAllCaps="false"
-        android:fontFamily="@font/regular" />
+        android:textAllCaps="false" />
 
     <Button
         android:layout_width="match_parent"
@@ -123,7 +128,6 @@
         android:text="Vissza"
         android:textSize="16sp"
         android:textColor="@color/white"
-        android:textAllCaps="false"
-        android:fontFamily="@font/regular" />
+        android:textAllCaps="false" />
 
 </RelativeLayout>
