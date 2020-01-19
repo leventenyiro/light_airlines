@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,19 +10,16 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_margin="20dp"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginRight="30dp"
         android:layout_marginEnd="30dp"
         android:id="@+id/btnIcon"
-        app:srcCompat="@drawable/icon_white" />
+        android:src="@drawable/icon_white" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/btnIcon"
         android:layout_marginTop="30dp"
-        android:layout_marginLeft="30dp"
         android:layout_marginStart="30dp"
         android:id="@+id/textCim"
         android:text="Bejelentkezés"
@@ -40,9 +36,7 @@
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
         android:paddingStart="20dp"
-        android:paddingLeft="20dp"
         android:paddingEnd="15dp"
-        android:paddingRight="15dp"
         android:id="@+id/inputUsernameEmail"
         android:background="@drawable/inputlogin"
         android:inputType="textEmailAddress"
@@ -63,9 +57,7 @@
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
         android:paddingStart="20dp"
-        android:paddingLeft="20dp"
         android:paddingEnd="15dp"
-        android:paddingRight="15dp"
         android:id="@+id/inputPassword"
         android:background="@drawable/inputlogin"
         android:inputType="textPassword"
@@ -81,16 +73,14 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/inputPassword"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginRight="40dp"
         android:layout_marginEnd="40dp"
         android:layout_marginTop="30dp"
         android:id="@+id/btnLogin"
         android:background="@drawable/button"
         android:text="Bejelentkezés"
-        android:textColor="@color/white"
         android:textSize="16sp"
+        android:textColor="@color/white"
         android:fontFamily="@font/regular"
         android:textAllCaps="false" />
 
@@ -99,7 +89,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="25dp"
-        android:layout_marginLeft="25dp"
         android:layout_marginStart="25dp">
 
         <TextView
@@ -113,7 +102,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
             android:layout_marginStart="4dp"
             android:id="@+id/btnReg"
             android:text="Regisztrálj."
