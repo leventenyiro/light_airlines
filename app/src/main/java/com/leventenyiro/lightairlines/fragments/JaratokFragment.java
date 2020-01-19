@@ -183,7 +183,7 @@ public class JaratokFragment extends Fragment {
                 paramsHelyek.addRule(RelativeLayout.BELOW, tvIdotartam.getId());
                 paramsHelyek.topMargin = dp20;
                 tvHelyekSzama.setLayoutParams(paramsHelyek);
-                String helyInfo = R.string.seatInfo1 + helyekSzama + R.string.seatInfo2
+                String helyInfo = R.string.seatInfo1 + helyekSzama + R.string.seatInfo2;
                 tvHelyekSzama.setText(helyInfo);
                 tvHelyekSzama.setTypeface(getActivity().getResources().getFont(R.font.regular));
                 tvHelyekSzama.setTextColor(getActivity().getResources().getColor(R.color.gray));
