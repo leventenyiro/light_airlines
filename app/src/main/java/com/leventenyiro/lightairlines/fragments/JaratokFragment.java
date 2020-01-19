@@ -131,8 +131,8 @@ public class JaratokFragment extends Fragment {
                         s.edit().putString("jaratId", finalJaratId).apply();
                         Intent intent = new Intent(getActivity(), JaratActivity.class);
                         startActivity(intent);
-                        getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                         getActivity().finish();
+                        getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     }
                 });
                 card.setId(card.generateViewId());

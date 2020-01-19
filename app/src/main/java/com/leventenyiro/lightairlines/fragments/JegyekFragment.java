@@ -103,8 +103,8 @@ public class JegyekFragment extends Fragment {
                         s.edit().putString("foglalasId", finalFoglalasId).apply();
                         Intent intent = new Intent(getActivity(), JegyActivity.class);
                         startActivity(intent);
-                        getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                         getActivity().finish();
+                        getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     }
                 });
                 card.setId(card.generateViewId());

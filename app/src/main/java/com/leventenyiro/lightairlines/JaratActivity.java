@@ -57,8 +57,8 @@ public class JaratActivity extends AppCompatActivity implements View.OnClickList
             case R.id.btnHelyFoglalas:
                 Intent intent = new Intent(JaratActivity.this, FoglalasActivity.class);
                 startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 finish();
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         }
     }
 
@@ -80,7 +80,7 @@ public class JaratActivity extends AppCompatActivity implements View.OnClickList
         s.edit().remove("jaratId").apply();
         Intent intent = new Intent(JaratActivity.this, InnerActivity.class);
         startActivity(intent);
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 }

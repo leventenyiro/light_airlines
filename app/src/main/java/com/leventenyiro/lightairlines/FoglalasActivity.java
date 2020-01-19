@@ -2,6 +2,8 @@ package com.leventenyiro.lightairlines;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -194,10 +196,11 @@ public class FoglalasActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 insertFoglalas();
+                // átdobás a jegyek fragmentbe
                 Intent intent = new Intent(FoglalasActivity.this, InnerActivity.class);
                 startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 finish();
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
             }
         });
         alertDialog = alertDialogBuilder.create();
@@ -282,7 +285,7 @@ public class FoglalasActivity extends AppCompatActivity {
         s.edit().remove("ules").apply();
         Intent intent = new Intent(FoglalasActivity.this, JaratActivity.class);
         startActivity(intent);
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 }

@@ -142,15 +142,15 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
     public void onBackPressed() {
         Intent intent = new Intent(Reg3Activity.this, Reg2Activity.class);
         startActivity(intent);
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
     public void backToLogin() {
         se.clear().apply();
         Intent intent = new Intent(Reg3Activity.this, LoginActivity.class);
         startActivity(intent);
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         finish();
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 }

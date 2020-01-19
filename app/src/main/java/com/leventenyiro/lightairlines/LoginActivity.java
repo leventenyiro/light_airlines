@@ -95,8 +95,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.btnReg:
                 intent = new Intent(LoginActivity.this, Reg1Activity.class);
                 startActivity(intent);
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 break;
             case R.id.btnLogin:
                 if (inputUsernameEmail.getText().toString().isEmpty()) {
@@ -117,8 +117,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 else {
                     intent = new Intent(LoginActivity.this, InnerActivity.class);
                     startActivity(intent);
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     finish();
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 }
                 break;
         }

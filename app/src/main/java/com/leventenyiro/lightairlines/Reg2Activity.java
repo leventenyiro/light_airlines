@@ -123,6 +123,7 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
                     se.apply();
                     Intent intent = new Intent(Reg2Activity.this, Reg3Activity.class);
                     startActivity(intent);
+                    finish();
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 }
                 break;
@@ -177,15 +178,15 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
     public void onBackPressed() {
         Intent intent = new Intent(Reg2Activity.this, Reg1Activity.class);
         startActivity(intent);
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
     public void backToLogin() {
         se.clear().apply();
         Intent intent = new Intent(Reg2Activity.this, LoginActivity.class);
         startActivity(intent);
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         finish();
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 }

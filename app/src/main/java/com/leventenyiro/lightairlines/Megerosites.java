@@ -62,8 +62,8 @@ public class Megerosites extends AppCompatActivity implements View.OnClickListen
                     s.edit().remove("foglalasId").apply();
                     Intent intent = new Intent(Megerosites.this, InnerActivity.class);
                     startActivity(intent);
-                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                     finish();
+                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 }
                 break;
         }
@@ -80,7 +80,7 @@ public class Megerosites extends AppCompatActivity implements View.OnClickListen
     public void onBackPressed() {
         Intent intent = new Intent(Megerosites.this,JegyActivity.class);
         startActivity(intent);
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 }

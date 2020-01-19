@@ -45,8 +45,8 @@ public class InnerActivity extends AppCompatActivity {
                 getSharedPreferences("variables", Context.MODE_PRIVATE).edit().remove("userId").apply();
                 Intent intent = new Intent(InnerActivity.this, LoginActivity.class);
                 startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 finish();
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
             }
         });
         alertDialog = alertDialogBuilder.create();

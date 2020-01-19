@@ -23,8 +23,8 @@ public class LoadingActivity extends AppCompatActivity {
                 finally {
                     Intent intent = new Intent(LoadingActivity.this, LoginActivity.class);
                     startActivity(intent);
-                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                     finish();
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 }
             }
         };

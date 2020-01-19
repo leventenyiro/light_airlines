@@ -173,8 +173,8 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
             case R.id.btnPasswordUpdate:
                 Intent intent = new Intent(getActivity(), PasswordUpdate.class);
                 startActivity(intent);
+                //getActivity().finish();
                 getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                getActivity().finish();
                 break;
             case R.id.btnLogout:
                 getActivity().onBackPressed();

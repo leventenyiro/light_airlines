@@ -130,8 +130,8 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
                     se.apply();
                     intent = new Intent(Reg1Activity.this, Reg2Activity.class);
                     startActivity(intent);
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     finish();
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 }
                 break;
         }
@@ -181,7 +181,7 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
         se.clear().apply();
         Intent intent = new Intent(Reg1Activity.this, LoginActivity.class);
         startActivity(intent);
+        finish();
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-        finishAffinity();
     }
 }
