@@ -13,7 +13,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:id="@+id/btnBack"
-        android:src="@drawable/ic_back" />
+        android:src="@drawable/back" />
 
     <TextView
         android:layout_width="wrap_content"

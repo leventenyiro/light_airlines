@@ -95,7 +95,7 @@ public class JegyekFragment extends Fragment {
                     params.setMargins(0,0,0,dp20);
                 card.setLayoutParams(params);
                 card.setCardElevation(50);
-                card.setBackground(getResources().getDrawable(R.drawable.bg_card));
+                card.setBackground(getResources().getDrawable(R.drawable.card));
                 final String finalFoglalasId = foglalasId;
                 card.setOnClickListener(new View.OnClickListener() {
                     @Override

@@ -11,7 +11,7 @@
         android:layout_height="30dp"
         android:layout_margin="20dp"
         android:id="@+id/btnBack"
-        android:src="@drawable/ic_back" />
+        android:src="@drawable/back" />
 
     <ImageView
         android:layout_width="40dp"

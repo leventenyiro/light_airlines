@@ -7,7 +7,6 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -123,7 +122,7 @@ public class JaratokFragment extends Fragment {
                     params.setMargins(0,0,0, dp20);
                 card.setLayoutParams(params);
                 card.setCardElevation(50);
-                card.setBackground(getResources().getDrawable(R.drawable.bg_card));
+                card.setBackground(getResources().getDrawable(R.drawable.card));
                 final String finalJaratId = jaratId;
                 card.setOnClickListener(new View.OnClickListener() {
                     @Override

@@ -76,7 +76,7 @@ public class FoglalasActivity extends AppCompatActivity {
                 helyLista.add(tv.getId());
                 final int finalUlesId = ulesId;
                 if (foglaltE(finalUlesId)) {
-                    tv.setBackground(getResources().getDrawable(R.drawable.ic_seatred));
+                    tv.setBackground(getResources().getDrawable(R.drawable.seatred));
                     tv.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -85,16 +85,16 @@ public class FoglalasActivity extends AppCompatActivity {
                     });
                 }
                 else {
-                    tv.setBackground(getResources().getDrawable(R.drawable.ic_seatfree));
+                    tv.setBackground(getResources().getDrawable(R.drawable.seatfree));
                     tv.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             for (int id : helyLista) {
                                 if (!foglaltE(helyLista.indexOf(id))) {
-                                    findViewById(id).setBackground(getResources().getDrawable(R.drawable.ic_seatfree));
+                                    findViewById(id).setBackground(getResources().getDrawable(R.drawable.seatfree));
                                 }
                             }
-                            findViewById(helyLista.get(finalUlesId)).setBackground(getResources().getDrawable(R.drawable.ic_seatgreen));
+                            findViewById(helyLista.get(finalUlesId)).setBackground(getResources().getDrawable(R.drawable.seatgreen));
                             s.edit().putString("ules", ulesKodolas(finalUlesId)).apply();
                         }
                     });
@@ -120,7 +120,7 @@ public class FoglalasActivity extends AppCompatActivity {
                 helyLista.add(tv.getId());
                 final int finalUlesId = ulesId;
                 if (foglaltE(finalUlesId)) {
-                    tv.setBackground(getResources().getDrawable(R.drawable.ic_seatred));
+                    tv.setBackground(getResources().getDrawable(R.drawable.seatred));
                     tv.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -129,16 +129,16 @@ public class FoglalasActivity extends AppCompatActivity {
                     });
                 }
                 else {
-                    tv.setBackground(getResources().getDrawable(R.drawable.ic_seatfree));
+                    tv.setBackground(getResources().getDrawable(R.drawable.seatfree));
                     tv.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             for (int id : helyLista) {
                                 if (!foglaltE(helyLista.indexOf(id))) {
-                                    findViewById(id).setBackground(getResources().getDrawable(R.drawable.ic_seatfree));
+                                    findViewById(id).setBackground(getResources().getDrawable(R.drawable.seatfree));
                                 }
                             }
-                            findViewById(helyLista.get(finalUlesId)).setBackground(getResources().getDrawable(R.drawable.ic_seatgreen));
+                            findViewById(helyLista.get(finalUlesId)).setBackground(getResources().getDrawable(R.drawable.seatgreen));
                             s.edit().putString("ules", ulesKodolas(finalUlesId)).apply();
                         }
                     });

@@ -1,5 +1,4 @@
 <resources>
-
     <style name="BlueTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/rebelBlue</item>
         <item name="colorPrimaryDark">@color/rebelBlue</item>
@@ -8,7 +7,6 @@
         <item name="windowActionBar">false</item>
         <item name="android:textColor">@color/gray</item>
     </style>
-
     <style name="GrayTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/rebelBlue</item>
         <item name="colorPrimaryDark">@color/gray</item>
@@ -16,7 +14,6 @@
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
     </style>
-
     <style name="WhiteGrayTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/rebelBlue</item>
         <item name="colorPrimaryDark">@color/white</item>
@@ -25,7 +22,6 @@
         <item name="windowActionBar">false</item>
         <item name="android:textColor">@color/gray</item>
     </style>
-
     <style name="WhiteTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/rebelBlue</item>
         <item name="colorPrimaryDark">@color/white</item>
@@ -33,5 +29,4 @@
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
     </style>
-
 </resources>
