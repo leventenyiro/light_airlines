@@ -94,7 +94,7 @@ public class JegyActivity extends AppCompatActivity implements View.OnClickListe
                 textNev.setText(nevInfo);
                 textIdopont.setText(e.getString(1).substring(0, 16).replace('-', '.'));
                 textIdotartam.setText(m.idotartamAtalakitas(e.getString(6)));
-                String ulesInfo = getString(R.string.seatInfo) + e.getString(0);
+                String ulesInfo = getString(R.string.seatInfo) + " " + e.getString(0);
                 textUles.setText(ulesInfo);
             }
         }
