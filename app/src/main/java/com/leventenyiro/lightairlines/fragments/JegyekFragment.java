@@ -120,7 +120,7 @@ public class JegyekFragment extends Fragment {
                 RelativeLayout.LayoutParams paramsVaros = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
                 paramsVaros.topMargin = dp20;
                 tvVaros.setLayoutParams(paramsVaros);
-                String fromTo = indulas + " " + getString(R.string.fromTo) + " " + celallomas;
+                String fromTo = indulas + " - " + celallomas;
                 tvVaros.setText(fromTo);
                 tvVaros.setTypeface(getActivity().getResources().getFont(R.font.regular));
                 tvVaros.setTextColor(getActivity().getResources().getColor(R.color.gray));

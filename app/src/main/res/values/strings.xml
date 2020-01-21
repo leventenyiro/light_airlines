@@ -1,13 +1,21 @@
 <resources>
     <string name="app_name">Light Airlines</string>
 
+    <!-- Login -->
     <string name="password">Jelszó</string>
     <string name="nincsMegProfil">Nincs még profilod?</string>
     <string name="regisztralj">Regisztrálj.</string>
-
     <string name="login">Bejelentkezés</string>
     <string name="usernameEmail">Felhasználónév vagy E-mail</string>
+    <string name="exit">Kilépés</string>
+    <string name="exitMessage">Biztosan elhagyod az alkalmazást?</string>
+    <string name="yes">Igen</string>
+    <string name="no">Nem</string>
+    <string name="noUsernameEmail">Nincs megadva a felhasználónév vagy e-mail!</string>
+    <string name="noPassword">Nincs megadva jelszó!</string>
+    <string name="wrongLoginData">Helytelen bejelentkezési adatok!</string>
 
+    <!-- Reg -->
     <string name="reg">Regisztráció</string>
     <string name="username">Felhasználónév</string>
     <string name="emailExample">pelda@pelda.com</string>
@@ -19,7 +27,25 @@
     <string name="birthdate">Születési dátum</string>
     <string name="passwordInfo">A minimum 8 karakteres jelszónak legalább\n 1 nagybetűt és 1 számot kell tartalmaznia</string>
     <string name="passwordAgain">Jelszó megerősítés</string>
+    <string name="usernameExists">A felhasználónév foglalt!</string>
+    <string name="usernameWhiteSpace">A felhasználónévben nem lehet üres karakter!</string>
+    <string name="username5char">A felhasználónév minimum 5 karakterből álljon!</string>
+    <string name="noUsername">Nincs megadva felhasználónév!</string>
+    <string name="emailExists">Az e-mail cím foglalt!</string>
+    <string name="wrongEmail">Helytelen e-mail cím!</string>
+    <string name="noEmail">Nincs megadva felhasználónév!</string>
+    <!-- 2 -->
+    <string name="noFirstname">Nincs megadva keresztnév!</string>
+    <string name="noLastname">Nincs megadva vezetéknév!</string>
+    <string name="under13">13 éven aluliak nem regisztrálhatnak!</string>
+    <!-- 3 -->
+    <string name="noPasswordAgain">Ismételd meg a jelszót!</string>
+    <string name="noPasswordPass">A két jelszó nem egyezik!</string>
+    <string name="weakPassword">Gyenge jelszó!</string>
+    <string name="successReg">Sikeres regisztráció!</string>
+    <string name="unsuccessReg">Szerverhiba! Sikertelen regisztráció!</string>
 
+    <!-- Metodus -->
     <string name="hour">óra</string>
     <string name="minute">perc</string>
 
@@ -27,9 +53,9 @@
     <string name="jaratok">Járatok</string>
     <string name="jegyek">Jegyek</string>
     <string name="beallitasok">Beállítások</string>
-    <string name="fromTo">-</string>
     <string name="seatInfo1">Még</string>
     <string name="seatInfo2">elérhető hely</string>
+    <string name="logoutMessage">Biztosan kijelentkezel?</string>
 
     <!-- Jarat -->
     <string name="from">Honnan</string>
@@ -39,6 +65,11 @@
     <string name="finalize">Véglegesítés</string>
     <string name="back">Vissza</string>
     <string name="noFlight">Nincs ilyen járat!</string>
+    <string name="seatReserved">Ez a hely már foglalt!</string>
+    <string name="noSeatReserved">Nincs kiválasztott hely!</string>
+    <string name="finalizeMessage">Ezzel a lépéssel véglegesíted a helyfoglalást.</string>
+    <string name="successReserve">Sikeres foglalás!</string>
+    <string name="unsuccessReserve">Szerverhiba! Sikertelen foglalás!</string>
 
     <!-- Jegyek -->
     <string name="codeInfo">A kódot le kell olvasni a beléptető kapunál</string>
@@ -46,6 +77,9 @@
     <string name="verify">Jóváhagyás</string>
     <string name="seatInfo">Ülőhely: </string>
     <string name="noReserve">Még nincs foglalt járat!</string>
+    <string name="unsuccessFinalize">Sikertelen jóváhagyás!</string>
+    <string name="successTicketDelete">Sikeres jegytörlés!</string>
+    <string name="unsuccessTicketDelete">Szerverhiba! Sikertelen jegytörlés!</string>
 
     <!-- Beallitasok -->
     <string name="modify">Módosítás</string>
@@ -55,4 +89,11 @@
     <string name="passwordOld">Régi jelszó</string>
     <string name="passwordNew">Új jelszó</string>
     <string name="save">Mentés</string>
+    <string name="successModify">Sikeres módosítás!</string>
+    <string name="unsuccessModify">Szerverhiba! Sikertelen módosítás!</string>
+    <string name="noOldPassword">Nincs megadva a régi jelszó!</string>
+    <string name="wrongOldPassword">Helytelen a régi jelszó!</string>
+    <string name="successPasswordUpdate">Sikeres jelszómódosítás!</string>
+    <string name="unsuccessPasswordUpdate">Szerverhiba! Sikertelen jelszómódosítás!</string>
+
 </resources>

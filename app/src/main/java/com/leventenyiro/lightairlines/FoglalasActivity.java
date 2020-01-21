@@ -80,7 +80,7 @@ public class FoglalasActivity extends AppCompatActivity {
                     tv.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Toast.makeText(mContext, "Ez a hely már foglalt!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(mContext, getString(R.string.seatReserved), Toast.LENGTH_LONG).show();
                         }
                     });
                 }
@@ -124,7 +124,7 @@ public class FoglalasActivity extends AppCompatActivity {
                     tv.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Toast.makeText(mContext, "Ez a hely már foglalt!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(mContext, getString(R.string.seatReserved), Toast.LENGTH_LONG).show();
                         }
                     });
                 }
@@ -155,7 +155,7 @@ public class FoglalasActivity extends AppCompatActivity {
                     alertDialog.show();
                 }
                 else {
-                    Toast.makeText(mContext, "Nincs kiválasztott hely!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(mContext, getString(R.string.noSeatReserved), Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -182,15 +182,15 @@ public class FoglalasActivity extends AppCompatActivity {
         s = getSharedPreferences("variables", Context.MODE_PRIVATE);
 
         alertDialogBuilder = new AlertDialog.Builder(FoglalasActivity.this);
-        alertDialogBuilder.setTitle("Véglegesítés");
-        alertDialogBuilder.setMessage("Ezzel a lépéssel véglegesíted a helyfoglalást.");
-        alertDialogBuilder.setPositiveButton("Nem", new DialogInterface.OnClickListener() {
+        alertDialogBuilder.setTitle(getString(R.string.finalize));
+        alertDialogBuilder.setMessage(getString(R.string.finalizeMessage));
+        alertDialogBuilder.setPositiveButton(getString(R.string.no), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
             }
         });
-        alertDialogBuilder.setNegativeButton("Igen", new DialogInterface.OnClickListener() {
+        alertDialogBuilder.setNegativeButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 insertFoglalas();
@@ -271,9 +271,9 @@ public class FoglalasActivity extends AppCompatActivity {
         String ules = s.getString("ules", "");
         Boolean eredmeny = db.insertFoglalas(jaratId, userId, ules);
         if (eredmeny)
-            Toast.makeText(this, "Sikeres foglalás!", Toast.LENGTH_LONG);
+            Toast.makeText(this, getString(R.string.successReserve), Toast.LENGTH_LONG);
         else
-            Toast.makeText(this, "Szerverhiba! Sikertelen foglalás!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.unsuccessReserve), Toast.LENGTH_LONG).show();
         s.edit().remove("jaratId").apply();
         s.edit().remove("ules").apply();
     }

@@ -49,15 +49,15 @@ public class InnerActivity extends AppCompatActivity {
         s = getSharedPreferences("variables", Context.MODE_PRIVATE);
         fragment = s.getString("fragment", "");
         alertDialogBuilder = new AlertDialog.Builder(InnerActivity.this);
-        alertDialogBuilder.setTitle("Kijelentkezés");
-        alertDialogBuilder.setMessage("Biztos kijelentkezel?");
-        alertDialogBuilder.setPositiveButton("Nem", new DialogInterface.OnClickListener() {
+        alertDialogBuilder.setTitle(getString(R.string.logout));
+        alertDialogBuilder.setMessage(getString(R.string.logoutMessage));
+        alertDialogBuilder.setPositiveButton(getString(R.string.no), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
             }
         });
-        alertDialogBuilder.setNegativeButton("Igen", new DialogInterface.OnClickListener() {
+        alertDialogBuilder.setNegativeButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 getSharedPreferences("variables", Context.MODE_PRIVATE).edit().remove("userId").apply();

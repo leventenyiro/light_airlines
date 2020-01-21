@@ -72,13 +72,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         dp20 = m.dpToPx(20, getResources());
 
         alertDialogBuilder = new AlertDialog.Builder(LoginActivity.this);
-        alertDialogBuilder.setTitle("Kilépés");
-        alertDialogBuilder.setMessage("Biztos elhagyod az alkalmazást?");
-        alertDialogBuilder.setPositiveButton("Nem", new DialogInterface.OnClickListener() {
+        alertDialogBuilder.setTitle(getString(R.string.exit));
+        alertDialogBuilder.setMessage(getString(R.string.exitMessage));
+        alertDialogBuilder.setPositiveButton(getString(R.string.no), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) { }
         });
-        alertDialogBuilder.setNegativeButton("Igen", new DialogInterface.OnClickListener() {
+        alertDialogBuilder.setNegativeButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 finishAffinity();
@@ -100,16 +100,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.btnLogin:
                 if (inputUsernameEmail.getText().toString().isEmpty()) {
-                    Toast.makeText(this, "Nincs megadva a felhasználónév vagy e-mail!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, getString(R.string.noUsernameEmail), Toast.LENGTH_LONG).show();
                     inputPassword.setText("");
                     inputSzin("usernameEmailRed");
                 }
                 else if (inputPassword.getText().toString().isEmpty()) {
-                    Toast.makeText(this, "Nincs megadva a jelszó!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, getString(R.string.noPassword), Toast.LENGTH_LONG).show();
                     inputSzin("passwordRed");
                 }
                 else if (!login()) {
-                    Toast.makeText(LoginActivity.this, "Helytelen bejelentkezési adatok!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, getString(R.string.wrongLoginData), Toast.LENGTH_LONG).show();
                     inputPassword.setText("");
                     inputSzin("usernameEmailRed");
                     inputSzin("passwordRed");

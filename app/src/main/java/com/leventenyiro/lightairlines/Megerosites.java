@@ -51,10 +51,10 @@ public class Megerosites extends AppCompatActivity implements View.OnClickListen
             case R.id.btnCancel: onBackPressed(); break;
             case R.id.btnVerify:
                 if (inputPassword.getText().toString().isEmpty()) {
-                    Toast.makeText(this, "Nincs megadva jelszó!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, getString(R.string.noPassword), Toast.LENGTH_LONG).show();
                 }
                 else if (!m.jelszoEllenorzes(s.getString("userId", ""), inputPassword.getText().toString())) {
-                    Toast.makeText(this, "Sikertelen jóváhagyás!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, getString(R.string.unsuccessFinalize), Toast.LENGTH_LONG).show();
                     inputPassword.setText("");
                 }
                 else {
@@ -71,9 +71,9 @@ public class Megerosites extends AppCompatActivity implements View.OnClickListen
 
     public void deleteJegy() {
         if (db.deleteJegy(s.getString("foglalasId", "")))
-            Toast.makeText(this, "Sikeres jegytörlés!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.successTicketDelete), Toast.LENGTH_LONG).show();
         else
-            Toast.makeText(this, "Szerverhiba! Sikertelen jegytörlés!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.unsuccessTicketDelete), Toast.LENGTH_LONG).show();
     }
 
     @Override

@@ -104,15 +104,15 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
             case R.id.btnNext:
                 if (inputFirstname.getText().toString().isEmpty()) {
                     inputSzin("firstnameRed");
-                    Toast.makeText(this, "Nincs megadva keresztnév!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, getString(R.string.noFirstname), Toast.LENGTH_LONG).show();
                 }
                 else if (inputLastname.getText().toString().isEmpty()) {
                     inputSzin("firstnameGreen");
                     inputSzin("lastnameRed");
-                    Toast.makeText(this, "Nincs megadva vezetéknév!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, getString(R.string.noLastname), Toast.LENGTH_LONG).show();
                 }
                 else if (!korEllenorzes(inputBirthdate.getYear(), inputBirthdate.getMonth(), inputBirthdate.getDayOfMonth())) {
-                    Toast.makeText(Reg2Activity.this, "13 éven aluliak nem regisztrálhatnak!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Reg2Activity.this, getString(R.string.under13), Toast.LENGTH_LONG).show();
                 }
                 else {
                     inputSzin("firstnameGreen");

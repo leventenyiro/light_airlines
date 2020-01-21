@@ -116,47 +116,47 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
                 else {
                     if (vanEUsername()) {
                         inputSzin("usernameRed");
-                        Toast.makeText(getActivity(), "A felhasználónév foglalt!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), getString(R.string.usernameExists), Toast.LENGTH_LONG).show();
                     }
                     else if (!m.usernameWhiteSpaceEllenorzes(inputUsername.getText().toString())) {
-                        Toast.makeText(getActivity(), "A felhasználónévben nem lehet üres karakter!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), getString(R.string.usernameWhiteSpace), Toast.LENGTH_LONG).show();
                         inputSzin("usernameRed");
                     }
                     else if (!m.usernameHosszEllenorzes(inputUsername.getText().toString())) {
-                        Toast.makeText(getActivity(), "A felhasználónév minimum 5 karakterből álljon!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), getString(R.string.username5char), Toast.LENGTH_LONG).show();
                         inputSzin("usernameRed");
                     }
                     else if (inputUsername.getText().toString().isEmpty()) {
                         inputSzin("usernameRed");
-                        Toast.makeText(getActivity(), "Nincs megadva felhasználónév!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), getString(R.string.noUsername), Toast.LENGTH_LONG).show();
                     }
                     else if (vanEEmail()) {
                         inputSzin("usernameGreen");
                         inputSzin("emailRed");
-                        Toast.makeText(getActivity(), "Az e-mail cím foglalt!", Toast.LENGTH_LONG).show();
-                    }
-                    else if (inputEmail.getText().toString().isEmpty()) {
-                        inputSzin("usernameGreen");
-                        inputSzin("emailRed");
-                        Toast.makeText(getActivity(), "Nincs megadva e-mail cím!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), getString(R.string.emailExists), Toast.LENGTH_LONG).show();
                     }
                     else if (!m.emailEllenorzes(inputEmail.getText().toString())) {
                         inputSzin("usernameGreen");
                         inputSzin("emailRed");
-                        Toast.makeText(getActivity(), "Helytelen e-mail cím!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), getString(R.string.wrongEmail), Toast.LENGTH_LONG).show();
+                    }
+                    else if (inputEmail.getText().toString().isEmpty()) {
+                        inputSzin("usernameGreen");
+                        inputSzin("emailRed");
+                        Toast.makeText(getActivity(), getString(R.string.noEmail), Toast.LENGTH_LONG).show();
                     }
                     else if (inputFirstname.getText().toString().isEmpty()) {
                         inputSzin("usernameGreen");
                         inputSzin("emailGreen");
                         inputSzin("firstnameRed");
-                        Toast.makeText(getActivity(), "Nincs megadva keresztnév!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), getString(R.string.noFirstname), Toast.LENGTH_LONG).show();
                     }
                     else if (inputLastname.getText().toString().isEmpty()) {
                         inputSzin("usernameGreen");
                         inputSzin("emailGreen");
                         inputSzin("firstnameGreen");
                         inputSzin("lastnameRed");
-                        Toast.makeText(getActivity(), "Nincs megadva vezetéknév!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), getString(R.string.noLastname), Toast.LENGTH_LONG).show();
                     }
                     else {
                         inputsDisable();
@@ -300,12 +300,12 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
     private void update() {
         boolean eredmeny = db.updateUser(userId, inputUsername.getText().toString(), inputEmail.getText().toString(), m.elsoNagybetu(inputFirstname.getText().toString()), m.elsoNagybetu(inputLastname.getText().toString()));
         if (eredmeny) {
-            Toast.makeText(getActivity(), "Sikeres módosítás!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getString(R.string.successModify), Toast.LENGTH_SHORT).show();
             btnCancel.setVisibility(View.INVISIBLE);
             btnUpdate.setText(getString(R.string.modify));
         }
         else {
-            Toast.makeText(getActivity(), "Szerverhiba! Sikertelen módosítás!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getString(R.string.unsuccessModify), Toast.LENGTH_SHORT).show();
         }
     }
 }

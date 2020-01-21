@@ -91,19 +91,19 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
             case R.id.btnLogin: backToLogin(); break;
             case R.id.btnReg:
                 if (inputPassword.getText().toString().isEmpty()) {
-                    Toast.makeText(this, "Nincs megadva jelszó!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, getString(R.string.noPassword), Toast.LENGTH_LONG).show();
                     inputClear();
                 }
                 else if (inputPasswordAgain.getText().toString().isEmpty()) {
-                    Toast.makeText(this, "Ismételd meg a jelszót!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, getString(R.string.noPasswordAgain), Toast.LENGTH_LONG).show();
                     inputClear();
                 }
                 else if (!inputPassword.getText().toString().equals(inputPasswordAgain.getText().toString())) {
-                    Toast.makeText(this, "A két jelszó nem egyezik!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, getString(R.string.noPasswordPass), Toast.LENGTH_LONG).show();
                     inputClear();
                 }
                 else if (!m.jelszoErossegEllenorzes(inputPassword.getText().toString())) {
-                    Toast.makeText(this, "Gyenge jelszó!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, getString(R.string.weakPassword), Toast.LENGTH_LONG).show();
                     inputClear();
                 }
                 else {
@@ -133,9 +133,9 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
 
         boolean eredmeny = db.insertUser(username, email, firstname, lastname, birthdate, password);
         if (eredmeny)
-            Toast.makeText(this, "Sikeres regisztráció!", Toast.LENGTH_LONG);
+            Toast.makeText(this, getString(R.string.successReg), Toast.LENGTH_LONG);
         else
-            Toast.makeText(this, "Szerverhiba! Sikertelen regisztráció!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.unsuccessReg), Toast.LENGTH_LONG).show();
     }
 
     @Override

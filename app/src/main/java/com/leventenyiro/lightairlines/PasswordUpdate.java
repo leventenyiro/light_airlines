@@ -92,27 +92,27 @@ public class PasswordUpdate extends AppCompatActivity implements View.OnClickLis
             case R.id.btnCancel: onBackPressed(); break;
             case R.id.btnUpdate:
                 if (inputOldPassword.getText().toString().isEmpty()) {
-                    Toast.makeText(this, "Nincs megadva a régi jelszó!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, getString(R.string.noOldPassword), Toast.LENGTH_LONG).show();
                     inputClear();
                 }
                 else if (!jelszoEllenorzes()) {
-                    Toast.makeText(this, "Helytelen a régi jelszó!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, getString(R.string.wrongOldPassword), Toast.LENGTH_LONG).show();
                     inputClear();
                 }
                 else if (!m.jelszoErossegEllenorzes(inputPassword.getText().toString())) {
-                    Toast.makeText(this, "Gyenge jelszó!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, getString(R.string.weakPassword), Toast.LENGTH_LONG).show();
                     inputClear();
                 }
                 else if (inputPassword.getText().toString().isEmpty()) {
-                    Toast.makeText(this, "Nincs megadva jelszó!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, getString(R.string.noPassword), Toast.LENGTH_LONG).show();
                     inputClear();
                 }
                 else if (inputPasswordAgain.getText().toString().isEmpty()) {
-                    Toast.makeText(this, "Ismételd meg a jelszót!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, getString(R.string.noPasswordAgain), Toast.LENGTH_LONG).show();
                     inputClear();
                 }
                 else if (!inputPassword.getText().toString().equals(inputPasswordAgain.getText().toString())) {
-                    Toast.makeText(this, "A két jelszó nem egyezik!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, getString(R.string.noPasswordPass), Toast.LENGTH_LONG).show();
                     inputClear();
                 }
                 else {
@@ -148,9 +148,9 @@ public class PasswordUpdate extends AppCompatActivity implements View.OnClickLis
         String titkositottPassword = PasswordUtils.generateSecurePassword(inputPassword.getText().toString(), salt);
         String password = titkositottPassword + ";" + salt;
         if (db.updatePassword(userId, password))
-            Toast.makeText(this, "Sikeres jelszómódosítás!", Toast.LENGTH_LONG);
+            Toast.makeText(this, getString(R.string.successPasswordUpdate), Toast.LENGTH_LONG);
         else
-            Toast.makeText(this, "Szerverhiba! Sikertelen jelszómódosítás!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.unsuccessPasswordUpdate), Toast.LENGTH_LONG).show();
     }
 
     @Override

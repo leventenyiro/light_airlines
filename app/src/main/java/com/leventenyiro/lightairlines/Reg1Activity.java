@@ -92,33 +92,33 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
             case R.id.btnLogin: onBackPressed(); break;
             case R.id.btnNext:
                 if (vanEUsername()) {
-                    Toast.makeText(this, "A felhasználónév foglalt!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, getString(R.string.usernameExists), Toast.LENGTH_LONG).show();
                     inputSzin("usernameRed");
                 }
                 else if (!m.usernameWhiteSpaceEllenorzes(inputUsername.getText().toString())) {
-                    Toast.makeText(this, "A felhasználónévben nem lehet üres karakter!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, getString(R.string.usernameWhiteSpace), Toast.LENGTH_LONG).show();
                     inputSzin("usernameRed");
                 }
                 else if (!m.usernameHosszEllenorzes(inputUsername.getText().toString())) {
-                    Toast.makeText(this, "A felhasználónév minimum 5 karakterből álljon!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, getString(R.string.username5char), Toast.LENGTH_LONG).show();
                     inputSzin("usernameRed");
                 }
                 else if (inputUsername.getText().toString().isEmpty()) {
-                    Toast.makeText(this, "Nincs megadva felhasználónév!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, getString(R.string.noUsername), Toast.LENGTH_LONG).show();
                     inputSzin("usernameRed");
                 }
                 else if (vanEEmail()) {
-                    Toast.makeText(this, "Az e-mail cím foglalt!", Toast.LENGTH_LONG).show();
-                    inputSzin("usernameGreen");
-                    inputSzin("emailRed");
-                }
-                else if (inputEmail.getText().toString().isEmpty()) {
-                    Toast.makeText(this, "Nincs megadva e-mail cím!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, getString(R.string.emailExists), Toast.LENGTH_LONG).show();
                     inputSzin("usernameGreen");
                     inputSzin("emailRed");
                 }
                 else if (!m.emailEllenorzes(inputEmail.getText().toString())) {
-                    Toast.makeText(this, "Helytelen e-mail cím!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, getString(R.string.wrongEmail), Toast.LENGTH_LONG).show();
+                    inputSzin("usernameGreen");
+                    inputSzin("emailRed");
+                }
+                else if (inputEmail.getText().toString().isEmpty()) {
+                    Toast.makeText(this, getString(R.string.noEmail), Toast.LENGTH_LONG).show();
                     inputSzin("usernameGreen");
                     inputSzin("emailRed");
                 }

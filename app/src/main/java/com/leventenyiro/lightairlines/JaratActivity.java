@@ -66,9 +66,9 @@ public class JaratActivity extends AppCompatActivity implements View.OnClickList
         Cursor e = db.selectJarat(s.getString("jaratId", ""));
         if (e != null && e.getCount() > 0) {
             while (e.moveToNext()) {
-                String roviditesInfo = e.getString(3) + " " + getString(R.string.fromTo) + " " + e.getString(5);
+                String roviditesInfo = e.getString(3) + " - " + e.getString(5);
                 textRovidites.setText(roviditesInfo);
-                String nevInfo = e.getString(2) + " " + getString(R.string.fromTo) + " " + e.getString(4);
+                String nevInfo = e.getString(2) + " - " + e.getString(4);
                 textNev.setText(nevInfo);
                 textIdopont.setText(e.getString(1).substring(0, 16).replace('-', '.'));
                 textIdotartam.setText(m.idotartamAtalakitas(e.getString(6)));
