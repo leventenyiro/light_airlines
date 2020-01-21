@@ -5,8 +5,8 @@
     <string name="nincsMegProfil">Nincs még profilod?</string>
     <string name="regisztralj">Regisztrálj.</string>
 
-    <string name="loginLogin">Bejelentkezés</string>
-    <string name="loginHintUsernameEmail">Felhasználónév vagy E-mail</string>
+    <string name="login">Bejelentkezés</string>
+    <string name="usernameEmail">Felhasználónév vagy E-mail</string>
 
     <string name="reg">Regisztráció</string>
     <string name="username">Felhasználónév</string>

@@ -22,7 +22,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginStart="30dp"
         android:id="@+id/textCim"
-        android:text="@string/loginLogin"
+        android:text="@string/login"
         android:textSize="35sp"
         android:textColor="@color/white"
         android:fontFamily="@font/bold" />
@@ -40,7 +40,7 @@
         android:id="@+id/inputUsernameEmail"
         android:background="@drawable/inputlogin"
         android:inputType="textEmailAddress"
-        android:hint="@string/loginHintUsernameEmail"
+        android:hint="@string/usernameEmail"
         android:textColorHint="@color/midGray"
         android:textColor="@color/white"
         android:maxLines="1"
@@ -76,7 +76,7 @@
         android:layout_marginTop="30dp"
         android:id="@+id/btnLogin"
         android:background="@drawable/button"
-        android:text="@string/loginLogin"
+        android:text="@string/login"
         android:textSize="16sp"
         android:textColor="@color/white"
         android:textAllCaps="false" />
