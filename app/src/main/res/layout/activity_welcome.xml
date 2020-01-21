@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WelcomeActivity"
+    android:background="@drawable/bg_winglet">
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_margin="20dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="30dp"
+        android:id="@+id/btnIcon"
+        android:src="@drawable/icon_white" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="170dp"
+        android:id="@+id/textWelcome"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:textAlignment="center" />
+
+</RelativeLayout>

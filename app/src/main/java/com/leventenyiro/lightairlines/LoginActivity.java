@@ -115,10 +115,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     inputSzin("passwordRed");
                 }
                 else {
-                    intent = new Intent(LoginActivity.this, InnerActivity.class);
+                    intent = new Intent(LoginActivity.this, WelcomeActivity.class);
                     startActivity(intent);
                     finish();
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                    overridePendingTransition(R.anim.fade_in_slow, R.anim.fade_out);
                 }
                 break;
         }

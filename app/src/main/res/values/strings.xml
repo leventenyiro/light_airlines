@@ -45,6 +45,9 @@
     <string name="successReg">Sikeres regisztráció!</string>
     <string name="unsuccessReg">Szerverhiba! Sikertelen regisztráció!</string>
 
+    <!-- Welcome -->
+    <string name="welcome">Üdvözlünk,</string>
+
     <!-- Metodus -->
     <string name="hour">óra</string>
     <string name="minute">perc</string>

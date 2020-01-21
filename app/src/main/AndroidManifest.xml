@@ -40,6 +40,10 @@
             android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
+            android:name=".WelcomeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/GrayTheme" />
+        <activity
             android:name=".InnerActivity"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
