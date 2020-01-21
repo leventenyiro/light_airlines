@@ -20,6 +20,9 @@
     <string name="passwordInfo">A minimum 8 karakteres jelszónak legalább\n 1 nagybetűt és 1 számot kell tartalmaznia</string>
     <string name="passwordAgain">Jelszó megerősítés</string>
 
+    <string name="hour">óra</string>
+    <string name="minute">perc</string>
+
     <!-- Inner -->
     <string name="jaratok">Járatok</string>
     <string name="jegyek">Jegyek</string>

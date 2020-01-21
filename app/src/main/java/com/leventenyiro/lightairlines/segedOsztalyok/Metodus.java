@@ -5,15 +5,19 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.util.TypedValue;
 
+import com.leventenyiro.lightairlines.R;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public final class Metodus {
 
     private Database db;
+    private Context c;
 
     public Metodus(Context context) {
         db = new Database(context);
+        c = context;
     }
 
     public int dpToPx(int dp, Resources r) {
@@ -69,10 +73,10 @@ public final class Metodus {
     public String idotartamAtalakitas(String idotartam) {
         String[] idoresz = idotartam.split(":");
         if (Integer.parseInt(idoresz[0]) < 10) {
-            return idoresz[0].substring(1, 2) + " óra " + idoresz[1] + " perc";
+            return idoresz[0].substring(1, 2) + " " + c.getString(R.string.hour) + " " + idoresz[1] + " " + c.getString(R.string.minute);
         }
         else {
-            return idoresz[0] + " óra " + idoresz[1] + " perc";
+            return idoresz[0] + " " + c.getString(R.string.hour) + " " + idoresz[1] + " " + c.getString(R.string.minute);
         }
     }
 }
