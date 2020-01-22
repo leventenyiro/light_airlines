@@ -1,16 +1,17 @@
-package com.leventenyiro.lightairlines;
+package com.leventenyiro.lightairlines.kezdoActivityk;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.drawable.Animatable;
 import android.os.Bundle;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
+import com.leventenyiro.lightairlines.R;
+import com.leventenyiro.lightairlines.userActivityk.InnerActivity;
 import com.leventenyiro.lightairlines.segedOsztalyok.Database;
 
 public class WelcomeActivity extends AppCompatActivity {

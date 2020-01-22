@@ -1,11 +1,10 @@
-package com.leventenyiro.lightairlines;
+package com.leventenyiro.lightairlines.kezdoActivityk;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Editable;
@@ -17,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.leventenyiro.lightairlines.R;
 import com.leventenyiro.lightairlines.segedOsztalyok.Database;
 import com.leventenyiro.lightairlines.segedOsztalyok.Metodus;
 

@@ -1,4 +1,4 @@
-package com.leventenyiro.lightairlines;
+package com.leventenyiro.lightairlines.kezdoActivityk;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.leventenyiro.lightairlines.R;
 import com.leventenyiro.lightairlines.segedOsztalyok.Database;
 import com.leventenyiro.lightairlines.segedOsztalyok.Metodus;
 import com.leventenyiro.lightairlines.segedOsztalyok.PasswordUtils;

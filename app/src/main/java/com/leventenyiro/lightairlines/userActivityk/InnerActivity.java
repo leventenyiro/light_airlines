@@ -1,4 +1,4 @@
-package com.leventenyiro.lightairlines;
+package com.leventenyiro.lightairlines.userActivityk;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -13,6 +13,8 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.leventenyiro.lightairlines.kezdoActivityk.LoginActivity;
+import com.leventenyiro.lightairlines.R;
 
 public class InnerActivity extends AppCompatActivity {
 

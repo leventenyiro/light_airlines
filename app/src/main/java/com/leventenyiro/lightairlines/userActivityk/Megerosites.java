@@ -1,4 +1,4 @@
-package com.leventenyiro.lightairlines;
+package com.leventenyiro.lightairlines.userActivityk;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.leventenyiro.lightairlines.R;
 import com.leventenyiro.lightairlines.segedOsztalyok.Database;
 import com.leventenyiro.lightairlines.segedOsztalyok.Metodus;
 

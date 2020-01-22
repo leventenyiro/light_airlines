@@ -19,6 +19,7 @@ public class Database extends SQLiteOpenHelper {
                                                     "lastname VARCHAR(255) NOT NULL, " +
                                                     "birthdate DATE NOT NULL, " +
                                                     "password TEXT NOT NULL)");
+        db.execSQL("INSERT INTO user (username, email, firstname, lastname, birthdate, password) VALUES('LightAirlinesAdmin', 'admin@lightairlines.com', '', '', '', 'WHfQn2BbjcIShCy6Lj1P4pYooqvtTDPKDXzO5o1iJRc=;AjwbBigW9CZQKAcZ4l7WO3ENGdXHtr')");
         db.execSQL("CREATE TABLE airport (id INTEGER PRIMARY KEY AUTOINCREMENT, nev varchar(100) NOT NULL UNIQUE, rovidites varchar(3) NOT NULL UNIQUE)");
         db.execSQL("INSERT INTO airport (nev, rovidites) VALUES ('Budapest', 'BUD'), ('London', 'LHR'), ('Párizs', 'CDG')");
         db.execSQL("CREATE TABLE foglalas(id INTEGER PRIMARY KEY AUTOINCREMENT, \n" +

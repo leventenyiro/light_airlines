@@ -7,17 +7,17 @@
 
     <fragment
         android:id="@+id/navigation_jegyek"
-        android:name="com.leventenyiro.lightairlines.fragments.JegyekFragment"
+        android:name="com.leventenyiro.lightairlines.userActivityk.fragments.JegyekFragment"
 
         tools:layout="@layout/fragment_jegyek" />
 
     <fragment
         android:id="@+id/navigation_jaratok"
-        android:name="com.leventenyiro.lightairlines.fragments.JaratokFragment"
+        android:name="com.leventenyiro.lightairlines.userActivityk.fragments.JaratokFragment"
         tools:layout="@layout/fragment_jaratok" />
 
     <fragment
         android:id="@+id/navigation_beallitasok"
-        android:name="com.leventenyiro.lightairlines.fragments.BeallitasokFragment"
+        android:name="com.leventenyiro.lightairlines.userActivityk.fragments.BeallitasokFragment"
         tools:layout="@layout/fragment_beallitasok" />
 </navigation>

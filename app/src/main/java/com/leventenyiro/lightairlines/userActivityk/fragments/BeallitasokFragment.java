@@ -1,4 +1,4 @@
-package com.leventenyiro.lightairlines.fragments;
+package com.leventenyiro.lightairlines.userActivityk.fragments;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,7 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.leventenyiro.lightairlines.segedOsztalyok.Database;
-import com.leventenyiro.lightairlines.PasswordUpdate;
+import com.leventenyiro.lightairlines.userActivityk.PasswordUpdate;
 import com.leventenyiro.lightairlines.R;
 import com.leventenyiro.lightairlines.segedOsztalyok.Metodus;
 

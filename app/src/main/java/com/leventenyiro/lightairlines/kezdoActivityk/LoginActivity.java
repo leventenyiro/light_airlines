@@ -1,4 +1,4 @@
-package com.leventenyiro.lightairlines;
+package com.leventenyiro.lightairlines.kezdoActivityk;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.leventenyiro.lightairlines.R;
 import com.leventenyiro.lightairlines.segedOsztalyok.Database;
 import com.leventenyiro.lightairlines.segedOsztalyok.Metodus;
 
@@ -108,17 +109,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     Toast.makeText(this, getString(R.string.noPassword), Toast.LENGTH_LONG).show();
                     inputSzin("passwordRed");
                 }
-                else if (!login()) {
+                else if (login() == 0) {
                     Toast.makeText(LoginActivity.this, getString(R.string.wrongLoginData), Toast.LENGTH_LONG).show();
                     inputPassword.setText("");
                     inputSzin("usernameEmailRed");
                     inputSzin("passwordRed");
                 }
                 else {
-                    intent = new Intent(LoginActivity.this, WelcomeActivity.class);
-                    startActivity(intent);
-                    finish();
-                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                    if (login() == 1) {
+                        intent = new Intent(LoginActivity.this, WelcomeActivity.class);
+                        startActivity(intent);
+                        finish();
+                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                    }
+                    else {
+                        Toast.makeText(LoginActivity.this, "Admin vagy", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 break;
         }
@@ -145,18 +151,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    public boolean login() {
+    public int login() {
         Cursor eredmeny = db.selectLogin(inputUsernameEmail.getText().toString().trim());
         if (eredmeny.getCount() == 1) {
             while (eredmeny.moveToNext()) {
                 String userId = eredmeny.getString(0);
-                if (m.jelszoEllenorzes(userId, inputPassword.getText().toString())) {
+                if (m.jelszoEllenorzes(userId, inputPassword.getText().toString()) && userId.equals(String.valueOf(1))) {
+                    return 2;
+                }
+                else if (m.jelszoEllenorzes(userId, inputPassword.getText().toString())) {
                     getSharedPreferences("variables",Context.MODE_PRIVATE).edit().putString("userId", eredmeny.getString(0)).apply();
-                    return true;
+                    return 1;
                 }
             }
         }
-        return false;
+        return 0;
     }
 
     @Override

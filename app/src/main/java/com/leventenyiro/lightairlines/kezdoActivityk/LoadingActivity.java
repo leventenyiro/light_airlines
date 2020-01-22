@@ -1,9 +1,11 @@
-package com.leventenyiro.lightairlines;
+package com.leventenyiro.lightairlines.kezdoActivityk;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import com.leventenyiro.lightairlines.R;
 
 public class LoadingActivity extends AppCompatActivity {
 

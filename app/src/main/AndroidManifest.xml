@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true">
         <activity
-            android:name=".LoadingActivity"
+            android:name=".kezdoActivityk.LoadingActivity"
             android:screenOrientation="portrait"
             android:theme="@style/BlueTheme">
             <intent-filter>
@@ -24,47 +24,47 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".kezdoActivityk.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/GrayTheme" />
         <activity
-            android:name=".Reg1Activity"
+            android:name=".kezdoActivityk.Reg1Activity"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
-            android:name=".Reg2Activity"
+            android:name=".kezdoActivityk.Reg2Activity"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
-            android:name=".Reg3Activity"
+            android:name=".kezdoActivityk.Reg3Activity"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
-            android:name=".WelcomeActivity"
+            android:name=".kezdoActivityk.WelcomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/GrayTheme" />
         <activity
-            android:name=".InnerActivity"
+            android:name=".userActivityk.InnerActivity"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
-            android:name=".PasswordUpdate"
+            android:name=".userActivityk.PasswordUpdate"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
-            android:name=".JaratActivity"
+            android:name=".userActivityk.JaratActivity"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
-            android:name=".FoglalasActivity"
+            android:name=".userActivityk.FoglalasActivity"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
-            android:name=".JegyActivity"
+            android:name=".userActivityk.JegyActivity"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
-            android:name=".Megerosites"
+            android:name=".userActivityk.Megerosites"
             android:screenOrientation="portrait"
             android:theme="@style/GrayTheme" />
     </application>
