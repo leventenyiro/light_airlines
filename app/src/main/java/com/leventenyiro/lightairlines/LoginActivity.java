@@ -118,7 +118,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     intent = new Intent(LoginActivity.this, WelcomeActivity.class);
                     startActivity(intent);
                     finish();
-                    overridePendingTransition(R.anim.fade_in_slow, R.anim.fade_out);
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 }
                 break;
         }
