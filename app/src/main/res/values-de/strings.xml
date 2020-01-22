@@ -98,5 +98,7 @@
     <string name="wrongOldPassword">Alt Kennwort ist ungültig!</string>
     <string name="successPasswordUpdate">Erfolgreich Kennwort ändern!</string>
     <string name="unsuccessPasswordUpdate">Serverfehler! Erfolglos Kennwort ändern!</string>
+    <string name="ujJarat">Neu flug</string>
+    <string name="ok">Ok</string>
 
 </resources>

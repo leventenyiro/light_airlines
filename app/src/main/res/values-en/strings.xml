@@ -53,7 +53,7 @@
     <string name="minute">minute(s)</string>
 
     <!-- Inner -->
-    <string name="jaratok">Flight</string>
+    <string name="jaratok">Flights</string>
     <string name="jegyek">Boarding pass</string>
     <string name="beallitasok">Settings</string>
     <string name="seatInfo1">Only</string>
@@ -98,5 +98,7 @@
     <string name="wrongOldPassword">Your old password is invalid!</string>
     <string name="successPasswordUpdate">Successful password update!</string>
     <string name="unsuccessPasswordUpdate">Server error! Unsuccessful password update!</string>
+    <string name="ujJarat">New flight</string>
+    <string name="ok">Ok</string>
 
 </resources>

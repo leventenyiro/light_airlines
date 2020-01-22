@@ -98,5 +98,7 @@
     <string name="wrongOldPassword">Helytelen a régi jelszó!</string>
     <string name="successPasswordUpdate">Sikeres jelszómódosítás!</string>
     <string name="unsuccessPasswordUpdate">Szerverhiba! Sikertelen jelszómódosítás!</string>
+    <string name="ujJarat">Új járat</string>
+    <string name="ok">Ok</string>
 
 </resources>

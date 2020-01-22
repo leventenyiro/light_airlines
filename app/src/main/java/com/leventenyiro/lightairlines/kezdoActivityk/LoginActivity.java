@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.leventenyiro.lightairlines.R;
+import com.leventenyiro.lightairlines.adminActivityk.AdminActivity;
 import com.leventenyiro.lightairlines.segedOsztalyok.Database;
 import com.leventenyiro.lightairlines.segedOsztalyok.Metodus;
 
@@ -123,7 +124,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                     }
                     else {
-                        Toast.makeText(LoginActivity.this, "Admin vagy", Toast.LENGTH_SHORT).show();
+                        intent = new Intent(LoginActivity.this, AdminActivity.class);
+                        startActivity(intent);
+                        finish();
+                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                     }
                 }
                 break;
