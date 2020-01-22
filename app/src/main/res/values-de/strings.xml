@@ -8,7 +8,7 @@
     <string name="login">Einloggen</string>
     <string name="usernameEmail">Nutzername oder E-mail</string>
     <string name="exit">Ausfahrt</string>
-    <string name="exitMessage">Ausfahrtst du die Anwendung sicher?</string>
+    <string name="exitMessage">Fährst du die Anwendung sicher auf?</string>
     <string name="yes">Ja</string>
     <string name="no">Nein</string>
     <string name="noUsernameEmail">Du gibst kein Nutzername oder E-mail!</string>
