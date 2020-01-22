@@ -8,7 +8,7 @@
     <string name="login">Einloggen</string>
     <string name="usernameEmail">Nutzername oder E-mail</string>
     <string name="exit">Ausfahrt</string>
-    <string name="exitMessage">Fährst du die Anwendung sicher auf?</string>
+    <string name="exitMessage">Fährst du die Anwendung sicher aus?</string>
     <string name="yes">Ja</string>
     <string name="no">Nein</string>
     <string name="noUsernameEmail">Du gibst kein Nutzername oder E-mail!</string>
@@ -58,7 +58,7 @@
     <string name="beallitasok">Einstellungen</string>
     <string name="seatInfo1">Noch</string>
     <string name="seatInfo2">verfügbar Sitz</string>
-    <string name="logoutMessage">Ausloggst du sicher?</string>
+    <string name="logoutMessage">Loggst du sicher aus?</string>
 
     <!-- Jarat -->
     <string name="from">Von</string>
