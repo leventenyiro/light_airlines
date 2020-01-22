@@ -1,0 +1,102 @@
+<resources>
+    <string name="app_name">Light Airlines</string>
+
+    <!-- Login -->
+    <string name="password">Kennwort</string>
+    <string name="nincsMegProfil">Hast du kein Profil?</string>
+    <string name="regisztralj">Registrieren.</string>
+    <string name="login">Einloggen</string>
+    <string name="usernameEmail">Nutzername oder E-mail</string>
+    <string name="exit">Ausfahrt</string>
+    <string name="exitMessage">Ausfahrtst du die Anwendung sicher?</string>
+    <string name="yes">Ja</string>
+    <string name="no">Nein</string>
+    <string name="noUsernameEmail">Du gibst kein Nutzername oder E-mail!</string>
+    <string name="noPassword">Du gibst kein Kennwort!</string>
+    <string name="wrongLoginData">Ungültig einloggen!</string>
+
+    <!-- Reg -->
+    <string name="reg">Registrieren</string>
+    <string name="username">Nutzername</string>
+    <string name="emailExample">beispiel@beispiel.com</string>
+    <string name="next">Nächster</string>
+    <string name="marVanProfil">Hast du Profil?</string>
+    <string name="jelentkezzBe">Loggen ein.</string>
+    <string name="firstname">Vorname</string>
+    <string name="lastname">Nachname</string>
+    <string name="birthdate">Geburtstag</string>
+    <string name="passwordInfo">Kennwort Länge ist 8 Charakter und\n das enthält 1 Kapitell und 1 Nummer</string>
+    <string name="passwordAgain">Kennwort nochmal</string>
+    <string name="usernameExists">Nutzername ist reserviert!</string>
+    <string name="usernameWhiteSpace">Nutzername kannt Leerzeichen enthälten!</string>
+    <string name="username5char">Nutzername minimum Länge ist 5 Charakter!</string>
+    <string name="noUsername">Du gibst kein Nutzername!</string>
+    <string name="emailExists">E-mail ist reserviert!</string>
+    <string name="wrongEmail">Ungültig E-mail!</string>
+    <string name="noEmail">Du gibst kein E-mail!</string>
+    <!-- 2 -->
+    <string name="noFirstname">Du gibst kein Vorname!</string>
+    <string name="noLastname">Du gibst kein Nachname!</string>
+    <string name="under13">Du kannst nicht registrieren, wenn du unter 13!</string>
+    <!-- 3 -->
+    <string name="noPasswordAgain">Wiederhol dein Kennwort!</string>
+    <string name="noPasswordPass">Kennworten sind nicht bestanden!</string>
+    <string name="weakPassword">Schwach Kennwort!</string>
+    <string name="successReg">Erfolgreich registrieren!</string>
+    <string name="unsuccessReg">Serverfehler! erfolglos registrieren!</string>
+
+    <!-- Welcome -->
+    <string name="welcome">Willkommen,</string>
+
+    <!-- Metodus -->
+    <string name="hour">Uhr</string>
+    <string name="minute">Minuten</string>
+
+    <!-- Inner -->
+    <string name="jaratok">Flüge</string>
+    <string name="jegyek">Bordkarte</string>
+    <string name="beallitasok">Einstellungen</string>
+    <string name="seatInfo1">Noch</string>
+    <string name="seatInfo2">verfügbar Sitz</string>
+    <string name="logoutMessage">Ausloggst du sicher?</string>
+
+    <!-- Jarat -->
+    <string name="from">Von</string>
+    <string name="to">Bis</string>
+    <string name="reserve">Reservieren</string>
+    <string name="cancel">Mégse</string>
+    <string name="finalize">stornieren</string>
+    <string name="back">Zurück</string>
+    <string name="noFlight">Es gibt kein Flug!</string>
+    <string name="seatReserved">Dies Sitz ist reserviert!</string>
+    <string name="noSeatReserved">Du wählst kein Sitz!</string>
+    <string name="finalizeMessage">Du abschließt dein Reservierung.</string>
+    <string name="successReserve">Erfolgreich Reservierung!</string>
+    <string name="unsuccessReserve">Serverfehler! Erfolglos Reservierung!</string>
+
+    <!-- Jegyek -->
+    <string name="codeInfo">Du muss dies Karte scannen am Steuerung</string>
+    <string name="renounce">Verzichten</string>
+    <string name="verify">Überprüfen</string>
+    <string name="seatInfo">Sitz: </string>
+    <string name="noReserve">Du hast kein Bordkarte!</string>
+    <string name="unsuccessFinalize">Erfolglos abschließen!</string>
+    <string name="successTicketDelete">Erfolgreich löschen!</string>
+    <string name="unsuccessTicketDelete">Serverfehler! Erfolglos löschen!</string>
+
+    <!-- Beallitasok -->
+    <string name="modify">Ändern</string>
+    <string name="reject">Ablehnen</string>
+    <string name="passwordUpdate">Kennwort ändern</string>
+    <string name="logout">Ausloggen</string>
+    <string name="passwordOld">Alt Kennwort</string>
+    <string name="passwordNew">Neu Kennwort</string>
+    <string name="save">Speichern</string>
+    <string name="successModify">Erfolgreich Ändern!</string>
+    <string name="unsuccessModify">Serverfehler! Erfolglos Ändern!</string>
+    <string name="noOldPassword">Du gibst kein alt Kennwort!</string>
+    <string name="wrongOldPassword">Alt Kennwort ist ungültig!</string>
+    <string name="successPasswordUpdate">Erfolgreich Kennwort ändern!</string>
+    <string name="unsuccessPasswordUpdate">Serverfehler! Erfolglos Kennwort ändern!</string>
+
+</resources>

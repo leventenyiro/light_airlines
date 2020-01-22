@@ -1,0 +1,102 @@
+<resources>
+    <string name="app_name">Light Airlines</string>
+
+    <!-- Login -->
+    <string name="password">Password</string>
+    <string name="nincsMegProfil">Haven\'t you profile?</string>
+    <string name="regisztralj">Sign up.</string>
+    <string name="login">Login</string>
+    <string name="usernameEmail">Username or E-mail</string>
+    <string name="exit">Exit</string>
+    <string name="exitMessage">Are you sure to leave?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="noUsernameEmail">You didn\'t add username or e-mail!</string>
+    <string name="noPassword">You didn\'t add password!</string>
+    <string name="wrongLoginData">Unsuccessful login!</string>
+
+    <!-- Reg -->
+    <string name="reg">Sign up</string>
+    <string name="username">Username</string>
+    <string name="emailExample">example@example.com</string>
+    <string name="next">Next</string>
+    <string name="marVanProfil">Have you profile?</string>
+    <string name="jelentkezzBe">Sign in.</string>
+    <string name="firstname">Firstname</string>
+    <string name="lastname">Lastname</string>
+    <string name="birthdate">Birthdate</string>
+    <string name="passwordInfo">Password minimum length is 8 and\n it must be contains 1 capital letter, and a number</string>
+    <string name="passwordAgain">Password again</string>
+    <string name="usernameExists">Username exists yet!</string>
+    <string name="usernameWhiteSpace">Username doesn\'t contains whitespace!</string>
+    <string name="username5char">Username must be at least 5 character!</string>
+    <string name="noUsername">You didn\'t add username!</string>
+    <string name="emailExists">E-mail exists yet!</string>
+    <string name="wrongEmail">E-mail is invalid!</string>
+    <string name="noEmail">You didn\'t add e-mail!</string>
+    <!-- 2 -->
+    <string name="noFirstname">You didn\'t add firstname!</string>
+    <string name="noLastname">You didn\'t add lastname!</string>
+    <string name="under13">You can\'t sign up under 13!</string>
+    <!-- 3 -->
+    <string name="noPasswordAgain">Repeat your password!</string>
+    <string name="noPasswordPass">Passwords aren\'t pass!</string>
+    <string name="weakPassword">Password is weak!</string>
+    <string name="successReg">Successful sign up!</string>
+    <string name="unsuccessReg">Server error! Unsuccessful sign up!</string>
+
+    <!-- Welcome -->
+    <string name="welcome">Welcome,</string>
+
+    <!-- Metodus -->
+    <string name="hour">hour(s)</string>
+    <string name="minute">minute(s)</string>
+
+    <!-- Inner -->
+    <string name="jaratok">Flight</string>
+    <string name="jegyek">Boarding pass</string>
+    <string name="beallitasok">Settings</string>
+    <string name="seatInfo1">Only</string>
+    <string name="seatInfo2">available seat</string>
+    <string name="logoutMessage">Are you sure to sign out?</string>
+
+    <!-- Jarat -->
+    <string name="from">From</string>
+    <string name="to">To</string>
+    <string name="reserve">Reserve</string>
+    <string name="cancel">Cancel</string>
+    <string name="finalize">Finalize</string>
+    <string name="back">Back</string>
+    <string name="noFlight">There are no flight!</string>
+    <string name="seatReserved">This seat is already reserved!</string>
+    <string name="noSeatReserved">You didn\'t choose seat!</string>
+    <string name="finalizeMessage">With this step you finalize your reserve.</string>
+    <string name="successReserve">Successful reserve!</string>
+    <string name="unsuccessReserve">Server error! Unsuccessful reserve!</string>
+
+    <!-- Jegyek -->
+    <string name="codeInfo">You have to scan this code at boarding</string>
+    <string name="renounce">Renounce</string>
+    <string name="verify">Verify</string>
+    <string name="seatInfo">Your seat: </string>
+    <string name="noReserve">You haven\'t boarding passes yet!</string>
+    <string name="unsuccessFinalize">Unsuccessful finalize!</string>
+    <string name="successTicketDelete">Successful delete!</string>
+    <string name="unsuccessTicketDelete">Server error! Unsuccessful delete!</string>
+
+    <!-- Beallitasok -->
+    <string name="modify">Modify</string>
+    <string name="reject">Reject</string>
+    <string name="passwordUpdate">Password update</string>
+    <string name="logout">Sign out</string>
+    <string name="passwordOld">Old password</string>
+    <string name="passwordNew">New password</string>
+    <string name="save">Save</string>
+    <string name="successModify">Successful modify!</string>
+    <string name="unsuccessModify">Server error! Unsuccessful modify!</string>
+    <string name="noOldPassword">You didn\'t add old password!</string>
+    <string name="wrongOldPassword">Your old password is invalid!</string>
+    <string name="successPasswordUpdate">Successful password update!</string>
+    <string name="unsuccessPasswordUpdate">Server error! Unsuccessful password update!</string>
+
+</resources>

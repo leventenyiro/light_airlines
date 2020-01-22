@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Light Airlines</string>
+    <string name="app_name">Light Airlines</string>
 
     <!-- Login -->
     <string name="password">Jelszó</string>
