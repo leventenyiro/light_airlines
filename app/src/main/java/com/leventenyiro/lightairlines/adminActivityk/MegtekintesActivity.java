@@ -70,7 +70,7 @@ public class MegtekintesActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(MegtekintesActivity.this, JaratAdminActivity.class);
+        Intent intent = new Intent(MegtekintesActivity.this, AdminActivity.class);
         startActivity(intent);
         finish();
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);

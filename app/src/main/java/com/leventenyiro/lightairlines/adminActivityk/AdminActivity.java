@@ -35,14 +35,14 @@ public class AdminActivity extends AppCompatActivity {
         init();
 
         switch (fragment) {
-            case "jegyek":
-                navView.setSelectedItemId(R.id.navigation_jegyek);
+            case "jaratInsert":
+                navView.setSelectedItemId(R.id.navigation_admin_jarat_insert);
                 break;
             case "beallitasok":
-                navView.setSelectedItemId(R.id.navigation_beallitasok);
+                navView.setSelectedItemId(R.id.navigation_admin_beallitasok);
                 break;
             default:
-                navView.setSelectedItemId(R.id.navigation_jaratok);
+                navView.setSelectedItemId(R.id.navigation_admin_jaratok);
                 break;
         }
         s.edit().remove("fragment").apply();

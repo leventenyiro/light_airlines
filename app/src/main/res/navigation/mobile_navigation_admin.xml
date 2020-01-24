@@ -7,16 +7,16 @@
 
     <fragment
         android:id="@+id/navigation_admin_jaratok"
-        android:name="com.leventenyiro.lightairlines.adminActivityk.fragments.JaratokAdminFragment"
+        android:name="com.leventenyiro.lightairlines.adminActivityk.fragments.AdminJaratokFragment"
         tools:layout="@layout/fragment_admin_jaratok" />
 
     <fragment
-        android:id="@+id/navigation_admin_jaratok_insert"
-        android:name="com.leventenyiro.lightairlines.adminActivityk.fragments.JaratokAdminInsertFragment"
-        tools:layout="@layout/fragment_admin_jaratok_insert" />
+        android:id="@+id/navigation_admin_jarat_insert"
+        android:name="com.leventenyiro.lightairlines.adminActivityk.fragments.AdminJaratInsertFragment"
+        tools:layout="@layout/fragment_admin_jarat_insert" />
 
     <fragment
         android:id="@+id/navigation_admin_beallitasok"
-        android:name="com.leventenyiro.lightairlines.adminActivityk.fragments.BeallitasokAdminFragment"
+        android:name="com.leventenyiro.lightairlines.adminActivityk.fragments.AdminBeallitasokFragment"
         tools:layout="@layout/fragment_admin_beallitasok" />
 </navigation>

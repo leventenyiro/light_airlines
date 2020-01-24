@@ -7,7 +7,7 @@
         android:title="@string/jaratok" />
 
     <item
-        android:id="@+id/navigation_admin_jaratok_insert"
+        android:id="@+id/navigation_admin_jarat_insert"
         android:icon="@drawable/jegyek"
         android:title="@string/create" />
 
