@@ -13,6 +13,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true">
+        <activity android:name=".adminActivityk.JaratInsertActivity"></activity>
         <activity
             android:name=".kezdoActivityk.LoadingActivity"
             android:screenOrientation="portrait"
@@ -67,7 +68,7 @@
             android:name=".userActivityk.Megerosites"
             android:screenOrientation="portrait"
             android:theme="@style/GrayTheme" />
-        <activity android:name=".adminActivityk.MegtekintesActivity"></activity>
+        <activity android:name=".adminActivityk.MegtekintesActivity" />
         <activity
             android:name=".adminActivityk.AdminActivity"
             android:screenOrientation="portrait"
