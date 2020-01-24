@@ -100,5 +100,6 @@
     <string name="unsuccessPasswordUpdate">Server error! Unsuccessful password update!</string>
     <string name="ujJarat">New flight</string>
     <string name="ok">Ok</string>
+    <string name="create">Create</string>
 
 </resources>

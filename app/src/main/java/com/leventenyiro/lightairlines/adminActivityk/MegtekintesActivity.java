@@ -15,8 +15,6 @@ import android.widget.TextView;
 import com.leventenyiro.lightairlines.R;
 import com.leventenyiro.lightairlines.segedOsztalyok.Database;
 import com.leventenyiro.lightairlines.segedOsztalyok.Metodus;
-import com.leventenyiro.lightairlines.userActivityk.FoglalasActivity;
-import com.leventenyiro.lightairlines.userActivityk.InnerActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,7 +70,7 @@ public class MegtekintesActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(MegtekintesActivity.this, AdminActivity.class);
+        Intent intent = new Intent(MegtekintesActivity.this, JaratAdminActivity.class);
         startActivity(intent);
         finish();
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
