@@ -18,7 +18,6 @@ import android.widget.Toast;
 
 import com.leventenyiro.lightairlines.R;
 import com.leventenyiro.lightairlines.adminActivityk.AdminActivity;
-import com.leventenyiro.lightairlines.adminActivityk.JaratAdminActivity;
 import com.leventenyiro.lightairlines.segedOsztalyok.Database;
 import com.leventenyiro.lightairlines.segedOsztalyok.Metodus;
 

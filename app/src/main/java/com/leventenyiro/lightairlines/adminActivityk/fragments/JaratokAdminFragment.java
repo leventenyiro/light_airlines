@@ -92,7 +92,7 @@ public class JaratokAdminFragment extends Fragment {
         }
         cardLista.clear();
 
-        Cursor eredmeny = db.selectJaratok(inputHonnan.getText().toString(), inputHova.getText().toString(), "1");
+        Cursor eredmeny = db.selectJaratok(inputHonnan.getText().toString().trim(), inputHova.getText().toString().trim(), "1");
         String jaratId;
         String helyekSzama;
         String idopont;

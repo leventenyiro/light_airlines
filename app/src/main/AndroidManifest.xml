@@ -67,12 +67,7 @@
             android:name=".userActivityk.Megerosites"
             android:screenOrientation="portrait"
             android:theme="@style/GrayTheme" />
-        <activity
-            android:name=".adminActivityk.JaratAdminActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/WhiteTheme" />
         <activity android:name=".adminActivityk.MegtekintesActivity"></activity>
-        <activity android:name=".adminActivityk.JaratInsertActivity" />
         <activity
             android:name=".adminActivityk.AdminActivity"
             android:screenOrientation="portrait"

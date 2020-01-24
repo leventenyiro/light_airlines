@@ -135,7 +135,7 @@ public class Database extends SQLiteOpenHelper {
                     "INNER JOIN utvonal u ON j.utvonal_id = u.id\n" +
                     "INNER JOIN airport ai ON u.indulas_id = ai.id\n" +
                     "INNER JOIN airport ac ON u.celallomas_id = ac.id\n"+
-                    "WHERE (ai.nev LIKE '%" + honnan.trim() + "%' OR ai.rovidites LIKE '%" + honnan.trim() + "%') AND (ac.nev LIKE '%" + hova.trim() + "%' OR ac.rovidites LIKE '%" + hova.trim() + "%') " +
+                    "WHERE (ai.nev LIKE '%" + honnan + "%' OR ai.rovidites LIKE '%" + honnan + "%') AND (ac.nev LIKE '%" + hova + "%' OR ac.rovidites LIKE '%" + hova + "%') " +
                     "AND j.idopont > datetime('now') " +
                     "AND j.helyek_szama - (SELECT COUNT(*) FROM foglalas f WHERE f.jarat_id = j.id) > 0", null);
         }
@@ -193,5 +193,14 @@ public class Database extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         long eredmeny = db.delete("foglalas", "id = ?", new String[] { foglalasId });
         return eredmeny == 1;
+    }
+
+    public Cursor selectUtvonalak(String honnan, String hova) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.rawQuery("SELECT id, ai.nev, ai.rovidites, ac.nev, ac.rovidites, u.idotartam\n" +
+                "FROM utvonal u\n" +
+                "INNER JOIN airport ai ON u.indulas_id = ai.id\n" +
+                "INNER JOIN airport ac ON u.celallomas_id = ac.id\n" +
+                "WHERE (ai.nev LIKE '%" + honnan + "%' OR ai.rovidites LIKE '%" + honnan + "%') AND (ac.nev LIKE '%" + hova + "%' OR ac.rovidites LIKE '%" + hova + "%')", null);
     }
 }

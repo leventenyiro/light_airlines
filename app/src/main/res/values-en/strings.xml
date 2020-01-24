@@ -101,5 +101,7 @@
     <string name="ujJarat">New flight</string>
     <string name="ok">Ok</string>
     <string name="create">Create</string>
+    <string name="chooseLine">Choose line</string>
+    <string name="noLine">There are no line!</string>
 
 </resources>

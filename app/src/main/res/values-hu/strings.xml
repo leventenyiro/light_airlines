@@ -102,5 +102,7 @@
     <string name="ujJarat">Új járat</string>
     <string name="ok">Ok</string>
     <string name="create">Hozzáadás</string>
+    <string name="chooseLine">Útvonalválasztás</string>
+    <string name="noLine">Nincs ilyen útvonal!</string>
 
 </resources>
