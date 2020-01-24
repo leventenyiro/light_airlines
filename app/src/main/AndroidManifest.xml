@@ -15,7 +15,6 @@
         android:supportsRtl="true">
         <activity
             android:name=".kezdoActivityk.LoadingActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/BlueTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

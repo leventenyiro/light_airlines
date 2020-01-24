@@ -1,6 +1,7 @@
 package com.leventenyiro.lightairlines.adminActivityk.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import com.leventenyiro.lightairlines.R;
+import com.leventenyiro.lightairlines.adminActivityk.JaratInsertActivity;
 import com.leventenyiro.lightairlines.segedOsztalyok.Database;
 import com.leventenyiro.lightairlines.segedOsztalyok.Metodus;
 
@@ -117,10 +119,10 @@ public class AdminJaratInsertFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         s.edit().putString("utvonalId", utvonalId).apply();
-                        //Intent intent = new Intent(getActivity(), JaratInsertActivity.class);
-                        //startActivity(intent);
-                        //getActivity().finish();
-                        //getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                        Intent intent = new Intent(getActivity(), JaratInsertActivity.class);
+                        startActivity(intent);
+                        getActivity().finish();
+                        getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     }
                 });
                 card.setId(card.generateViewId());
