@@ -25,57 +25,46 @@
         </activity>
         <activity
             android:name=".kezdoActivityk.LoginActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/GrayTheme" />
         <activity
             android:name=".kezdoActivityk.Reg1Activity"
-            android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
             android:name=".kezdoActivityk.Reg2Activity"
-            android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
             android:name=".kezdoActivityk.Reg3Activity"
-            android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
             android:name=".kezdoActivityk.WelcomeActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/GrayTheme" />
         <activity
             android:name=".userActivityk.InnerActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
             android:name=".userActivityk.PasswordUpdate"
-            android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
             android:name=".userActivityk.JaratActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
             android:name=".userActivityk.FoglalasActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
             android:name=".userActivityk.JegyActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
             android:name=".userActivityk.Megerosites"
-            android:screenOrientation="portrait"
             android:theme="@style/GrayTheme" />
-        <activity android:name=".adminActivityk.MegtekintesActivity" />
+        <activity
+            android:name=".adminActivityk.MegtekintesActivity"
+            android:theme="@style/WhiteTheme" />
         <activity
             android:name=".adminActivityk.AdminActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
             android:name=".adminActivityk.JaratInsertActivity"
-            android:screenOrientation="portrait"
-            />
+            android:theme="@style/WhiteTheme" />
     </application>
 
 </manifest>
