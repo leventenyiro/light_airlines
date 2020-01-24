@@ -13,7 +13,6 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true">
-        <activity android:name=".adminActivityk.JaratInsertActivity"></activity>
         <activity
             android:name=".kezdoActivityk.LoadingActivity"
             android:screenOrientation="portrait"
@@ -73,6 +72,10 @@
             android:name=".adminActivityk.AdminActivity"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
+        <activity
+            android:name=".adminActivityk.JaratInsertActivity"
+            android:screenOrientation="portrait"
+            />
     </application>
 
 </manifest>
