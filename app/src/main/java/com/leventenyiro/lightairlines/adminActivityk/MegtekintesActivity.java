@@ -185,6 +185,7 @@ public class MegtekintesActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        s.edit().remove("jaratId").apply();
         Intent intent = new Intent(MegtekintesActivity.this, AdminActivity.class);
         startActivity(intent);
         finish();
