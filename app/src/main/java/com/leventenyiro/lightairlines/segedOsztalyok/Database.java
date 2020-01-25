@@ -197,7 +197,7 @@ public class Database extends SQLiteOpenHelper {
 
     public Cursor selectUtvonalak(String honnan, String hova) {
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.rawQuery("SELECT id, ai.nev, ai.rovidites, ac.nev, ac.rovidites, u.idotartam\n" +
+        return db.rawQuery("SELECT u.id, ai.nev, ai.rovidites, ac.nev, ac.rovidites, u.idotartam\n" +
                 "FROM utvonal u\n" +
                 "INNER JOIN airport ai ON u.indulas_id = ai.id\n" +
                 "INNER JOIN airport ac ON u.celallomas_id = ac.id\n" +
