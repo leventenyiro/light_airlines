@@ -20,7 +20,6 @@ import com.leventenyiro.lightairlines.segedOsztalyok.Database;
 import com.leventenyiro.lightairlines.segedOsztalyok.Metodus;
 
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 public class JaratInsertActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -96,11 +95,11 @@ public class JaratInsertActivity extends AppCompatActivity implements View.OnCli
             Toast.makeText(this, getString(R.string.successInsert), Toast.LENGTH_SHORT).show();
         else
             Toast.makeText(this, getString(R.string.unsuccessInsert), Toast.LENGTH_SHORT).show();
-        s.edit().remove("utvonalId").apply();
     }
 
     @Override
     public void onBackPressed() {
+        s.edit().remove("utvonalId").apply();
         Intent intent = new Intent(JaratInsertActivity.this, AdminActivity.class);
         startActivity(intent);
         finish();
