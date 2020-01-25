@@ -211,4 +211,23 @@ public class Database extends SQLiteOpenHelper {
                 "INNER JOIN foglalas f ON u.id = f.user_id\n" +
                 "WHERE f.jarat_id = " + jaratId + " AND f.ules = '" + ules + "'", null);
     }
+
+    public Cursor selectUtvonal(String utvonalId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.rawQuery("SELECT ai.nev, ai.rovidites, ac.nev, ac.rovidites\n" +
+                "FROM utvonal u\n" +
+                "INNER JOIN airport ai ON u.indulas_id = ai.id\n" +
+                "INNER JOIN airport ac ON u.celallomas_id = ac.id\n" +
+                "WHERE u.id = " + utvonalId, null);
+    }
+
+    public boolean insertJarat(String utvonalId, String datum, String idopont) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("utvonal_id", utvonalId);
+        contentValues.put("helyek_szama", 120);
+        contentValues.put("idopont", datum + " " + idopont);
+        long eredmeny = db.insert("jarat", null, contentValues);
+        return eredmeny != -1;
+    }
 }
