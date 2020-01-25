@@ -104,5 +104,7 @@
     <string name="chooseLine">Choose line</string>
     <string name="noLine">There are no line!</string>
     <string name="noReserved">This seat isn\'t reserved!</string>
+    <string name="successInsert">Successful insert!</string>
+    <string name="unsuccessInsert">Server error! Unsuccessful insert!</string>
 
 </resources>

@@ -1,9 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".adminActivityk.JaratInsertActivity">
+    tools:context=".adminActivityk.JaratInsertActivity"
+    android:background="@color/white">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:id="@+id/btnBack"
+        android:src="@drawable/back" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="20dp"
+        android:text="@string/ujJarat"
+        android:textSize="30sp"
+        android:textColor="@color/gray"
+        android:fontFamily="@font/bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/btnBack"
+        android:id="@+id/textRovidites"
+        android:textSize="50sp"
+        android:textColor="@color/gray"
+        android:fontFamily="@font/bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/textRovidites"
+        android:id="@+id/textNev"
+        android:textSize="20sp"
+        android:textColor="@color/gray" />
+
+    <DatePicker
+        android:layout_width="340dp"
+        android:layout_height="180dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/textNev"
+        android:padding="10dp"
+        android:id="@+id/inputDate"
+        android:background="@drawable/inputdatepicker"
+        android:datePickerMode="spinner"
+        android:calendarViewShown="false" />
+
+    <TimePicker
+        android:layout_width="340dp"
+        android:layout_height="180dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/inputDate"
+        android:layout_marginTop="20dp"
+        android:padding="10dp"
+        android:id="@+id/inputTime"
+        android:background="@drawable/inputdatepicker"
+        android:timePickerMode="spinner" />
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/inputTime"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="40dp"
+        android:id="@+id/btnInsert"
+        android:background="@drawable/button"
+        android:text="@string/finalize"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:textAllCaps="false" />
+
+
+
+</RelativeLayout>

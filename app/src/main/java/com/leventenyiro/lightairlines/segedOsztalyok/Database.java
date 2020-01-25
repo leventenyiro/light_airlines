@@ -221,12 +221,12 @@ public class Database extends SQLiteOpenHelper {
                 "WHERE u.id = " + utvonalId, null);
     }
 
-    public boolean insertJarat(String utvonalId, String datum, String idopont) {
+    public boolean insertJarat(String utvonalId, String date, String time) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("utvonal_id", utvonalId);
         contentValues.put("helyek_szama", 120);
-        contentValues.put("idopont", datum + " " + idopont);
+        contentValues.put("idopont", date + " " + time);
         long eredmeny = db.insert("jarat", null, contentValues);
         return eredmeny != -1;
     }

@@ -104,5 +104,7 @@
     <string name="chooseLine">Wähl Linie</string>
     <string name="noLine">Es gibt kein Linie!</string>
     <string name="noReserved">Dies Sitz nicht reserviert!</string>
+    <string name="successInsert">Erfolgreich Paste!</string>
+    <string name="unsuccessInsert">Serverfehler! Erfolglos Paste!</string>
 
 </resources>

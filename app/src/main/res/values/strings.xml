@@ -104,5 +104,7 @@
     <string name="chooseLine">Útvonalválasztás</string>
     <string name="noLine">Nincs ilyen útvonal!</string>
     <string name="noReserved">Ez az ülés még nem foglalt!</string>
+    <string name="successInsert">Sikeres rögzítés!</string>
+    <string name="unsuccessInsert">Szerverhiba! Sikertelen rögzítés!</string>
 
 </resources>
