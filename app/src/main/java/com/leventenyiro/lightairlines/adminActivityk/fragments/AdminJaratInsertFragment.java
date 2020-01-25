@@ -31,7 +31,7 @@ public class AdminJaratInsertFragment extends Fragment {
     private Context mContext;
     private Database db;
     private EditText inputHonnan, inputHova;
-    private int dp5, dp7, dp10, dp15,dp20, dp40, dp100, dp200, dp360;
+    private int dp5, dp10, dp15,dp20, dp40, dp100, dp360;
     private List<Integer> cardLista;
     private Metodus m;
     private RelativeLayout mRelativeLayout;
@@ -74,7 +74,6 @@ public class AdminJaratInsertFragment extends Fragment {
         mRelativeLayout = root.findViewById(R.id.relativeLayout);
         m = new Metodus(getActivity());
         dp5 = m.dpToPx(5, getResources());
-        dp7 = m.dpToPx(7, getResources());
         dp10 = m.dpToPx(10, getResources());
         dp15 = m.dpToPx(15, getResources());
         dp20 = m.dpToPx(20, getResources());
@@ -104,6 +103,7 @@ public class AdminJaratInsertFragment extends Fragment {
 
                 CardView card = new CardView(mContext);
                 RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(dp360, dp100);
+                params.addRule(RelativeLayout.CENTER_HORIZONTAL);
                 if (cardLista.size() == 0)
                     params.addRule(RelativeLayout.BELOW, R.id.inputHova);
                 else
@@ -135,7 +135,7 @@ public class AdminJaratInsertFragment extends Fragment {
 
                 TextView tvRovidites = new TextView(mContext);
                 RelativeLayout.LayoutParams paramsRovidites = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-                paramsRovidites.topMargin = dp20;
+                paramsRovidites.topMargin = dp15;
                 tvRovidites.setLayoutParams(paramsRovidites);
                 String fromTo = indulasRovidites + " - " + celallomasRovidites;
                 tvRovidites.setText(fromTo);
@@ -143,12 +143,11 @@ public class AdminJaratInsertFragment extends Fragment {
                 tvRovidites.setTextColor(getActivity().getResources().getColor(R.color.gray));
                 tvRovidites.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 tvRovidites.setId(tvRovidites.generateViewId());
-                tvRovidites.setTextSize(dp15);
+                tvRovidites.setTextSize(dp10);
 
                 TextView tvVaros = new TextView(mContext);
                 RelativeLayout.LayoutParams paramsVaros = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
                 paramsVaros.addRule(RelativeLayout.BELOW, tvRovidites.getId());
-                paramsVaros.topMargin = dp20;
                 tvVaros.setLayoutParams(paramsVaros);
                 fromTo = indulasNev + " - " + celallomasNev;
                 tvVaros.setText(fromTo);
@@ -156,19 +155,18 @@ public class AdminJaratInsertFragment extends Fragment {
                 tvVaros.setTextColor(getActivity().getResources().getColor(R.color.gray));
                 tvVaros.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 tvVaros.setId(tvVaros.generateViewId());
-                tvVaros.setTextSize(dp10);
+                tvVaros.setTextSize(dp5);
 
                 TextView tvIdotartam = new TextView(mContext);
                 RelativeLayout.LayoutParams paramsIdotartam = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-                paramsVaros.addRule(RelativeLayout.BELOW, tvVaros.getId());
-                paramsIdotartam.topMargin = dp20;
+                paramsIdotartam.addRule(RelativeLayout.BELOW, tvVaros.getId());
                 tvIdotartam.setLayoutParams(paramsIdotartam);
                 tvIdotartam.setText(idotartam);
                 tvIdotartam.setTypeface(getActivity().getResources().getFont(R.font.regular));
                 tvIdotartam.setTextColor(getActivity().getResources().getColor(R.color.gray));
                 tvIdotartam.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 tvIdotartam.setId(tvIdotartam.generateViewId());
-                tvIdotartam.setTextSize(dp10);
+                tvIdotartam.setTextSize(dp5);
 
                 rlCard.addView(tvRovidites);
                 rlCard.addView(tvVaros);
