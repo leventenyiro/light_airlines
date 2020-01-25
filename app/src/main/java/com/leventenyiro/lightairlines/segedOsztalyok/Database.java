@@ -203,4 +203,12 @@ public class Database extends SQLiteOpenHelper {
                 "INNER JOIN airport ac ON u.celallomas_id = ac.id\n" +
                 "WHERE (ai.nev LIKE '%" + honnan + "%' OR ai.rovidites LIKE '%" + honnan + "%') AND (ac.nev LIKE '%" + hova + "%' OR ac.rovidites LIKE '%" + hova + "%')", null);
     }
+
+    public Cursor selectUlesInfo(String jaratId, String ules) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.rawQuery("SELECT u.username, u.email, u.firstname, u.lastname\n" +
+                "FROM user u\n" +
+                "INNER JOIN foglalas f ON u.id = f.user_id\n" +
+                "WHERE f.jarat_id = " + jaratId + " AND f.ules = '" + ules + "'", null);
+    }
 }

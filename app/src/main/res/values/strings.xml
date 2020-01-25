@@ -103,5 +103,6 @@
     <string name="create">Hozzáadás</string>
     <string name="chooseLine">Útvonalválasztás</string>
     <string name="noLine">Nincs ilyen útvonal!</string>
+    <string name="noReserved">Ez az ülés még nem foglalt!</string>
 
 </resources>

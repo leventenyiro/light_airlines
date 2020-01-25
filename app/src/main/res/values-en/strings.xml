@@ -103,5 +103,6 @@
     <string name="create">Create</string>
     <string name="chooseLine">Choose line</string>
     <string name="noLine">There are no line!</string>
+    <string name="noReserved">This seat isn\'t reserved!</string>
 
 </resources>

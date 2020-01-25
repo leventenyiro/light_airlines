@@ -7,10 +7,16 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.util.TypedValue;
+import android.view.Gravity;
+import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.leventenyiro.lightairlines.R;
 import com.leventenyiro.lightairlines.segedOsztalyok.Database;
@@ -40,6 +46,98 @@ public class MegtekintesActivity extends AppCompatActivity {
 
         init();
 
+        int ulesId = 0;
+        for (int i = 1; i < 21; i++) {
+            LinearLayout ll = new LinearLayout(mContext);
+            RelativeLayout.LayoutParams paramsSor = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, dp35);
+            if (i == 1) {
+                paramsSor.setMargins(0, dp10, 0, dp10);
+                paramsSor.addRule(RelativeLayout.BELOW, R.id.betuk);
+            }
+            else {
+                if (i == 20)
+                    paramsSor.setMargins(0, dp10, 0, dp200);
+                else
+                    paramsSor.setMargins(0, dp10, 0, dp10);
+                paramsSor.addRule(RelativeLayout.BELOW, sorId);
+            }
+            ll.setLayoutParams(paramsSor);
+            ll.setGravity(Gravity.CENTER);
+            ll.setOrientation(LinearLayout.HORIZONTAL);
+            ll.setId(ll.generateViewId());
+            sorId = ll.getId();
+            for (int j = 0; j < 3; j++) {
+                tv = new TextView(mContext);
+                LinearLayout.LayoutParams paramsUles = new LinearLayout.LayoutParams(dp35, LinearLayout.LayoutParams.WRAP_CONTENT);
+                paramsUles.setMargins(dp8, 0, dp8, 0);
+                tv.setLayoutParams(paramsUles);
+                tv.setId(tv.generateViewId());
+                helyLista.add(tv.getId());
+                final int finalUlesId = ulesId;
+                if (m.foglaltE(finalUlesId, s.getString("jaratId", ""))) {
+                    tv.setBackground(getResources().getDrawable(R.drawable.seatred));
+                    tv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            ulesInfo(m.ulesKodolas(finalUlesId));
+                        }
+                    });
+                }
+                else {
+                    tv.setBackground(getResources().getDrawable(R.drawable.seatfree));
+                    tv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(mContext, getString(R.string.noReserved), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+                ulesId++;
+                ll.addView(tv);
+            }
+            tv = new TextView(mContext);
+            LinearLayout.LayoutParams paramsSorszam = new LinearLayout.LayoutParams(dp35, LinearLayout.LayoutParams.WRAP_CONTENT);
+            paramsSorszam.setMargins(20, 0, 20, 0);
+            paramsSorszam.gravity = Gravity.CENTER;
+            tv.setLayoutParams(paramsSorszam);
+            tv.setText(String.valueOf(i));
+            tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+            tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            ll.addView(tv);
+            for (int j = 0; j < 3; j++) {
+                tv = new TextView(mContext);
+                LinearLayout.LayoutParams paramsUles = new LinearLayout.LayoutParams(dp35, LinearLayout.LayoutParams.WRAP_CONTENT);
+                paramsUles.setMargins(dp8, 0, dp8, 0);
+                tv.setLayoutParams(paramsUles);
+                tv.setId(tv.generateViewId());
+                helyLista.add(tv.getId());
+                final int finalUlesId = ulesId;
+                if (m.foglaltE(finalUlesId, s.getString("jaratId", ""))) {
+                    tv.setBackground(getResources().getDrawable(R.drawable.seatred));
+                    tv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            ulesInfo(m.ulesKodolas(finalUlesId));
+                        }
+                    });
+                }
+                else {
+                    tv.setBackground(getResources().getDrawable(R.drawable.seatfree));
+                    tv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(mContext, getString(R.string.noReserved), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+                ulesId++;
+                ll.addView(tv);
+            }
+            mRelativeLayout.addView(ll);
+        }
+    }
+
+    private void init() {
         mContext = getApplicationContext();
         mRelativeLayout = findViewById(R.id.plane);
         helyLista = new ArrayList<>();
@@ -51,21 +149,25 @@ public class MegtekintesActivity extends AppCompatActivity {
         dp35 = m.dpToPx(35, getResources());
         dp200 = m.dpToPx(200, getResources());
         s = getSharedPreferences("variables", Context.MODE_PRIVATE);
-
-        alertDialogBuilder = new AlertDialog.Builder(MegtekintesActivity.this);
-        //alertDialogBuilder.setTitle(getString(R.string.seatInfo) + " " + );
-        alertDialogBuilder.setMessage(getString(R.string.finalizeMessage));
-        alertDialogBuilder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-            }
-        });
-        alertDialog = alertDialogBuilder.create();
     }
 
-    private void init() {
-
+    private void ulesInfo(String ules) {
+        Cursor eredmeny = db.selectUlesInfo(s.getString("jaratId", ""), ules);
+        if (eredmeny != null && eredmeny.getCount() > 0) {
+            while (eredmeny.moveToNext()) {
+                alertDialogBuilder = new AlertDialog.Builder(MegtekintesActivity.this);
+                alertDialogBuilder.setTitle(getString(R.string.seatInfo) + " " + ules);
+                alertDialogBuilder.setMessage("Név: " + eredmeny.getString(2) + " " + eredmeny.getString(3) +
+                        "\n" + getString(R.string.username) + ": " + eredmeny.getString(0) +
+                        "\nE-mail: " + eredmeny.getString(1));
+                alertDialogBuilder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) { }
+                });
+                alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+            }
+        }
     }
 
     @Override

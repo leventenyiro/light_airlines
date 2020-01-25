@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -46,7 +45,7 @@ public class FoglalasActivity extends AppCompatActivity {
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
         init();
-        selectFoglaltHelyek();
+        m.selectFoglaltHelyek(s.getString("jaratId", ""));
 
         int ulesId = 0;
         for (int i = 1; i < 21; i++) {
@@ -76,7 +75,7 @@ public class FoglalasActivity extends AppCompatActivity {
                 tv.setId(tv.generateViewId());
                 helyLista.add(tv.getId());
                 final int finalUlesId = ulesId;
-                if (foglaltE(finalUlesId)) {
+                if (m.foglaltE(finalUlesId, s.getString("jaratId", ""))) {
                     tv.setBackground(getResources().getDrawable(R.drawable.seatred));
                     tv.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -91,12 +90,12 @@ public class FoglalasActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             for (int id : helyLista) {
-                                if (!foglaltE(helyLista.indexOf(id))) {
+                                if (!m.foglaltE(helyLista.indexOf(id), s.getString("jaratId", ""))) {
                                     findViewById(id).setBackground(getResources().getDrawable(R.drawable.seatfree));
                                 }
                             }
                             findViewById(helyLista.get(finalUlesId)).setBackground(getResources().getDrawable(R.drawable.seatgreen));
-                            s.edit().putString("ules", ulesKodolas(finalUlesId)).apply();
+                            s.edit().putString("ules", m.ulesKodolas(finalUlesId)).apply();
                         }
                     });
                 }
@@ -120,7 +119,7 @@ public class FoglalasActivity extends AppCompatActivity {
                 tv.setId(tv.generateViewId());
                 helyLista.add(tv.getId());
                 final int finalUlesId = ulesId;
-                if (foglaltE(finalUlesId)) {
+                if (m.foglaltE(finalUlesId, s.getString("jaratId", ""))) {
                     tv.setBackground(getResources().getDrawable(R.drawable.seatred));
                     tv.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -135,12 +134,12 @@ public class FoglalasActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             for (int id : helyLista) {
-                                if (!foglaltE(helyLista.indexOf(id))) {
+                                if (!m.foglaltE(helyLista.indexOf(id), s.getString("jaratId", ""))) {
                                     findViewById(id).setBackground(getResources().getDrawable(R.drawable.seatfree));
                                 }
                             }
                             findViewById(helyLista.get(finalUlesId)).setBackground(getResources().getDrawable(R.drawable.seatgreen));
-                            s.edit().putString("ules", ulesKodolas(finalUlesId)).apply();
+                            s.edit().putString("ules", m.ulesKodolas(finalUlesId)).apply();
                         }
                     });
                 }
@@ -205,67 +204,6 @@ public class FoglalasActivity extends AppCompatActivity {
         alertDialog = alertDialogBuilder.create();
     }
 
-    public String ulesKodolas(int szam) {
-        String ules = "";
-        ules += szam / 6 + 1;
-        switch (szam % 6) {
-            case 0: ules += "A"; break;
-            case 1: ules += "B"; break;
-            case 2: ules += "C"; break;
-            case 3: ules += "D"; break;
-            case 4: ules += "E"; break;
-            case 5: ules += "F"; break;
-        }
-        return ules;
-    }
-
-    public int ulesDekodolas(String ules) {
-        int szam;
-        if (ules.length() == 2) {
-            szam = (Integer.parseInt(ules.substring(0,1)) - 1) * 6;
-            switch (ules.substring(1,2)) {
-                case "A": szam += 0; break;
-                case "B": szam += 1; break;
-                case "C": szam += 2; break;
-                case "D": szam += 3; break;
-                case "E": szam += 4; break;
-                case "F": szam += 5; break;
-            }
-        }
-        else {
-            szam = (Integer.parseInt(ules.substring(0, 2)) - 1) * 6;
-            switch (ules.substring(2, 3)) {
-                case "A": szam += 0; break;
-                case "B": szam += 1; break;
-                case "C": szam += 2; break;
-                case "D": szam += 3; break;
-                case "E": szam += 4; break;
-                case "F": szam += 5; break;
-            }
-        }
-        return szam;
-    }
-
-    public boolean foglaltE(int id) {
-        for (String hely : selectFoglaltHelyek()) {
-            if (id == ulesDekodolas(hely)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public List<String> selectFoglaltHelyek() {
-        List<String> foglaltHelyek = new ArrayList<>();
-        Cursor eredmeny = db.selectUlesek(s.getString("jaratId", ""));
-        if (eredmeny != null && eredmeny.getCount() > 0) {
-            while (eredmeny.moveToNext()) {
-                foglaltHelyek.add(eredmeny.getString(0));
-            }
-        }
-        return foglaltHelyek;
-    }
-
     public void insertFoglalas() {
         String jaratId = s.getString("jaratId", "");
         String userId = s.getString("userId", "");
@@ -278,6 +216,8 @@ public class FoglalasActivity extends AppCompatActivity {
         s.edit().remove("jaratId").apply();
         s.edit().remove("ules").apply();
     }
+
+
 
     @Override
     public void onBackPressed() {
