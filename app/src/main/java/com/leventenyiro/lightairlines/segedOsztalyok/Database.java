@@ -128,7 +128,8 @@ public class Database extends SQLiteOpenHelper {
                     "WHERE (ai.nev LIKE '%" + honnan.trim() + "%' OR ai.rovidites LIKE '%" + honnan.trim() + "%') AND (ac.nev LIKE '%" + hova.trim() + "%' OR ac.rovidites LIKE '%" + hova.trim() + "%') " +
                     "AND j.idopont > datetime('now') " +
                     "AND j.helyek_szama - (SELECT COUNT(*) FROM foglalas f WHERE f.jarat_id = j.id) > 0 " +
-                    "AND j.id NOT IN (SELECT f.jarat_id FROM foglalas f WHERE user_id = " + userId + ")", null);
+                    "AND j.id NOT IN (SELECT f.jarat_id FROM foglalas f WHERE user_id = " + userId + ") " +
+                    "ORDER BY j.idopont", null);
         }
         else {
             return db.rawQuery("SELECT j.id, j.helyek_szama - (SELECT COUNT(*) FROM foglalas WHERE jarat_id = j.id), j.idopont, ai.nev, ac.nev, u.idotartam FROM jarat j\n" +
@@ -137,7 +138,8 @@ public class Database extends SQLiteOpenHelper {
                     "INNER JOIN airport ac ON u.celallomas_id = ac.id\n"+
                     "WHERE (ai.nev LIKE '%" + honnan + "%' OR ai.rovidites LIKE '%" + honnan + "%') AND (ac.nev LIKE '%" + hova + "%' OR ac.rovidites LIKE '%" + hova + "%') " +
                     "AND j.idopont > datetime('now') " +
-                    "AND j.helyek_szama - (SELECT COUNT(*) FROM foglalas f WHERE f.jarat_id = j.id) > 0", null);
+                    "AND j.helyek_szama - (SELECT COUNT(*) FROM foglalas f WHERE f.jarat_id = j.id) > 0" +
+                    "ORDER BY j.idopont", null);
         }
     }
 

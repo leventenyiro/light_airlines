@@ -144,6 +144,8 @@ public final class Metodus {
     }
 
     public String dateToString(int year, int month, int day) {
+        if (month < 10)
+            return year + "-0" + (month + 1) + "-" + day;
         return year + "-" + (month + 1) + "-" + day;
     }
 }
