@@ -142,4 +142,8 @@ public final class Metodus {
         }
         return foglaltHelyek;
     }
+
+    public String dateToString(int year, int month, int day) {
+        return year + "-" + (month + 1) + "-" + day;
+    }
 }

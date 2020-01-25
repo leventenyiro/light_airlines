@@ -120,7 +120,7 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
                     inputSzin("lastnameGreen");
                     se.putString("firstname", m.elsoNagybetu(inputFirstname.getText().toString()).trim());
                     se.putString("lastname", m.elsoNagybetu(inputLastname.getText().toString()).trim());
-                    se.putString("birthdate", birthdateToString(inputBirthdate.getYear(), inputBirthdate.getMonth(), inputBirthdate.getDayOfMonth()));
+                    se.putString("birthdate", m.dateToString(inputBirthdate.getYear(), inputBirthdate.getMonth(), inputBirthdate.getDayOfMonth()));
                     se.apply();
                     Intent intent = new Intent(Reg2Activity.this, Reg3Activity.class);
                     startActivity(intent);
@@ -171,9 +171,7 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
         return age >= 13;
     }
 
-    public String birthdateToString(int year, int month, int day) {
-        return year + "-" + (month + 1) + "-" + day;
-    }
+
 
     @Override
     public void onBackPressed() {
