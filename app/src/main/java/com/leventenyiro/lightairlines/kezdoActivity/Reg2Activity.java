@@ -1,4 +1,4 @@
-package com.leventenyiro.lightairlines.kezdoActivityk;
+package com.leventenyiro.lightairlines.kezdoActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,7 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.leventenyiro.lightairlines.R;
-import com.leventenyiro.lightairlines.segedOsztalyok.Metodus;
+import com.leventenyiro.lightairlines.segedOsztaly.Metodus;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;

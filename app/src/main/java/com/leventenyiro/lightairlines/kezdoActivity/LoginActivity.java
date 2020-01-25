@@ -1,4 +1,4 @@
-package com.leventenyiro.lightairlines.kezdoActivityk;
+package com.leventenyiro.lightairlines.kezdoActivity;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,9 +17,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.leventenyiro.lightairlines.R;
-import com.leventenyiro.lightairlines.adminActivityk.AdminActivity;
-import com.leventenyiro.lightairlines.segedOsztalyok.Database;
-import com.leventenyiro.lightairlines.segedOsztalyok.Metodus;
+import com.leventenyiro.lightairlines.adminActivity.AdminActivity;
+import com.leventenyiro.lightairlines.segedOsztaly.Database;
+import com.leventenyiro.lightairlines.segedOsztaly.Metodus;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private AlertDialog alertDialog;
@@ -160,7 +160,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (eredmeny.getCount() == 1) {
             while (eredmeny.moveToNext()) {
                 String userId = eredmeny.getString(0);
-                if (m.jelszoEllenorzes(userId, inputPassword.getText().toString()) && userId.equals(String.valueOf(1))) {
+                if (m.jelszoEllenorzes(userId, inputPassword.getText().toString()) && userId.equals("1")) {
+                    getSharedPreferences("variables",Context.MODE_PRIVATE).edit().putString("userId", "1").apply();
                     return 2;
                 }
                 else if (m.jelszoEllenorzes(userId, inputPassword.getText().toString())) {

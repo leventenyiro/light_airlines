@@ -1,4 +1,4 @@
-package com.leventenyiro.lightairlines.adminActivityk;
+package com.leventenyiro.lightairlines.adminActivity;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -15,7 +15,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.leventenyiro.lightairlines.R;
-import com.leventenyiro.lightairlines.kezdoActivityk.LoginActivity;
+import com.leventenyiro.lightairlines.kezdoActivity.LoginActivity;
 
 public class AdminActivity extends AppCompatActivity {
 

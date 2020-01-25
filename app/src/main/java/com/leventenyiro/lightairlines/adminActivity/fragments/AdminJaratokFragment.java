@@ -1,4 +1,4 @@
-package com.leventenyiro.lightairlines.userActivityk.fragments;
+package com.leventenyiro.lightairlines.adminActivity.fragments;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,15 +18,15 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
-import com.leventenyiro.lightairlines.segedOsztalyok.Database;
-import com.leventenyiro.lightairlines.userActivityk.JaratActivity;
 import com.leventenyiro.lightairlines.R;
-import com.leventenyiro.lightairlines.segedOsztalyok.Metodus;
+import com.leventenyiro.lightairlines.adminActivity.MegtekintesActivity;
+import com.leventenyiro.lightairlines.segedOsztaly.Database;
+import com.leventenyiro.lightairlines.segedOsztaly.Metodus;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class JaratokFragment extends Fragment {
+public class AdminJaratokFragment extends Fragment {
 
     private Context mContext;
     private Database db;
@@ -38,7 +38,7 @@ public class JaratokFragment extends Fragment {
     private SharedPreferences s;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_jaratok, container, false);
+        View root = inflater.inflate(R.layout.fragment_admin_jaratok, container, false);
         init(root);
         select();
         inputHonnan.addTextChangedListener(new TextWatcher() {
@@ -92,7 +92,7 @@ public class JaratokFragment extends Fragment {
         }
         cardLista.clear();
 
-        Cursor eredmeny = db.selectJaratok(inputHonnan.getText().toString().trim(), inputHova.getText().toString().trim(), s.getString("userId", ""));
+        Cursor eredmeny = db.selectJaratok(inputHonnan.getText().toString().trim(), inputHova.getText().toString().trim(), "1");
         String jaratId;
         String helyekSzama;
         String idopont;
@@ -128,7 +128,7 @@ public class JaratokFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         s.edit().putString("jaratId", finalJaratId).apply();
-                        Intent intent = new Intent(getActivity(), JaratActivity.class);
+                        Intent intent = new Intent(getActivity(), MegtekintesActivity.class);
                         startActivity(intent);
                         getActivity().finish();
                         getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

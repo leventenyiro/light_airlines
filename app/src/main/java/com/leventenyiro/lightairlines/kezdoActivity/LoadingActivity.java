@@ -1,4 +1,4 @@
-package com.leventenyiro.lightairlines.kezdoActivityk;
+package com.leventenyiro.lightairlines.kezdoActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 

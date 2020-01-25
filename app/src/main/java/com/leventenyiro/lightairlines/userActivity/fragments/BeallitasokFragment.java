@@ -1,4 +1,4 @@
-package com.leventenyiro.lightairlines.userActivityk.fragments;
+package com.leventenyiro.lightairlines.userActivity.fragments;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,10 +16,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.leventenyiro.lightairlines.segedOsztalyok.Database;
-import com.leventenyiro.lightairlines.userActivityk.PasswordUpdate;
+import com.leventenyiro.lightairlines.segedOsztaly.Database;
+import com.leventenyiro.lightairlines.globalActivity.PasswordUpdate;
 import com.leventenyiro.lightairlines.R;
-import com.leventenyiro.lightairlines.segedOsztalyok.Metodus;
+import com.leventenyiro.lightairlines.segedOsztaly.Metodus;
 
 public class BeallitasokFragment extends Fragment implements View.OnClickListener {
 

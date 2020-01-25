@@ -1,4 +1,4 @@
-package com.leventenyiro.lightairlines.adminActivityk;
+package com.leventenyiro.lightairlines.userActivity;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -19,17 +18,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.leventenyiro.lightairlines.R;
-import com.leventenyiro.lightairlines.segedOsztalyok.Database;
-import com.leventenyiro.lightairlines.segedOsztalyok.Metodus;
+import com.leventenyiro.lightairlines.segedOsztaly.Database;
+import com.leventenyiro.lightairlines.segedOsztaly.Metodus;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MegtekintesActivity extends AppCompatActivity {
+public class FoglalasActivity extends AppCompatActivity {
 
     private AlertDialog alertDialog;
     private AlertDialog.Builder alertDialogBuilder;
-    private Button btnBack;
+    private Button btnFoglalas, btnBack;
     private Context mContext;
     private Database db;
     private int sorId, dp8, dp10, dp35, dp200;
@@ -37,16 +36,16 @@ public class MegtekintesActivity extends AppCompatActivity {
     private Metodus m;
     private RelativeLayout mRelativeLayout;
     private SharedPreferences s;
-    private String jaratId;
     private TextView tv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_megtekintes);
+        setContentView(R.layout.activity_foglalas);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
         init();
+        m.selectFoglaltHelyek(s.getString("jaratId", ""));
 
         int ulesId = 0;
         for (int i = 1; i < 21; i++) {
@@ -76,12 +75,12 @@ public class MegtekintesActivity extends AppCompatActivity {
                 tv.setId(tv.generateViewId());
                 helyLista.add(tv.getId());
                 final int finalUlesId = ulesId;
-                if (m.foglaltE(finalUlesId, jaratId)) {
+                if (m.foglaltE(finalUlesId, s.getString("jaratId", ""))) {
                     tv.setBackground(getResources().getDrawable(R.drawable.seatred));
                     tv.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            ulesInfo(m.ulesKodolas(finalUlesId));
+                            Toast.makeText(mContext, getString(R.string.seatReserved), Toast.LENGTH_LONG).show();
                         }
                     });
                 }
@@ -90,7 +89,13 @@ public class MegtekintesActivity extends AppCompatActivity {
                     tv.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Toast.makeText(mContext, getString(R.string.noReserved), Toast.LENGTH_SHORT).show();
+                            for (int id : helyLista) {
+                                if (!m.foglaltE(helyLista.indexOf(id), s.getString("jaratId", ""))) {
+                                    findViewById(id).setBackground(getResources().getDrawable(R.drawable.seatfree));
+                                }
+                            }
+                            findViewById(helyLista.get(finalUlesId)).setBackground(getResources().getDrawable(R.drawable.seatgreen));
+                            s.edit().putString("ules", m.ulesKodolas(finalUlesId)).apply();
                         }
                     });
                 }
@@ -114,12 +119,12 @@ public class MegtekintesActivity extends AppCompatActivity {
                 tv.setId(tv.generateViewId());
                 helyLista.add(tv.getId());
                 final int finalUlesId = ulesId;
-                if (m.foglaltE(finalUlesId, jaratId)) {
+                if (m.foglaltE(finalUlesId, s.getString("jaratId", ""))) {
                     tv.setBackground(getResources().getDrawable(R.drawable.seatred));
                     tv.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            ulesInfo(m.ulesKodolas(finalUlesId));
+                            Toast.makeText(mContext, getString(R.string.seatReserved), Toast.LENGTH_LONG).show();
                         }
                     });
                 }
@@ -128,7 +133,13 @@ public class MegtekintesActivity extends AppCompatActivity {
                     tv.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Toast.makeText(mContext, getString(R.string.noReserved), Toast.LENGTH_SHORT).show();
+                            for (int id : helyLista) {
+                                if (!m.foglaltE(helyLista.indexOf(id), s.getString("jaratId", ""))) {
+                                    findViewById(id).setBackground(getResources().getDrawable(R.drawable.seatfree));
+                                }
+                            }
+                            findViewById(helyLista.get(finalUlesId)).setBackground(getResources().getDrawable(R.drawable.seatgreen));
+                            s.edit().putString("ules", m.ulesKodolas(finalUlesId)).apply();
                         }
                     });
                 }
@@ -137,14 +148,21 @@ public class MegtekintesActivity extends AppCompatActivity {
             }
             mRelativeLayout.addView(ll);
         }
+        btnFoglalas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!s.getString("ules", "").isEmpty()) {
+                    alertDialog.show();
+                }
+                else {
+                    Toast.makeText(mContext, getString(R.string.noSeatReserved), Toast.LENGTH_LONG).show();
+                }
+            }
+        });
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                s.edit().putString("fragment", "jaratok").apply();
-                Intent intent = new Intent(MegtekintesActivity.this, AdminActivity.class);
-                startActivity(intent);
-                finish();
-                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                onBackPressed();
             }
         });
     }
@@ -153,6 +171,7 @@ public class MegtekintesActivity extends AppCompatActivity {
         mContext = getApplicationContext();
         mRelativeLayout = findViewById(R.id.plane);
         helyLista = new ArrayList<>();
+        btnFoglalas = findViewById(R.id.btnFoglalas);
         btnBack = findViewById(R.id.btnBack);
         db = new Database(this);
         m = new Metodus(this);
@@ -161,32 +180,49 @@ public class MegtekintesActivity extends AppCompatActivity {
         dp35 = m.dpToPx(35, getResources());
         dp200 = m.dpToPx(200, getResources());
         s = getSharedPreferences("variables", Context.MODE_PRIVATE);
-        jaratId = s.getString("jaratId", "");
+
+        alertDialogBuilder = new AlertDialog.Builder(FoglalasActivity.this);
+        alertDialogBuilder.setTitle(getString(R.string.finalize));
+        alertDialogBuilder.setMessage(getString(R.string.finalizeMessage));
+        alertDialogBuilder.setPositiveButton(getString(R.string.no), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        alertDialogBuilder.setNegativeButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                insertFoglalas();
+                s.edit().putString("fragment", "jegyek").apply();
+                Intent intent = new Intent(FoglalasActivity.this, InnerActivity.class);
+                startActivity(intent);
+                finish();
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            }
+        });
+        alertDialog = alertDialogBuilder.create();
     }
 
-    private void ulesInfo(String ules) {
-        Cursor eredmeny = db.selectUlesInfo(jaratId, ules);
-        if (eredmeny != null && eredmeny.getCount() > 0) {
-            while (eredmeny.moveToNext()) {
-                alertDialogBuilder = new AlertDialog.Builder(MegtekintesActivity.this);
-                alertDialogBuilder.setTitle(getString(R.string.seatInfo) + " " + ules);
-                alertDialogBuilder.setMessage("Név: " + eredmeny.getString(2) + " " + eredmeny.getString(3) +
-                        "\n" + getString(R.string.username) + ": " + eredmeny.getString(0) +
-                        "\nE-mail: " + eredmeny.getString(1));
-                alertDialogBuilder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) { }
-                });
-                alertDialog = alertDialogBuilder.create();
-                alertDialog.show();
-            }
-        }
+    public void insertFoglalas() {
+        String jaratId = s.getString("jaratId", "");
+        String userId = s.getString("userId", "");
+        String ules = s.getString("ules", "");
+        boolean eredmeny = db.insertFoglalas(jaratId, userId, ules);
+        if (eredmeny)
+            Toast.makeText(this, getString(R.string.successReserve), Toast.LENGTH_LONG);
+        else
+            Toast.makeText(this, getString(R.string.unsuccessReserve), Toast.LENGTH_LONG).show();
+        s.edit().remove("jaratId").apply();
+        s.edit().remove("ules").apply();
     }
+
+
 
     @Override
     public void onBackPressed() {
-        s.edit().remove("jaratId").apply();
-        Intent intent = new Intent(MegtekintesActivity.this, AdminActivity.class);
+        s.edit().remove("ules").apply();
+        Intent intent = new Intent(FoglalasActivity.this, JaratActivity.class);
         startActivity(intent);
         finish();
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);

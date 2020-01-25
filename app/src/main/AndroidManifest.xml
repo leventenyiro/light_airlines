@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true">
         <activity
-            android:name=".kezdoActivityk.LoadingActivity"
+            android:name=".kezdoActivity.LoadingActivity"
             android:theme="@style/BlueTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,46 +23,46 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".kezdoActivityk.LoginActivity"
+            android:name=".kezdoActivity.LoginActivity"
             android:theme="@style/GrayTheme" />
         <activity
-            android:name=".kezdoActivityk.Reg1Activity"
+            android:name=".kezdoActivity.Reg1Activity"
             android:theme="@style/WhiteTheme" />
         <activity
-            android:name=".kezdoActivityk.Reg2Activity"
+            android:name=".kezdoActivity.Reg2Activity"
             android:theme="@style/WhiteTheme" />
         <activity
-            android:name=".kezdoActivityk.Reg3Activity"
+            android:name=".kezdoActivity.Reg3Activity"
             android:theme="@style/WhiteTheme" />
         <activity
-            android:name=".kezdoActivityk.WelcomeActivity"
+            android:name=".kezdoActivity.WelcomeActivity"
             android:theme="@style/GrayTheme" />
         <activity
-            android:name=".userActivityk.InnerActivity"
+            android:name=".userActivity.InnerActivity"
             android:theme="@style/WhiteTheme" />
         <activity
-            android:name=".userActivityk.PasswordUpdate"
+            android:name=".globalActivity.PasswordUpdate"
             android:theme="@style/WhiteTheme" />
         <activity
-            android:name=".userActivityk.JaratActivity"
+            android:name=".userActivity.JaratActivity"
             android:theme="@style/WhiteTheme" />
         <activity
-            android:name=".userActivityk.FoglalasActivity"
+            android:name=".userActivity.FoglalasActivity"
             android:theme="@style/WhiteTheme" />
         <activity
-            android:name=".userActivityk.JegyActivity"
+            android:name=".userActivity.JegyActivity"
             android:theme="@style/WhiteTheme" />
         <activity
-            android:name=".userActivityk.Megerosites"
+            android:name=".userActivity.Megerosites"
             android:theme="@style/GrayTheme" />
         <activity
-            android:name=".adminActivityk.MegtekintesActivity"
+            android:name=".adminActivity.MegtekintesActivity"
             android:theme="@style/WhiteTheme" />
         <activity
-            android:name=".adminActivityk.AdminActivity"
+            android:name=".adminActivity.AdminActivity"
             android:theme="@style/WhiteTheme" />
         <activity
-            android:name=".adminActivityk.JaratInsertActivity"
+            android:name=".adminActivity.JaratInsertActivity"
             android:theme="@style/WhiteTheme" />
     </application>
 

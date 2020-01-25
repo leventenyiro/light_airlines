@@ -1,4 +1,4 @@
-package com.leventenyiro.lightairlines.adminActivityk;
+package com.leventenyiro.lightairlines.adminActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,8 +16,8 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.leventenyiro.lightairlines.R;
-import com.leventenyiro.lightairlines.segedOsztalyok.Database;
-import com.leventenyiro.lightairlines.segedOsztalyok.Metodus;
+import com.leventenyiro.lightairlines.segedOsztaly.Database;
+import com.leventenyiro.lightairlines.segedOsztaly.Metodus;
 
 import java.util.Calendar;
 

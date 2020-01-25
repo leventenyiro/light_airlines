@@ -1,4 +1,4 @@
-package com.leventenyiro.lightairlines.userActivityk;
+package com.leventenyiro.lightairlines.userActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,8 +13,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.leventenyiro.lightairlines.R;
-import com.leventenyiro.lightairlines.segedOsztalyok.Database;
-import com.leventenyiro.lightairlines.segedOsztalyok.Metodus;
+import com.leventenyiro.lightairlines.segedOsztaly.Database;
+import com.leventenyiro.lightairlines.segedOsztaly.Metodus;
 
 public class Megerosites extends AppCompatActivity implements View.OnClickListener {
 

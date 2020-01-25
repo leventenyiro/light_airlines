@@ -1,4 +1,4 @@
-package com.leventenyiro.lightairlines.userActivityk;
+package com.leventenyiro.lightairlines.globalActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,9 +15,11 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.leventenyiro.lightairlines.R;
-import com.leventenyiro.lightairlines.segedOsztalyok.Database;
-import com.leventenyiro.lightairlines.segedOsztalyok.Metodus;
-import com.leventenyiro.lightairlines.segedOsztalyok.PasswordUtils;
+import com.leventenyiro.lightairlines.adminActivity.AdminActivity;
+import com.leventenyiro.lightairlines.segedOsztaly.Database;
+import com.leventenyiro.lightairlines.segedOsztaly.Metodus;
+import com.leventenyiro.lightairlines.segedOsztaly.PasswordUtils;
+import com.leventenyiro.lightairlines.userActivity.InnerActivity;
 
 public class PasswordUpdate extends AppCompatActivity implements View.OnClickListener{
     private Button btnCancel, btnUpdate;
@@ -156,9 +158,17 @@ public class PasswordUpdate extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(PasswordUpdate.this, InnerActivity.class);
-        startActivity(intent);
-        finish();
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        if (userId.equals("1")) {
+            Intent intent = new Intent(PasswordUpdate.this, AdminActivity.class);
+            startActivity(intent);
+            finish();
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        }
+        else {
+            Intent intent = new Intent(PasswordUpdate.this, InnerActivity.class);
+            startActivity(intent);
+            finish();
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        }
     }
 }

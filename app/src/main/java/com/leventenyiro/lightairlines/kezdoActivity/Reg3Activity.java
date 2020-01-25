@@ -1,4 +1,4 @@
-package com.leventenyiro.lightairlines.kezdoActivityk;
+package com.leventenyiro.lightairlines.kezdoActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,9 +16,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.leventenyiro.lightairlines.R;
-import com.leventenyiro.lightairlines.segedOsztalyok.Database;
-import com.leventenyiro.lightairlines.segedOsztalyok.Metodus;
-import com.leventenyiro.lightairlines.segedOsztalyok.PasswordUtils;
+import com.leventenyiro.lightairlines.segedOsztaly.Database;
+import com.leventenyiro.lightairlines.segedOsztaly.Metodus;
+import com.leventenyiro.lightairlines.segedOsztaly.PasswordUtils;
 
 public class Reg3Activity extends AppCompatActivity implements View.OnClickListener {
     private Button btnReg;

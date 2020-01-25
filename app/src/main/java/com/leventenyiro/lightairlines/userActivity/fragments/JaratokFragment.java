@@ -1,13 +1,16 @@
-package com.leventenyiro.lightairlines.userActivityk.fragments;
+package com.leventenyiro.lightairlines.userActivity.fragments;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -15,43 +18,67 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
-import com.leventenyiro.lightairlines.userActivityk.JegyActivity;
+import com.leventenyiro.lightairlines.segedOsztaly.Database;
+import com.leventenyiro.lightairlines.userActivity.JaratActivity;
 import com.leventenyiro.lightairlines.R;
-import com.leventenyiro.lightairlines.segedOsztalyok.Database;
-import com.leventenyiro.lightairlines.segedOsztalyok.Metodus;
+import com.leventenyiro.lightairlines.segedOsztaly.Metodus;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class JegyekFragment extends Fragment {
+public class JaratokFragment extends Fragment {
 
     private Context mContext;
     private Database db;
-    private int dp7, dp8, dp10, dp11, dp15, dp20, dp100, dp200, dp360;
+    private EditText inputHonnan, inputHova;
+    private int dp5, dp7, dp10, dp15,dp20, dp40, dp100, dp200, dp360;
     private List<Integer> cardLista;
     private Metodus m;
     private RelativeLayout mRelativeLayout;
     private SharedPreferences s;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_jegyek, container, false);
+        View root = inflater.inflate(R.layout.fragment_jaratok, container, false);
         init(root);
         select();
+        inputHonnan.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                select();
+            }
+            @Override
+            public void afterTextChanged(Editable s) { }
+        });
+
+        inputHova.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                select();
+            }
+            @Override
+            public void afterTextChanged(Editable s) { }
+        });
         return root;
     }
 
     private void init(View root) {
         db = new Database(getActivity());
+        inputHonnan = root.findViewById(R.id.inputHonnan);
+        inputHova = root.findViewById(R.id.inputHova);
         cardLista = new ArrayList<>();
         mContext = root.getContext();
         mRelativeLayout = root.findViewById(R.id.relativeLayout);
         m = new Metodus(getActivity());
+        dp5 = m.dpToPx(5, getResources());
         dp7 = m.dpToPx(7, getResources());
-        dp8 = m.dpToPx(8, getResources());
         dp10 = m.dpToPx(10, getResources());
-        dp11 = m.dpToPx(11, getResources());
         dp15 = m.dpToPx(15, getResources());
         dp20 = m.dpToPx(20, getResources());
+        dp40 = m.dpToPx(40, getResources());
         dp100 = m.dpToPx(100, getResources());
         dp200 = m.dpToPx(200, getResources());
         dp360 = m.dpToPx(360, getResources());
@@ -65,9 +92,9 @@ public class JegyekFragment extends Fragment {
         }
         cardLista.clear();
 
-        Cursor eredmeny = db.selectJegyek(s.getString("userId", ""));
-        String foglalasId;
-        String ules;
+        Cursor eredmeny = db.selectJaratok(inputHonnan.getText().toString().trim(), inputHova.getText().toString().trim(), s.getString("userId", ""));
+        String jaratId;
+        String helyekSzama;
         String idopont;
         String indulas;
         String celallomas;
@@ -75,8 +102,8 @@ public class JegyekFragment extends Fragment {
         if (eredmeny != null && eredmeny.getCount() > 0) {
             int id = 0;
             while (eredmeny.moveToNext()) {
-                foglalasId = eredmeny.getString(0);
-                ules = eredmeny.getString(1);
+                jaratId = eredmeny.getString(0);
+                helyekSzama = eredmeny.getString(1);
                 idopont = eredmeny.getString(2);
                 indulas = eredmeny.getString(3);
                 celallomas = eredmeny.getString(4);
@@ -86,23 +113,22 @@ public class JegyekFragment extends Fragment {
                 RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(dp360, dp200);
                 params.addRule(RelativeLayout.CENTER_HORIZONTAL);
                 if (cardLista.size() == 0)
-                    params.addRule(RelativeLayout.BELOW, R.id.textCim);
+                    params.addRule(RelativeLayout.BELOW, R.id.inputHova);
                 else
                     params.addRule(RelativeLayout.BELOW, id);
                 if (eredmeny.getCount() - 1 == cardLista.size())
-                    params.setMargins(0,0,0,dp100);
+                    params.setMargins(0,0,0, dp100);
                 else
-                    params.setMargins(0,0,0,dp20);
+                    params.setMargins(0,0,0, dp20);
                 card.setLayoutParams(params);
                 card.setCardElevation(50);
                 card.setBackground(getResources().getDrawable(R.drawable.card));
-                final String finalFoglalasId = foglalasId;
+                final String finalJaratId = jaratId;
                 card.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        s.edit().putString("foglalasId", finalFoglalasId).apply();
-                        s.edit().putString("fragment", "jegyek").apply();
-                        Intent intent = new Intent(getActivity(), JegyActivity.class);
+                        s.edit().putString("jaratId", finalJaratId).apply();
+                        Intent intent = new Intent(getActivity(), JaratActivity.class);
                         startActivity(intent);
                         getActivity().finish();
                         getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
@@ -152,36 +178,36 @@ public class JegyekFragment extends Fragment {
                 tvIdotartam.setId(tvIdotartam.generateViewId());
                 tvIdotartam.setTextSize(dp7);
 
-                TextView tvUles = new TextView(mContext);
-                RelativeLayout.LayoutParams paramsUles = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-                paramsUles.addRule(RelativeLayout.BELOW, tvIdotartam.getId());
-                paramsUles.topMargin = dp20;
-                tvUles.setLayoutParams(paramsUles);
-                String ulesInfo = getString(R.string.seatInfo) + " " + ules;
-                tvUles.setText(ulesInfo);
-                tvUles.setTypeface(getActivity().getResources().getFont(R.font.regular));
-                tvUles.setTextColor(getActivity().getResources().getColor(R.color.gray));
-                tvUles.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                tvUles.setTextSize(dp8);
+                TextView tvHelyekSzama = new TextView(mContext);
+                RelativeLayout.LayoutParams paramsHelyek = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                paramsHelyek.addRule(RelativeLayout.BELOW, tvIdotartam.getId());
+                paramsHelyek.topMargin = dp20;
+                tvHelyekSzama.setLayoutParams(paramsHelyek);
+                String helyInfo = getString(R.string.seatInfo1) + " " + helyekSzama + " " + getString(R.string.seatInfo2);
+                tvHelyekSzama.setText(helyInfo);
+                tvHelyekSzama.setTypeface(getActivity().getResources().getFont(R.font.regular));
+                tvHelyekSzama.setTextColor(getActivity().getResources().getColor(R.color.gray));
+                tvHelyekSzama.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                tvHelyekSzama.setTextSize(dp5);
 
                 rlCard.addView(tvVaros);
                 rlCard.addView(tvIdopont);
                 rlCard.addView(tvIdotartam);
-                rlCard.addView(tvUles);
+                rlCard.addView(tvHelyekSzama);
                 card.addView(rlCard);
                 mRelativeLayout.addView(card);
             }
         }
         else {
             TextView tv = new TextView(mContext);
-            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
-            params.addRule(RelativeLayout.BELOW, R.id.textCim);
-            params.topMargin = dp200;
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            params.addRule(RelativeLayout.BELOW, R.id.inputHova);
+            params.topMargin = dp40;
             tv.setLayoutParams(params);
             tv.setTypeface(getActivity().getResources().getFont(R.font.regular));
             tv.setTextColor(getActivity().getResources().getColor(R.color.gray));
-            tv.setTextSize(dp11);
-            tv.setText(getString(R.string.noReserve));
+            tv.setTextSize(dp15);
+            tv.setText(getString(R.string.noFlight));
             tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             mRelativeLayout.addView(tv);
         }

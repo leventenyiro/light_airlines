@@ -1,4 +1,4 @@
-package com.leventenyiro.lightairlines.segedOsztalyok;
+package com.leventenyiro.lightairlines.segedOsztaly;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
