@@ -208,7 +208,7 @@ public class FoglalasActivity extends AppCompatActivity {
         String jaratId = s.getString("jaratId", "");
         String userId = s.getString("userId", "");
         String ules = s.getString("ules", "");
-        Boolean eredmeny = db.insertFoglalas(jaratId, userId, ules);
+        boolean eredmeny = db.insertFoglalas(jaratId, userId, ules);
         if (eredmeny)
             Toast.makeText(this, getString(R.string.successReserve), Toast.LENGTH_LONG);
         else
