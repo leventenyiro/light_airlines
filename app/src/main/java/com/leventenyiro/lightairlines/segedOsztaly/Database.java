@@ -138,7 +138,7 @@ public class Database extends SQLiteOpenHelper {
                     "INNER JOIN airport ac ON u.celallomas_id = ac.id\n"+
                     "WHERE (ai.nev LIKE '%" + honnan + "%' OR ai.rovidites LIKE '%" + honnan + "%') AND (ac.nev LIKE '%" + hova + "%' OR ac.rovidites LIKE '%" + hova + "%') " +
                     "AND j.idopont > datetime('now') " +
-                    "AND j.helyek_szama - (SELECT COUNT(*) FROM foglalas f WHERE f.jarat_id = j.id) > 0" +
+                    "AND j.helyek_szama - (SELECT COUNT(*) FROM foglalas f WHERE f.jarat_id = j.id) > 0 " +
                     "ORDER BY j.idopont", null);
         }
     }

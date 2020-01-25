@@ -35,9 +35,6 @@ public class AdminActivity extends AppCompatActivity {
         init();
 
         switch (fragment) {
-            case "jaratInsert":
-                navView.setSelectedItemId(R.id.navigation_admin_jarat_insert);
-                break;
             case "beallitasok":
                 navView.setSelectedItemId(R.id.navigation_admin_beallitasok);
                 break;

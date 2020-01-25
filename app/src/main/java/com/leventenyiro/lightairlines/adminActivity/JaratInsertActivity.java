@@ -37,10 +37,8 @@ public class JaratInsertActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jarat_insert);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-
         init();
         selectUtvonal();
-
         btnBack.setOnClickListener(this);
         btnInsert.setOnClickListener(this);
     }
@@ -52,7 +50,7 @@ public class JaratInsertActivity extends AppCompatActivity implements View.OnCli
         inputDate.setMaxDate(System.currentTimeMillis() + 31556952000L);
         Calendar c = Calendar.getInstance();
         inputDate.updateDate(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
-        inputDate.setMinDate(System.currentTimeMillis());
+        inputDate.setMinDate(System.currentTimeMillis() + 604800000);
         inputTime = findViewById(R.id.inputTime);
         inputTime.setIs24HourView(true);
         textRovidites = findViewById(R.id.textRovidites);

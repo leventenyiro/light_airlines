@@ -12,15 +12,11 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.leventenyiro.lightairlines.R;
-import com.leventenyiro.lightairlines.segedOsztaly.Metodus;
 import com.leventenyiro.lightairlines.globalActivity.PasswordUpdate;
 
 public class AdminBeallitasokFragment extends Fragment implements View.OnClickListener {
 
     private Button btnPasswordUpdate, btnLogout;
-    private int dp15, dp20;
-    private Metodus m;
-    private String userId;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_admin_beallitasok, container, false);
@@ -33,10 +29,6 @@ public class AdminBeallitasokFragment extends Fragment implements View.OnClickLi
     private void init(View root) {
         btnPasswordUpdate = root.findViewById(R.id.btnPasswordUpdate);
         btnLogout = root.findViewById(R.id.btnLogout);
-        m = new Metodus(getActivity());
-        dp15 = m.dpToPx(15, getResources());
-        dp20 = m.dpToPx(20, getResources());
-        userId = this.getActivity().getSharedPreferences("variables", Context.MODE_PRIVATE).getString("userId", "");
     }
 
     @Override
