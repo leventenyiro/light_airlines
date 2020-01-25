@@ -90,7 +90,7 @@ public class JaratInsertActivity extends AppCompatActivity implements View.OnCli
     }
 
     public void insertJarat() {
-        boolean eredmeny = db.insertJarat(s.getString("utvonalId", ""), m.dateToString(inputDate.getYear(), inputDate.getMonth(), inputDate.getDayOfMonth()), timeToString(inputTime.getHour(), inputTime.getMinute()))
+        boolean eredmeny = db.insertJarat(s.getString("utvonalId", ""), m.dateToString(inputDate.getYear(), inputDate.getMonth(), inputDate.getDayOfMonth()), timeToString(inputTime.getCurrentHour(), inputTime.getCurrentMinute()));
         if (eredmeny)
             Toast.makeText(this, getString(R.string.successInsert), Toast.LENGTH_SHORT).show();
         else
