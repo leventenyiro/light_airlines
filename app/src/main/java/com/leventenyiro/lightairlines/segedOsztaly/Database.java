@@ -25,7 +25,7 @@ public class Database extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE foglalas(id INTEGER PRIMARY KEY AUTOINCREMENT, \n" +
                                 "jarat_id INTEGER NOT NULL REFERENCES jarat ON UPDATE cascade ON DELETE restrict, \n" +
                                 "user_id INTEGER NOT NULL REFERENCES user ON UPDATE cascade ON DELETE restrict,\n" +
-                                "ules VARCHAR(4) NOT NULL)");
+                                "ules VARCHAR(3) NOT NULL)");
         db.execSQL("CREATE TABLE jarat(id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
                                 "utvonal_id INTEGER NOT NULL REFERENCES utvonal ON UPDATE cascade ON DELETE restrict,\n" +
                                 "helyek_szama INTEGER NOT NULL,\n" +
