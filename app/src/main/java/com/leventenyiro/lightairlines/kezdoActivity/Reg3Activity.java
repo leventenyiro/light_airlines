@@ -184,11 +184,11 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
                                         Toast.makeText(Reg3Activity.this, "Meg kell erősíteni a jelentkezést!", Toast.LENGTH_LONG).show();
                                         backToLogin();
                                     }
-                                })
+                                });
                             }
                         }
                     }
-                })
+                });
     }
 
     @Override

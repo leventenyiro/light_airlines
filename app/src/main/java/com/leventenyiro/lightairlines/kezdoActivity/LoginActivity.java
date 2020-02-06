@@ -17,9 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.leventenyiro.lightairlines.R;
-import com.leventenyiro.lightairlines.adminActivity.AdminActivity;
-import com.leventenyiro.lightairlines.segedOsztaly.Database;
-import com.leventenyiro.lightairlines.segedOsztaly.Metodus;
+import com.leventenyiro.lightairlines.adminActivity.*;
+import com.leventenyiro.lightairlines.segedOsztaly.*;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private AlertDialog alertDialog;
