@@ -1,5 +1,6 @@
 package com.leventenyiro.lightairlines.kezdoActivity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -15,17 +16,28 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.leventenyiro.lightairlines.R;
-import com.leventenyiro.lightairlines.segedOsztaly.Database;
-import com.leventenyiro.lightairlines.segedOsztaly.Metodus;
-import com.leventenyiro.lightairlines.segedOsztaly.PasswordUtils;
+import com.leventenyiro.lightairlines.segedOsztaly.*;
+import com.leventenyiro.lightairlines.User;
 
 public class Reg3Activity extends AppCompatActivity implements View.OnClickListener {
     private Button btnReg;
-    private Database db;
+    private DatabaseReference db;
     private EditText inputPassword, inputPasswordAgain;
+    private FirebaseAuth mAuth;
     private ImageView btnBack, btnHome;
     private int dp15, dp20;
+    private long id;
     private Metodus m;
     private SharedPreferences s;
     private SharedPreferences.Editor se;
@@ -75,7 +87,19 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
         btnReg = findViewById(R.id.btnReg);
         inputPassword = findViewById(R.id.inputPassword);
         inputPasswordAgain = findViewById(R.id.inputPasswordAgain);
-        db = new Database(this);
+        //db = new Database(this);
+        db = FirebaseDatabase.getInstance().getReference().child("user");
+        db.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    id = dataSnapshot.getChildrenCount();
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) { }
+        });
+        mAuth = FirebaseAuth.getInstance();
         m = new Metodus(this);
         dp15 = m.dpToPx(15, getResources());
         dp20 = m.dpToPx(20, getResources());
@@ -128,7 +152,7 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
         String lastname = s.getString("lastname", "");
         String birthdate = s.getString("birthdate", "");
 
-        String salt = PasswordUtils.getSalt(30);
+        /*String salt = PasswordUtils.getSalt(30);
         String titkositottPassword = PasswordUtils.generateSecurePassword(s.getString("password", ""), salt);
         String password = titkositottPassword + ";" + salt;
 
@@ -136,7 +160,35 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
         if (eredmeny)
             Toast.makeText(this, getString(R.string.successReg), Toast.LENGTH_LONG);
         else
-            Toast.makeText(this, getString(R.string.unsuccessReg), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.unsuccessReg), Toast.LENGTH_LONG).show();*/
+
+        // useradatok insert
+        User user = new User();
+        user.setUsername(username);
+        user.setFirstname(firstname);
+        user.setLastname(lastname);
+        user.setBirthdate(birthdate);
+        db.child(String.valueOf(id + 1)).setValue(user);
+
+        // autentikáció véglegesítése
+        mAuth.createUserWithEmailAndPassword(email, inputPassword.getText().toString())
+                .addOnCompleteListener(Reg3Activity.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            FirebaseUser fUser = mAuth.getCurrentUser();
+                            if (!fUser.isEmailVerified()) {
+                                fUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        Toast.makeText(Reg3Activity.this, "Meg kell erősíteni a jelentkezést!", Toast.LENGTH_LONG).show();
+                                        backToLogin();
+                                    }
+                                })
+                            }
+                        }
+                    }
+                })
     }
 
     @Override
