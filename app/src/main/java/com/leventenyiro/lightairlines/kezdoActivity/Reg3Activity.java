@@ -18,19 +18,14 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.auth.*;
+import com.google.firebase.database.*;
 import com.leventenyiro.lightairlines.R;
 import com.leventenyiro.lightairlines.segedOsztaly.*;
 import com.leventenyiro.lightairlines.User;
 
 public class Reg3Activity extends AppCompatActivity implements View.OnClickListener {
+
     private Button btnReg;
     private DatabaseReference db;
     private EditText inputPassword, inputPasswordAgain;
@@ -87,7 +82,6 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
         btnReg = findViewById(R.id.btnReg);
         inputPassword = findViewById(R.id.inputPassword);
         inputPasswordAgain = findViewById(R.id.inputPasswordAgain);
-        //db = new Database(this);
         db = FirebaseDatabase.getInstance().getReference().child("user");
         db.addValueEventListener(new ValueEventListener() {
             @Override
@@ -132,6 +126,7 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
                     inputClear();
                 }
                 else {
+                    m.loading(findViewById(R.id.loading));
                     se.putString("password", inputPassword.getText().toString()).apply();
                     insertUser();
                     backToLogin();
@@ -152,25 +147,14 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
         String lastname = s.getString("lastname", "");
         String birthdate = s.getString("birthdate", "");
 
-        /*String salt = PasswordUtils.getSalt(30);
-        String titkositottPassword = PasswordUtils.generateSecurePassword(s.getString("password", ""), salt);
-        String password = titkositottPassword + ";" + salt;
-
-        boolean eredmeny = db.insertUser(username, email, firstname, lastname, birthdate, password);
-        if (eredmeny)
-            Toast.makeText(this, getString(R.string.successReg), Toast.LENGTH_LONG);
-        else
-            Toast.makeText(this, getString(R.string.unsuccessReg), Toast.LENGTH_LONG).show();*/
-
-        // useradatok insert
         User user = new User();
         user.setUsername(username);
+        user.setEmail(email);
         user.setFirstname(firstname);
         user.setLastname(lastname);
         user.setBirthdate(birthdate);
         db.child(String.valueOf(id + 1)).setValue(user);
 
-        // autentikáció véglegesítése
         mAuth.createUserWithEmailAndPassword(email, inputPassword.getText().toString())
                 .addOnCompleteListener(Reg3Activity.this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -181,11 +165,15 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
                                 fUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
-                                        Toast.makeText(Reg3Activity.this, "Meg kell erősíteni a jelentkezést!", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(Reg3Activity.this, getString(R.string.validateEmail), Toast.LENGTH_LONG).show();
                                         backToLogin();
+                                        m.loading(findViewById(R.id.loading));
                                     }
                                 });
                             }
+                        }
+                        else {
+                            Toast.makeText(Reg3Activity.this, getString(R.string.unsuccessReg), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

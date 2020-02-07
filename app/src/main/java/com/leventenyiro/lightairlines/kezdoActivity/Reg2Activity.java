@@ -23,6 +23,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class Reg2Activity extends AppCompatActivity implements View.OnClickListener {
+
     private Button btnNext;
     private DatePicker inputBirthdate;
     private EditText inputFirstname, inputLastname;
@@ -170,8 +171,6 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
             age--;
         return age >= 13;
     }
-
-
 
     @Override
     public void onBackPressed() {

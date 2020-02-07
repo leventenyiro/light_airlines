@@ -1,7 +1,7 @@
 package com.leventenyiro.lightairlines;
 
 public class User {
-    public String username, firstname, lastname, birthdate;
+    public String username, email, firstname, lastname, birthdate;
 
     public User() { }
 
@@ -11,6 +11,14 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getFirstname() {

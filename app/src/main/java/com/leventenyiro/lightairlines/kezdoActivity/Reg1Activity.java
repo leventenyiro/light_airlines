@@ -1,11 +1,11 @@
 package com.leventenyiro.lightairlines.kezdoActivity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -16,13 +16,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.*;
 import com.leventenyiro.lightairlines.R;
-import com.leventenyiro.lightairlines.segedOsztaly.Database;
-import com.leventenyiro.lightairlines.segedOsztaly.Metodus;
+import com.leventenyiro.lightairlines.segedOsztaly.*;
 
 public class Reg1Activity extends AppCompatActivity implements View.OnClickListener {
+
     private Button btnNext;
-    private Database db;
     private EditText inputUsername, inputEmail;
     private ImageView btnBack, btnHome;
     private int dp15, dp20;
@@ -76,7 +76,6 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
         btnNext = findViewById(R.id.btnNext);
         inputUsername = findViewById(R.id.inputUsername);
         inputEmail = findViewById(R.id.inputEmail);
-        db = new Database(this);
         m = new Metodus(this);
         dp15 = m.dpToPx(15, getResources());
         dp20 = m.dpToPx(20, getResources());
@@ -85,17 +84,12 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void onClick(View v) {
-        Intent intent;
         switch (v.getId()) {
             case R.id.btnBack:
             case R.id.btnHome:
             case R.id.btnLogin: onBackPressed(); break;
             case R.id.btnNext:
-                if (vanEUsername()) {
-                    Toast.makeText(this, getString(R.string.usernameExists), Toast.LENGTH_LONG).show();
-                    inputSzin("usernameRed");
-                }
-                else if (!m.usernameWhiteSpaceEllenorzes(inputUsername.getText().toString())) {
+                if (!m.usernameWhiteSpaceEllenorzes(inputUsername.getText().toString())) {
                     Toast.makeText(this, getString(R.string.usernameWhiteSpace), Toast.LENGTH_LONG).show();
                     inputSzin("usernameRed");
                 }
@@ -106,11 +100,6 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
                 else if (inputUsername.getText().toString().isEmpty()) {
                     Toast.makeText(this, getString(R.string.noUsername), Toast.LENGTH_LONG).show();
                     inputSzin("usernameRed");
-                }
-                else if (vanEEmail()) {
-                    Toast.makeText(this, getString(R.string.emailExists), Toast.LENGTH_LONG).show();
-                    inputSzin("usernameGreen");
-                    inputSzin("emailRed");
                 }
                 else if (!m.emailEllenorzes(inputEmail.getText().toString())) {
                     Toast.makeText(this, getString(R.string.wrongEmail), Toast.LENGTH_LONG).show();
@@ -123,15 +112,52 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
                     inputSzin("emailRed");
                 }
                 else {
-                    inputSzin("usernameGreen");
-                    inputSzin("emailGreen");
-                    se.putString("username", inputUsername.getText().toString());
-                    se.putString("email", inputEmail.getText().toString());
-                    se.apply();
-                    intent = new Intent(Reg1Activity.this, Reg2Activity.class);
-                    startActivity(intent);
-                    finish();
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                    m.loading(findViewById(R.id.loading));
+                    DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("user");
+                    ref.orderByChild("username").equalTo(inputUsername.getText().toString())
+                            .addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    if (dataSnapshot.getChildrenCount() == 1) {
+                                        Toast.makeText(Reg1Activity.this, getString(R.string.usernameExists), Toast.LENGTH_LONG).show();
+                                        inputSzin("usernameRed");
+                                        m.loading(findViewById(R.id.loading));
+                                    } else {
+                                        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("user");
+                                        ref.orderByChild("email").equalTo(inputEmail.getText().toString())
+                                                .addListenerForSingleValueEvent(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                        if (dataSnapshot.getChildrenCount() == 1) {
+                                                            Toast.makeText(Reg1Activity.this, getString(R.string.emailExists), Toast.LENGTH_LONG).show();
+                                                            inputSzin("usernameGreen");
+                                                            inputSzin("emailRed");
+                                                            m.loading(findViewById(R.id.loading));
+                                                        } else {
+                                                            inputSzin("usernameGreen");
+                                                            inputSzin("emailGreen");
+                                                            se.putString("username", inputUsername.getText().toString());
+                                                            se.putString("email", inputEmail.getText().toString());
+                                                            se.apply();
+                                                            Intent intent = new Intent(Reg1Activity.this, Reg2Activity.class);
+                                                            startActivity(intent);
+                                                            finish();
+                                                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                                            m.loading(findViewById(R.id.loading));
+
+                                                        }
+                                                    }
+
+                                                    @Override
+                                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                                                    }
+                                                });
+                                    }
+                                }
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                                }
+                            });
                 }
                 break;
         }
@@ -164,16 +190,6 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
                 inputEmail.setPaddingRelative(dp20, dp15, dp20, dp15);
                 break;
         }
-    }
-
-    public boolean vanEUsername() {
-        Cursor eredmeny = db.selectUsername(inputUsername.getText().toString());
-        return eredmeny.getCount() == 1;
-    }
-
-    public boolean vanEEmail() {
-        Cursor eredmeny = db.selectEmail(inputEmail.getText().toString());
-        return eredmeny.getCount() == 1;
     }
 
     @Override

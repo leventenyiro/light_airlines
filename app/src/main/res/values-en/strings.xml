@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">Light Airlines</string>
 
     <!-- Login -->
     <string name="password">Password</string>
@@ -107,5 +106,6 @@
     <string name="successInsert">Successful insert!</string>
     <string name="unsuccessInsert">Server error! Unsuccessful insert!</string>
     <string name="noInternet">No internet connection!</string>
+    <string name="validateEmail">You have to validate your e-mail address!</string>
 
 </resources>
