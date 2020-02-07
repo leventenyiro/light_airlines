@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "207747018502",
-    "firebase_url": "https://lightairlines-97a64.firebaseio.com",
-    "project_id": "lightairlines-97a64",
-    "storage_bucket": "lightairlines-97a64.appspot.com"
+    "project_number": "672468789019",
+    "firebase_url": "https://lightairlines-2586b.firebaseio.com",
+    "project_id": "lightairlines-2586b",
+    "storage_bucket": "lightairlines-2586b.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:207747018502:android:8815f20a3221b4c2c67887",
+        "mobilesdk_app_id": "1:672468789019:android:ecd95806586b1075b5d5be",
         "android_client_info": {
           "package_name": "com.leventenyiro.lightairlines"
         }
       },
       "oauth_client": [
         {
-          "client_id": "207747018502-vg25sdheq0hf1qo1ub8o01dnke3g7h8p.apps.googleusercontent.com",
+          "client_id": "672468789019-l1kto3icvdqp879lar7lte6g8jns98q1.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.leventenyiro.lightairlines",
@@ -23,20 +23,20 @@
           }
         },
         {
-          "client_id": "207747018502-pkpb8v5kjjlp1fj8a6hn980hh66v65k6.apps.googleusercontent.com",
+          "client_id": "672468789019-ueeh548jb1kac94rtr1rbetgnidbht8f.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyADIygxbxrV0BpSpSfw_Cnz3QN1u1lwf9c"
+          "current_key": "AIzaSyDoYnoWxVHLPS-Ofs4gmoj2plM8V2Bi5sM"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "207747018502-pkpb8v5kjjlp1fj8a6hn980hh66v65k6.apps.googleusercontent.com",
+              "client_id": "672468789019-ueeh548jb1kac94rtr1rbetgnidbht8f.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

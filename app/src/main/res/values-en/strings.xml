@@ -106,5 +106,6 @@
     <string name="noReserved">This seat isn\'t reserved!</string>
     <string name="successInsert">Successful insert!</string>
     <string name="unsuccessInsert">Server error! Unsuccessful insert!</string>
+    <string name="noInternet">No internet connection!</string>
 
 </resources>

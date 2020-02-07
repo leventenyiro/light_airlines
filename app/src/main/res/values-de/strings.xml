@@ -106,5 +106,6 @@
     <string name="noReserved">Dies Sitz nicht reserviert!</string>
     <string name="successInsert">Erfolgreich Paste!</string>
     <string name="unsuccessInsert">Serverfehler! Erfolglos Paste!</string>
+    <string name="noInternet">Kein Internet Verbindung!</string>
 
 </resources>

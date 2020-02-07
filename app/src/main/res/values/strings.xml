@@ -106,5 +106,6 @@
     <string name="noReserved">Ez az ülés még nem foglalt!</string>
     <string name="successInsert">Sikeres rögzítés!</string>
     <string name="unsuccessInsert">Szerverhiba! Sikertelen rögzítés!</string>
+    <string name="noInternet">Nincs internetkapcsolat!</string>
 
 </resources>
