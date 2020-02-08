@@ -100,7 +100,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         switch (v.getId()) {
             case R.id.btnReg:
                 if (!isNetworkConnected())
-                    Toast.makeText(this, "Nincs internetkapcsolat!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getString(R.string.noInternet), Toast.LENGTH_SHORT).show();
                 else {
                     intent = new Intent(LoginActivity.this, Reg1Activity.class);
                     startActivity(intent);
@@ -110,7 +110,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.btnLogin:
                 if (!isNetworkConnected())
-                    Toast.makeText(this, "Nincs internetkapcsolat!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getString(R.string.noInternet), Toast.LENGTH_SHORT).show();
                 else {
                     if (inputUsernameEmail.getText().toString().isEmpty()) {
                         Toast.makeText(this, getString(R.string.noUsernameEmail), Toast.LENGTH_LONG).show();
@@ -122,6 +122,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         inputSzin("passwordRed");
                     }
                     else {
+                        m.loading(findViewById(R.id.loading));
                         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("user");
                         ref.orderByChild("username").equalTo(inputUsernameEmail.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
@@ -183,15 +184,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-                                    Toast.makeText(LoginActivity.this, "Erősítsd meg az emailed!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(LoginActivity.this, getString(R.string.validateEmail), Toast.LENGTH_SHORT).show();
                                     inputPassword.setText("");
                                     inputSzin("usernameEmail");
                                     inputSzin("password");
+                                    m.loading(findViewById(R.id.loading));
                                 }
                             });
                         }
                         else {
-                            Toast.makeText(LoginActivity.this, "Be vagy jelentkezve!", Toast.LENGTH_SHORT).show();
                             loginIntent(finalEmail);
                         }
                     }
@@ -200,6 +201,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         inputPassword.setText("");
                         inputSzin("usernameEmailRed");
                         inputSzin("passwordRed");
+                        m.loading(findViewById(R.id.loading));
                     }
                 }
             });
@@ -218,12 +220,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         startActivity(intent);
                         finish();
                         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                        m.loading(findViewById(R.id.loading));
                     }
                     else {
                         Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class);
                         startActivity(intent);
                         finish();
                         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                        m.loading(findViewById(R.id.loading));
                     }
                 }
             }

@@ -1,5 +1,6 @@
 package com.leventenyiro.lightairlines.kezdoActivity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -10,13 +11,17 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.leventenyiro.lightairlines.R;
 import com.leventenyiro.lightairlines.userActivity.InnerActivity;
 import com.leventenyiro.lightairlines.segedOsztaly.Database;
 
 public class WelcomeActivity extends AppCompatActivity {
 
-    Database db;
     TextView textWelcome;
 
     @Override
@@ -26,7 +31,20 @@ public class WelcomeActivity extends AppCompatActivity {
         getWindow().setStatusBarColor(getResources().getColor(R.color.welcomeGray));
 
         init();
-        textWelcome.setText(getString(R.string.welcome) + " " + getFirstname() + "!");
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("user");
+        ref.orderByKey().equalTo(getSharedPreferences("variables", Context.MODE_PRIVATE).getString("userId", ""))
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            textWelcome.setText(getString(R.string.welcome) + " " + snapshot.child("firstname").getValue() + "!");
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) { }
+                });
+
         startAnimation();
         Thread welcomeThread = new Thread() {
             @Override
@@ -49,21 +67,10 @@ public class WelcomeActivity extends AppCompatActivity {
 
     public void init() {
         textWelcome = findViewById(R.id.textWelcome);
-        db = new Database(this);
     }
 
     private void startAnimation() {
         Animation a = AnimationUtils.loadAnimation(this, R.anim.text_appear);
         textWelcome.startAnimation(a);
-    }
-
-    public String getFirstname() {
-        Cursor e = db.selectUser(getSharedPreferences("variables", Context.MODE_PRIVATE).getString("userId", ""));
-        if (e != null && e.getCount() > 0) {
-            while (e.moveToNext()) {
-                return e.getString(2);
-            }
-        }
-        return "";
     }
 }
