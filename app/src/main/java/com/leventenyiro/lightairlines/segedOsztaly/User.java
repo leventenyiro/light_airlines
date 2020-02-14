@@ -1,4 +1,4 @@
-package com.leventenyiro.lightairlines;
+package com.leventenyiro.lightairlines.segedOsztaly;
 
 public class User {
     public String username, email, firstname, lastname, birthdate;

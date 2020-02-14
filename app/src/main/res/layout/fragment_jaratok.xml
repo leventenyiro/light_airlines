@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:scrollbars="none">
 
     <RelativeLayout
@@ -59,6 +60,17 @@
             android:maxLines="1"
             android:lines="1"
             android:singleLine="true" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="invisible"
+            android:id="@+id/loading"
+            android:elevation="5dp"
+            app:lottie_fileName="loading.json"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_speed="1.5" />
 
     </RelativeLayout>
 

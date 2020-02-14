@@ -22,7 +22,6 @@ import com.google.firebase.auth.*;
 import com.google.firebase.database.*;
 import com.leventenyiro.lightairlines.R;
 import com.leventenyiro.lightairlines.segedOsztaly.*;
-import com.leventenyiro.lightairlines.User;
 
 public class Reg3Activity extends AppCompatActivity implements View.OnClickListener {
 
