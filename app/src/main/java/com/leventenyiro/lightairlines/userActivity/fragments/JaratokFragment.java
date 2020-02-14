@@ -44,6 +44,7 @@ public class JaratokFragment extends Fragment {
     private RelativeLayout mRelativeLayout;
     private SharedPreferences s;
     private View loading;
+    private DatabaseReference ref;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_jaratok, container, false);
@@ -91,6 +92,7 @@ public class JaratokFragment extends Fragment {
         dp200 = m.dpToPx(200, getResources());
         dp360 = m.dpToPx(360, getResources());
         s = getActivity().getSharedPreferences("variables", Context.MODE_PRIVATE);
+        ref = FirebaseDatabase.getInstance().getReference();
 
         loading = root.findViewById(R.id.loading);
     }
@@ -104,8 +106,7 @@ public class JaratokFragment extends Fragment {
         cardLista.clear();
         //firebase
 
-        //FirebaseDatabase.getInstance().getReference().child("airport").orderByKey()
-        FirebaseDatabase.getInstance().getReference().child("jarat").addValueEventListener(new ValueEventListener() {
+        ref.child("jarat").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
@@ -117,23 +118,20 @@ public class JaratokFragment extends Fragment {
                         String utvonalId = snapshot.child("utvonal_id").getValue().toString();
                         final long eredmenyekGetCount = dataSnapshot.getChildrenCount();
 
-                        FirebaseDatabase.getInstance().getReference().child("utvonal")
-                            .orderByKey().equalTo(utvonalId).addValueEventListener(new ValueEventListener() {
+                        ref.child("utvonal").orderByKey().equalTo(utvonalId).addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                                     String indulasId = snapshot.child("indulas_id").getValue().toString();
                                     final String celallomasId = snapshot.child("celallomas_id").getValue().toString();
                                     final String idotartam = snapshot.child("idotartam").getValue().toString();
-                                    FirebaseDatabase.getInstance().getReference().child("airport")
-                                        .orderByKey().equalTo(indulasId).addValueEventListener(new ValueEventListener() {
+                                    ref.child("airport").orderByKey().equalTo(indulasId).addValueEventListener(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                             for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                                                 final String indulasNev = snapshot.child("nev").getValue().toString();
                                                 String indulasRov = snapshot.child("rovidites").getValue().toString();
-                                                FirebaseDatabase.getInstance().getReference().child("airport")
-                                                    .orderByKey().equalTo(celallomasId).addValueEventListener(new ValueEventListener() {
+                                                ref.child("airport").orderByKey().equalTo(celallomasId).addValueEventListener(new ValueEventListener() {
                                                     @Override
                                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
@@ -231,34 +229,24 @@ public class JaratokFragment extends Fragment {
                                                             m.loading(loading);
                                                         }
                                                     }
-
                                                     @Override
-                                                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                                    }
+                                                    public void onCancelled(@NonNull DatabaseError databaseError) { }
                                                 });
                                             }
                                         }
-
                                         @Override
-                                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                        }
+                                        public void onCancelled(@NonNull DatabaseError databaseError) { }
                                     });
                                 }
                             }
-
                             @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                            }
+                            public void onCancelled(@NonNull DatabaseError databaseError) { }
                         });
                     }
                 }
             }
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
+            public void onCancelled(@NonNull DatabaseError databaseError) { }
         });
     }
 }
