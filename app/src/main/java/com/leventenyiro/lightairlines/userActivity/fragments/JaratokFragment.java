@@ -104,197 +104,149 @@ public class JaratokFragment extends Fragment {
             mRelativeLayout.removeView(c);
         }
         cardLista.clear();
-        //firebase
 
-        /*final List<String> indulasIdList = new ArrayList<>();
-        ref.child("airport").orderByChild("nev").equalTo(inputHonnan.getText().toString()).orderByChild("rovidites").equalTo(inputHonnan.getText().toString()).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
+
+        Query query = ref.child("jarat");
+        if (!inputHonnan.getText().toString().isEmpty() && !inputHova.getText().toString().isEmpty()) {
+            String search = inputHonnan.getText().toString().substring(0, 1).toUpperCase() + inputHonnan.getText().toString().substring(1).toLowerCase() + "_" + inputHova.getText().toString().substring(0, 1).toUpperCase() + inputHova.getText().toString().substring(1).toLowerCase();
+
+            ref.child("airport").orderByChild("indulas").startAt(inputHonnan.getText().toString().substring(0, 1).toUpperCase() + inputHonnan.getText().toString().substring(1).toLowerCase()).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        indulasIdList.add(snapshot.getKey());
+
                     }
                 }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) { }
-        });
-        final List<String> celallomasIdList = new ArrayList<>();
-        ref.child("airport").orderByChild("nev").equalTo(inputHova.getText().toString()).orderByChild("rovidites").equalTo(inputHova.getText().toString()).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        celallomasIdList.add(snapshot.getKey());
-                    }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
                 }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) { }
-        });
-        // keressük meg azokat az útvonalakat, ahol az indulasId és a celallomasId létezik
-        List<String> utvonalIdList = new ArrayList<>();
-        Query query = ref.child("utvonal");
-        if (indulasIdList.size() > 0) {
-            for (String s : indulasIdList) {
-                query.orderByChild("indulas_id").equalTo(s).addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        for (dataSnapshot)
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) { }
-                });
-            }
-        }*/
-
-
-
-        ref.child("jarat") //...
-
-
-
-        /*ref.child("jarat").orderByChild("utvonal_id").equalTo(1).addValueEventListener(new ValueEventListener() {
+            })
+            query = query.orderByChild("indulas_celallomas").startAt(search).endAt(search + "\uf8ff");
+        }
+        else if (!inputHonnan.getText().toString().isEmpty()) {
+            String search = inputHonnan.getText().toString().substring(0, 1).toUpperCase() + inputHonnan.getText().toString().substring(1).toLowerCase();
+            query = query.orderByChild("indulas_nev").startAt(search).endAt(search + "\uf8ff");
+            Toast.makeText(mContext, search, Toast.LENGTH_SHORT).show();
+        }
+        else if (!inputHova.getText().toString().isEmpty()) {
+            String search = inputHova.getText().toString().substring(0, 1).toUpperCase() + inputHova.getText().toString().substring(1).toLowerCase();
+            query = query.orderByChild("celallomas_nev").startAt(search).endAt(search + "\uf8ff");
+        }
+        query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    final int[] id = {0};
+                    int id = 0;
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        final String jaratId = snapshot.getKey();
-                        final String helyekSzama = snapshot.child("helyek_szama").getValue().toString();
-                        final String idopont = snapshot.child("idopont").getValue().toString();
-                        String utvonalId = snapshot.child("utvonal_id").getValue().toString();
-                        final long eredmenyekGetCount = dataSnapshot.getChildrenCount();
-
-                        ref.child("utvonal").orderByKey().equalTo(utvonalId).addValueEventListener(new ValueEventListener() {
+                        CardView card = new CardView(mContext);
+                        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(dp360, dp200);
+                        params.addRule(RelativeLayout.CENTER_HORIZONTAL);
+                        if (cardLista.size() == 0)
+                            params.addRule(RelativeLayout.BELOW, R.id.inputHova);
+                        else
+                            params.addRule(RelativeLayout.BELOW, id);
+                        if (dataSnapshot.getChildrenCount() - 1 == cardLista.size())
+                            params.setMargins(0, 0, 0, dp100);
+                        else
+                            params.setMargins(0, 0, 0, dp20);
+                        card.setLayoutParams(params);
+                        card.setCardElevation(50);
+                        card.setBackground(getResources().getDrawable(R.drawable.card));
+                        final String finalJaratId = snapshot.getKey();
+                        card.setOnClickListener(new View.OnClickListener() {
                             @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                                    String indulasId = snapshot.child("indulas_id").getValue().toString();
-                                    final String celallomasId = snapshot.child("celallomas_id").getValue().toString();
-                                    final String idotartam = snapshot.child("idotartam").getValue().toString();
-                                    ref.child("airport").orderByKey().equalTo(indulasId).addValueEventListener(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                                                final String indulasNev = snapshot.child("nev").getValue().toString();
-                                                String indulasRov = snapshot.child("rovidites").getValue().toString();
-                                                ref.child("airport").orderByKey().equalTo(celallomasId).addValueEventListener(new ValueEventListener() {
-                                                    @Override
-                                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                                                            String celallomasNev = snapshot.child("nev").getValue().toString();
-                                                            String celallomasRovidites = snapshot.child("rovidites").getValue().toString();
-
-                                                            // KÁRTYÁK IDE
-                                                            CardView card = new CardView(mContext);
-                                                            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(dp360, dp200);
-                                                            params.addRule(RelativeLayout.CENTER_HORIZONTAL);
-                                                            if (cardLista.size() == 0)
-                                                                params.addRule(RelativeLayout.BELOW, R.id.inputHova);
-                                                            else
-                                                                params.addRule(RelativeLayout.BELOW, id[0]);
-                                                            if (eredmenyekGetCount - 1 == cardLista.size())
-                                                                params.setMargins(0,0,0, dp100);
-                                                            else
-                                                                params.setMargins(0,0,0, dp20);
-                                                            card.setLayoutParams(params);
-                                                            card.setCardElevation(50);
-                                                            card.setBackground(getResources().getDrawable(R.drawable.card));
-                                                            final String finalJaratId = jaratId;
-                                                            card.setOnClickListener(new View.OnClickListener() {
-                                                                @Override
-                                                                public void onClick(View v) {
-                                                                    s.edit().putString("jaratId", finalJaratId).apply();
-                                                                    Intent intent = new Intent(getActivity(), JaratActivity.class);
-                                                                    startActivity(intent);
-                                                                    getActivity().finish();
-                                                                    getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                                                                }
-                                                            });
-                                                            card.setId(card.generateViewId());
-                                                            id[0] = card.getId();
-                                                            cardLista.add(id[0]);
-
-                                                            RelativeLayout rlCard = new RelativeLayout(mContext);
-                                                            RelativeLayout.LayoutParams paramsRlCard = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-                                                            rlCard.setLayoutParams(paramsRlCard);
-
-                                                            TextView tvVaros = new TextView(mContext);
-                                                            RelativeLayout.LayoutParams paramsVaros = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-                                                            paramsVaros.topMargin = dp20;
-                                                            tvVaros.setLayoutParams(paramsVaros);
-                                                            String fromTo = indulasNev + " - " + celallomasNev;
-                                                            tvVaros.setText(fromTo);
-                                                            tvVaros.setTypeface(getActivity().getResources().getFont(R.font.regular));
-                                                            tvVaros.setTextColor(getActivity().getResources().getColor(R.color.gray));
-                                                            tvVaros.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                                                            tvVaros.setId(tvVaros.generateViewId());
-                                                            tvVaros.setTextSize(dp10);
-
-                                                            TextView tvIdopont = new TextView(mContext);
-                                                            RelativeLayout.LayoutParams paramsIdopont = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-                                                            paramsIdopont.addRule(RelativeLayout.BELOW, tvVaros.getId());
-                                                            paramsIdopont.topMargin = dp15;
-                                                            tvIdopont.setLayoutParams(paramsIdopont);
-                                                            tvIdopont.setText(idopont.substring(0, 16).replace('-', '.'));
-                                                            tvIdopont.setTypeface(getActivity().getResources().getFont(R.font.regular));
-                                                            tvIdopont.setTextColor(getActivity().getResources().getColor(R.color.gray));
-                                                            tvIdopont.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                                                            tvIdopont.setId(tvIdopont.generateViewId());
-                                                            tvIdopont.setTextSize(dp7);
-
-                                                            TextView tvIdotartam = new TextView(mContext);
-                                                            RelativeLayout.LayoutParams paramsIdotartam = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-                                                            paramsIdotartam.addRule(RelativeLayout.BELOW, tvIdopont.getId());
-                                                            paramsIdotartam.topMargin = dp15;
-                                                            tvIdotartam.setLayoutParams(paramsIdotartam);
-                                                            tvIdotartam.setText(m.idotartamAtalakitas(idotartam));
-                                                            tvIdotartam.setTypeface(getActivity().getResources().getFont(R.font.regular));
-                                                            tvIdotartam.setTextColor(getActivity().getResources().getColor(R.color.gray));
-                                                            tvIdotartam.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                                                            tvIdotartam.setId(tvIdotartam.generateViewId());
-                                                            tvIdotartam.setTextSize(dp7);
-
-                                                            TextView tvHelyekSzama = new TextView(mContext);
-                                                            RelativeLayout.LayoutParams paramsHelyek = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-                                                            paramsHelyek.addRule(RelativeLayout.BELOW, tvIdotartam.getId());
-                                                            paramsHelyek.topMargin = dp20;
-                                                            tvHelyekSzama.setLayoutParams(paramsHelyek);
-                                                            String helyInfo = getString(R.string.seatInfo1) + " " + helyekSzama + " " + getString(R.string.seatInfo2);
-                                                            tvHelyekSzama.setText(helyInfo);
-                                                            tvHelyekSzama.setTypeface(getActivity().getResources().getFont(R.font.regular));
-                                                            tvHelyekSzama.setTextColor(getActivity().getResources().getColor(R.color.gray));
-                                                            tvHelyekSzama.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                                                            tvHelyekSzama.setTextSize(dp5);
-
-                                                            rlCard.addView(tvVaros);
-                                                            rlCard.addView(tvIdopont);
-                                                            rlCard.addView(tvIdotartam);
-                                                            rlCard.addView(tvHelyekSzama);
-                                                            card.addView(rlCard);
-                                                            mRelativeLayout.addView(card);
-                                                            m.loading(loading);
-                                                        }
-                                                    }
-                                                    @Override
-                                                    public void onCancelled(@NonNull DatabaseError databaseError) { }
-                                                });
-                                            }
-                                        }
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError databaseError) { }
-                                    });
-                                }
+                            public void onClick(View v) {
+                                s.edit().putString("jaratId", finalJaratId).apply();
+                                Intent intent = new Intent(getActivity(), JaratActivity.class);
+                                startActivity(intent);
+                                getActivity().finish();
+                                getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                             }
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) { }
                         });
+                        card.setId(card.generateViewId());
+                        id = card.getId();
+                        cardLista.add(id);
+
+                        RelativeLayout rlCard = new RelativeLayout(mContext);
+                        RelativeLayout.LayoutParams paramsRlCard = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                        rlCard.setLayoutParams(paramsRlCard);
+
+                        TextView tvVaros = new TextView(mContext);
+                        RelativeLayout.LayoutParams paramsVaros = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                        paramsVaros.topMargin = dp20;
+                        tvVaros.setLayoutParams(paramsVaros);
+                        String fromTo = snapshot.child("indulas_nev").getValue() + " - " + snapshot.child("celallomas_nev").getValue();
+                        tvVaros.setText(fromTo);
+                        tvVaros.setTypeface(getActivity().getResources().getFont(R.font.regular));
+                        tvVaros.setTextColor(getActivity().getResources().getColor(R.color.gray));
+                        tvVaros.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                        tvVaros.setId(tvVaros.generateViewId());
+                        tvVaros.setTextSize(dp10);
+
+                        TextView tvIdopont = new TextView(mContext);
+                        RelativeLayout.LayoutParams paramsIdopont = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                        paramsIdopont.addRule(RelativeLayout.BELOW, tvVaros.getId());
+                        paramsIdopont.topMargin = dp15;
+                        tvIdopont.setLayoutParams(paramsIdopont);
+                        tvIdopont.setText(String.valueOf(snapshot.child("idopont").getValue()).substring(0, 16).replace('-', '.'));
+                        tvIdopont.setTypeface(getActivity().getResources().getFont(R.font.regular));
+                        tvIdopont.setTextColor(getActivity().getResources().getColor(R.color.gray));
+                        tvIdopont.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                        tvIdopont.setId(tvIdopont.generateViewId());
+                        tvIdopont.setTextSize(dp7);
+
+                        TextView tvIdotartam = new TextView(mContext);
+                        RelativeLayout.LayoutParams paramsIdotartam = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                        paramsIdotartam.addRule(RelativeLayout.BELOW, tvIdopont.getId());
+                        paramsIdotartam.topMargin = dp15;
+                        tvIdotartam.setLayoutParams(paramsIdotartam);
+                        tvIdotartam.setText(m.idotartamAtalakitas(String.valueOf(snapshot.child("idotartam").getValue())));
+                        tvIdotartam.setTypeface(getActivity().getResources().getFont(R.font.regular));
+                        tvIdotartam.setTextColor(getActivity().getResources().getColor(R.color.gray));
+                        tvIdotartam.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                        tvIdotartam.setId(tvIdotartam.generateViewId());
+                        tvIdotartam.setTextSize(dp7);
+
+                        TextView tvHelyekSzama = new TextView(mContext);
+                        RelativeLayout.LayoutParams paramsHelyek = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                        paramsHelyek.addRule(RelativeLayout.BELOW, tvIdotartam.getId());
+                        paramsHelyek.topMargin = dp20;
+                        tvHelyekSzama.setLayoutParams(paramsHelyek);
+                        String helyInfo = getString(R.string.seatInfo1) + " " + snapshot.child("helyek_szama").getValue() + " " + getString(R.string.seatInfo2);
+                        tvHelyekSzama.setText(helyInfo);
+                        tvHelyekSzama.setTypeface(getActivity().getResources().getFont(R.font.regular));
+                        tvHelyekSzama.setTextColor(getActivity().getResources().getColor(R.color.gray));
+                        tvHelyekSzama.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                        tvHelyekSzama.setTextSize(dp5);
+
+                        rlCard.addView(tvVaros);
+                        rlCard.addView(tvIdopont);
+                        rlCard.addView(tvIdotartam);
+                        rlCard.addView(tvHelyekSzama);
+                        card.addView(rlCard);
+                        mRelativeLayout.addView(card);
                     }
+                } else {
+                    TextView tv = new TextView(mContext);
+                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                    params.addRule(RelativeLayout.BELOW, R.id.inputHova);
+                    params.topMargin = dp40;
+                    tv.setLayoutParams(params);
+                    tv.setTypeface(getActivity().getResources().getFont(R.font.regular));
+                    tv.setTextColor(getActivity().getResources().getColor(R.color.gray));
+                    tv.setTextSize(dp15);
+                    tv.setText(getString(R.string.noFlight));
+                    tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    mRelativeLayout.addView(tv);
                 }
             }
+
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) { }
-        });*/
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+        m.loading(loading);
     }
 }
