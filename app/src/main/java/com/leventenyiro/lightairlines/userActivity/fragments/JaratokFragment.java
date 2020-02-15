@@ -106,7 +106,55 @@ public class JaratokFragment extends Fragment {
         cardLista.clear();
         //firebase
 
-        ref.child("jarat").addValueEventListener(new ValueEventListener() {
+        /*final List<String> indulasIdList = new ArrayList<>();
+        ref.child("airport").orderByChild("nev").equalTo(inputHonnan.getText().toString()).orderByChild("rovidites").equalTo(inputHonnan.getText().toString()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        indulasIdList.add(snapshot.getKey());
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) { }
+        });
+        final List<String> celallomasIdList = new ArrayList<>();
+        ref.child("airport").orderByChild("nev").equalTo(inputHova.getText().toString()).orderByChild("rovidites").equalTo(inputHova.getText().toString()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        celallomasIdList.add(snapshot.getKey());
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) { }
+        });
+        // keressük meg azokat az útvonalakat, ahol az indulasId és a celallomasId létezik
+        List<String> utvonalIdList = new ArrayList<>();
+        Query query = ref.child("utvonal");
+        if (indulasIdList.size() > 0) {
+            for (String s : indulasIdList) {
+                query.orderByChild("indulas_id").equalTo(s).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (dataSnapshot)
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) { }
+                });
+            }
+        }*/
+
+
+
+        ref.child("jarat") //...
+
+
+
+        /*ref.child("jarat").orderByChild("utvonal_id").equalTo(1).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
@@ -247,6 +295,6 @@ public class JaratokFragment extends Fragment {
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) { }
-        });
+        });*/
     }
 }
