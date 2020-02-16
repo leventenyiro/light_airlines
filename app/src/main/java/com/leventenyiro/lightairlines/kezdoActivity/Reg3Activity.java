@@ -28,7 +28,6 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
     private int dp15, dp20;
     private Metodus m;
     private SharedPreferences s;
-    private SharedPreferences.Editor se;
     private TextView btnLogin;
 
     @Override
@@ -80,7 +79,6 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
         dp15 = m.dpToPx(15, getResources());
         dp20 = m.dpToPx(20, getResources());
         s = getSharedPreferences("regisztracio", Context.MODE_PRIVATE);
-        se = s.edit();
     }
 
     @Override
@@ -108,7 +106,7 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
                     inputClear();
                 }
                 else {
-                    se.putString("password", inputPassword.getText().toString()).apply();
+                    s.edit().putString("password", inputPassword.getText().toString()).apply();
                     insertUser();
                     backToLogin();
                 }
@@ -148,7 +146,7 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void backToLogin() {
-        se.clear().apply();
+        s.edit().clear().apply();
         Intent intent = new Intent(Reg3Activity.this, LoginActivity.class);
         startActivity(intent);
         finish();
