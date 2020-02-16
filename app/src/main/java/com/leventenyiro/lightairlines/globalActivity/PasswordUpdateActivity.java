@@ -98,7 +98,7 @@ public class PasswordUpdateActivity extends AppCompatActivity implements View.On
                     Toast.makeText(this, getString(R.string.noOldPassword), Toast.LENGTH_LONG).show();
                     inputClear();
                 }
-                else if (!jelszoEllenorzes()) {
+                else if (!m.jelszoEllenorzes(getSharedPreferences("variables", Context.MODE_PRIVATE).getString("userId", ""), inputOldPassword.getText().toString())) {
                     Toast.makeText(this, getString(R.string.wrongOldPassword), Toast.LENGTH_LONG).show();
                     inputClear();
                 }
@@ -130,20 +130,6 @@ public class PasswordUpdateActivity extends AppCompatActivity implements View.On
         inputOldPassword.setText("");
         inputPassword.setText("");
         inputPasswordAgain.setText("");
-    }
-
-    public boolean jelszoEllenorzes() {
-        Cursor eredmeny = db.selectPasswordById(userId);
-        String password = null;
-        String salt = null;
-        if (eredmeny != null && eredmeny.getCount() > 0) {
-            while (eredmeny.moveToNext()) {
-                String[] adatok = eredmeny.getString(0).split(";");
-                password = adatok[0];
-                salt = adatok[1];
-            }
-        }
-        return PasswordUtils.verifyUserPassword(inputOldPassword.getText().toString(), password, salt);
     }
 
     private void update() {
