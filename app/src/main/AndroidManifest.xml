@@ -41,7 +41,7 @@
             android:name=".userActivity.InnerActivity"
             android:theme="@style/WhiteTheme" />
         <activity
-            android:name=".globalActivity.PasswordUpdate"
+            android:name=".globalActivity.PasswordUpdateActivity"
             android:theme="@style/WhiteTheme" />
         <activity
             android:name=".userActivity.JaratActivity"

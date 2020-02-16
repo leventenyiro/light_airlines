@@ -21,7 +21,7 @@ import com.leventenyiro.lightairlines.segedOsztaly.Metodus;
 import com.leventenyiro.lightairlines.segedOsztaly.PasswordUtils;
 import com.leventenyiro.lightairlines.userActivity.InnerActivity;
 
-public class PasswordUpdate extends AppCompatActivity implements View.OnClickListener{
+public class PasswordUpdateActivity extends AppCompatActivity implements View.OnClickListener{
     private Button btnCancel, btnUpdate;
     private Database db;
     private EditText inputOldPassword, inputPassword, inputPasswordAgain;
@@ -159,13 +159,13 @@ public class PasswordUpdate extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onBackPressed() {
         if (userId.equals("1")) {
-            Intent intent = new Intent(PasswordUpdate.this, AdminActivity.class);
+            Intent intent = new Intent(PasswordUpdateActivity.this, AdminActivity.class);
             startActivity(intent);
             finish();
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         }
         else {
-            Intent intent = new Intent(PasswordUpdate.this, InnerActivity.class);
+            Intent intent = new Intent(PasswordUpdateActivity.this, InnerActivity.class);
             startActivity(intent);
             finish();
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);

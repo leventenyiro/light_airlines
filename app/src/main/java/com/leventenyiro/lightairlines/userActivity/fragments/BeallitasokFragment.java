@@ -17,7 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.leventenyiro.lightairlines.segedOsztaly.Database;
-import com.leventenyiro.lightairlines.globalActivity.PasswordUpdate;
+import com.leventenyiro.lightairlines.globalActivity.PasswordUpdateActivity;
 import com.leventenyiro.lightairlines.R;
 import com.leventenyiro.lightairlines.segedOsztaly.Metodus;
 
@@ -172,7 +172,7 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
                 break;
             case R.id.btnPasswordUpdate:
                 getActivity().getSharedPreferences("variables", Context.MODE_PRIVATE).edit().putString("fragment", "beallitasok").apply();
-                Intent intent = new Intent(getActivity(), PasswordUpdate.class);
+                Intent intent = new Intent(getActivity(), PasswordUpdateActivity.class);
                 startActivity(intent);
                 getActivity().finish();
                 getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

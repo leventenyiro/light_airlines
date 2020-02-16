@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.leventenyiro.lightairlines.R;
-import com.leventenyiro.lightairlines.globalActivity.PasswordUpdate;
+import com.leventenyiro.lightairlines.globalActivity.PasswordUpdateActivity;
 
 public class AdminBeallitasokFragment extends Fragment implements View.OnClickListener {
 
@@ -39,7 +39,7 @@ public class AdminBeallitasokFragment extends Fragment implements View.OnClickLi
                 break;
             case R.id.btnPasswordUpdate:
                 getActivity().getSharedPreferences("variables", Context.MODE_PRIVATE).edit().putString("fragment", "beallitasok").apply();
-                Intent intent = new Intent(getActivity(), PasswordUpdate.class);
+                Intent intent = new Intent(getActivity(), PasswordUpdateActivity.class);
                 startActivity(intent);
                 getActivity().finish();
                 getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
