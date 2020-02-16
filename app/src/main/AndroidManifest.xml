@@ -53,7 +53,7 @@
             android:name=".userActivity.JegyActivity"
             android:theme="@style/WhiteTheme" />
         <activity
-            android:name=".userActivity.Megerosites"
+            android:name=".userActivity.MegerositesActivity"
             android:theme="@style/GrayTheme" />
         <activity
             android:name=".adminActivity.MegtekintesActivity"

@@ -16,7 +16,7 @@ import com.leventenyiro.lightairlines.R;
 import com.leventenyiro.lightairlines.segedOsztaly.Database;
 import com.leventenyiro.lightairlines.segedOsztaly.Metodus;
 
-public class Megerosites extends AppCompatActivity implements View.OnClickListener {
+public class MegerositesActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button btnCancel, btnVerify;
     private Database db;
@@ -61,7 +61,7 @@ public class Megerosites extends AppCompatActivity implements View.OnClickListen
                 else {
                     deleteJegy();
                     s.edit().remove("foglalasId").apply();
-                    Intent intent = new Intent(Megerosites.this, InnerActivity.class);
+                    Intent intent = new Intent(MegerositesActivity.this, InnerActivity.class);
                     startActivity(intent);
                     finish();
                     overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
@@ -79,7 +79,7 @@ public class Megerosites extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(Megerosites.this,JegyActivity.class);
+        Intent intent = new Intent(MegerositesActivity.this,JegyActivity.class);
         startActivity(intent);
         finish();
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
