@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,6 +17,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.journeyapps.barcodescanner.BarcodeEncoder;
 import com.leventenyiro.lightairlines.R;
 import com.leventenyiro.lightairlines.segedOsztaly.Database;
 import com.leventenyiro.lightairlines.segedOsztaly.Metodus;
@@ -24,7 +30,7 @@ public class JegyActivity extends AppCompatActivity implements View.OnClickListe
 
     private Button btnDelete;
     private Database db;
-    private ImageView btnBack;
+    private ImageView btnBack, imgQr;
     private int brightness;
     private Metodus m;
     private SharedPreferences s;
@@ -38,6 +44,7 @@ public class JegyActivity extends AppCompatActivity implements View.OnClickListe
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
         init();
         select();
+        qrCode("lightairlines_foglalas_" + s.getString("foglalasId", ""));
         setFenyesseg(255);
         btnBack.setOnClickListener(this);
         btnDelete.setOnClickListener(this);
@@ -51,6 +58,7 @@ public class JegyActivity extends AppCompatActivity implements View.OnClickListe
         textIdopont = findViewById(R.id.textIdopont);
         textIdotartam = findViewById(R.id.textIdotartam);
         textUles = findViewById(R.id.textUles);
+        imgQr = findViewById(R.id.imgQr);
         db = new Database(this);
         m = new Metodus(this);
         s = getSharedPreferences("variables", Context.MODE_PRIVATE);
@@ -97,6 +105,18 @@ public class JegyActivity extends AppCompatActivity implements View.OnClickListe
                 String ulesInfo = getString(R.string.seatInfo) + " " + e.getString(0);
                 textUles.setText(ulesInfo);
             }
+        }
+    }
+
+    public void qrCode(String ertek) {
+        MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
+        try {
+            BitMatrix bitMatrix = multiFormatWriter.encode(ertek, BarcodeFormat.QR_CODE, m.dpToPx(200, getResources()), m.dpToPx(200, getResources()));
+            BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+            Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
+            imgQr.setImageBitmap(bitmap);
+        } catch (WriterException e) {
+            e.printStackTrace();
         }
     }
 
