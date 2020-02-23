@@ -21,7 +21,7 @@ public class Database extends SQLiteOpenHelper {
                 "password TEXT NOT NULL)");
         db.execSQL("INSERT INTO user (username, email, firstname, lastname, birthdate, password) VALUES('LightAirlinesAdmin', 'admin@lightairlines.com', '', '', '', 'WHfQn2BbjcIShCy6Lj1P4pYooqvtTDPKDXzO5o1iJRc=;AjwbBigW9CZQKAcZ4l7WO3ENGdXHtr')");
         db.execSQL("CREATE TABLE airport (id INTEGER PRIMARY KEY AUTOINCREMENT, nev varchar(100) NOT NULL UNIQUE, rovidites varchar(3) NOT NULL UNIQUE)");
-        db.execSQL("INSERT INTO airport (nev, rovidites) VALUES ('Budapest', 'BUD'), ('London', 'LHR'), ('Párizs', 'CDG')");
+        db.execSQL("INSERT INTO airport (nev, rovidites) VALUES ('Budapest', 'BUD'), ('London', 'LHR'), ('Paris', 'CDG')");
         db.execSQL("CREATE TABLE foglalas(id INTEGER PRIMARY KEY AUTOINCREMENT, \n" +
                 "jarat_id INTEGER NOT NULL REFERENCES jarat ON UPDATE cascade ON DELETE restrict, \n" +
                 "user_id INTEGER NOT NULL REFERENCES user ON UPDATE cascade ON DELETE restrict,\n" +
