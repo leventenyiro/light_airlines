@@ -44,23 +44,31 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
 
         inputUsername.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 inputSzin("username");
             }
+
             @Override
-            public void afterTextChanged(Editable s) { }
+            public void afterTextChanged(Editable s) {
+            }
         });
         inputEmail.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 inputSzin("email");
             }
+
             @Override
-            public void afterTextChanged(Editable s) { }
+            public void afterTextChanged(Editable s) {
+            }
         });
 
         btnBack.setOnClickListener(this);
@@ -89,40 +97,35 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.btnBack:
             case R.id.btnHome:
-            case R.id.btnLogin: onBackPressed(); break;
+            case R.id.btnLogin:
+                onBackPressed();
+                break;
             case R.id.btnNext:
                 if (vanEUsername()) {
                     Toast.makeText(this, getString(R.string.usernameExists), Toast.LENGTH_LONG).show();
                     inputSzin("usernameRed");
-                }
-                else if (!m.usernameWhiteSpaceEllenorzes(inputUsername.getText().toString())) {
+                } else if (!m.usernameWhiteSpaceEllenorzes(inputUsername.getText().toString())) {
                     Toast.makeText(this, getString(R.string.usernameWhiteSpace), Toast.LENGTH_LONG).show();
                     inputSzin("usernameRed");
-                }
-                else if (!m.usernameHosszEllenorzes(inputUsername.getText().toString())) {
+                } else if (!m.usernameHosszEllenorzes(inputUsername.getText().toString())) {
                     Toast.makeText(this, getString(R.string.username5char), Toast.LENGTH_LONG).show();
                     inputSzin("usernameRed");
-                }
-                else if (inputUsername.getText().toString().isEmpty()) {
+                } else if (inputUsername.getText().toString().isEmpty()) {
                     Toast.makeText(this, getString(R.string.noUsername), Toast.LENGTH_LONG).show();
                     inputSzin("usernameRed");
-                }
-                else if (vanEEmail()) {
+                } else if (vanEEmail()) {
                     Toast.makeText(this, getString(R.string.emailExists), Toast.LENGTH_LONG).show();
                     inputSzin("usernameGreen");
                     inputSzin("emailRed");
-                }
-                else if (!m.emailEllenorzes(inputEmail.getText().toString())) {
+                } else if (!m.emailEllenorzes(inputEmail.getText().toString())) {
                     Toast.makeText(this, getString(R.string.wrongEmail), Toast.LENGTH_LONG).show();
                     inputSzin("usernameGreen");
                     inputSzin("emailRed");
-                }
-                else if (inputEmail.getText().toString().isEmpty()) {
+                } else if (inputEmail.getText().toString().isEmpty()) {
                     Toast.makeText(this, getString(R.string.noEmail), Toast.LENGTH_LONG).show();
                     inputSzin("usernameGreen");
                     inputSzin("emailRed");
-                }
-                else {
+                } else {
                     inputSzin("usernameGreen");
                     inputSzin("emailGreen");
                     se.putString("username", inputUsername.getText().toString());

@@ -20,9 +20,8 @@ public class LoadingActivity extends AppCompatActivity {
                 try {
                     super.run();
                     sleep(1300);  //Delay of 1 seconds = 1000 millis
-                }
-                catch (Exception e) { }
-                finally {
+                } catch (Exception e) {
+                } finally {
                     Intent intent = new Intent(LoadingActivity.this, LoginActivity.class);
                     startActivity(intent);
                     finish();

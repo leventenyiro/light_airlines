@@ -30,7 +30,7 @@
         android:text="@string/reg"
         android:textSize="40sp"
         android:textColor="@color/gray"
-        android:fontFamily="@font/bold"/>
+        android:fontFamily="@font/bold" />
 
     <TextView
         android:layout_width="320dp"
@@ -86,7 +86,7 @@
         android:textColor="@color/gray"
         android:maxLines="1"
         android:lines="1"
-        android:singleLine="true"/>
+        android:singleLine="true" />
 
     <Button
         android:layout_width="150dp"

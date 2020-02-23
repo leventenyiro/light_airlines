@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
 import com.leventenyiro.lightairlines.userActivity.JegyActivity;
@@ -90,9 +91,9 @@ public class JegyekFragment extends Fragment {
                 else
                     params.addRule(RelativeLayout.BELOW, id);
                 if (eredmeny.getCount() - 1 == cardLista.size())
-                    params.setMargins(0,0,0,dp100);
+                    params.setMargins(0, 0, 0, dp100);
                 else
-                    params.setMargins(0,0,0,dp20);
+                    params.setMargins(0, 0, 0, dp20);
                 card.setLayoutParams(params);
                 card.setCardElevation(50);
                 card.setBackground(getResources().getDrawable(R.drawable.card));
@@ -122,7 +123,7 @@ public class JegyekFragment extends Fragment {
                 tvVaros.setLayoutParams(paramsVaros);
                 String fromTo = indulas + " - " + celallomas;
                 tvVaros.setText(fromTo);
-                tvVaros.setTypeface(getActivity().getResources().getFont(R.font.regular));
+                tvVaros.setTypeface(ResourcesCompat.getFont(getActivity().getApplicationContext(), R.font.regular));
                 tvVaros.setTextColor(getActivity().getResources().getColor(R.color.gray));
                 tvVaros.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 tvVaros.setId(tvVaros.generateViewId());
@@ -134,7 +135,7 @@ public class JegyekFragment extends Fragment {
                 paramsIdopont.topMargin = dp15;
                 tvIdopont.setLayoutParams(paramsIdopont);
                 tvIdopont.setText(idopont.substring(0, 16).replace('-', '.'));
-                tvIdopont.setTypeface(getActivity().getResources().getFont(R.font.regular));
+                tvIdopont.setTypeface(ResourcesCompat.getFont(getActivity().getApplicationContext(), R.font.regular));
                 tvIdopont.setTextColor(getActivity().getResources().getColor(R.color.gray));
                 tvIdopont.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 tvIdopont.setId(tvIdopont.generateViewId());
@@ -146,7 +147,7 @@ public class JegyekFragment extends Fragment {
                 paramsIdotartam.topMargin = dp15;
                 tvIdotartam.setLayoutParams(paramsIdotartam);
                 tvIdotartam.setText(m.idotartamAtalakitas(idotartam));
-                tvIdotartam.setTypeface(getActivity().getResources().getFont(R.font.regular));
+                tvIdotartam.setTypeface(ResourcesCompat.getFont(getActivity().getApplicationContext(), R.font.regular));
                 tvIdotartam.setTextColor(getActivity().getResources().getColor(R.color.gray));
                 tvIdotartam.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 tvIdotartam.setId(tvIdotartam.generateViewId());
@@ -159,7 +160,7 @@ public class JegyekFragment extends Fragment {
                 tvUles.setLayoutParams(paramsUles);
                 String ulesInfo = getString(R.string.seatInfo) + " " + ules;
                 tvUles.setText(ulesInfo);
-                tvUles.setTypeface(getActivity().getResources().getFont(R.font.regular));
+                tvUles.setTypeface(ResourcesCompat.getFont(getActivity().getApplicationContext(), R.font.regular));
                 tvUles.setTextColor(getActivity().getResources().getColor(R.color.gray));
                 tvUles.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 tvUles.setTextSize(dp8);
@@ -171,14 +172,13 @@ public class JegyekFragment extends Fragment {
                 card.addView(rlCard);
                 mRelativeLayout.addView(card);
             }
-        }
-        else {
+        } else {
             TextView tv = new TextView(mContext);
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
             params.addRule(RelativeLayout.BELOW, R.id.textCim);
             params.topMargin = dp200;
             tv.setLayoutParams(params);
-            tv.setTypeface(getActivity().getResources().getFont(R.font.regular));
+            tv.setTypeface(ResourcesCompat.getFont(getActivity().getApplicationContext(), R.font.regular));
             tv.setTextColor(getActivity().getResources().getColor(R.color.gray));
             tv.setTextSize(dp11);
             tv.setText(getString(R.string.noReserve));

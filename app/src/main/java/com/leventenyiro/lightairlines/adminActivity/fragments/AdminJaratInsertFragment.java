@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
 import com.leventenyiro.lightairlines.R;
@@ -31,7 +32,7 @@ public class AdminJaratInsertFragment extends Fragment {
     private Context mContext;
     private Database db;
     private EditText inputHonnan, inputHova;
-    private int dp5, dp10, dp15,dp20, dp40, dp100, dp360;
+    private int dp5, dp10, dp15, dp20, dp40, dp100, dp360;
     private List<Integer> cardLista;
     private Metodus m;
     private RelativeLayout mRelativeLayout;
@@ -43,24 +44,32 @@ public class AdminJaratInsertFragment extends Fragment {
         select();
         inputHonnan.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 select();
             }
+
             @Override
-            public void afterTextChanged(Editable s) { }
+            public void afterTextChanged(Editable s) {
+            }
         });
 
         inputHova.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 select();
             }
+
             @Override
-            public void afterTextChanged(Editable s) { }
+            public void afterTextChanged(Editable s) {
+            }
         });
         return root;
     }
@@ -109,9 +118,9 @@ public class AdminJaratInsertFragment extends Fragment {
                 else
                     params.addRule(RelativeLayout.BELOW, id);
                 if (eredmeny.getCount() - 1 == cardLista.size())
-                    params.setMargins(0,0,0, dp100);
+                    params.setMargins(0, 0, 0, dp100);
                 else
-                    params.setMargins(0,0,0, dp20);
+                    params.setMargins(0, 0, 0, dp20);
                 card.setLayoutParams(params);
                 card.setCardElevation(50);
                 card.setBackground(getResources().getDrawable(R.drawable.card));
@@ -139,7 +148,7 @@ public class AdminJaratInsertFragment extends Fragment {
                 tvRovidites.setLayoutParams(paramsRovidites);
                 String fromTo = indulasRovidites + " - " + celallomasRovidites;
                 tvRovidites.setText(fromTo);
-                tvRovidites.setTypeface(getActivity().getResources().getFont(R.font.regular));
+                tvRovidites.setTypeface(ResourcesCompat.getFont(getActivity().getApplicationContext(), R.font.regular));
                 tvRovidites.setTextColor(getActivity().getResources().getColor(R.color.gray));
                 tvRovidites.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 tvRovidites.setId(tvRovidites.generateViewId());
@@ -151,7 +160,7 @@ public class AdminJaratInsertFragment extends Fragment {
                 tvVaros.setLayoutParams(paramsVaros);
                 fromTo = indulasNev + " - " + celallomasNev;
                 tvVaros.setText(fromTo);
-                tvVaros.setTypeface(getActivity().getResources().getFont(R.font.regular));
+                tvVaros.setTypeface(ResourcesCompat.getFont(getActivity().getApplicationContext(), R.font.regular));
                 tvVaros.setTextColor(getActivity().getResources().getColor(R.color.gray));
                 tvVaros.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 tvVaros.setId(tvVaros.generateViewId());
@@ -162,7 +171,7 @@ public class AdminJaratInsertFragment extends Fragment {
                 paramsIdotartam.addRule(RelativeLayout.BELOW, tvVaros.getId());
                 tvIdotartam.setLayoutParams(paramsIdotartam);
                 tvIdotartam.setText(idotartam);
-                tvIdotartam.setTypeface(getActivity().getResources().getFont(R.font.regular));
+                tvIdotartam.setTypeface(ResourcesCompat.getFont(getActivity().getApplicationContext(), R.font.regular));
                 tvIdotartam.setTextColor(getActivity().getResources().getColor(R.color.gray));
                 tvIdotartam.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 tvIdotartam.setId(tvIdotartam.generateViewId());
@@ -174,14 +183,13 @@ public class AdminJaratInsertFragment extends Fragment {
                 card.addView(rlCard);
                 mRelativeLayout.addView(card);
             }
-        }
-        else {
+        } else {
             TextView tv = new TextView(mContext);
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
             params.addRule(RelativeLayout.BELOW, R.id.inputHova);
             params.topMargin = dp40;
             tv.setLayoutParams(params);
-            tv.setTypeface(getActivity().getResources().getFont(R.font.regular));
+            tv.setTypeface(ResourcesCompat.getFont(getActivity().getApplicationContext(), R.font.regular));
             tv.setTextColor(getActivity().getResources().getColor(R.color.gray));
             tv.setTextSize(dp15);
             tv.setText(getString(R.string.noLine));

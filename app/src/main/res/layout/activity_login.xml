@@ -45,7 +45,7 @@
         android:textColor="@color/white"
         android:maxLines="1"
         android:lines="1"
-        android:singleLine="true"/>
+        android:singleLine="true" />
 
     <EditText
         android:layout_width="340dp"
@@ -65,7 +65,7 @@
         android:textColor="@color/white"
         android:maxLines="1"
         android:lines="1"
-        android:singleLine="true"/>
+        android:singleLine="true" />
 
     <Button
         android:layout_width="150dp"

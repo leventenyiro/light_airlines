@@ -40,23 +40,31 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         inputUsernameEmail.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 inputSzin("usernameEmail");
             }
+
             @Override
-            public void afterTextChanged(Editable s) { }
+            public void afterTextChanged(Editable s) {
+            }
         });
         inputPassword.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 inputSzin("password");
             }
+
             @Override
-            public void afterTextChanged(Editable s) { }
+            public void afterTextChanged(Editable s) {
+            }
         });
 
         btnReg.setOnClickListener(this);
@@ -78,7 +86,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         alertDialogBuilder.setMessage(getString(R.string.exitMessage));
         alertDialogBuilder.setPositiveButton(getString(R.string.no), new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) { }
+            public void onClick(DialogInterface dialog, int which) {
+            }
         });
         alertDialogBuilder.setNegativeButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
             @Override
@@ -105,25 +114,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     Toast.makeText(this, getString(R.string.noUsernameEmail), Toast.LENGTH_LONG).show();
                     inputPassword.setText("");
                     inputSzin("usernameEmailRed");
-                }
-                else if (inputPassword.getText().toString().isEmpty()) {
+                } else if (inputPassword.getText().toString().isEmpty()) {
                     Toast.makeText(this, getString(R.string.noPassword), Toast.LENGTH_LONG).show();
                     inputSzin("passwordRed");
-                }
-                else if (login() == 0) {
+                } else if (login() == 0) {
                     Toast.makeText(LoginActivity.this, getString(R.string.wrongLoginData), Toast.LENGTH_LONG).show();
                     inputPassword.setText("");
                     inputSzin("usernameEmailRed");
                     inputSzin("passwordRed");
-                }
-                else {
+                } else {
                     if (login() == 1) {
                         intent = new Intent(LoginActivity.this, WelcomeActivity.class);
                         startActivity(intent);
                         finish();
                         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                    }
-                    else {
+                    } else {
                         intent = new Intent(LoginActivity.this, AdminActivity.class);
                         startActivity(intent);
                         finish();
@@ -161,11 +166,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             while (eredmeny.moveToNext()) {
                 String userId = eredmeny.getString(0);
                 if (m.jelszoEllenorzes(userId, inputPassword.getText().toString()) && userId.equals("1")) {
-                    getSharedPreferences("variables",Context.MODE_PRIVATE).edit().putString("userId", "1").apply();
+                    getSharedPreferences("variables", Context.MODE_PRIVATE).edit().putString("userId", "1").apply();
                     return 2;
-                }
-                else if (m.jelszoEllenorzes(userId, inputPassword.getText().toString())) {
-                    getSharedPreferences("variables",Context.MODE_PRIVATE).edit().putString("userId", eredmeny.getString(0)).apply();
+                } else if (m.jelszoEllenorzes(userId, inputPassword.getText().toString())) {
+                    getSharedPreferences("variables", Context.MODE_PRIVATE).edit().putString("userId", eredmeny.getString(0)).apply();
                     return 1;
                 }
             }

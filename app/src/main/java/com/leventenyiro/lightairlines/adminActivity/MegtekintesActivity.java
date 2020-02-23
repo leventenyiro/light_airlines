@@ -55,8 +55,7 @@ public class MegtekintesActivity extends AppCompatActivity {
             if (i == 1) {
                 paramsSor.setMargins(0, dp10, 0, dp10);
                 paramsSor.addRule(RelativeLayout.BELOW, R.id.betuk);
-            }
-            else {
+            } else {
                 if (i == 20)
                     paramsSor.setMargins(0, dp10, 0, dp200);
                 else
@@ -84,8 +83,7 @@ public class MegtekintesActivity extends AppCompatActivity {
                             ulesInfo(m.ulesKodolas(finalUlesId));
                         }
                     });
-                }
-                else {
+                } else {
                     tv.setBackground(getResources().getDrawable(R.drawable.seatfree));
                     tv.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -122,8 +120,7 @@ public class MegtekintesActivity extends AppCompatActivity {
                             ulesInfo(m.ulesKodolas(finalUlesId));
                         }
                     });
-                }
-                else {
+                } else {
                     tv.setBackground(getResources().getDrawable(R.drawable.seatfree));
                     tv.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -175,7 +172,8 @@ public class MegtekintesActivity extends AppCompatActivity {
                         "\nE-mail: " + eredmeny.getString(1));
                 alertDialogBuilder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) { }
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
                 });
                 alertDialog = alertDialogBuilder.create();
                 alertDialog.show();

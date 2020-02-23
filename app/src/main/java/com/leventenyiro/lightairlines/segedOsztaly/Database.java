@@ -14,35 +14,35 @@ public class Database extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE user (id INTEGER PRIMARY KEY AUTOINCREMENT, username VARCHAR(255) NOT NULL, " +
-                                                    "email VARCHAR(255) NOT NULL, " +
-                                                    "firstname VARCHAR(255) NOT NULL, " +
-                                                    "lastname VARCHAR(255) NOT NULL, " +
-                                                    "birthdate DATE NOT NULL, " +
-                                                    "password TEXT NOT NULL)");
+                "email VARCHAR(255) NOT NULL, " +
+                "firstname VARCHAR(255) NOT NULL, " +
+                "lastname VARCHAR(255) NOT NULL, " +
+                "birthdate DATE NOT NULL, " +
+                "password TEXT NOT NULL)");
         db.execSQL("INSERT INTO user (username, email, firstname, lastname, birthdate, password) VALUES('LightAirlinesAdmin', 'admin@lightairlines.com', '', '', '', 'WHfQn2BbjcIShCy6Lj1P4pYooqvtTDPKDXzO5o1iJRc=;AjwbBigW9CZQKAcZ4l7WO3ENGdXHtr')");
         db.execSQL("CREATE TABLE airport (id INTEGER PRIMARY KEY AUTOINCREMENT, nev varchar(100) NOT NULL UNIQUE, rovidites varchar(3) NOT NULL UNIQUE)");
         db.execSQL("INSERT INTO airport (nev, rovidites) VALUES ('Budapest', 'BUD'), ('London', 'LHR'), ('Párizs', 'CDG')");
         db.execSQL("CREATE TABLE foglalas(id INTEGER PRIMARY KEY AUTOINCREMENT, \n" +
-                                "jarat_id INTEGER NOT NULL REFERENCES jarat ON UPDATE cascade ON DELETE restrict, \n" +
-                                "user_id INTEGER NOT NULL REFERENCES user ON UPDATE cascade ON DELETE restrict,\n" +
-                                "ules VARCHAR(3) NOT NULL)");
+                "jarat_id INTEGER NOT NULL REFERENCES jarat ON UPDATE cascade ON DELETE restrict, \n" +
+                "user_id INTEGER NOT NULL REFERENCES user ON UPDATE cascade ON DELETE restrict,\n" +
+                "ules VARCHAR(3) NOT NULL)");
         db.execSQL("CREATE TABLE jarat(id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
-                                "utvonal_id INTEGER NOT NULL REFERENCES utvonal ON UPDATE cascade ON DELETE restrict,\n" +
-                                "helyek_szama INTEGER NOT NULL,\n" +
-                                "idopont DATETIME NOT NULL)");
+                "utvonal_id INTEGER NOT NULL REFERENCES utvonal ON UPDATE cascade ON DELETE restrict,\n" +
+                "helyek_szama INTEGER NOT NULL,\n" +
+                "idopont DATETIME NOT NULL)");
         db.execSQL("INSERT INTO jarat (utvonal_id, helyek_szama, idopont) VALUES " +
-                        "(1, 120, '2020-03-15 08:00:00'), " +
-                        "(2, 120, '2020-03-15 14:00:00'), " +
-                        "(3, 120, '2020-04-15 09:00:00'), " +
-                        "(4, 120, '2020-04-15 15:00:00'), " +
-                        "(1, 120, '2020-05-15 08:00:00'), " +
-                        "(2, 120, '2020-05-15 14:00:00'), " +
-                        "(3, 120, '2020-06-15 09:00:00'), " +
-                        "(4, 120, '2020-06-15 15:00:00')");
+                "(1, 120, '2020-03-15 08:00:00'), " +
+                "(2, 120, '2020-03-15 14:00:00'), " +
+                "(3, 120, '2020-04-15 09:00:00'), " +
+                "(4, 120, '2020-04-15 15:00:00'), " +
+                "(1, 120, '2020-05-15 08:00:00'), " +
+                "(2, 120, '2020-05-15 14:00:00'), " +
+                "(3, 120, '2020-06-15 09:00:00'), " +
+                "(4, 120, '2020-06-15 15:00:00')");
         db.execSQL("CREATE TABLE utvonal(id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
-                                        "indulas_id INTEGER NOT NULL REFERENCES airport ON UPDATE cascade ON DELETE restrict,\n" +
-                                        "celallomas_id INTEGER NOT NULL REFERENCES airport ON UPDATE cascade ON DELETE restrict,\n" +
-                                        "idotartam time NOT NULL);");
+                "indulas_id INTEGER NOT NULL REFERENCES airport ON UPDATE cascade ON DELETE restrict,\n" +
+                "celallomas_id INTEGER NOT NULL REFERENCES airport ON UPDATE cascade ON DELETE restrict,\n" +
+                "idotartam time NOT NULL);");
         db.execSQL("INSERT INTO utvonal (indulas_id, celallomas_id, idotartam) VALUES " +
                 "(1, 2, '02:45:00'), " +
                 "(2, 1, '02:45:00'), " +
@@ -119,23 +119,22 @@ public class Database extends SQLiteOpenHelper {
     public Cursor selectJaratok(String honnan, String hova, String userId) {
         SQLiteDatabase db = this.getWritableDatabase();
 
-        Cursor szam = db.rawQuery("SELECT f.id FROM foglalas f WHERE user_id = " + userId,null);
+        Cursor szam = db.rawQuery("SELECT f.id FROM foglalas f WHERE user_id = " + userId, null);
         if (szam.getCount() > 0) {
             return db.rawQuery("SELECT j.id, j.helyek_szama - (SELECT COUNT(*) FROM foglalas WHERE jarat_id = j.id), j.idopont, ai.nev, ac.nev, u.idotartam FROM jarat j\n" +
                     "INNER JOIN utvonal u ON j.utvonal_id = u.id\n" +
                     "INNER JOIN airport ai ON u.indulas_id = ai.id\n" +
-                    "INNER JOIN airport ac ON u.celallomas_id = ac.id\n"+
+                    "INNER JOIN airport ac ON u.celallomas_id = ac.id\n" +
                     "WHERE (ai.nev LIKE '%" + honnan.trim() + "%' OR ai.rovidites LIKE '%" + honnan.trim() + "%') AND (ac.nev LIKE '%" + hova.trim() + "%' OR ac.rovidites LIKE '%" + hova.trim() + "%') " +
                     "AND j.idopont > datetime('now') " +
                     "AND j.helyek_szama - (SELECT COUNT(*) FROM foglalas f WHERE f.jarat_id = j.id) > 0 " +
                     "AND j.id NOT IN (SELECT f.jarat_id FROM foglalas f WHERE user_id = " + userId + ") " +
                     "ORDER BY j.idopont", null);
-        }
-        else {
+        } else {
             return db.rawQuery("SELECT j.id, j.helyek_szama - (SELECT COUNT(*) FROM foglalas WHERE jarat_id = j.id), j.idopont, ai.nev, ac.nev, u.idotartam FROM jarat j\n" +
                     "INNER JOIN utvonal u ON j.utvonal_id = u.id\n" +
                     "INNER JOIN airport ai ON u.indulas_id = ai.id\n" +
-                    "INNER JOIN airport ac ON u.celallomas_id = ac.id\n"+
+                    "INNER JOIN airport ac ON u.celallomas_id = ac.id\n" +
                     "WHERE (ai.nev LIKE '%" + honnan + "%' OR ai.rovidites LIKE '%" + honnan + "%') AND (ac.nev LIKE '%" + hova + "%' OR ac.rovidites LIKE '%" + hova + "%') " +
                     "AND j.idopont > datetime('now') " +
                     "AND j.helyek_szama - (SELECT COUNT(*) FROM foglalas f WHERE f.jarat_id = j.id) > 0 " +
@@ -148,7 +147,7 @@ public class Database extends SQLiteOpenHelper {
         return db.rawQuery("SELECT j.helyek_szama - (SELECT COUNT(*) FROM foglalas WHERE jarat_id = " + id + "), j.idopont, ai.nev, ai.rovidites, ac.nev, ac.rovidites, u.idotartam FROM jarat j\n" +
                 "INNER JOIN utvonal u ON j.utvonal_id = u.id\n" +
                 "INNER JOIN airport ai ON u.indulas_id = ai.id\n" +
-                "INNER JOIN airport ac ON u.celallomas_id = ac.id\n"+
+                "INNER JOIN airport ac ON u.celallomas_id = ac.id\n" +
                 "WHERE j.id = " + id, null);
     }
 
@@ -193,7 +192,7 @@ public class Database extends SQLiteOpenHelper {
 
     public boolean deleteJegy(String foglalasId) {
         SQLiteDatabase db = this.getWritableDatabase();
-        long eredmeny = db.delete("foglalas", "id = ?", new String[] { foglalasId });
+        long eredmeny = db.delete("foglalas", "id = ?", new String[]{foglalasId});
         return eredmeny == 1;
     }
 

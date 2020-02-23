@@ -54,8 +54,7 @@ public class FoglalasActivity extends AppCompatActivity {
             if (i == 1) {
                 paramsSor.setMargins(0, dp10, 0, dp10);
                 paramsSor.addRule(RelativeLayout.BELOW, R.id.betuk);
-            }
-            else {
+            } else {
                 if (i == 20)
                     paramsSor.setMargins(0, dp10, 0, dp200);
                 else
@@ -83,8 +82,7 @@ public class FoglalasActivity extends AppCompatActivity {
                             Toast.makeText(mContext, getString(R.string.seatReserved), Toast.LENGTH_LONG).show();
                         }
                     });
-                }
-                else {
+                } else {
                     tv.setBackground(getResources().getDrawable(R.drawable.seatfree));
                     tv.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -127,8 +125,7 @@ public class FoglalasActivity extends AppCompatActivity {
                             Toast.makeText(mContext, getString(R.string.seatReserved), Toast.LENGTH_LONG).show();
                         }
                     });
-                }
-                else {
+                } else {
                     tv.setBackground(getResources().getDrawable(R.drawable.seatfree));
                     tv.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -153,8 +150,7 @@ public class FoglalasActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (!s.getString("ules", "").isEmpty()) {
                     alertDialog.show();
-                }
-                else {
+                } else {
                     Toast.makeText(mContext, getString(R.string.noSeatReserved), Toast.LENGTH_LONG).show();
                 }
             }
@@ -216,7 +212,6 @@ public class FoglalasActivity extends AppCompatActivity {
         s.edit().remove("jaratId").apply();
         s.edit().remove("ules").apply();
     }
-
 
 
     @Override

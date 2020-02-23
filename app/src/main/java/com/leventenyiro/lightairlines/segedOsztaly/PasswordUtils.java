@@ -1,10 +1,11 @@
 package com.leventenyiro.lightairlines.segedOsztaly;
 
+import android.util.Base64;
+
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Arrays;
-import java.util.Base64;
 import java.util.Random;
 
 import javax.crypto.SecretKeyFactory;
@@ -29,18 +30,17 @@ public class PasswordUtils {
         try {
             SecretKeyFactory secretKeyFactory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
             return secretKeyFactory.generateSecret(spec).getEncoded();
-        }
-        catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
             throw new AssertionError("Hiba a jelszótitkosítás közben!");
-        }
-        finally {
+        } finally {
             spec.clearPassword();
         }
     }
 
     public static String generateSecurePassword(String password, String salt) {
         byte[] securePassword = hash(password.toCharArray(), salt.getBytes());
-        String returnValue = Base64.getEncoder().encodeToString(securePassword);
+        //String returnValue = Base64.getEncoder().encodeToString(securePassword);
+        String returnValue = android.util.Base64.encodeToString(securePassword, Base64.DEFAULT);
         return returnValue;
     }
 

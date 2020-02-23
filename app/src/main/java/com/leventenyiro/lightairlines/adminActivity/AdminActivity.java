@@ -53,7 +53,8 @@ public class AdminActivity extends AppCompatActivity {
         alertDialogBuilder.setMessage(getString(R.string.logoutMessage));
         alertDialogBuilder.setPositiveButton(getString(R.string.no), new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) { }
+            public void onClick(DialogInterface dialog, int which) {
+            }
         });
         alertDialogBuilder.setNegativeButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
             @Override

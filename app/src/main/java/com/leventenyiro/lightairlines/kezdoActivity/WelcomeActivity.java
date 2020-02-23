@@ -1,11 +1,13 @@
 package com.leventenyiro.lightairlines.kezdoActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
@@ -23,7 +25,6 @@ public class WelcomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
-        getWindow().setStatusBarColor(getResources().getColor(R.color.welcomeGray));
 
         init();
         textWelcome.setText(getString(R.string.welcome) + " " + getFirstname() + "!");
@@ -34,9 +35,8 @@ public class WelcomeActivity extends AppCompatActivity {
                 try {
                     super.run();
                     sleep(1000);  //Delay of 1 seconds = 1000 millis
-                }
-                catch (Exception e) { }
-                finally {
+                } catch (Exception e) {
+                } finally {
                     Intent intent = new Intent(WelcomeActivity.this, InnerActivity.class);
                     startActivity(intent);
                     finish();

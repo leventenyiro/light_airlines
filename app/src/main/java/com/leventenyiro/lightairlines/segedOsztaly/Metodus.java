@@ -76,8 +76,7 @@ public class Metodus {
         String[] idoresz = idotartam.split(":");
         if (Integer.parseInt(idoresz[0]) < 10) {
             return idoresz[0].substring(1, 2) + " " + c.getString(R.string.hour) + " " + idoresz[1] + " " + c.getString(R.string.minute);
-        }
-        else {
+        } else {
             return idoresz[0] + " " + c.getString(R.string.hour) + " " + idoresz[1] + " " + c.getString(R.string.minute);
         }
     }
@@ -86,12 +85,24 @@ public class Metodus {
         String ules = "";
         ules += szam / 6 + 1;
         switch (szam % 6) {
-            case 0: ules += "A"; break;
-            case 1: ules += "B"; break;
-            case 2: ules += "C"; break;
-            case 3: ules += "D"; break;
-            case 4: ules += "E"; break;
-            case 5: ules += "F"; break;
+            case 0:
+                ules += "A";
+                break;
+            case 1:
+                ules += "B";
+                break;
+            case 2:
+                ules += "C";
+                break;
+            case 3:
+                ules += "D";
+                break;
+            case 4:
+                ules += "E";
+                break;
+            case 5:
+                ules += "F";
+                break;
         }
         return ules;
     }
@@ -99,25 +110,48 @@ public class Metodus {
     public int ulesDekodolas(String ules) {
         int szam;
         if (ules.length() == 2) {
-            szam = (Integer.parseInt(ules.substring(0,1)) - 1) * 6;
-            switch (ules.substring(1,2)) {
-                case "A": szam += 0; break;
-                case "B": szam += 1; break;
-                case "C": szam += 2; break;
-                case "D": szam += 3; break;
-                case "E": szam += 4; break;
-                case "F": szam += 5; break;
+            szam = (Integer.parseInt(ules.substring(0, 1)) - 1) * 6;
+            switch (ules.substring(1, 2)) {
+                case "A":
+                    szam += 0;
+                    break;
+                case "B":
+                    szam += 1;
+                    break;
+                case "C":
+                    szam += 2;
+                    break;
+                case "D":
+                    szam += 3;
+                    break;
+                case "E":
+                    szam += 4;
+                    break;
+                case "F":
+                    szam += 5;
+                    break;
             }
-        }
-        else {
+        } else {
             szam = (Integer.parseInt(ules.substring(0, 2)) - 1) * 6;
             switch (ules.substring(2, 3)) {
-                case "A": szam += 0; break;
-                case "B": szam += 1; break;
-                case "C": szam += 2; break;
-                case "D": szam += 3; break;
-                case "E": szam += 4; break;
-                case "F": szam += 5; break;
+                case "A":
+                    szam += 0;
+                    break;
+                case "B":
+                    szam += 1;
+                    break;
+                case "C":
+                    szam += 2;
+                    break;
+                case "D":
+                    szam += 3;
+                    break;
+                case "E":
+                    szam += 4;
+                    break;
+                case "F":
+                    szam += 5;
+                    break;
             }
         }
         return szam;

@@ -50,23 +50,31 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
 
         inputFirstname.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 inputSzin("firstname");
             }
+
             @Override
-            public void afterTextChanged(Editable s) { }
+            public void afterTextChanged(Editable s) {
+            }
         });
         inputLastname.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 inputSzin("lastname");
             }
+
             @Override
-            public void afterTextChanged(Editable s) { }
+            public void afterTextChanged(Editable s) {
+            }
         });
 
         btnBack.setOnClickListener(this);
@@ -84,7 +92,7 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
         inputLastname = findViewById(R.id.inputLastname);
         inputBirthdate = findViewById(R.id.inputBirthdate);
         inputBirthdate.setMaxDate(System.currentTimeMillis());
-        inputBirthdate.updateDate(2000,00,01);
+        inputBirthdate.updateDate(2000, 00, 01);
         m = new Metodus(this);
         dp15 = m.dpToPx(15, getResources());
         dp20 = m.dpToPx(20, getResources());
@@ -106,16 +114,13 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
                 if (inputFirstname.getText().toString().isEmpty()) {
                     inputSzin("firstnameRed");
                     Toast.makeText(this, getString(R.string.noFirstname), Toast.LENGTH_LONG).show();
-                }
-                else if (inputLastname.getText().toString().isEmpty()) {
+                } else if (inputLastname.getText().toString().isEmpty()) {
                     inputSzin("firstnameGreen");
                     inputSzin("lastnameRed");
                     Toast.makeText(this, getString(R.string.noLastname), Toast.LENGTH_LONG).show();
-                }
-                else if (!korEllenorzes(inputBirthdate.getYear(), inputBirthdate.getMonth(), inputBirthdate.getDayOfMonth())) {
+                } else if (!korEllenorzes(inputBirthdate.getYear(), inputBirthdate.getMonth(), inputBirthdate.getDayOfMonth())) {
                     Toast.makeText(Reg2Activity.this, getString(R.string.under13), Toast.LENGTH_LONG).show();
-                }
-                else {
+                } else {
                     inputSzin("firstnameGreen");
                     inputSzin("lastnameGreen");
                     se.putString("firstname", m.elsoNagybetu(inputFirstname.getText().toString()).trim());
@@ -170,7 +175,6 @@ public class Reg2Activity extends AppCompatActivity implements View.OnClickListe
             age--;
         return age >= 13;
     }
-
 
 
     @Override

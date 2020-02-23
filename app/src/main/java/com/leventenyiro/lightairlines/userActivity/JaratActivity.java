@@ -54,7 +54,9 @@ public class JaratActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnBack:
-            case R.id.btnMegse: onBackPressed(); break;
+            case R.id.btnMegse:
+                onBackPressed();
+                break;
             case R.id.btnHelyFoglalas:
                 Intent intent = new Intent(JaratActivity.this, FoglalasActivity.class);
                 startActivity(intent);

@@ -36,43 +36,59 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
         beallitasok();
         inputUsername.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 inputSzin("username");
             }
+
             @Override
-            public void afterTextChanged(Editable s) { }
+            public void afterTextChanged(Editable s) {
+            }
         });
         inputEmail.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 inputSzin("email");
             }
+
             @Override
-            public void afterTextChanged(Editable s) { }
+            public void afterTextChanged(Editable s) {
+            }
         });
         inputFirstname.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 inputSzin("firstname");
             }
+
             @Override
-            public void afterTextChanged(Editable s) { }
+            public void afterTextChanged(Editable s) {
+            }
         });
         inputLastname.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 inputSzin("lastname");
             }
+
             @Override
-            public void afterTextChanged(Editable s) { }
+            public void afterTextChanged(Editable s) {
+            }
         });
         btnUpdate.setOnClickListener(this);
         btnCancel.setOnClickListener(this);
@@ -112,53 +128,43 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
                     inputLastname.setTextColor(getResources().getColor(R.color.gray));
                     btnCancel.setVisibility(View.VISIBLE);
                     btnUpdate.setText(getString(R.string.save));
-                }
-                else {
+                } else {
                     if (vanEUsername()) {
                         inputSzin("usernameRed");
                         Toast.makeText(getActivity(), getString(R.string.usernameExists), Toast.LENGTH_LONG).show();
-                    }
-                    else if (!m.usernameWhiteSpaceEllenorzes(inputUsername.getText().toString())) {
+                    } else if (!m.usernameWhiteSpaceEllenorzes(inputUsername.getText().toString())) {
                         Toast.makeText(getActivity(), getString(R.string.usernameWhiteSpace), Toast.LENGTH_LONG).show();
                         inputSzin("usernameRed");
-                    }
-                    else if (!m.usernameHosszEllenorzes(inputUsername.getText().toString())) {
+                    } else if (!m.usernameHosszEllenorzes(inputUsername.getText().toString())) {
                         Toast.makeText(getActivity(), getString(R.string.username5char), Toast.LENGTH_LONG).show();
                         inputSzin("usernameRed");
-                    }
-                    else if (inputUsername.getText().toString().isEmpty()) {
+                    } else if (inputUsername.getText().toString().isEmpty()) {
                         inputSzin("usernameRed");
                         Toast.makeText(getActivity(), getString(R.string.noUsername), Toast.LENGTH_LONG).show();
-                    }
-                    else if (vanEEmail()) {
+                    } else if (vanEEmail()) {
                         inputSzin("usernameGreen");
                         inputSzin("emailRed");
                         Toast.makeText(getActivity(), getString(R.string.emailExists), Toast.LENGTH_LONG).show();
-                    }
-                    else if (!m.emailEllenorzes(inputEmail.getText().toString())) {
+                    } else if (!m.emailEllenorzes(inputEmail.getText().toString())) {
                         inputSzin("usernameGreen");
                         inputSzin("emailRed");
                         Toast.makeText(getActivity(), getString(R.string.wrongEmail), Toast.LENGTH_LONG).show();
-                    }
-                    else if (inputEmail.getText().toString().isEmpty()) {
+                    } else if (inputEmail.getText().toString().isEmpty()) {
                         inputSzin("usernameGreen");
                         inputSzin("emailRed");
                         Toast.makeText(getActivity(), getString(R.string.noEmail), Toast.LENGTH_LONG).show();
-                    }
-                    else if (inputFirstname.getText().toString().isEmpty()) {
+                    } else if (inputFirstname.getText().toString().isEmpty()) {
                         inputSzin("usernameGreen");
                         inputSzin("emailGreen");
                         inputSzin("firstnameRed");
                         Toast.makeText(getActivity(), getString(R.string.noFirstname), Toast.LENGTH_LONG).show();
-                    }
-                    else if (inputLastname.getText().toString().isEmpty()) {
+                    } else if (inputLastname.getText().toString().isEmpty()) {
                         inputSzin("usernameGreen");
                         inputSzin("emailGreen");
                         inputSzin("firstnameGreen");
                         inputSzin("lastnameRed");
                         Toast.makeText(getActivity(), getString(R.string.noLastname), Toast.LENGTH_LONG).show();
-                    }
-                    else {
+                    } else {
                         inputsDisable();
                         update();
                     }
@@ -273,8 +279,7 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
         }
         if (username.equals(inputUsername.getText().toString())) {
             return false;
-        }
-        else {
+        } else {
             eredmeny = db.selectUsername(inputUsername.getText().toString());
             return eredmeny.getCount() == 1;
         }
@@ -290,8 +295,7 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
         }
         if (email.equals(inputEmail.getText().toString())) {
             return false;
-        }
-        else {
+        } else {
             eredmeny = db.selectEmail(inputEmail.getText().toString());
             return eredmeny.getCount() == 1;
         }
@@ -303,8 +307,7 @@ public class BeallitasokFragment extends Fragment implements View.OnClickListene
             Toast.makeText(getActivity(), getString(R.string.successModify), Toast.LENGTH_SHORT).show();
             btnCancel.setVisibility(View.INVISIBLE);
             btnUpdate.setText(getString(R.string.modify));
-        }
-        else {
+        } else {
             Toast.makeText(getActivity(), getString(R.string.unsuccessModify), Toast.LENGTH_SHORT).show();
         }
     }

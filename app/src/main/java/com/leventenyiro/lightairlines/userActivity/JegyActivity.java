@@ -68,7 +68,9 @@ public class JegyActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btnBack: onBackPressed(); break;
+            case R.id.btnBack:
+                onBackPressed();
+                break;
             case R.id.btnDelete:
                 setFenyesseg(brightness);
                 Intent intent = new Intent(JegyActivity.this, MegerositesActivity.class);
@@ -82,8 +84,7 @@ public class JegyActivity extends AppCompatActivity implements View.OnClickListe
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (Settings.System.canWrite(getApplicationContext())) {
                 Settings.System.putInt(getApplicationContext().getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, brightness);
-            }
-            else {
+            } else {
                 Intent intent = new Intent(android.provider.Settings.ACTION_MANAGE_WRITE_SETTINGS);
                 intent.setData(Uri.parse("package:" + getPackageName()));
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

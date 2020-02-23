@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
 import com.leventenyiro.lightairlines.R;
@@ -31,7 +32,7 @@ public class AdminJaratokFragment extends Fragment {
     private Context mContext;
     private Database db;
     private EditText inputHonnan, inputHova;
-    private int dp5, dp7, dp10, dp15,dp20, dp40, dp100, dp200, dp360;
+    private int dp5, dp7, dp10, dp15, dp20, dp40, dp100, dp200, dp360;
     private List<Integer> cardLista;
     private Metodus m;
     private RelativeLayout mRelativeLayout;
@@ -43,24 +44,32 @@ public class AdminJaratokFragment extends Fragment {
         select();
         inputHonnan.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 select();
             }
+
             @Override
-            public void afterTextChanged(Editable s) { }
+            public void afterTextChanged(Editable s) {
+            }
         });
 
         inputHova.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 select();
             }
+
             @Override
-            public void afterTextChanged(Editable s) { }
+            public void afterTextChanged(Editable s) {
+            }
         });
         return root;
     }
@@ -117,9 +126,9 @@ public class AdminJaratokFragment extends Fragment {
                 else
                     params.addRule(RelativeLayout.BELOW, id);
                 if (eredmeny.getCount() - 1 == cardLista.size())
-                    params.setMargins(0,0,0, dp100);
+                    params.setMargins(0, 0, 0, dp100);
                 else
-                    params.setMargins(0,0,0, dp20);
+                    params.setMargins(0, 0, 0, dp20);
                 card.setLayoutParams(params);
                 card.setCardElevation(50);
                 card.setBackground(getResources().getDrawable(R.drawable.card));
@@ -148,7 +157,7 @@ public class AdminJaratokFragment extends Fragment {
                 tvVaros.setLayoutParams(paramsVaros);
                 String fromTo = indulas + " - " + celallomas;
                 tvVaros.setText(fromTo);
-                tvVaros.setTypeface(getActivity().getResources().getFont(R.font.regular));
+                tvVaros.setTypeface(ResourcesCompat.getFont(getActivity().getApplicationContext(), R.font.regular));
                 tvVaros.setTextColor(getActivity().getResources().getColor(R.color.gray));
                 tvVaros.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 tvVaros.setId(tvVaros.generateViewId());
@@ -160,7 +169,7 @@ public class AdminJaratokFragment extends Fragment {
                 paramsIdopont.topMargin = dp15;
                 tvIdopont.setLayoutParams(paramsIdopont);
                 tvIdopont.setText(idopont.substring(0, 16).replace('-', '.'));
-                tvIdopont.setTypeface(getActivity().getResources().getFont(R.font.regular));
+                tvIdopont.setTypeface(ResourcesCompat.getFont(getActivity().getApplicationContext(), R.font.regular));
                 tvIdopont.setTextColor(getActivity().getResources().getColor(R.color.gray));
                 tvIdopont.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 tvIdopont.setId(tvIdopont.generateViewId());
@@ -172,7 +181,7 @@ public class AdminJaratokFragment extends Fragment {
                 paramsIdotartam.topMargin = dp15;
                 tvIdotartam.setLayoutParams(paramsIdotartam);
                 tvIdotartam.setText(m.idotartamAtalakitas(idotartam));
-                tvIdotartam.setTypeface(getActivity().getResources().getFont(R.font.regular));
+                tvIdotartam.setTypeface(ResourcesCompat.getFont(getActivity().getApplicationContext(), R.font.regular));
                 tvIdotartam.setTextColor(getActivity().getResources().getColor(R.color.gray));
                 tvIdotartam.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 tvIdotartam.setId(tvIdotartam.generateViewId());
@@ -185,7 +194,7 @@ public class AdminJaratokFragment extends Fragment {
                 tvHelyekSzama.setLayoutParams(paramsHelyek);
                 String helyInfo = getString(R.string.seatInfo1) + " " + helyekSzama + " " + getString(R.string.seatInfo2);
                 tvHelyekSzama.setText(helyInfo);
-                tvHelyekSzama.setTypeface(getActivity().getResources().getFont(R.font.regular));
+                tvHelyekSzama.setTypeface(ResourcesCompat.getFont(getActivity().getApplicationContext(), R.font.regular));
                 tvHelyekSzama.setTextColor(getActivity().getResources().getColor(R.color.gray));
                 tvHelyekSzama.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 tvHelyekSzama.setTextSize(dp5);
@@ -197,14 +206,13 @@ public class AdminJaratokFragment extends Fragment {
                 card.addView(rlCard);
                 mRelativeLayout.addView(card);
             }
-        }
-        else {
+        } else {
             TextView tv = new TextView(mContext);
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
             params.addRule(RelativeLayout.BELOW, R.id.inputHova);
             params.topMargin = dp40;
             tv.setLayoutParams(params);
-            tv.setTypeface(getActivity().getResources().getFont(R.font.regular));
+            tv.setTypeface(ResourcesCompat.getFont(getActivity().getApplicationContext(), R.font.regular));
             tv.setTextColor(getActivity().getResources().getColor(R.color.gray));
             tv.setTextSize(dp15);
             tv.setText(getString(R.string.noFlight));

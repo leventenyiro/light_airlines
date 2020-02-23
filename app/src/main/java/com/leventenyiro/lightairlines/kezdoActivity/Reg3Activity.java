@@ -40,25 +40,33 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
 
         inputPassword.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 inputPassword.setBackground(getResources().getDrawable(R.drawable.input));
                 inputPassword.setPaddingRelative(dp20, dp15, dp20, dp15);
             }
+
             @Override
-            public void afterTextChanged(Editable s) { }
+            public void afterTextChanged(Editable s) {
+            }
         });
         inputPasswordAgain.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 inputPasswordAgain.setBackground(getResources().getDrawable(R.drawable.input));
                 inputPasswordAgain.setPaddingRelative(dp20, dp15, dp20, dp15);
             }
+
             @Override
-            public void afterTextChanged(Editable s) { }
+            public void afterTextChanged(Editable s) {
+            }
         });
 
         btnBack.setOnClickListener(this);
@@ -83,29 +91,28 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        switch (v.getId())
-        {
-            case R.id.btnBack: onBackPressed(); break;
+        switch (v.getId()) {
+            case R.id.btnBack:
+                onBackPressed();
+                break;
             case R.id.btnHome:
-            case R.id.btnLogin: backToLogin(); break;
+            case R.id.btnLogin:
+                backToLogin();
+                break;
             case R.id.btnReg:
                 if (inputPassword.getText().toString().isEmpty()) {
                     Toast.makeText(this, getString(R.string.noPassword), Toast.LENGTH_LONG).show();
                     inputClear();
-                }
-                else if (inputPasswordAgain.getText().toString().isEmpty()) {
+                } else if (inputPasswordAgain.getText().toString().isEmpty()) {
                     Toast.makeText(this, getString(R.string.noPasswordAgain), Toast.LENGTH_LONG).show();
                     inputClear();
-                }
-                else if (!inputPassword.getText().toString().equals(inputPasswordAgain.getText().toString())) {
+                } else if (!inputPassword.getText().toString().equals(inputPasswordAgain.getText().toString())) {
                     Toast.makeText(this, getString(R.string.noPasswordPass), Toast.LENGTH_LONG).show();
                     inputClear();
-                }
-                else if (!m.jelszoErossegEllenorzes(inputPassword.getText().toString())) {
+                } else if (!m.jelszoErossegEllenorzes(inputPassword.getText().toString())) {
                     Toast.makeText(this, getString(R.string.weakPassword), Toast.LENGTH_LONG).show();
                     inputClear();
-                }
-                else {
+                } else {
                     s.edit().putString("password", inputPassword.getText().toString()).apply();
                     insertUser();
                     backToLogin();

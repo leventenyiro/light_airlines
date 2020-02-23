@@ -1,4 +1,5 @@
 <resources>
+
     <style name="BlueTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/rebelBlue</item>
         <item name="colorPrimaryDark">@color/rebelBlue</item>
@@ -7,6 +8,7 @@
         <item name="windowActionBar">false</item>
         <item name="android:screenOrientation">portrait</item>
     </style>
+
     <style name="GrayTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/rebelBlue</item>
         <item name="colorPrimaryDark">@color/gray</item>
@@ -16,6 +18,17 @@
         <item name="android:fontFamily">@font/regular</item>
         <item name="android:screenOrientation">portrait</item>
     </style>
+
+    <style name="WelcomeTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/rebelBlue</item>
+        <item name="colorPrimaryDark">@color/welcomeGray</item>
+        <item name="colorAccent">@color/rebelBlue</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:fontFamily">@font/regular</item>
+        <item name="android:screenOrientation">portrait</item>
+    </style>
+
     <style name="WhiteTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/rebelBlue</item>
         <item name="colorPrimaryDark">@color/white</item>

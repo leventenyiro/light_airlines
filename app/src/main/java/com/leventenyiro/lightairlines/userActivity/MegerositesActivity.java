@@ -49,16 +49,16 @@ public class MegerositesActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnBack:
-            case R.id.btnCancel: onBackPressed(); break;
+            case R.id.btnCancel:
+                onBackPressed();
+                break;
             case R.id.btnVerify:
                 if (inputPassword.getText().toString().isEmpty()) {
                     Toast.makeText(this, getString(R.string.noPassword), Toast.LENGTH_LONG).show();
-                }
-                else if (!m.jelszoEllenorzes(s.getString("userId", ""), inputPassword.getText().toString())) {
+                } else if (!m.jelszoEllenorzes(s.getString("userId", ""), inputPassword.getText().toString())) {
                     Toast.makeText(this, getString(R.string.unsuccessFinalize), Toast.LENGTH_LONG).show();
                     inputPassword.setText("");
-                }
-                else {
+                } else {
                     deleteJegy();
                     s.edit().remove("foglalasId").apply();
                     Intent intent = new Intent(MegerositesActivity.this, InnerActivity.class);
@@ -79,7 +79,7 @@ public class MegerositesActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(MegerositesActivity.this,JegyActivity.class);
+        Intent intent = new Intent(MegerositesActivity.this, JegyActivity.class);
         startActivity(intent);
         finish();
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
