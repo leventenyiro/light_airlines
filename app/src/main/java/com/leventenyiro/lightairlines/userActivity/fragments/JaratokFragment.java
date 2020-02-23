@@ -49,6 +49,11 @@ public class JaratokFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String honnan = inputHonnan.getText().toString();
+                if (honnan.contains("'")) {
+                    inputHonnan.setText(honnan.substring(0, honnan.length() - 1));
+                    inputHonnan.setSelection(honnan.length());
+                }
                 select();
             }
 
@@ -64,6 +69,11 @@ public class JaratokFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String hova = inputHova.getText().toString();
+                if (hova.contains("'")) {
+                    inputHova.setText(hova.substring(0, hova.length() - 1));
+                    inputHova.setSelection(hova.length());
+                }
                 select();
             }
 
@@ -169,7 +179,6 @@ public class JaratokFragment extends Fragment {
                 paramsIdopont.topMargin = dp15;
                 tvIdopont.setLayoutParams(paramsIdopont);
                 tvIdopont.setText(idopont.substring(0, 16).replace('-', '.'));
-                //tvIdopont.setTypeface(getActivity().getResources().getFont(R.font.regular));
                 tvIdopont.setTypeface(ResourcesCompat.getFont(getActivity().getApplicationContext(), R.font.regular));
                 tvIdopont.setTextColor(getActivity().getResources().getColor(R.color.gray));
                 tvIdopont.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
@@ -213,7 +222,7 @@ public class JaratokFragment extends Fragment {
             params.addRule(RelativeLayout.BELOW, R.id.inputHova);
             params.topMargin = dp40;
             tv.setLayoutParams(params);
-            tv.setTypeface(getActivity().getResources().getFont(R.font.regular));
+            tv.setTypeface(ResourcesCompat.getFont(getActivity().getApplicationContext(), R.font.regular));
             tv.setTextColor(getActivity().getResources().getColor(R.color.gray));
             tv.setTextSize(dp15);
             tv.setText(getString(R.string.noFlight));

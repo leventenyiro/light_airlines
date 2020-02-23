@@ -49,6 +49,11 @@ public class AdminJaratokFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String honnan = inputHonnan.getText().toString();
+                if (honnan.contains("'")) {
+                    inputHonnan.setText(honnan.substring(0, honnan.length() - 1));
+                    inputHonnan.setSelection(honnan.length());
+                }
                 select();
             }
 
@@ -64,6 +69,11 @@ public class AdminJaratokFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String hova = inputHova.getText().toString();
+                if (hova.contains("'")) {
+                    inputHova.setText(hova.substring(0, hova.length() - 1));
+                    inputHova.setSelection(hova.length());
+                }
                 select();
             }
 
