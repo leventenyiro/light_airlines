@@ -178,8 +178,14 @@ public class Metodus {
     }
 
     public String dateToString(int year, int month, int day) {
-        if (month < 10)
-            return year + "-0" + (month + 1) + "-" + day;
-        return year + "-" + (month + 1) + "-" + day;
+        String date = String.valueOf(year);
+        if (month < 10) {
+            date += "-0" + (month + 1);
+            if (day < 10) {
+                return date + "-0" + day;
+            }
+            return date + "-" + day;
+        }
+        return date + "-" + (month + 1) + "-" + day;
     }
 }
