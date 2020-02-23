@@ -39,9 +39,7 @@ public class PasswordUtils {
 
     public static String generateSecurePassword(String password, String salt) {
         byte[] securePassword = hash(password.toCharArray(), salt.getBytes());
-        //String returnValue = Base64.getEncoder().encodeToString(securePassword);
-        String returnValue = android.util.Base64.encodeToString(securePassword, Base64.DEFAULT);
-        return returnValue;
+        return android.util.Base64.encodeToString(securePassword, Base64.NO_WRAP);
     }
 
     public static boolean verifyUserPassword(String providedPassword, String securedPassword, String salt) {
