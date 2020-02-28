@@ -138,6 +138,7 @@ public class AdminJaratInsertFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         s.edit().putString("utvonalId", utvonalId).apply();
+                        getActivity().getSharedPreferences("variables", Context.MODE_PRIVATE).edit().putString("fragment", "jaratInsert").apply();
                         Intent intent = new Intent(getActivity(), JaratInsertActivity.class);
                         startActivity(intent);
                         getActivity().finish();
