@@ -6,6 +6,7 @@
     <uses-permission
         android:name="android.permission.WRITE_SETTINGS"
         tools:ignore="ProtectedPermissions" />
+    <!-- https://www.youtube.com/watch?v=SMrB97JuIoM -->
 
     <application
         android:allowBackup="true"
