@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">Light Airlines</string>
 
     <!-- Login -->
     <string name="password">Password</string>
@@ -106,5 +105,6 @@
     <string name="noReserved">This seat isn\'t reserved!</string>
     <string name="successInsert">Successful insert!</string>
     <string name="unsuccessInsert">Server error! Unsuccessful insert!</string>
+    <string name="app_name" translatable="false">fdgdf</string>
 
 </resources>

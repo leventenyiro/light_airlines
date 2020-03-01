@@ -4,14 +4,14 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/textCim"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:id="@+id/textCim"
+        android:fontFamily="@font/bold"
         android:text="@string/beallitasok"
-        android:textSize="40sp"
         android:textColor="@color/gray"
-        android:fontFamily="@font/bold" />
+        android:textSize="40sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,29 +20,29 @@
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/btnPasswordUpdate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@id/btnLogout"
             android:layout_margin="10dp"
-            android:id="@+id/btnPasswordUpdate"
             android:background="@drawable/button"
             android:text="@string/passwordUpdate"
-            android:textSize="16sp"
+            android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textAllCaps="false" />
+            android:textSize="16sp" />
 
         <Button
+            android:id="@+id/btnLogout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:id="@+id/btnLogout"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/buttonred"
             android:text="@string/logout"
-            android:textSize="16sp"
+            android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textAllCaps="false" />
+            android:textSize="16sp" />
     </LinearLayout>
 
 

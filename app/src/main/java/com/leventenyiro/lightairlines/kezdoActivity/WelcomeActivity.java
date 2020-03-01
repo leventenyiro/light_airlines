@@ -1,20 +1,18 @@
 package com.leventenyiro.lightairlines.kezdoActivity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.leventenyiro.lightairlines.R;
-import com.leventenyiro.lightairlines.userActivity.InnerActivity;
 import com.leventenyiro.lightairlines.segedOsztaly.Database;
+import com.leventenyiro.lightairlines.userActivity.InnerActivity;
 
 public class WelcomeActivity extends AppCompatActivity {
 

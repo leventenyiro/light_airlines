@@ -3,137 +3,137 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".userActivity.FoglalasActivity"
-    android:background="@drawable/bg_registration">
+    android:background="@drawable/bg_registration"
+    tools:context=".userActivity.FoglalasActivity">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <RelativeLayout
+            android:id="@+id/plane"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/plane">
+            android:layout_height="wrap_content">
 
             <LinearLayout
+                android:id="@+id/betuk"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/betuk"
                 android:layout_marginTop="40dp"
                 android:gravity="center">
 
                 <TextView
                     android:layout_width="35dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="8dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
                     android:text="A"
-                    android:textSize="20sp"
+                    android:textAlignment="center"
                     android:textColor="@color/gray"
-                    android:textAlignment="center" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="35dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="8dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
                     android:text="B"
-                    android:textSize="20sp"
+                    android:textAlignment="center"
                     android:textColor="@color/gray"
-                    android:textAlignment="center" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="35dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="8dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
                     android:text="C"
-                    android:textSize="20sp"
+                    android:textAlignment="center"
                     android:textColor="@color/gray"
-                    android:textAlignment="center" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="35dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="8dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
                     android:text=" "
-                    android:textSize="20sp"
-                    android:textAlignment="center" />
+                    android:textAlignment="center"
+                    android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="35dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="8dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
                     android:text="D"
-                    android:textSize="20sp"
+                    android:textAlignment="center"
                     android:textColor="@color/gray"
-                    android:textAlignment="center" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="35dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="8dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
                     android:text="E"
-                    android:textSize="20sp"
+                    android:textAlignment="center"
                     android:textColor="@color/gray"
-                    android:textAlignment="center" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="35dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="8dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
                     android:text="F"
-                    android:textSize="20sp"
+                    android:textAlignment="center"
                     android:textColor="@color/gray"
-                    android:textAlignment="center" />
+                    android:textSize="20sp" />
 
             </LinearLayout>
         </RelativeLayout>
     </ScrollView>
 
     <Button
+        android:id="@+id/btnFoglalas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginEnd="10dp"
         android:layout_above="@id/btnBack"
-        android:id="@+id/btnFoglalas"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
         android:background="@drawable/button"
         android:text="@string/finalize"
-        android:textSize="16sp"
+        android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textAllCaps="false" />
+        android:textSize="16sp" />
 
     <Button
+        android:id="@+id/btnBack"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_margin="10dp"
-        android:id="@+id/btnBack"
         android:background="@drawable/buttonred"
         android:text="@string/back"
-        android:textSize="16sp"
+        android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textAllCaps="false" />
+        android:textSize="16sp" />
 
 </RelativeLayout>

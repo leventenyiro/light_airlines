@@ -4,103 +4,103 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".userActivity.JaratActivity"
-    android:background="@drawable/bg_registration">
+    android:background="@drawable/bg_registration"
+    tools:context=".userActivity.JaratActivity">
 
     <ImageView
+        android:id="@+id/btnBack"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        android:id="@+id/btnBack"
         android:src="@drawable/back" />
 
     <TextView
+        android:id="@+id/textRovidites"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"
-        android:id="@+id/textRovidites"
-        android:textSize="60sp"
+        android:fontFamily="@font/bold"
         android:textColor="@color/gray"
-        android:fontFamily="@font/bold" />
+        android:textSize="60sp" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/textRovidites"
         android:id="@+id/textNev"
-        android:textSize="20sp"
-        android:textColor="@color/gray" />
-
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/textRovidites"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/textNev"
-        android:layout_marginTop="10dp"
+        android:textColor="@color/gray"
+        android:textSize="20sp" />
+
+    <TextView
         android:id="@+id/textIdopont"
-        android:textSize="20sp"
-        android:textColor="@color/gray" />
-
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/textNev"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/textIdopont"
         android:layout_marginTop="10dp"
+        android:textColor="@color/gray"
+        android:textSize="20sp" />
+
+    <TextView
         android:id="@+id/textIdotartam"
-        android:textSize="20sp"
-        android:textColor="@color/gray" />
-
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/textIdopont"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/textIdotartam"
         android:layout_marginTop="10dp"
+        android:textColor="@color/gray"
+        android:textSize="20sp" />
+
+    <TextView
         android:id="@+id/textHelyekSzama"
-        android:textSize="20sp"
-        android:textColor="@color/gray" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textIdotartam"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/gray"
+        android:textSize="20sp" />
 
     <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/gif"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_centerHorizontal="true"
         android:layout_below="@id/textHelyekSzama"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="-100dp"
-        android:id="@+id/gif"
-        app:lottie_fileName="plane.json"
         app:lottie_autoPlay="true"
+        app:lottie_fileName="plane.json"
         app:lottie_loop="true"
         app:lottie_speed="1" />
 
     <Button
+        android:id="@+id/btnHelyFoglalas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginEnd="10dp"
         android:layout_above="@+id/btnMegse"
-        android:id="@+id/btnHelyFoglalas"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
         android:background="@drawable/button"
         android:text="@string/reserve"
-        android:textSize="16sp"
+        android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textAllCaps="false" />
+        android:textSize="16sp" />
 
     <Button
+        android:id="@+id/btnMegse"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_margin="10dp"
-        android:id="@+id/btnMegse"
         android:background="@drawable/buttonred"
         android:text="@string/cancel"
-        android:textSize="16sp"
+        android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textAllCaps="false" />
+        android:textSize="16sp" />
 
 </RelativeLayout>

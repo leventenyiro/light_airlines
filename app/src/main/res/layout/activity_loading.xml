@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".kezdoActivity.LoadingActivity"
-    android:background="@drawable/bg_loading">
+    android:background="@drawable/bg_loading"
+    tools:context=".kezdoActivity.LoadingActivity">
 
     <com.airbnb.lottie.LottieAnimationView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:lottie_fileName="globeloading.json"
         app:lottie_autoPlay="true"
+        app:lottie_fileName="globeloading.json"
         app:lottie_loop="true"
         app:lottie_speed="2" />
 
@@ -20,16 +20,16 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_margin="25dp"
+        android:fontFamily="@font/bold"
         android:text="@string/app_name"
-        android:textSize="20sp"
         android:textColor="@color/gray"
-        android:fontFamily="@font/bold" />
+        android:textSize="20sp" />
 
     <ImageView
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:layout_margin="20dp"
         android:src="@drawable/icon" />
 

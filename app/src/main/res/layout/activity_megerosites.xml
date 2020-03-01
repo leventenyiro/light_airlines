@@ -3,85 +3,85 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".userActivity.MegerositesActivity"
-    android:background="@drawable/bg_login">
+    android:background="@drawable/bg_login"
+    tools:context=".userActivity.MegerositesActivity">
 
     <ImageView
+        android:id="@+id/btnBack"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        android:id="@+id/btnBack"
         android:src="@drawable/back"
         android:tint="@color/white" />
 
     <ImageView
+        android:id="@+id/btnIcon"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_margin="20dp"
         android:layout_alignParentEnd="true"
+        android:layout_margin="20dp"
         android:layout_marginEnd="30dp"
-        android:id="@+id/btnIcon"
         android:src="@drawable/icon_white" />
 
     <TextView
+        android:id="@+id/textCim"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/btnIcon"
-        android:layout_marginTop="30dp"
         android:layout_marginStart="30dp"
-        android:id="@+id/textCim"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/bold"
         android:text="@string/verify"
-        android:textSize="35sp"
         android:textColor="@color/white"
-        android:fontFamily="@font/bold" />
+        android:textSize="35sp" />
 
     <EditText
+        android:id="@+id/inputPassword"
         android:layout_width="340dp"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_below="@id/textCim"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
-        android:paddingStart="20dp"
-        android:paddingEnd="15dp"
-        android:id="@+id/inputPassword"
         android:background="@drawable/inputlogin"
-        android:inputType="textPassword"
         android:hint="@string/password"
-        android:textColorHint="@color/midGray"
-        android:textColor="@color/white"
-        android:maxLines="1"
+        android:inputType="textPassword"
         android:lines="1"
-        android:singleLine="true" />
+        android:maxLines="1"
+        android:paddingStart="20dp"
+        android:paddingTop="15dp"
+        android:paddingEnd="15dp"
+        android:paddingBottom="15dp"
+        android:singleLine="true"
+        android:textColor="@color/white"
+        android:textColorHint="@color/midGray" />
 
     <Button
+        android:id="@+id/btnVerify"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/inputPassword"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="40dp"
         android:layout_marginTop="30dp"
-        android:id="@+id/btnVerify"
+        android:layout_marginEnd="40dp"
         android:background="@drawable/button"
         android:text="@string/next"
-        android:textSize="16sp"
+        android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textAllCaps="false" />
+        android:textSize="16sp" />
 
     <Button
+        android:id="@+id/btnCancel"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/btnVerify"
-        android:layout_marginTop="10dp"
         android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="40dp"
-        android:id="@+id/btnCancel"
         android:background="@drawable/buttonred"
         android:text="@string/cancel"
-        android:textSize="16sp"
+        android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textAllCaps="false" />
+        android:textSize="16sp" />
 
 </RelativeLayout>

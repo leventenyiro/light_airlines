@@ -16,10 +16,10 @@ import androidx.cardview.widget.CardView;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
-import com.leventenyiro.lightairlines.userActivity.JegyActivity;
 import com.leventenyiro.lightairlines.R;
 import com.leventenyiro.lightairlines.segedOsztaly.Database;
 import com.leventenyiro.lightairlines.segedOsztaly.Metodus;
+import com.leventenyiro.lightairlines.userActivity.JegyActivity;
 
 import java.util.ArrayList;
 import java.util.List;

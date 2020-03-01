@@ -3,14 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".kezdoActivity.Reg1Activity"
-    android:background="@drawable/bg_registration">
+    android:background="@drawable/bg_registration"
+    tools:context=".kezdoActivity.Reg1Activity">
 
     <ImageView
+        android:id="@+id/btnBack"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_margin="20dp"
-        android:id="@+id/btnBack"
         android:src="@drawable/back" />
 
     <ImageView
@@ -18,96 +18,95 @@
         android:layout_height="40dp"
         android:layout_alignParentEnd="true"
         android:layout_margin="20dp"
-        android:id="@+id/btnHome"
         android:src="@drawable/icon" />
 
     <TextView
+        android:id="@+id/textCim"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnBack"
         android:layout_marginStart="30dp"
-        android:id="@+id/textCim"
+        android:fontFamily="@font/bold"
         android:text="@string/reg"
-        android:textSize="40sp"
         android:textColor="@color/gray"
-        android:fontFamily="@font/bold" />
+        android:textSize="40sp" />
 
     <EditText
+        android:id="@+id/inputUsername"
         android:layout_width="340dp"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_below="@id/textCim"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
-        android:paddingStart="20dp"
-        android:paddingEnd="15dp"
-        android:id="@+id/inputUsername"
         android:background="@drawable/input"
         android:hint="@string/username"
-        android:textColor="@color/gray"
-        android:maxLines="1"
         android:lines="1"
-        android:singleLine="true" />
+        android:maxLines="1"
+        android:paddingStart="20dp"
+        android:paddingTop="15dp"
+        android:paddingEnd="15dp"
+        android:paddingBottom="15dp"
+        android:singleLine="true"
+        android:textColor="@color/gray" />
 
     <EditText
+        android:id="@+id/inputEmail"
         android:layout_width="340dp"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_below="@id/inputUsername"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
+        android:background="@drawable/input"
+        android:hint="@string/emailExample"
+        android:inputType="textEmailAddress"
+        android:lines="1"
+        android:maxLines="1"
         android:paddingStart="20dp"
         android:paddingLeft="20dp"
+        android:paddingTop="15dp"
         android:paddingEnd="20dp"
         android:paddingRight="20dp"
-        android:id="@+id/inputEmail"
-        android:background="@drawable/input"
-        android:inputType="textEmailAddress"
-        android:hint="@string/emailExample"
-        android:textColor="@color/gray"
-        android:maxLines="1"
-        android:lines="1"
-        android:singleLine="true" />
+        android:paddingBottom="15dp"
+        android:singleLine="true"
+        android:textColor="@color/gray" />
 
     <Button
+        android:id="@+id/btnNext"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/inputEmail"
-        android:layout_marginTop="30dp"
         android:layout_alignParentEnd="true"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="40dp"
-        android:id="@+id/btnNext"
         android:background="@drawable/button"
         android:text="@string/next"
-        android:textSize="16sp"
+        android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textAllCaps="false" />
+        android:textSize="16sp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="25dp"
-        android:layout_marginStart="25dp">
+        android:layout_marginStart="25dp"
+        android:layout_marginBottom="25dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/marVanProfil"
-            android:textSize="20sp"
-            android:textColor="@color/gray" />
+            android:textColor="@color/gray"
+            android:textSize="20sp" />
 
         <TextView
+            android:id="@+id/btnLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:id="@+id/btnLogin"
+            android:fontFamily="@font/bold"
             android:text="@string/jelentkezzBe"
             android:textColor="@color/rebelBlue"
-            android:textSize="20sp"
-            android:fontFamily="@font/bold" />
+            android:textSize="20sp" />
 
     </LinearLayout>
 

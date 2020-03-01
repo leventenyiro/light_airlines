@@ -1,7 +1,5 @@
 package com.leventenyiro.lightairlines.kezdoActivity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.leventenyiro.lightairlines.R;
 import com.leventenyiro.lightairlines.segedOsztaly.Database;
 import com.leventenyiro.lightairlines.segedOsztaly.Metodus;
@@ -24,7 +24,7 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
     private Button btnNext;
     private Database db;
     private EditText inputUsername, inputEmail;
-    private ImageView btnBack, btnHome;
+    private ImageView btnBack;
     private int dp15, dp20;
     private Metodus m;
     private SharedPreferences s;
@@ -72,14 +72,12 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
         });
 
         btnBack.setOnClickListener(this);
-        btnHome.setOnClickListener(this);
         btnLogin.setOnClickListener(this);
         btnNext.setOnClickListener(this);
     }
 
     public void init() {
         btnBack = findViewById(R.id.btnBack);
-        btnHome = findViewById(R.id.btnHome);
         btnLogin = findViewById(R.id.btnLogin);
         btnNext = findViewById(R.id.btnNext);
         inputUsername = findViewById(R.id.inputUsername);
@@ -96,7 +94,6 @@ public class Reg1Activity extends AppCompatActivity implements View.OnClickListe
         Intent intent;
         switch (v.getId()) {
             case R.id.btnBack:
-            case R.id.btnHome:
             case R.id.btnLogin:
                 onBackPressed();
                 break;

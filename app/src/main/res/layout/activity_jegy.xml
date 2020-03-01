@@ -3,94 +3,94 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".userActivity.JegyActivity"
-    android:background="@drawable/bg_registration">
+    android:background="@drawable/bg_registration"
+    tools:context=".userActivity.JegyActivity">
 
     <ImageView
+        android:id="@+id/btnBack"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        android:id="@+id/btnBack"
         android:src="@drawable/back" />
 
     <TextView
+        android:id="@+id/textRovidites"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"
-        android:id="@+id/textRovidites"
-        android:textSize="60sp"
+        android:fontFamily="@font/bold"
         android:textColor="@color/gray"
-        android:fontFamily="@font/bold" />
+        android:textSize="60sp" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/textRovidites"
         android:id="@+id/textNev"
-        android:textSize="20sp"
-        android:textColor="@color/gray" />
-
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/textRovidites"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/textNev"
-        android:layout_marginTop="10dp"
+        android:textColor="@color/gray"
+        android:textSize="20sp" />
+
+    <TextView
         android:id="@+id/textIdopont"
-        android:textSize="20sp"
-        android:textColor="@color/gray" />
-
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/textNev"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/textIdopont"
         android:layout_marginTop="10dp"
+        android:textColor="@color/gray"
+        android:textSize="20sp" />
+
+    <TextView
         android:id="@+id/textIdotartam"
-        android:textSize="20sp"
-        android:textColor="@color/gray" />
-
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/textIdopont"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/textIdotartam"
         android:layout_marginTop="10dp"
+        android:textColor="@color/gray"
+        android:textSize="20sp" />
+
+    <TextView
         android:id="@+id/textUles"
-        android:textSize="20sp"
-        android:textColor="@color/gray" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textIdotartam"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/gray"
+        android:textSize="20sp" />
 
     <ImageView
+        android:id="@+id/imgQr"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:layout_centerHorizontal="true"
         android:layout_below="@id/textUles"
-        android:layout_marginTop="60dp"
-        android:id="@+id/imgQr" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_below="@id/imgQr"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:text="@string/codeInfo"
-        android:textSize="15sp"
-        android:textColor="@color/gray" />
+        android:textColor="@color/gray"
+        android:textSize="15sp" />
 
     <Button
+        android:id="@+id/btnDelete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_margin="10dp"
-        android:id="@+id/btnDelete"
         android:background="@drawable/buttonred"
         android:text="@string/renounce"
-        android:textSize="16sp"
+        android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textAllCaps="false" />
+        android:textSize="16sp" />
 
 </RelativeLayout>

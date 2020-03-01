@@ -14,8 +14,8 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.leventenyiro.lightairlines.kezdoActivity.LoginActivity;
 import com.leventenyiro.lightairlines.R;
+import com.leventenyiro.lightairlines.kezdoActivity.LoginActivity;
 
 public class InnerActivity extends AppCompatActivity {
 

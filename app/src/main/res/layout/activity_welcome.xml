@@ -3,25 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".kezdoActivity.WelcomeActivity"
-    android:background="@drawable/bg_winglet">
+    android:background="@drawable/bg_winglet"
+    tools:context=".kezdoActivity.WelcomeActivity">
 
     <ImageView
+        android:id="@+id/btnIcon"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_margin="20dp"
         android:layout_alignParentEnd="true"
+        android:layout_margin="20dp"
         android:layout_marginEnd="30dp"
-        android:id="@+id/btnIcon"
         android:src="@drawable/icon_white" />
 
     <TextView
+        android:id="@+id/textWelcome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="170dp"
-        android:id="@+id/textWelcome"
-        android:textSize="20sp"
+        android:textAlignment="center"
         android:textColor="@color/white"
-        android:textAlignment="center" />
+        android:textSize="20sp" />
 
 </RelativeLayout>
