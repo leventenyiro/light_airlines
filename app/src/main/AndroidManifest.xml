@@ -6,7 +6,6 @@
     <uses-permission
         android:name="android.permission.WRITE_SETTINGS"
         tools:ignore="ProtectedPermissions" />
-    <!-- https://www.youtube.com/watch?v=SMrB97JuIoM -->
 
     <application
         android:allowBackup="true"
@@ -16,6 +15,7 @@
         android:supportsRtl="true">
         <activity
             android:name=".kezdoActivity.LoadingActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/BlueTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,45 +25,59 @@
         </activity>
         <activity
             android:name=".kezdoActivity.LoginActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/GrayTheme" />
         <activity
             android:name=".kezdoActivity.Reg1Activity"
+            android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
             android:name=".kezdoActivity.Reg2Activity"
+            android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
             android:name=".kezdoActivity.Reg3Activity"
+            android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
             android:name=".kezdoActivity.WelcomeActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/WelcomeTheme" />
         <activity
             android:name=".userActivity.InnerActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
             android:name=".globalActivity.PasswordUpdateActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
             android:name=".userActivity.JaratActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
             android:name=".userActivity.FoglalasActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
             android:name=".userActivity.JegyActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
             android:name=".userActivity.MegerositesActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/GrayTheme" />
         <activity
             android:name=".adminActivity.MegtekintesActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
             android:name=".adminActivity.AdminActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
             android:name=".adminActivity.JaratInsertActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
     </application>
 
