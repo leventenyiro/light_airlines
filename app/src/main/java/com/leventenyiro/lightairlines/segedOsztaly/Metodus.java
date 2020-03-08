@@ -16,7 +16,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.leventenyiro.lightairlines.R;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -39,7 +44,6 @@ public class Metodus {
     }
 
     public void loading(View view) {
-
         if (view.getVisibility() == View.VISIBLE)
             view.setVisibility(View.INVISIBLE);
         else
@@ -157,5 +161,30 @@ public class Metodus {
         if (month < 10)
             return year + "-0" + (month + 1) + "-" + day;
         return year + "-" + (month + 1) + "-" + day;
+    }
+
+    public boolean idopontEllenorzes(String idopont) {
+        String datum = idopont.split(" ")[0];
+        String ido = idopont.split(" ")[1];
+        String[] datumok = datum.split("-");
+        int year = Integer.parseInt(datumok[0]);
+        int month = Integer.parseInt(datumok[1]) - 1;
+        int day = Integer.parseInt(datumok[2]);
+        String[] idok = ido.split(":");
+        int hour = Integer.parseInt(idok[0]);
+        int minute = Integer.parseInt(idok[1]);
+        int seconds = Integer.parseInt(idok[2]);
+        Calendar calIdopont = GregorianCalendar.getInstance();
+        calIdopont.set(year, month, day, hour, minute, seconds);
+
+        Calendar now = GregorianCalendar.getInstance();
+        int todayYear = now.get(Calendar.YEAR);
+        int todayMonth = now.get(Calendar.MONTH);
+        int todayDay = now.get(Calendar.DAY_OF_MONTH);
+        int nowHour = now.get(Calendar.HOUR);
+        int nowMinute = now.get(Calendar.MINUTE);
+        int nowSecond = now.get(Calendar.SECOND);
+
+        return calIdopont.after(now);
     }
 }
