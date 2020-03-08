@@ -1,5 +1,6 @@
 package com.leventenyiro.lightairlines.userActivity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,8 +18,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.leventenyiro.lightairlines.R;
-import com.leventenyiro.lightairlines.segedOsztaly.Database;
 import com.leventenyiro.lightairlines.segedOsztaly.Metodus;
 
 import java.util.ArrayList;
@@ -30,13 +35,14 @@ public class FoglalasActivity extends AppCompatActivity {
     private AlertDialog.Builder alertDialogBuilder;
     private Button btnFoglalas, btnBack;
     private Context mContext;
-    private Database db;
     private int sorId, dp8, dp10, dp35, dp200;
+    private long id;
     private List<Integer> helyLista;
     private Metodus m;
     private RelativeLayout mRelativeLayout;
     private SharedPreferences s;
     private TextView tv;
+    private DatabaseReference db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -173,7 +179,17 @@ public class FoglalasActivity extends AppCompatActivity {
         helyLista = new ArrayList<>();
         btnFoglalas = findViewById(R.id.btnFoglalas);
         btnBack = findViewById(R.id.btnBack);
-        db = new Database(this);
+        db = FirebaseDatabase.getInstance().getReference().child("foglalas");
+        db.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    id = dataSnapshot.getChildrenCount();
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) { }
+        });
         m = new Metodus(this);
         dp8 = m.dpToPx(8, getResources());
         dp10 = m.dpToPx(10, getResources());
@@ -206,13 +222,11 @@ public class FoglalasActivity extends AppCompatActivity {
 
     public void insertFoglalas() {
         String jaratId = s.getString("jaratId", "");
-        String userId = s.getString("userId", "");
         String ules = s.getString("ules", "");
-        boolean eredmeny = db.insertFoglalas(jaratId, userId, ules);
-        if (eredmeny)
-            Toast.makeText(this, getString(R.string.successReserve), Toast.LENGTH_LONG);
-        else
-            Toast.makeText(this, getString(R.string.unsuccessReserve), Toast.LENGTH_LONG).show();
+        String userId = s.getString("userId", "");
+        db.child(String.valueOf(id + 1)).child("jarat_id").setValue(jaratId);
+        db.child(String.valueOf(id + 1)).child("ules").setValue(ules);
+        db.child(String.valueOf(id + 1)).child("user_id").setValue(userId);
         s.edit().remove("jaratId").apply();
         s.edit().remove("ules").apply();
     }

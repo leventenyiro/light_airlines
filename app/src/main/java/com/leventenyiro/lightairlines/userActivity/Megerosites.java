@@ -1,5 +1,6 @@
 package com.leventenyiro.lightairlines.userActivity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -12,18 +13,26 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.leventenyiro.lightairlines.R;
-import com.leventenyiro.lightairlines.segedOsztaly.Database;
-import com.leventenyiro.lightairlines.segedOsztaly.Metodus;
 
 public class Megerosites extends AppCompatActivity implements View.OnClickListener {
 
     private Button btnCancel, btnVerify;
-    private Database db;
+    private DatabaseReference db;
     private EditText inputPassword;
     private ImageView btnBack;
-    private Metodus m;
     private SharedPreferences s;
+    private FirebaseAuth mAuth;
+    private String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +49,19 @@ public class Megerosites extends AppCompatActivity implements View.OnClickListen
         btnCancel = findViewById(R.id.btnCancel);
         btnVerify = findViewById(R.id.btnVerify);
         inputPassword = findViewById(R.id.inputPassword);
-        db = new Database(this);
-        m = new Metodus(this);
+        db = FirebaseDatabase.getInstance().getReference();
         s = getSharedPreferences("variables", Context.MODE_PRIVATE);
+        mAuth = FirebaseAuth.getInstance();
+        db.child("user").orderByKey().equalTo(s.getString("userId", "")).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    email = String.valueOf(snapshot.child("email").getValue());
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) { }
+        });
     }
 
     @Override
@@ -53,28 +72,42 @@ public class Megerosites extends AppCompatActivity implements View.OnClickListen
             case R.id.btnVerify:
                 if (inputPassword.getText().toString().isEmpty()) {
                     Toast.makeText(this, getString(R.string.noPassword), Toast.LENGTH_LONG).show();
-                }
-                else if (!m.jelszoEllenorzes(s.getString("userId", ""), inputPassword.getText().toString())) {
-                    Toast.makeText(this, getString(R.string.unsuccessFinalize), Toast.LENGTH_LONG).show();
-                    inputPassword.setText("");
-                }
-                else {
-                    deleteJegy();
-                    s.edit().remove("foglalasId").apply();
-                    Intent intent = new Intent(Megerosites.this, InnerActivity.class);
-                    startActivity(intent);
-                    finish();
-                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                } else {
+                    mAuth.signInWithEmailAndPassword(email, inputPassword.getText().toString()).addOnCompleteListener(Megerosites.this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                deleteJegy();
+                                s.edit().remove("foglalasId").apply();
+                                Intent intent = new Intent(Megerosites.this, InnerActivity.class);
+                                startActivity(intent);
+                                finish();
+                                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                            } else
+                                rosszJelszo();
+                        }
+                    });
                 }
                 break;
         }
     }
 
+    public void rosszJelszo() {
+        Toast.makeText(this, getString(R.string.unsuccessFinalize), Toast.LENGTH_LONG).show();
+        inputPassword.setText("");
+    }
+
     public void deleteJegy() {
-        if (db.deleteJegy(s.getString("foglalasId", "")))
-            Toast.makeText(this, getString(R.string.successTicketDelete), Toast.LENGTH_LONG).show();
-        else
-            Toast.makeText(this, getString(R.string.unsuccessTicketDelete), Toast.LENGTH_LONG).show();
+        db.child("foglalas").orderByKey().equalTo(s.getString("foglalasId", "")).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    snapshot.getRef().removeValue();
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) { }
+        });
     }
 
     @Override

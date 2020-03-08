@@ -144,13 +144,11 @@ public class Reg3Activity extends AppCompatActivity implements View.OnClickListe
         String lastname = s.getString("lastname", "");
         String birthdate = s.getString("birthdate", "");
 
-        User user = new User();
-        user.setUsername(username);
-        user.setEmail(email);
-        user.setFirstname(firstname);
-        user.setLastname(lastname);
-        user.setBirthdate(birthdate);
-        db.child(String.valueOf(id + 1)).setValue(user);
+        db.child(String.valueOf(id + 1)).child("username").setValue(username);
+        db.child(String.valueOf(id + 1)).child("email").setValue(email);
+        db.child(String.valueOf(id + 1)).child("firstname").setValue(firstname);
+        db.child(String.valueOf(id + 1)).child("lastname").setValue(lastname);
+        db.child(String.valueOf(id + 1)).child("birthdate").setValue(birthdate);
 
         mAuth.createUserWithEmailAndPassword(email, inputPassword.getText().toString())
                 .addOnCompleteListener(Reg3Activity.this, new OnCompleteListener<AuthResult>() {

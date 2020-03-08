@@ -6,21 +6,32 @@ import android.database.Cursor;
 import android.util.TypedValue;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.leventenyiro.lightairlines.R;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Metodus {
 
-    private Database db;
     private Context c;
+    private DatabaseReference db;
+    private List<String> foglaltHelyek;
 
     public Metodus(Context context) {
-        db = new Database(context);
         c = context;
+        db = FirebaseDatabase.getInstance().getReference();
+        foglaltHelyek = new LinkedList<>();
     }
 
     public int dpToPx(int dp, Resources r) {
@@ -47,22 +58,6 @@ public class Metodus {
         String emailPattern = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
         Pattern pattern = Pattern.compile(emailPattern);
         return pattern.matcher(email).matches();
-    }
-
-    public boolean jelszoEllenorzes(String userId, String inputPassword) {
-        Cursor eredmeny = db.selectPasswordById(userId);
-
-        String password = null;
-        String salt = null;
-
-        if (eredmeny != null && eredmeny.getCount() > 0) {
-            while (eredmeny.moveToNext()) {
-                String[] adatok = eredmeny.getString(0).split(";");
-                password = adatok[0];
-                salt = adatok[1];
-            }
-        }
-        return PasswordUtils.verifyUserPassword(inputPassword, password, salt);
     }
 
     public String elsoNagybetu(String nev) {
@@ -134,21 +129,27 @@ public class Metodus {
 
     public boolean foglaltE(int id, String jaratId) {
         for (String hely : selectFoglaltHelyek(jaratId)) {
-            if (id == ulesDekodolas(hely)) {
+            if (id == ulesDekodolas(hely))
                 return true;
-            }
         }
         return false;
     }
 
-    public List<String> selectFoglaltHelyek(String jaratId) {
-        List<String> foglaltHelyek = new ArrayList<>();
-        Cursor eredmeny = db.selectUlesek(jaratId);
-        if (eredmeny != null && eredmeny.getCount() > 0) {
-            while (eredmeny.moveToNext()) {
-                foglaltHelyek.add(eredmeny.getString(0));
+    public void addFoglaltHelyek(String jaratId) {
+        db.child("foglalas").orderByChild("jarat_id").equalTo(jaratId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    foglaltHelyek.add(String.valueOf(snapshot.child("ules").getValue()));
+                }
             }
-        }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) { }
+        });
+    }
+
+    public List<String> selectFoglaltHelyek(String jaratId) {
+        addFoglaltHelyek(jaratId);
         return foglaltHelyek;
     }
 
