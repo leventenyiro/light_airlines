@@ -84,7 +84,14 @@ public class JaratInsertActivity extends AppCompatActivity implements View.OnCli
     }
 
     public String timeToString(int hour, int minute) {
-        return hour + ":" + minute + ":00";
+        String time = "";
+        if (hour < 10)
+            time += "0";
+        time += hour + ":";
+        if (minute < 10)
+            time += "0";
+        time += minute + ":00";
+        return time;
     }
 
     public void insertJarat() {
