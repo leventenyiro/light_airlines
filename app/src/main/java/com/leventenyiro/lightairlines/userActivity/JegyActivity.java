@@ -63,7 +63,7 @@ public class JegyActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btnBack: onBackPressed(); break;
             case R.id.btnDelete:
                 setFenyesseg(brightness);
-                Intent intent = new Intent(JegyActivity.this, Megerosites.class);
+                Intent intent = new Intent(JegyActivity.this, MegerositesActivity.class);
                 startActivity(intent);
                 finish();
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

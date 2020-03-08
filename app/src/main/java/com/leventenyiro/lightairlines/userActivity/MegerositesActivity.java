@@ -24,7 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.leventenyiro.lightairlines.R;
 
-public class Megerosites extends AppCompatActivity implements View.OnClickListener {
+public class MegerositesActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button btnCancel, btnVerify;
     private DatabaseReference db;
@@ -73,13 +73,13 @@ public class Megerosites extends AppCompatActivity implements View.OnClickListen
                 if (inputPassword.getText().toString().isEmpty()) {
                     Toast.makeText(this, getString(R.string.noPassword), Toast.LENGTH_LONG).show();
                 } else {
-                    mAuth.signInWithEmailAndPassword(email, inputPassword.getText().toString()).addOnCompleteListener(Megerosites.this, new OnCompleteListener<AuthResult>() {
+                    mAuth.signInWithEmailAndPassword(email, inputPassword.getText().toString()).addOnCompleteListener(MegerositesActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 deleteJegy();
                                 s.edit().remove("foglalasId").apply();
-                                Intent intent = new Intent(Megerosites.this, InnerActivity.class);
+                                Intent intent = new Intent(MegerositesActivity.this, InnerActivity.class);
                                 startActivity(intent);
                                 finish();
                                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
@@ -112,7 +112,7 @@ public class Megerosites extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(Megerosites.this,JegyActivity.class);
+        Intent intent = new Intent(MegerositesActivity.this,JegyActivity.class);
         startActivity(intent);
         finish();
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
