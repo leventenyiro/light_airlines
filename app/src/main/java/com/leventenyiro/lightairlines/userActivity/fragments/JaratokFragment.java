@@ -3,17 +3,15 @@ package com.leventenyiro.lightairlines.userActivity.fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -25,57 +23,63 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.leventenyiro.lightairlines.segedOsztaly.Database;
 import com.leventenyiro.lightairlines.userActivity.JaratActivity;
 import com.leventenyiro.lightairlines.R;
 import com.leventenyiro.lightairlines.segedOsztaly.Metodus;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class JaratokFragment extends Fragment {
 
     private Context mContext;
-    private Database db;
-    private EditText inputHonnan, inputHova;
+    private AutoCompleteTextView inputHonnan, inputHova;
     private int dp5, dp7, dp10, dp15,dp20, dp40, dp100, dp200, dp360;
     private List<Integer> cardLista;
     private Metodus m;
     private RelativeLayout mRelativeLayout;
     private SharedPreferences s;
     private View loading;
+    private List<String> varosLista;
     private DatabaseReference ref;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_jaratok, container, false);
         init(root);
         select();
-        inputHonnan.addTextChangedListener(new TextWatcher() {
+        inputHonnan.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                select();
+            public void onClick(View v) {
+                inputHonnan.showDropDown();
             }
-            @Override
-            public void afterTextChanged(Editable s) { }
         });
-
-        inputHova.addTextChangedListener(new TextWatcher() {
+        inputHova.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void onClick(View v) {
+                inputHova.showDropDown();
+            }
+        });
+        inputHonnan.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (inputHonnan.getText().toString().equals(getString(R.string.search)))
+                    inputHonnan.setText("");
                 select();
             }
+        });
+        inputHova.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void afterTextChanged(Editable s) { }
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (inputHova.getText().toString().equals(getString(R.string.search)))
+                    inputHova.setText("");
+                select();
+            }
         });
         return root;
     }
 
     private void init(View root) {
-        db = new Database(getActivity());
         inputHonnan = root.findViewById(R.id.inputHonnan);
         inputHova = root.findViewById(R.id.inputHova);
         cardLista = new ArrayList<>();
@@ -92,8 +96,23 @@ public class JaratokFragment extends Fragment {
         dp200 = m.dpToPx(200, getResources());
         dp360 = m.dpToPx(360, getResources());
         s = getActivity().getSharedPreferences("variables", Context.MODE_PRIVATE);
+        varosLista = new LinkedList<>();
+        varosLista.add(getString(R.string.search));
         ref = FirebaseDatabase.getInstance().getReference();
-
+        ref.child("airport").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    if (!varosLista.contains(String.valueOf(snapshot.child("nev").getValue())))
+                        varosLista.add(String.valueOf(snapshot.child("nev").getValue()));
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) { }
+        });
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(root.getContext(), android.R.layout.simple_dropdown_item_1line, varosLista);
+        inputHonnan.setAdapter(adapter);
+        inputHova.setAdapter(adapter);
         loading = root.findViewById(R.id.loading);
     }
 
@@ -105,34 +124,9 @@ public class JaratokFragment extends Fragment {
         }
         cardLista.clear();
 
-
         Query query = ref.child("jarat");
         if (!inputHonnan.getText().toString().isEmpty() && !inputHova.getText().toString().isEmpty()) {
-            String search = inputHonnan.getText().toString().substring(0, 1).toUpperCase() + inputHonnan.getText().toString().substring(1).toLowerCase() + "_" + inputHova.getText().toString().substring(0, 1).toUpperCase() + inputHova.getText().toString().substring(1).toLowerCase();
-
-            ref.child("airport").orderByChild("indulas").startAt(inputHonnan.getText().toString().substring(0, 1).toUpperCase() + inputHonnan.getText().toString().substring(1).toLowerCase()).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            })
-            query = query.orderByChild("indulas_celallomas").startAt(search).endAt(search + "\uf8ff");
-        }
-        else if (!inputHonnan.getText().toString().isEmpty()) {
-            String search = inputHonnan.getText().toString().substring(0, 1).toUpperCase() + inputHonnan.getText().toString().substring(1).toLowerCase();
-            query = query.orderByChild("indulas_nev").startAt(search).endAt(search + "\uf8ff");
-            Toast.makeText(mContext, search, Toast.LENGTH_SHORT).show();
-        }
-        else if (!inputHova.getText().toString().isEmpty()) {
-            String search = inputHova.getText().toString().substring(0, 1).toUpperCase() + inputHova.getText().toString().substring(1).toLowerCase();
-            query = query.orderByChild("celallomas_nev").startAt(search).endAt(search + "\uf8ff");
+            query = query.orderByChild("utvonal").equalTo(inputHonnan.getText().toString() + ";" + inputHova.getText().toString());
         }
         query.addValueEventListener(new ValueEventListener() {
             @Override
@@ -242,10 +236,8 @@ public class JaratokFragment extends Fragment {
                     mRelativeLayout.addView(tv);
                 }
             }
-
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
+            public void onCancelled(@NonNull DatabaseError databaseError) { }
         });
         m.loading(loading);
     }

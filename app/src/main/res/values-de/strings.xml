@@ -107,5 +107,6 @@
     <string name="unsuccessInsert">Serverfehler! Erfolglos Paste!</string>
     <string name="noInternet">Kein Internet Verbindung!</string>
     <string name="validateEmail">Du musst dein e-mail Adresse validaten erwies!</string>
+    <string name="search">Suche...</string>
 
 </resources>

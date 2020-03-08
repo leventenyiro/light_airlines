@@ -20,7 +20,7 @@
             android:textColor="@color/gray"
             android:fontFamily="@font/bold" />
 
-        <EditText
+        <AutoCompleteTextView
             android:layout_width="340dp"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -35,12 +35,13 @@
             android:id="@+id/inputHonnan"
             android:background="@drawable/input"
             android:hint="@string/from"
+            android:focusable="false"
             android:textColor="@color/gray"
             android:maxLines="1"
             android:lines="1"
             android:singleLine="true" />
 
-        <EditText
+        <AutoCompleteTextView
             android:layout_width="340dp"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -56,6 +57,7 @@
             android:id="@+id/inputHova"
             android:background="@drawable/input"
             android:hint="@string/to"
+            android:focusable="false"
             android:textColor="@color/gray"
             android:maxLines="1"
             android:lines="1"

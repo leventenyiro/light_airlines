@@ -108,5 +108,6 @@
     <string name="unsuccessInsert">Szerverhiba! Sikertelen rögzítés!</string>
     <string name="noInternet">Nincs internetkapcsolat!</string>
     <string name="validateEmail">Az e-mail megerősítésre vár!</string>
+    <string name="search">Keresés...</string>
 
 </resources>

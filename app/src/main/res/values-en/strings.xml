@@ -107,5 +107,6 @@
     <string name="unsuccessInsert">Server error! Unsuccessful insert!</string>
     <string name="noInternet">No internet connection!</string>
     <string name="validateEmail">You have to validate your e-mail address!</string>
+    <string name="search">Search...</string>
 
 </resources>
