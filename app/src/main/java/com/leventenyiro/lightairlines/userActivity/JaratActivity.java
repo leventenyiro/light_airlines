@@ -1,5 +1,6 @@
 package com.leventenyiro.lightairlines.userActivity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -12,17 +13,22 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.leventenyiro.lightairlines.R;
 import com.leventenyiro.lightairlines.segedOsztaly.Database;
 import com.leventenyiro.lightairlines.segedOsztaly.Metodus;
 
 public class JaratActivity extends AppCompatActivity implements View.OnClickListener {
     private Button btnHelyFoglalas, btnMegse;
-    private Database db;
     private ImageView btnBack;
     private Metodus m;
     private TextView textRovidites, textNev, textIdopont, textIdotartam, textHelyekSzama;
     private SharedPreferences s;
+    private DatabaseReference ref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +51,9 @@ public class JaratActivity extends AppCompatActivity implements View.OnClickList
         textHelyekSzama = findViewById(R.id.textHelyekSzama);
         btnHelyFoglalas = findViewById(R.id.btnHelyFoglalas);
         btnMegse = findViewById(R.id.btnMegse);
-        db = new Database(this);
         m = new Metodus(this);
         s = getSharedPreferences("variables", Context.MODE_PRIVATE);
+        ref = FirebaseDatabase.getInstance().getReference();
     }
 
     @Override
@@ -64,19 +70,31 @@ public class JaratActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void select() {
-        Cursor e = db.selectJarat(s.getString("jaratId", ""));
-        if (e != null && e.getCount() > 0) {
-            while (e.moveToNext()) {
-                String roviditesInfo = e.getString(3) + " - " + e.getString(5);
-                textRovidites.setText(roviditesInfo);
-                String nevInfo = e.getString(2) + " - " + e.getString(4);
-                textNev.setText(nevInfo);
-                textIdopont.setText(e.getString(1).substring(0, 16).replace('-', '.'));
-                textIdotartam.setText(m.idotartamAtalakitas(e.getString(6)));
-                String helyInfo = getString(R.string.seatInfo1) + " " + e.getString(0) + " " + getString(R.string.seatInfo2);
-                textHelyekSzama.setText(helyInfo);
+        ref.child("jaratok").orderByKey().equalTo(s.getString("jaratId", "")).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    textRovidites.setText(snapshot.child("indulas_rovidites").getValue() + " - " + snapshot.child("celallomas_rovidites").getValue());
+                    textNev.setText(snapshot.child("indulas_nev").getValue() + " - " + snapshot.child("celallomas_nev").getValue());
+                    textIdopont.setText(snapshot.child("idopont").toString().substring(0, 16).replace('-', '.'));
+                    textIdotartam.setText(m.idotartamAtalakitas(String.valueOf(snapshot.child("idotartam").getValue())));
+                    final int helyekszama = Integer.parseInt(String.valueOf(snapshot.child("helyek_szama").getValue()));
+                    ref.child("foglalas").orderByKey().equalTo(s.getString("jaratid", "")).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            textHelyekSzama.setText(String.valueOf(helyekszama - dataSnapshot.getChildrenCount()));
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) { }
+                    });
+                }
             }
-        }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override
