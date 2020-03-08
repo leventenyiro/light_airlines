@@ -1,5 +1,6 @@
 package com.leventenyiro.lightairlines.userActivity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -16,6 +17,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.leventenyiro.lightairlines.R;
 import com.leventenyiro.lightairlines.segedOsztaly.Database;
 import com.leventenyiro.lightairlines.segedOsztaly.Metodus;
@@ -23,7 +29,7 @@ import com.leventenyiro.lightairlines.segedOsztaly.Metodus;
 public class JegyActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button btnDelete;
-    private Database db;
+    private DatabaseReference db;
     private ImageView btnBack;
     private int brightness;
     private Metodus m;
@@ -51,7 +57,7 @@ public class JegyActivity extends AppCompatActivity implements View.OnClickListe
         textIdopont = findViewById(R.id.textIdopont);
         textIdotartam = findViewById(R.id.textIdotartam);
         textUles = findViewById(R.id.textUles);
-        db = new Database(this);
+        db = FirebaseDatabase.getInstance().getReference();
         m = new Metodus(this);
         s = getSharedPreferences("variables", Context.MODE_PRIVATE);
         brightness = Settings.System.getInt(getApplicationContext().getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, 0);
@@ -85,8 +91,8 @@ public class JegyActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void select() {
-        Cursor e = db.selectJegy(s.getString("foglalasId", ""));
-        if (e != null && e.getCount() > 0) {
+        //Cursor e = db.selectJegy(s.getString("foglalasId", ""));
+        /*if (e != null && e.getCount() > 0) {
             while (e.moveToNext()) {
                 String roviditesInfo = e.getString(3) + " - " + e.getString(5);
                 textRovidites.setText(roviditesInfo);
@@ -97,7 +103,20 @@ public class JegyActivity extends AppCompatActivity implements View.OnClickListe
                 String ulesInfo = getString(R.string.seatInfo) + " " + e.getString(0);
                 textUles.setText(ulesInfo);
             }
-        }
+        }*/
+        db.child("foglalas").orderByKey().equalTo(s.getString("foglalasId", "")).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        })
     }
 
     @Override

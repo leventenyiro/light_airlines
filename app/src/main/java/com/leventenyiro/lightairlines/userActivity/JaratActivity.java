@@ -24,11 +24,11 @@ import com.leventenyiro.lightairlines.segedOsztaly.Metodus;
 
 public class JaratActivity extends AppCompatActivity implements View.OnClickListener {
     private Button btnHelyFoglalas, btnMegse;
+    private DatabaseReference db;
     private ImageView btnBack;
     private Metodus m;
     private TextView textRovidites, textNev, textIdopont, textIdotartam, textHelyekSzama;
     private SharedPreferences s;
-    private DatabaseReference ref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +51,9 @@ public class JaratActivity extends AppCompatActivity implements View.OnClickList
         textHelyekSzama = findViewById(R.id.textHelyekSzama);
         btnHelyFoglalas = findViewById(R.id.btnHelyFoglalas);
         btnMegse = findViewById(R.id.btnMegse);
+        db = FirebaseDatabase.getInstance().getReference();
         m = new Metodus(this);
         s = getSharedPreferences("variables", Context.MODE_PRIVATE);
-        ref = FirebaseDatabase.getInstance().getReference();
     }
 
     @Override
@@ -70,19 +70,19 @@ public class JaratActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void select() {
-        ref.child("jaratok").orderByKey().equalTo(s.getString("jaratId", "")).addValueEventListener(new ValueEventListener() {
+        db.child("jarat").orderByKey().equalTo(s.getString("jaratId", "")).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     textRovidites.setText(snapshot.child("indulas_rovidites").getValue() + " - " + snapshot.child("celallomas_rovidites").getValue());
                     textNev.setText(snapshot.child("indulas_nev").getValue() + " - " + snapshot.child("celallomas_nev").getValue());
-                    textIdopont.setText(snapshot.child("idopont").toString().substring(0, 16).replace('-', '.'));
+                    textIdopont.setText(String.valueOf(snapshot.child("idopont").getValue()).substring(0, 16).replace('-', '.'));
                     textIdotartam.setText(m.idotartamAtalakitas(String.valueOf(snapshot.child("idotartam").getValue())));
                     final int helyekszama = Integer.parseInt(String.valueOf(snapshot.child("helyek_szama").getValue()));
-                    ref.child("foglalas").orderByKey().equalTo(s.getString("jaratid", "")).addValueEventListener(new ValueEventListener() {
+                    db.child("foglalas").orderByKey().equalTo(s.getString("jaratid", "")).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            textHelyekSzama.setText(String.valueOf(helyekszama - dataSnapshot.getChildrenCount()));
+                            textHelyekSzama.setText(getString(R.string.seatInfo1) + " " + (helyekszama - dataSnapshot.getChildrenCount()) + " " + getString(R.string.seatInfo2));
                         }
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) { }
