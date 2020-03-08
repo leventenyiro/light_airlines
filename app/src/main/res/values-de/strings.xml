@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">Light Airlines</string>
 
     <!-- Login -->
     <string name="password">Kennwort</string>
