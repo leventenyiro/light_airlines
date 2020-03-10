@@ -78,15 +78,7 @@ public class JaratActivity extends AppCompatActivity implements View.OnClickList
                     textNev.setText(snapshot.child("indulas_nev").getValue() + " - " + snapshot.child("celallomas_nev").getValue());
                     textIdopont.setText(String.valueOf(snapshot.child("idopont").getValue()).substring(0, 16).replace('-', '.'));
                     textIdotartam.setText(m.idotartamAtalakitas(String.valueOf(snapshot.child("idotartam").getValue())));
-                    final int helyekszama = Integer.parseInt(String.valueOf(snapshot.child("helyek_szama").getValue()));
-                    db.child("foglalas").orderByKey().equalTo(s.getString("jaratid", "")).addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            textHelyekSzama.setText(getString(R.string.seatInfo1) + " " + (helyekszama - dataSnapshot.getChildrenCount()) + " " + getString(R.string.seatInfo2));
-                        }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) { }
-                    });
+                    textHelyekSzama.setText(getString(R.string.seatInfo1) + " " + s.getString(String.valueOf(snapshot.getKey()), "") + " " + getString(R.string.seatInfo2));
                 }
             }
 

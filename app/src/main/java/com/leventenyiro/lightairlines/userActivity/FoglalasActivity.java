@@ -221,9 +221,9 @@ public class FoglalasActivity extends AppCompatActivity {
     }
 
     public void insertFoglalas() {
-        String jaratId = s.getString("jaratId", "");
+        int jaratId = Integer.parseInt(s.getString("jaratId", ""));
         String ules = s.getString("ules", "");
-        String userId = s.getString("userId", "");
+        int userId = Integer.parseInt(s.getString("userId", ""));
         db.child(String.valueOf(id + 1)).child("jarat_id").setValue(jaratId);
         db.child(String.valueOf(id + 1)).child("ules").setValue(ules);
         db.child(String.valueOf(id + 1)).child("user_id").setValue(userId);

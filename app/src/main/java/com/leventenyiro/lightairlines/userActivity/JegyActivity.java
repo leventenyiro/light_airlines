@@ -91,32 +91,31 @@ public class JegyActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void select() {
-        //Cursor e = db.selectJegy(s.getString("foglalasId", ""));
-        /*if (e != null && e.getCount() > 0) {
-            while (e.moveToNext()) {
-                String roviditesInfo = e.getString(3) + " - " + e.getString(5);
-                textRovidites.setText(roviditesInfo);
-                String nevInfo = e.getString(2) + " - " + e.getString(4);
-                textNev.setText(nevInfo);
-                textIdopont.setText(e.getString(1).substring(0, 16).replace('-', '.'));
-                textIdotartam.setText(m.idotartamAtalakitas(e.getString(6)));
-                String ulesInfo = getString(R.string.seatInfo) + " " + e.getString(0);
-                textUles.setText(ulesInfo);
-            }
-        }*/
         db.child("foglalas").orderByKey().equalTo(s.getString("foglalasId", "")).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    final String ules = String.valueOf(snapshot.child("ules").getValue());
+                    db.child("jarat").orderByKey().equalTo(String.valueOf(snapshot.child("jarat_id").getValue())).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                textRovidites.setText(snapshot.child("indulas_rovidites").getValue() + " - " + snapshot.child("celallomas_rovidites").getValue());
+                                textNev.setText(snapshot.child("indulas_nev").getValue() + " - " + snapshot.child("celallomas_nev").getValue());
+                                textIdopont.setText(String.valueOf(snapshot.child("idopont").getValue()).substring(0, 16).replace('-', '.'));
+                                textIdotartam.setText(m.idotartamAtalakitas(String.valueOf(snapshot.child("idotartam").getValue())));
+                                textUles.setText(getString(R.string.seatInfo) + " " + ules);
+                            }
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) { }
+                    });
 
                 }
             }
-
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        })
+            public void onCancelled(@NonNull DatabaseError databaseError) { }
+        });
     }
 
     @Override

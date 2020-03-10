@@ -41,8 +41,8 @@ public class JaratokFragment extends Fragment {
     private RelativeLayout mRelativeLayout;
     private SharedPreferences s;
     private View loading;
-    private List<String> varosLista;
-    private DatabaseReference ref;
+    private List<String> varosLista, foglaltJaratokLista;
+    private DatabaseReference db;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_jaratok, container, false);
@@ -96,10 +96,28 @@ public class JaratokFragment extends Fragment {
         dp200 = m.dpToPx(200, getResources());
         dp360 = m.dpToPx(360, getResources());
         s = getActivity().getSharedPreferences("variables", Context.MODE_PRIVATE);
+        db = FirebaseDatabase.getInstance().getReference();
+
+        foglaltJaratokLista = new ArrayList<>();
+        selectFoglaltJaratok();
+        for (String s : foglaltJaratokLista) {
+            System.out.println(s);
+        }
+
         varosLista = new LinkedList<>();
         varosLista.add(getString(R.string.search));
-        ref = FirebaseDatabase.getInstance().getReference();
-        ref.child("airport").addValueEventListener(new ValueEventListener() {
+        selectVarosok();
+
+        selectHelyekSzama();
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(root.getContext(), android.R.layout.simple_dropdown_item_1line, varosLista);
+        inputHonnan.setAdapter(adapter);
+        inputHova.setAdapter(adapter);
+        loading = root.findViewById(R.id.loading);
+    }
+
+    private void selectVarosok() {
+        db.child("airport").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
@@ -110,10 +128,49 @@ public class JaratokFragment extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) { }
         });
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(root.getContext(), android.R.layout.simple_dropdown_item_1line, varosLista);
-        inputHonnan.setAdapter(adapter);
-        inputHova.setAdapter(adapter);
-        loading = root.findViewById(R.id.loading);
+    }
+
+    private void selectFoglaltJaratok() {
+        db.child("foglalas").orderByChild("user_id").equalTo(Integer.parseInt(s.getString("userId", ""))).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    if (!foglaltJaratokLista.contains(String.valueOf(snapshot.child("jarat_id").getValue())))
+                        System.out.println(snapshot.child("jarat_id").getValue());
+                        foglaltJaratokLista.add(String.valueOf(snapshot.child("jarat_id").getValue()));
+
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) { }
+        });
+    }
+
+    private void selectHelyekSzama() {
+        db.child("jarat").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    final String id = snapshot.getKey();
+                    final String maxHely = String.valueOf(snapshot.child("helyek_szama").getValue());
+                    s.edit().putString(id, "120").apply();
+                    db.child("foglalas").orderByChild("jarat_id").equalTo(Integer.parseInt(snapshot.getKey())).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists())
+                                s.edit().putString(id, String.valueOf(Long.parseLong(maxHely) - dataSnapshot.getChildrenCount())).apply();
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) { }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void select() {
@@ -124,7 +181,7 @@ public class JaratokFragment extends Fragment {
         }
         cardLista.clear();
 
-        Query query = ref.child("jarat");
+        Query query = db.child("jarat");
         if (!inputHonnan.getText().toString().isEmpty() && !inputHova.getText().toString().isEmpty()) {
             query = query.orderByChild("utvonal").equalTo(inputHonnan.getText().toString() + ";" + inputHova.getText().toString());
         }
@@ -134,7 +191,8 @@ public class JaratokFragment extends Fragment {
                 if (dataSnapshot.exists()) {
                     int id = 0;
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        if (m.idopontEllenorzes(String.valueOf(snapshot.child("idopont").getValue()))) {
+                        String szabadHelyekSzama = s.getString(snapshot.getKey(), "");
+                        if (m.idopontEllenorzes(String.valueOf(snapshot.child("idopont").getValue())) && !foglaltJaratokLista.contains(snapshot.getKey()) && Integer.parseInt(szabadHelyekSzama) > 0) {
                             CardView card = new CardView(mContext);
                             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(dp360, dp200);
                             params.addRule(RelativeLayout.CENTER_HORIZONTAL);
@@ -142,7 +200,7 @@ public class JaratokFragment extends Fragment {
                                 params.addRule(RelativeLayout.BELOW, R.id.inputHova);
                             else
                                 params.addRule(RelativeLayout.BELOW, id);
-                            if (dataSnapshot.getChildrenCount() - 1 == cardLista.size())
+                            if (dataSnapshot.getChildrenCount() - foglaltJaratokLista.size() - 1 == cardLista.size())
                                 params.setMargins(0, 0, 0, dp100);
                             else
                                 params.setMargins(0, 0, 0, dp20);
@@ -209,7 +267,7 @@ public class JaratokFragment extends Fragment {
                             paramsHelyek.addRule(RelativeLayout.BELOW, tvIdotartam.getId());
                             paramsHelyek.topMargin = dp20;
                             tvHelyekSzama.setLayoutParams(paramsHelyek);
-                            String helyInfo = getString(R.string.seatInfo1) + " " + snapshot.child("helyek_szama").getValue() + " " + getString(R.string.seatInfo2);
+                            String helyInfo = getString(R.string.seatInfo1) + " " + szabadHelyekSzama + " " + getString(R.string.seatInfo2);
                             tvHelyekSzama.setText(helyInfo);
                             tvHelyekSzama.setTypeface(getActivity().getResources().getFont(R.font.regular));
                             tvHelyekSzama.setTextColor(getActivity().getResources().getColor(R.color.gray));

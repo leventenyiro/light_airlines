@@ -62,7 +62,7 @@ public class InnerActivity extends AppCompatActivity {
         alertDialogBuilder.setNegativeButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                getSharedPreferences("variables", Context.MODE_PRIVATE).edit().remove("userId").apply();
+                getSharedPreferences("variables", Context.MODE_PRIVATE).edit().clear().apply();
                 Intent intent = new Intent(InnerActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
